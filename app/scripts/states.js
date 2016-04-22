@@ -19,5 +19,21 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
         $title: function() { return 'About'; }
       }
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl',
+      resolve: {
+        $title: function() { return 'Log in'; }
+      }
+    })
+    .state('confirm', {
+      url: '/confirm/:key',
+      templateUrl: 'views/register.html',
+      controller: 'RegisterCtrl',
+      resolve: {
+        $title: function() { return 'Complete your profile'; }
+      }
+    })
 
 });

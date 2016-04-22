@@ -40,6 +40,7 @@
             <ul class="nav navbar-nav">
               <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
               <li ui-sref-active="active"><a ui-sref="about">About</a></li>
+              <li ui-sref-active="active"><a ui-sref="login">Log in</a></li>
             </ul>
           </div>
         </div>
@@ -52,7 +53,7 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p><span class="glyphicon glyphicon-heart"></span> from the HTK team</p>
       </div>
     </div>
 
@@ -86,6 +87,10 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/states.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/directives/pwCheck.js"></script>
         <!-- endbuild -->
 </body>
 </html>

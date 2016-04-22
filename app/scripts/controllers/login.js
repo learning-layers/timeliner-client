@@ -2,18 +2,16 @@
 
 /**
  * @ngdoc function
- * @name timelinerApp.controller:MainCtrl
+ * @name timelinerApp.controller:LoginCtrl
  * @description
- * # MainCtrl
+ * # LoginCtrl
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function () {
+  .controller('LoginCtrl', function () {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
-
-    console.log(this);
   });
