@@ -8,12 +8,24 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function () {
+  .controller('MainCtrl', function ($scope, AuthService) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
 
-    console.log(this);
+    $scope.createUser = function () {
+      $scope.updating = true;
+
+      AuthService.register({email: $scope.registerEmail}, function (success) {
+        $scope.updating = false;
+        $scope.success = success;
+        $scope.registerEmail = '';
+      }, function (error) {
+        $scope.updating = false;
+        $scope.error = error;
+      });
+    };
+
   });

@@ -5,11 +5,20 @@
     Welcome to Timeliner! Enter your email to start lining your time.
   </p>
 
-  <div class="input-group input-group-lg">
-    <input type="text" class="form-control" placeholder="Enter your email...">
-    <span class="input-group-btn">
-      <button class="btn btn-success" type="button">Register!</button>
-    </span>
+  <form ng-submit="createUser()" uib-collapse="success">
+    <div class="input-group input-group-lg">
+      <input type="email" class="form-control" placeholder="Enter your email..." ng-model="registerEmail">
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="submit" ng-disabled="updating">Register!</button>
+      </span>
+    </div>
+  </form>
+
+  <div class="alert alert-success animated fadeInDown" ng-if="success">
+    User created, temporary confirmation link (this will be sent with email to the user): <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
+  </div>
+  <div class="alert alert-danger animated fadeInDown" ng-if="error">
+    This email is already registered!
   </div>
   <span>Already a member? <a ui-sref="login">Log in</a></span>
 </div>

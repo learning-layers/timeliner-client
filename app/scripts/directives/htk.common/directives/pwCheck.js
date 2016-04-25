@@ -1,4 +1,4 @@
-angular.module('htk.common', [])
+angular.module('htk.common')
   .directive('pwCheck', [function () {
     return {
       require: 'ngModel',

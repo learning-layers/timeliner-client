@@ -25,9 +25,9 @@ angular.module('timelinerApp')
       AuthService.confirm($scope.form, function (successCB) {
         $scope.updating = false;
         $scope.form = {};
+        $scope.confirmationSuccessful = true;
       }, function (error) {
         $scope.updating = false;
-        console.log(error);
       })
     }
   });

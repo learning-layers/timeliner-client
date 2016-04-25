@@ -16,7 +16,8 @@ angular
     'ngSanitize',
     'ngTouch',
     'ui.router',
-    'htk.common'
+    'htk.common',
+    'ui.bootstrap'
   ]);
 
 angular.module('timelinerApp')
