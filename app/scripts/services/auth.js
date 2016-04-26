@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('timelinerApp')
-  .factory('AuthService', function AuthFactory($resource, $http){
+  .factory('AuthService', function AuthFactory($resource, $http, appConfig){
     $http.defaults.headers.patch = { 'Content-Type': 'application/json;charset=utf-8' };
 
-    var apiLocation = 'http://localhost:3000/api/auth';
+    var apiLocation = appConfig.backendApiUrl + '/auth';
 
     return $resource(apiLocation, {}, {
       register: {
