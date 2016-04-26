@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvider){
 
   // For any unmatched url, send to /
@@ -34,6 +36,6 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       resolve: {
         $title: function() { return 'Complete your profile'; }
       }
-    })
+    });
 
 });

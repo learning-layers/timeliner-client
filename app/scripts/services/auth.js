@@ -1,6 +1,8 @@
-angular.module("timelinerApp")
-  .factory("AuthService", function AuthFactory($resource, $http){
-    $http.defaults.headers.patch = {'Content-Type': 'application/json;charset=utf-8'};
+'use strict';
+
+angular.module('timelinerApp')
+  .factory('AuthService', function AuthFactory($resource, $http){
+    $http.defaults.headers.patch = { 'Content-Type': 'application/json;charset=utf-8' };
 
     var apiLocation = 'http://localhost:3000/api/auth';
 
