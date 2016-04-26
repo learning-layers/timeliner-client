@@ -9,11 +9,6 @@
  */
 angular.module('timelinerApp')
   .controller('MainCtrl', function ($scope, AuthService) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
 
     $scope.createUser = function () {
       $scope.updating = true;

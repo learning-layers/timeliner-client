@@ -11,8 +11,15 @@ describe('Service: appConfig', function () {
     appConfig = _appConfig_;
   }));
 
-  it('should do something', function () {
+  it('should exist', function () {
     expect(!!appConfig).toBe(true);
   });
 
+  it('should be an object', function() {
+    expect(typeof appConfig).toBe('object');
+  });
+
+  it('should have backendApiUrl', function() {
+    expect(!!appConfig.backendApiUrl).toBe(true);
+  });
 });

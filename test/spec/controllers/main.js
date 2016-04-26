@@ -17,7 +17,8 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of awesomeThings to the scope', function () {
-    expect(MainCtrl.awesomeThings.length).toBe(3);
+  it('should attach a createUser function to scope', function () {
+    expect(scope.createUser).toBeDefined();
+    expect(typeof scope.createUser).toBe('function');
   });
 });
