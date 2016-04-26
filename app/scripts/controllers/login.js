@@ -8,10 +8,33 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('LoginCtrl', function ($scope, AuthService) {
+    $scope.updating = false;
+    $scope.model = {};
+
+    // TODO This has to be moved to some better place
+    $scope.isLoggedIn = function() {
+      return AuthService.isLoggedIn();
+    };
+
+    $scope.login = function() {
+      $scope.updating = true;
+      AuthService.login({
+        email: $scope.model.email,
+        password: $scope.model.password
+      }, function(response) {
+        $scope.updating = false;
+        AuthService.setAuthCookie({
+          authToken: response.token
+        });
+        console.log('success', response);
+      }, function(response) {
+        $scope.updating = false;
+        console.log('error', response);
+      });
+    };
+
+    $scope.logout = function() {
+      AuthService.removeAuthCookie();
+    };
   });
