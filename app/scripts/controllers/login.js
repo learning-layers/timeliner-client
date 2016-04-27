@@ -24,12 +24,15 @@ angular.module('timelinerApp')
         password: $scope.model.password
       }, function(response) {
         $scope.updating = false;
+        $scope.error = false;
         AuthService.setAuthCookie({
           authToken: response.token
         });
+        $scope.model = {};
         console.log('success', response);
       }, function(response) {
         $scope.updating = false;
+        $scope.error = response.status;
         console.log('error', response);
       });
     };

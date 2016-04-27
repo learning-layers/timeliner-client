@@ -18,7 +18,7 @@ angular.module('timelinerApp')
         $scope.success = success;
         $scope.registerEmail = '';
       }, function (error) {
-        if(error.status == 409){
+        if(error.status === 409){
           $scope.error = 409;
         } else {
           $scope.error = error.status;
