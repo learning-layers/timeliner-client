@@ -11,7 +11,14 @@ angular.module('timelinerApp')
     }
 
     function setAuthCookie (dataObject) {
-      $cookies.putObject(authCookieName, dataObject);
+      var options = {};
+      var tokenData = JSON.parse(atob(dataObject.authToken.split('.')[1]));
+
+      if ( tokenData.exp ) {
+        options.expires = new Date(tokenData.exp * 1000);
+      }
+
+      $cookies.putObject(authCookieName, dataObject, options);
     }
 
     function removeAuthCookie () {
