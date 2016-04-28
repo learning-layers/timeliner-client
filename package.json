@@ -1,6 +1,9 @@
 {
   "name": "timeliner",
   "private": true,
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/karma/bin/karma test test/karma.conf.js"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
     "grunt": "^0.4.5",
