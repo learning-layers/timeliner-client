@@ -21,8 +21,4 @@ describe('Controller: MainCtrl', function () {
     expect(scope.createUser).toBeDefined();
     expect(typeof scope.createUser).toBe('function');
   });
-
-  it('will fail', function() {
-    expect(null).toBe(true);
-  });
 });
