@@ -8,21 +8,22 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function ($scope, AuthService) {
+  .controller('MainCtrl', function ($scope, AuthService, appConfig, vcRecaptchaService) {
+
+    $scope.captchaKey = appConfig.reCaptchaPublicKey;
+    $scope.register = {};
 
     $scope.createUser = function () {
       $scope.updating = true;
 
-      AuthService.register({email: $scope.registerEmail}, function (success) {
+      AuthService.register($scope.register, function () {
         $scope.updating = false;
-        $scope.success = success;
-        $scope.registerEmail = '';
+        $scope.error = null;
+        $scope.success = true;
+        $scope.register.email = '';
       }, function (error) {
-        if(error.status === 409){
-          $scope.error = 409;
-        } else {
-          $scope.error = error.status;
-        }
+        $scope.error = error.status;
+        vcRecaptchaService.reload();
         $scope.updating = false;
       });
     };

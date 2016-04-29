@@ -17,7 +17,8 @@ angular
     'ngTouch',
     'ui.router',
     'htk.common',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'vcRecaptcha'
   ]);
 
 angular.module('timelinerApp')

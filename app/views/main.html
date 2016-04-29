@@ -5,14 +5,18 @@
     Welcome to Timeliner! Enter your email to start lining your time.
   </p>
 
-  <form ng-submit="createUser()" uib-collapse="success">
+  <form ng-submit="createUser()" uib-collapse="success" name="registerForm">
     <div class="input-group input-group-lg">
-      <input type="email" class="form-control" placeholder="Enter your email..." ng-model="registerEmail">
+      <input type="email" class="form-control" placeholder="Enter your email..." ng-model="register.email" name="email">
       <span class="input-group-btn">
-        <button class="btn btn-success" type="submit" ng-disabled="updating">Register!</button>
+        <button class="btn btn-success" type="submit" ng-disabled="updating || registerForm.$invalid">Register!</button>
       </span>
     </div>
+    <br>
+    <div vc-recaptcha key="captchaKey" ng-model="register.captchaResponse" class="text-center" uib-collapse="registerForm.email.$pristine"></div>
   </form>
+
+
 
   <div class="alert alert-success animated fadeInDown" ng-if="success">
     User created, temporary confirmation link (this will be sent with email to the user): <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
