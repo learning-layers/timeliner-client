@@ -1,31 +1,3 @@
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Welcome to Timeliner! Enter your email to start lining your time.
-  </p>
+<uib-alert type="success" ng-if="isLoggedIn()">You are an authenticated user.</uib-alert>
 
-  <form ng-submit="createUser()" uib-collapse="success" name="registerForm">
-    <div class="input-group input-group-lg">
-      <input type="email" class="form-control" placeholder="Enter your email..." ng-model="register.email" name="email">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="submit" ng-disabled="updating || registerForm.$invalid">Register!</button>
-      </span>
-    </div>
-    <br>
-    <div vc-recaptcha key="captchaKey" ng-model="register.captchaResponse" class="text-center" uib-collapse="registerForm.email.$pristine"></div>
-  </form>
-
-
-
-  <div class="alert alert-success animated fadeInDown" ng-if="success">
-    User created, temporary confirmation link (this will be sent with email to the user): <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
-  </div>
-  <div class="alert alert-danger animated fadeInDown" ng-if="error == 409">
-    This email is already registered!
-  </div>
-  <div class="alert alert-danger animated fadeInDown" ng-if="error && error != 409">
-    Server error, please contact admin.
-  </div>
-  <span>Already a member? <a ui-sref="login">Log in</a></span>
-</div>
+<div ng-include src="'views/register.html'" ng-if="!isLoggedIn()"></div>

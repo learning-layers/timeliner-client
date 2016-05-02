@@ -8,25 +8,21 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('RegisterCtrl', function ($scope, $stateParams, AuthService) {
-    
-    $scope.form = {};
+  .controller('RegisterCtrl', function ($scope, AuthService, appConfig, vcRecaptchaService) {
+    $scope.captchaKey = appConfig.reCaptchaPublicKey;
+    $scope.register = {};
 
-    AuthService.checkConfirmationKeyValidity({key: $stateParams.key}, function (success) {
-      $scope.userEmail = success.email;
-    }, function () {
-      $scope.invalidKey = true;
-    });
-
-    $scope.confirmUser = function () {
+    $scope.createUser = function () {
       $scope.updating = true;
 
-      $scope.form.confirmationKey = $stateParams.key;
-      AuthService.confirm($scope.form, function () {
+      AuthService.register($scope.register, function () {
         $scope.updating = false;
-        $scope.form = {};
-        $scope.confirmationSuccessful = true;
-      }, function () {
+        $scope.error = null;
+        $scope.success = true;
+        $scope.register.email = '';
+      }, function (error) {
+        $scope.error = error.status;
+        vcRecaptchaService.reload();
         $scope.updating = false;
       });
     };

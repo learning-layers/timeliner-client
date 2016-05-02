@@ -8,14 +8,9 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($scope, AuthService) {
+  .controller('LoginCtrl', function ($scope, $state, AuthService) {
     $scope.updating = false;
     $scope.model = {};
-
-    // TODO This has to be moved to some better place
-    $scope.isLoggedIn = function() {
-      return AuthService.isLoggedIn();
-    };
 
     $scope.login = function() {
       $scope.updating = true;
@@ -29,15 +24,13 @@ angular.module('timelinerApp')
           authToken: response.token
         });
         $scope.model = {};
+        AuthService.setCurrentUser(response.user);
         console.log('success', response);
+        $state.go('home');
       }, function(response) {
         $scope.updating = false;
         $scope.error = response.status;
         console.log('error', response);
       });
-    };
-
-    $scope.logout = function() {
-      AuthService.removeAuthCookie();
     };
   });

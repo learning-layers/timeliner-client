@@ -3,6 +3,7 @@
 angular.module('timelinerApp')
   .factory('AuthService', function AuthFactory($resource, $http, $cookies, appConfig){
     var authCookieName = appConfig.authCookieName;
+    var currentUser = null;
 
     function getAuthCookie() {
       var cookie = $cookies.getObject(authCookieName);
@@ -76,6 +77,10 @@ angular.module('timelinerApp')
       login: {
         url: apiLocation + '/login',
         method: 'POST'
+      },
+      me: {
+        url: apiLocation + '/me',
+        method: 'GET'
       }
     });
 
@@ -87,6 +92,7 @@ angular.module('timelinerApp')
       confirm: authResource.confirm,
       checkConfirmationKeyValidity: authResource.checkConfirmationKeyValidity,
       login: authResource.login,
+      me: authResource.me,
       isLoggedIn: function() {
         if ( hasAuthCookie ) {
           if ( getAuthToken() && getUserId() ) {
@@ -95,6 +101,12 @@ angular.module('timelinerApp')
         }
 
         return false;
+      },
+      getCurrentUser: function() {
+        return currentUser;
+      },
+      setCurrentUser: function(user) {
+        currentUser = user;
       }
     };
 
