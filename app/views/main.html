@@ -1,3 +1,5 @@
-<uib-alert type="success" ng-if="isLoggedIn()">You are an authenticated user.</uib-alert>
+<div class="row" ng-if="isLoggedIn()">
+  <button type="button" class="btn btn-lg btn-success" ng-click="createNewProject()">New project</button>
+</div>
 
 <div ng-include src="'views/register.html'" ng-if="!isLoggedIn()"></div>
