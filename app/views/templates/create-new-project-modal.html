@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3" ng-class="{'has-error': newProjectForm.title.$error.required && newProjectForm.title.$dirty}">
         <p class="input-group">
-          <input type="text" name="title" class="form-control" ng-model="model.title" placeholder="Project title" style="width:269px" ng-required="true" ng-disable="updating">
+          <input type="text" name="title" class="form-control" ng-model="model.title" placeholder="Project title" style="" ng-required="true" ng-disable="updating">
           <span class="text-danger" ng-show="newProjectForm.title.$error.required && newProjectForm.title.$dirty">Title is required</span>
         </p>
       </div>
