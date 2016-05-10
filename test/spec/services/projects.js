@@ -16,4 +16,8 @@ describe('Service: projects', function () {
     expect(typeof ProjectsService.create).toBe('function');
   });
 
+  it('should have mine method defined', function () {
+    expect(ProjectsService.mine).toBeDefined();
+    expect(typeof ProjectsService.mine).toBe('function');
+  });
 });

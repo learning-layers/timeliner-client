@@ -12,7 +12,7 @@ angular.module('timelinerApp')
 
     $scope.updating = false;
 
-    $scope.format = 'dd-MM-yyyy';
+    $scope.format = 'dd.MM.yyyy';
 
     $scope.model = {
       start: new Date()
@@ -38,9 +38,9 @@ angular.module('timelinerApp')
         start: $scope.model.start,
         end: $scope.model.end
       }, function(response) {
-        $log.log('Project creation success', response);
+        $log.debug('Project creation success', response);
         $scope.updating = false;
-        $uibModalInstance.close($scope.model);
+        $uibModalInstance.close(response.data);
       }, function(err) {
         $log.error('Project creation error', err);
         $scope.updating = false;
@@ -57,5 +57,13 @@ angular.module('timelinerApp')
 
     $scope.openEnd = function() {
       $scope.popupEnd.opened = true;
+    };
+
+    $scope.datesMismatch = function() {
+      if ( $scope.model.end && $scope.model.start && new Date($scope.model.end) < new Date($scope.model.start) ) {
+        return true;
+      }
+
+      return false;
     };
   });

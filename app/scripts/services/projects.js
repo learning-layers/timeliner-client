@@ -30,6 +30,7 @@ angular.module('timelinerApp')
 
     // Public API here
     return {
-      create: projectsResource.create
+      create: projectsResource.create,
+      mine: projectsResource.mine
     };
   });

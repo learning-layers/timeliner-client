@@ -7,10 +7,13 @@
     <div class="row">
       <div class="col-md-6 col-md-offset-3" ng-class="{'has-error': newProjectForm.title.$error.required && newProjectForm.title.$dirty}">
         <p class="input-group">
-          <input type="text" name="title" class="form-control" ng-model="model.title" placeholder="Project title" style="" ng-required="true" ng-disable="updating">
-          <span class="text-danger" ng-show="newProjectForm.title.$error.required && newProjectForm.title.$dirty">Title is required</span>
+          <input type="text" name="title" class="form-control" ng-model="model.title" placeholder="Project title (required)" style="" ng-required="true" ng-disable="updating">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-asterisk"></span>
+          </span>
         </p>
       </div>
+      <span class="col-md-3 text-danger" ng-show="newProjectForm.title.$error.required && newProjectForm.title.$dirty">Title is required</span>
     </div>
 
     <div class="row">
@@ -19,10 +22,13 @@
           <span class="input-group-btn">
             <button type="button" class="btn btn-default" ng-click="openStart()"><i class="glyphicon glyphicon-calendar"></i></button>
           </span>
-          <input type="text" name="start" class="form-control" ng-model="model.start" uib-datepicker-popup="{{format}}" is-open="popupStart.opened" datepicker-options="dateOptions" ng-required="true" ng-disable="updating" close-text="Close" placeholder="pick start date">
-          <span class="text-danger" ng-show="newProjectForm.start.$error.required && newProjectForm.start.$dirty">Start date is required</span>
+          <input type="text" name="start" class="form-control" ng-model="model.start" uib-datepicker-popup="{{format}}" is-open="popupStart.opened" datepicker-options="dateOptions" ng-required="true" ng-disable="updating" close-text="Close" placeholder="pick start date (required)">
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-asterisk"></span>
+          </span>
         </p>
       </div>
+      <span class="text-danger" ng-show="newProjectForm.start.$error.required && newProjectForm.start.$dirty">Start date is required</span>
     </div>
 
     <div class="row">
@@ -34,11 +40,14 @@
           <input type="text" class="form-control" ng-model="model.end" uib-datepicker-popup="{{format}}" is-open="popupEnd.opened" ng-required="false" ng-disable="updating" close-text="Close" placeholder="pick end date" />
         </p>
       </div>
+      <div class="col-md-6 col-md-offset-3 alert alert-danger animated fadeInDown" ng-if="datesMismatch()">
+        End date can not be before start date.
+      </div>
     </div>
   </div>
 
   <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancel()" ng-disable="updating">Dismiss</button>
-    <button type="submit" class="btn btn-success" ng-disabled="updating || newProjectForm.$invalid">Finish</button>
+    <button type="submit" class="btn btn-success" ng-disabled="updating || newProjectForm.$invalid || datesMismatch()">Finish</button>
   </div>
 </form>
