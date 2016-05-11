@@ -5,6 +5,18 @@ angular.module('timelinerApp')
     var authCookieName = appConfig.authCookieName;
     var currentUser = null;
 
+    function setAuthHeader() {
+      if ( getAuthToken() ) {
+        $http.defaults.headers.common.Authorization = 'Bearer ' + getAuthToken();
+      }
+    }
+
+    function removeAuthHeader() {
+      if ( $http.defaults.headers.common.Authorization ) {
+        delete $http.defaults.headers.common.Authorization;
+      }
+    }
+
     function getAuthCookie() {
       var cookie = $cookies.getObject(authCookieName);
 
@@ -20,10 +32,12 @@ angular.module('timelinerApp')
       }
 
       $cookies.putObject(authCookieName, dataObject, options);
+      setAuthHeader();
     }
 
     function removeAuthCookie () {
       $cookies.remove(authCookieName);
+      removeAuthHeader();
     }
 
     function hasAuthCookie () {
