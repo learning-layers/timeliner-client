@@ -31,8 +31,8 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
     })
     .state('confirm', {
       url: '/confirm/:key',
-      templateUrl: 'views/register.html',
-      controller: 'RegisterCtrl',
+      templateUrl: 'views/confirmation.html',
+      controller: 'ConfirmationCtrl',
       resolve: {
         $title: function() { return 'Complete your profile'; }
       }

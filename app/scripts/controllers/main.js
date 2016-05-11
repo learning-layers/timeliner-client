@@ -43,7 +43,7 @@ angular.module('timelinerApp')
       if ( participants && participants.length > 0 ) {
         var names = [];
         angular.forEach(participants, function(participant) {
-          names.push(participant.name.first + ' ' + participant.name.last);
+          names.push(participant.user.name.first + ' ' + participant.user.name.last);
         });
 
         return names.join(', ');
