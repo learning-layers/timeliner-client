@@ -4,9 +4,9 @@
 
 <div ng-include src="'views/register.html'" ng-if="!isLoggedIn()"></div>
 
-<div>
+<div ng-if="isLoggedIn()">
   <h2>My projects (participant status)</h2>
-  <table class="table table-striped table-hover" ng-if="isLoggedIn()">
+  <table class="table table-striped table-hover" ng-if="projects && projects.length > 0">
     <thead>
       <th>#</th>
       <th>Title</th>
