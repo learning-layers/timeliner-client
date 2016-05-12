@@ -14,7 +14,7 @@ angular.module('timelinerApp')
 
     var projectsResource =  $resource(apiLocation, {}, {
       mine: {
-        url: apiLocation,
+        url: apiLocation + '/mine',
         method: 'GET'
       },
       create: {
