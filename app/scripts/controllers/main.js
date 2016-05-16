@@ -8,27 +8,19 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function ($scope, $uibModal, $log, $filter, ProjectsService, AuthService) {
+  .controller('MainCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia) {
     $scope.projects = [];
 
     $scope.canDeleteProject = function(project) {
       var currentUser = AuthService.getCurrentUser();
 
-      if ( project.owner._id === currentUser._id ) {
-        return true;
-      }
-
-      return false;
+      return project.owner._id === currentUser._id;
     };
 
     $scope.canLeaveProject = function(project) {
       var currentUser = AuthService.getCurrentUser();
 
-      if ( project.owner._id !== currentUser._id ) {
-        return true;
-      }
-
-      return false;
+      return project.owner._id !== currentUser._id;
     };
 
     $scope.displayDate = function(dateString) {
@@ -52,18 +44,28 @@ angular.module('timelinerApp')
       return '';
     };
 
-    $scope.createNewProject = function() {
-      var modalInstance = $uibModal.open({
-        animation: true,
-        templateUrl: 'views/templates/create-new-project-modal.html',
-        controller: 'CreateNewProjectModalInstanceCtrl',
-      });
+    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
+    $scope.createNewProject = function(ev) {
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+      $mdDialog.show({
+          controller: 'CreateNewProjectModalInstanceCtrl',
+          templateUrl: 'views/templates/create-new-project-modal.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen
+        })
+        .then(function(project) {
+          $log.debug('Dialog returned project:', project);
+          $scope.projects.push(project);
+        }, function() {
+          $log.debug('Dialog dismissed.');
+        });
 
-      modalInstance.result.then(function(project) {
-        $log.debug('Modal action called:', project);
-        $scope.projects.push(project);
-      }, function() {
-        $log.debug('Modal dismissed.');
+      $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
       });
     };
 

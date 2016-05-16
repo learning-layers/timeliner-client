@@ -1,31 +1,47 @@
-<div class="jumbotron" ng-controller="RegisterCtrl">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/logo.png" alt="Timeliner Logo"><br>
-    Welcome to Timeliner! Enter your email to start lining your time.
-  </p>
-
-  <form ng-submit="createUser()" uib-collapse="success" name="registerForm">
-    <div class="input-group input-group-lg">
-      <input type="email" class="form-control" placeholder="Enter your email..." ng-model="register.email" name="email">
-      <span class="input-group-btn">
-        <button class="btn btn-success" type="submit" ng-disabled="updating || registerForm.$invalid">Register!</button>
-      </span>
-    </div>
-    <br>
-    <div vc-recaptcha key="captchaKey" ng-model="register.captchaResponse" class="text-center" uib-collapse="registerForm.email.$pristine"></div>
-  </form>
-
-
-
-  <div class="alert alert-success animated fadeInDown" ng-if="success">
-    User created, temporary confirmation link (this will be sent with email to the user): <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
+<div ng-controller="RegisterCtrl">
+  <div layout="row" layout-align="center">
+    <img src="images/logo.png" alt="Timeliner Logo">
+    <span class="md-display-4">Timeliner</span>
   </div>
-  <div class="alert alert-danger animated fadeInDown" ng-if="error == 409">
-    This email is already registered!
+  <div layout="row" layout-align="center">
+    <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 600px">
+      <md-card-title>
+        <md-card-title-text>
+          <span class="md-headline">Welcome to Timeliner! Enter your email now to start lining your time.</span>
+        </md-card-title-text>
+      </md-card-title>
+
+      <md-card-content>
+        <form name="registerForm" ng-submit="createUser()" uib-collapse="success">
+          <md-input-container class="md-icon-float md-block">
+            <label>Email</label>
+            <md-icon>email</md-icon>
+            <input name="email" ng-model="register.email" type="email" required>
+            <div ng-messages="registerForm.email.$error">
+              <div ng-message="email">This doesn't look like an email</div>
+            </div>
+          </md-input-container>
+          <div layout="column" layout-align="start center">
+
+              <div vc-recaptcha key="captchaKey" theme="dark" ng-model="register.captchaResponse" uib-collapse="registerForm.email.$pristine"></div>
+
+              <md-button class="md-raised md-accent larger" type="submit" ng-disabled="updating || registerForm.$invalid">Register</md-button>
+
+          </div>
+        </form>
+        <div class="alert alert-success animated fadeInDown" ng-if="success">
+          User created, temporary confirmation link (this will be sent with email to the user): <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
+        </div>
+        <div class="alert alert-danger animated fadeInDown" ng-if="error == 409">
+          This email is already registered!
+        </div>
+        <div class="alert alert-danger animated fadeInDown" ng-if="error && error != 409">
+          Server error, please contact admin.
+        </div>
+      </md-card-content>
+    </md-card>
   </div>
-  <div class="alert alert-danger animated fadeInDown" ng-if="error && error != 409">
-    Server error, please contact admin.
+  <div layout="row" layout-align="center">
+    <span>Already a member? <a ui-sref="login">Log in</a></span>
   </div>
-  <span>Already a member? <a ui-sref="login">Log in</a></span>
 </div>

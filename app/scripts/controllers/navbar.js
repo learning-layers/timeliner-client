@@ -21,6 +21,6 @@ angular.module('timelinerApp')
         return currentUser.name.first + ' ' + currentUser.name.last;
       }
 
-      return '@unknwon';
+      return '@unknown';
     };
   });

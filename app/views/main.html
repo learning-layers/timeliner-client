@@ -1,45 +1,104 @@
-<div class="row" ng-if="isLoggedIn()">
-  <button type="button" class="btn btn-lg btn-success" ng-click="createNewProject()">New project</button>
+<div layout="row" ng-if="isLoggedIn()">
+  <md-button class="md-raised md-accent" type="submit" ng-click="createNewProject($event)">New project</md-button>
 </div>
-
+<!-- TODO make registration as a part of route resolving and redirect to a standalone view-->
 <div ng-include src="'views/register.html'" ng-if="!isLoggedIn()"></div>
 
 <div ng-if="isLoggedIn()">
   <h2>My projects (participant status)</h2>
-  <table class="table table-striped table-hover" ng-if="projects && projects.length > 0">
-    <thead>
-      <th>#</th>
-      <th>Title</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Creator</th>
-      <th>Owner</th>
-      <th>Participants</th>
-      <th>Actions</th>
-    </thead>
-    <tbody>
-      <tr ng-repeat="project in projects">
-        <td>{{::$index+1}}</td>
-        <td>{{::project.title}}</td>
-        <td>{{::displayDate(project.start)}}</td>
-        <td>{{::displayDate(project.end)}}</td>
-        <td>{{::(project.creator.name.first + ' ' + project.creator.name.last)}}</td>
-        <td>{{::(project.owner.name.first + ' ' + project.owner.name.last)}}</td>
-        <td>{{::displayParticipants(project.participants)}}</td>
-        <td>
-          <div class="btn-group" uib-dropdown>
-            <button id="btn-append-to-single-button" type="button" class="btn btn-default btn-sm" uib-dropdown-toggle>
-              <span class="glyphicon glyphicon-cog"></span>
-            </button>
-            <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="btn-append-to-single-button">
-              <li role="menuitem"><a ng-click="doEdit(project)">Edit</a></li>
-              <li role="menuitem" ng-class="{ disabled: !canLeaveProject(project) }"><a ng-click="doLeave(project)">Leave</a></li>
-              <li class="divider"></li>
-              <li role="menuitem" ng-class="{ disabled: !canDeleteProject(project) }"><a ng-click="doDelete(project)">Delete</a></li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+  <div layout="row" layout-align="end" layout-padding="5">
+    <div flex="50">Title</div>
+    <div flex="10">Start date</div>
+    <div flex="10">End date</div>
+    <div flex="10">Owner</div>
+    <div flex="20">Participants</div>
+    <div flex="5">Actions</div>
+  </div>
+
+  <md-list>
+    <div> <!-- TODO only show this block if user has pending projects (and list them here) -->
+      <md-subheader class="md-no-sticky">Pending projects</md-subheader>
+      <md-list-item class="secondary-button-padding" ng-click="openProject()">
+        <div flex="50">Something pending</div>
+        <div flex="10">27.08.2016</div>
+        <div flex="10">30.08.2018</div>
+        <div flex="10">Mati Mets</div>
+        <div flex="20">{{ ::displayParticipants(project.participants) }}</div>
+        <md-menu md-position-mode="target-right target">
+          <md-button aria-label="More options" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+            <md-icon md-menu-origin>more_vert</md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button  class="md-accent" ng-click="doJoin($event)">
+                <md-icon md-menu-align-target>check_circle</md-icon>
+                Join
+              </md-button>
+            </md-menu-item>
+            <md-menu-item>
+              <md-button disabled="disabled" ng-click="doDecline()">
+                <md-icon>cancel</md-icon>
+                Decline
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </md-list-item>
+      <md-subheader class="md-no-sticky">Active projects</md-subheader>
+      <md-divider></md-divider>
+    </div>
+
+    <md-list-item class="secondary-button-padding" ng-repeat="project in projects" ng-click="openProject()">
+      <div flex="50">{{ ::project.title }}</div> <!-- TODO remove this duplication of list items (except for menu buttons) -->
+      <div flex="10">{{ ::displayDate(project.start) }}</div>
+      <div flex="10">{{ ::displayDate(project.end) }}</div>
+      <div flex="10">{{ ::(project.owner.name.first + ' ' + project.owner.name.last) }}</div>
+      <div flex="20">
+        <div class="badge accent">
+          <md-tooltip md-direction="down" class="tooltip-text">Participants</md-tooltip>
+          <md-icon>person</md-icon>
+          36 <!-- TODO make these numbers functional -->
+        </div>
+        <div class="badge primary">
+          <md-tooltip md-direction="down" class="tooltip-text">Pending</md-tooltip>
+          <md-icon>person_add</md-icon>
+          3
+        </div>
+        <div class="badge warn">
+          <md-tooltip md-direction="down" class="tooltip-text">Rejected / placeholders</md-tooltip>
+          <md-icon>person_outline</md-icon>
+          1
+        </div>
+      </div>
+
+      <md-menu md-position-mode="target-right target">
+        <md-button aria-label="More options" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          <md-icon md-menu-origin>more_vert</md-icon>
+        </md-button>
+        <md-menu-content width="4">
+          <md-menu-item>
+            <md-button ng-click="doEdit()">
+              <md-icon md-menu-align-target>edit</md-icon>
+              Edit
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-disabled="!canLeaveProject(project)" ng-click="doLeave()">
+              <md-icon>cancel</md-icon>
+              Leave
+            </md-button>
+          </md-menu-item>
+          <md-menu-divider></md-menu-divider>
+          <md-menu-item>
+            <md-button class="md-warn" ng-disabled="!canDeleteProject(project)" ng-click="doDelete()">
+              <md-icon>delete_forever</md-icon>
+              <span>Delete project</span>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+    </md-list-item>
+    <md-divider></md-divider>
+  </md-list>
 </div>

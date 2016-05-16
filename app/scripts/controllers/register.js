@@ -15,10 +15,10 @@ angular.module('timelinerApp')
     $scope.createUser = function () {
       $scope.updating = true;
 
-      AuthService.register($scope.register, function () {
+      AuthService.register($scope.register, function (res) {
         $scope.updating = false;
         $scope.error = null;
-        $scope.success = true;
+        $scope.success = res;
         $scope.register.email = '';
       }, function (error) {
         $scope.error = error.status;

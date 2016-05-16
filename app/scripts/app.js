@@ -14,11 +14,12 @@ angular
     'ngCookies',
     'ngResource',
     'ngSanitize',
-    'ngTouch',
     'ui.router',
     'htk.common',
     'ui.bootstrap',
-    'vcRecaptcha'
+    'vcRecaptcha',
+    'ngMaterial',
+    'ngMessages'
   ]);
 
 angular.module('timelinerApp')
@@ -34,4 +35,28 @@ angular.module('timelinerApp')
       var titlePrefix = 'Timeliner - ';
       return titlePrefix + title;
     }
-  }]);
+  }])
+  .config(function($mdThemingProvider) {
+    $mdThemingProvider
+      .theme('default')
+      .dark()
+      .primaryPalette('blue-grey', {
+        'default': '500',
+        'hue-1': '700'
+      })
+      .backgroundPalette('blue-grey', {
+        'default': '800',
+        'hue-1': '900'
+      })
+      .accentPalette('green');
+  })
+  .config(function ($mdDateLocaleProvider) {
+    $mdDateLocaleProvider.formatDate = function(date) {
+      console.log('formatter:',date);
+      if(date){
+        return moment(date).format('DD.MM.YYYY');
+      }
+      return date;
+    };
+    $mdDateLocaleProvider.firstDayOfWeek = 1;
+  });

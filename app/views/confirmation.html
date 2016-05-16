@@ -1,36 +1,63 @@
 <div class="alert alert-danger" ng-if="invalidKey">Wrong or expired link!</div>
 
-<div ng-if="userEmail">
-  <h2 class="text-center">Complete your profile</h2>
+<div layout="row" layout-align="center" ng-if="userEmail">
+  <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 500px">
+    <md-card-title>
+      <md-card-title-text>
+        <span class="md-headline">Welcome back! Just one more step...</span>
+        <span class="md-subhead">Complete your profile</span>
+      </md-card-title-text>
+    </md-card-title>
 
-  <form name="registerForm" class="form-register" ng-submit="confirmUser()" uib-collapse="confirmationSuccessful">
-    <div class="form-group">
-      <label class="control-label">Email address</label>
-      <p class="form-control-static">{{ userEmail }}</p>
-    </div>
-    <div class="form-group">
-      <label for="firstName">First name</label>
-      <input type="text" class="form-control" id="firstName" placeholder="First name" ng-model="form.name.first" required>
-    </div>
-    <div class="form-group">
-      <label for="firstName">Last name</label>
-      <input type="text" class="form-control" id="lastName" placeholder="Last name" ng-model="form.name.last" required>
-    </div>
-    <div class="form-group">
-      <label for="password1">Password</label>
-      <input type="password" class="form-control" id="password1" placeholder="Password" ng-model="form.password" name="password1" required>
-    </div>
-    <div class="form-group">
-      <label for="password2">Repeat password</label>
-      <input type="password" class="form-control" id="password2" placeholder="Password" pw-check="form.password" name="password2" ng-model="form.password2" required>
-      <span class="text-danger" ng-show="registerForm.password2.$error.pwmatch && registerForm.password2.$dirty">Passwords don't match</span>
-    </div>
-    <button type="submit" class="btn btn-block btn-lg btn-success" ng-disabled="registerForm.$invalid || updating">Complete profile</button>
-  </form>
+    <md-card-content>
+      <form name="registerForm" ng-submit="confirmUser()" uib-collapse="confirmationSuccessful">
+        <md-input-container class="md-icon-float md-block">
+          <label>Email</label>
+          <md-icon>email</md-icon>
+          <input name="email" ng-model="userEmail" type="email" disabled>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>First name</label>
+          <md-icon>person</md-icon>
+          <input name="firstName" ng-model="form.name.first" type="text" required>
+          <div ng-messages="registerForm.firstName.$error">
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>Last name</label>
+          <md-icon>person</md-icon>
+          <input name="lastName" ng-model="form.name.last" type="text" required>
+          <div ng-messages="registerForm.lastName.$error">
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>Password</label>
+          <md-icon>vpn_key</md-icon>
+          <input name="password" ng-model="form.password" type="password" required>
+          <div ng-messages="loginForm.password.$error">
+            <div ng-message="required">This is required!</div>
+          </div>
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+          <label>Repeat password</label>
+          <md-icon>vpn_key</md-icon>
+          <input name="password2" ng-model="form.password2" type="password" pw-check="form.password" required>
+          <div ng-messages="registerForm.password2.$error">
+            <div ng-message="required">This is required!</div>
+            <div ng-message="pwmatch">Passwords don't match</div>
+          </div>
+        </md-input-container>
 
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-raised md-accent" type="submit" ng-disabled="registerForm.$invalid || updating">Register</md-button>
+        </md-card-actions>
+      </form>
 
-  <div class="alert alert-success animated fadeInDown" ng-if="confirmationSuccessful">
-    User registration completed.
-  </div>
-
+      <div class="alert alert-success animated fadeInDown" ng-if="confirmationSuccessful">
+        User registration completed.
+      </div>
+    </md-card-content>
+  </md-card>
 </div>
