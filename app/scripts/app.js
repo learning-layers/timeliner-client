@@ -19,7 +19,8 @@ angular
     'ui.bootstrap',
     'vcRecaptcha',
     'ngMaterial',
-    'ngMessages'
+    'ngMessages',
+    'pascalprecht.translate'
   ]);
 
 angular.module('timelinerApp')
@@ -64,4 +65,7 @@ angular.module('timelinerApp')
       return date;
     };
     $mdDateLocaleProvider.firstDayOfWeek = 1;
+  })
+  .config(function($translateProvider) {
+    $translateProvider.preferredLanguage('en');
   });
