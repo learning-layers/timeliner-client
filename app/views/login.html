@@ -1,4 +1,4 @@
-<div layout="row" layout-align="center">
+<div layout="row" layout-align="center" ng-if="!isLoggedIn()">
   <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 400px">
     <md-card-title>
       <md-card-title-text>
@@ -8,7 +8,7 @@
     </md-card-title>
 
     <md-card-content>
-      <form name="loginForm" ng-submit="login()" uib-collapse="isLoggedIn()">
+      <form name="loginForm" ng-submit="login()">
         <md-input-container class="md-icon-float md-block">
           <label>Email</label>
           <md-icon>email</md-icon>

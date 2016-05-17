@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($scope, $state, $mdToast, AuthService) {
+  .controller('LoginCtrl', function ($scope, $state, AuthService, SystemMessagesService) {
     $scope.updating = false;
     $scope.model = {};
 
@@ -24,17 +24,15 @@ angular.module('timelinerApp')
         });
         $scope.model = {};
         AuthService.setCurrentUser(response.user);
+        SystemMessagesService.showSuccess('Welcome back ' + response.user.name.first + ' ' + response.user.name.last + ', you have successfully logged in.');
         $state.go('home');
       }, function(response) {
         $scope.updating = false;
+
         if ( response.status === 401 ) {
-          $mdToast.show(
-            $mdToast.simple().textContent('Authentication failed, please try again!').theme('error-toast')
-          );
+          SystemMessagesService.showError('Authentication failed, please try again!');
         } else {
-          $mdToast.show(
-            $mdToast.simple().textContent('Server error, please contact administrator.').theme('error-toast')
-          );
+          SystemMessagesService.showError('Server error, please contact administrator!');
         }
       });
     };
