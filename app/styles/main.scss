@@ -45,3 +45,28 @@ $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/boots
   color: #dd2c00;
   margin: 10px 0 0 25px;
 }
+
+/* Custom toast theming for messages */
+md-toast.md-info-toast-theme {
+  .md-toast-content {
+    background-color: blue;
+  }
+}
+
+md-toast.md-success-toast-theme {
+  .md-toast-content {
+    background-color: green;
+  }
+}
+
+md-toast.md-warning-toast-theme {
+  .md-toast-content {
+    background-color: orange;
+  }
+}
+
+md-toast.md-error-toast-theme {
+  .md-toast-content {
+    background-color: red;
+  }
+}

@@ -15,6 +15,7 @@
           <input name="email" ng-model="model.email" type="email" required>
           <div ng-messages="loginForm.email.$error">
             <div ng-message="required">This is required!</div>
+            <div ng-message="email">This doesn't look like an email</div>
           </div>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
@@ -26,13 +27,6 @@
           </div>
         </md-input-container>
 
-        <div class="alert alert-danger animated fadeInDown" ng-if="error == 401">
-          Authentication failed, please try again!
-        </div>
-        <div class="alert alert-danger animated fadeInDown" ng-if="error && error != 401">
-          Server error, please contact admin.
-        </div>
-
         <md-card-actions layout="row" layout-align="end center">
           <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating">Sign in</md-button>
         </md-card-actions>
@@ -41,5 +35,3 @@
   </md-card>
 
 </div>
-
-

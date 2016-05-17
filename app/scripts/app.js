@@ -49,12 +49,17 @@ angular.module('timelinerApp')
         'hue-1': '900'
       })
       .accentPalette('green');
+      $mdThemingProvider.theme('info-toast');
+      $mdThemingProvider.theme('success-toast');
+      $mdThemingProvider.theme('warning-toast');
+      $mdThemingProvider.theme('error-toast');
   })
-  .config(function ($mdDateLocaleProvider) {
+  .config(function ($mdDateLocaleProvider, $windowProvider) {
+    var $window = $windowProvider.$get();
+
     $mdDateLocaleProvider.formatDate = function(date) {
-      console.log('formatter:',date);
       if(date){
-        return moment(date).format('DD.MM.YYYY');
+        return $window.moment(date).format('DD.MM.YYYY');
       }
       return date;
     };

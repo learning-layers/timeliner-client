@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($scope, $state, AuthService) {
+  .controller('LoginCtrl', function ($scope, $state, $mdToast, AuthService) {
     $scope.updating = false;
     $scope.model = {};
 
@@ -19,18 +19,23 @@ angular.module('timelinerApp')
         password: $scope.model.password
       }, function(response) {
         $scope.updating = false;
-        $scope.error = false;
         AuthService.setAuthCookie({
           authToken: response.token
         });
         $scope.model = {};
         AuthService.setCurrentUser(response.user);
-        console.log('success', response);
         $state.go('home');
       }, function(response) {
         $scope.updating = false;
-        $scope.error = response.status;
-        console.log('error', response);
+        if ( response.status === 401 ) {
+          $mdToast.show(
+            $mdToast.simple().textContent('Authentication failed, please try again!').theme('error-toast')
+          );
+        } else {
+          $mdToast.show(
+            $mdToast.simple().textContent('Server error, please contact administrator.').theme('error-toast')
+          );
+        }
       });
     };
   });
