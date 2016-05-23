@@ -72,7 +72,7 @@ angular.module('timelinerApp')
 
     $http.defaults.headers.patch = { 'Content-Type': 'application/json;charset=utf-8' };
 
-    var apiLocation = appConfig.backendApiUrl + '/auth';
+    var apiLocation = appConfig.backendUrl + '/api/auth';
 
     var authResource =  $resource(apiLocation, {}, {
       register: {
@@ -92,6 +92,11 @@ angular.module('timelinerApp')
         url: apiLocation + '/login',
         method: 'POST'
       },
+      loginSocial: {
+        url: apiLocation + '/login/social',
+        method: 'POST',
+        withCredentials: true
+      },
       me: {
         url: apiLocation + '/me',
         method: 'GET'
@@ -106,6 +111,7 @@ angular.module('timelinerApp')
       confirm: authResource.confirm,
       checkConfirmationKeyValidity: authResource.checkConfirmationKeyValidity,
       login: authResource.login,
+      loginSocial: authResource.loginSocial,
       me: authResource.me,
       isLoggedIn: function() {
         if ( hasAuthCookie ) {

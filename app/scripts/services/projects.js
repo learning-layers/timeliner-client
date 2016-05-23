@@ -10,7 +10,7 @@
 angular.module('timelinerApp')
   .factory('ProjectsService', function ($resource, appConfig) {
 
-    var apiLocation = appConfig.backendApiUrl + '/projects';
+    var apiLocation = appConfig.backendUrl + '/api/projects';
 
     var projectsResource =  $resource(apiLocation, {}, {
       mine: {

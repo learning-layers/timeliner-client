@@ -36,6 +36,14 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       resolve: {
         $title: function() { return 'Complete your profile'; }
       }
+    })
+    .state('auth', {
+      url: '/auth/:state',
+      template: '<md-progress-linear md-mode="indeterminate"></md-progress-linear>',
+      controller: 'SocialLoginCtrl',
+      resolve: {
+        $title: function() { return 'Complete social login'; }
+      }
     });
 
 });

@@ -19,7 +19,7 @@ describe('Service: appConfig', function () {
     expect(typeof appConfig).toBe('object');
   });
 
-  it('should have backendApiUrl', function() {
-    expect(!!appConfig.backendApiUrl).toBe(true);
+  it('should have backendUrl', function() {
+    expect(!!appConfig.backendUrl).toBe(true);
   });
 });

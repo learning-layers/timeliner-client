@@ -1,5 +1,7 @@
 <div layout="row" layout-align="center" ng-if="!isLoggedIn()">
   <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 400px">
+    <md-progress-linear md-mode="indeterminate" ng-show="showProgressIndicator"></md-progress-linear>
+
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline">Welcome back!</span>
@@ -29,6 +31,15 @@
 
         <md-card-actions layout="row" layout-align="end center">
           <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating">Sign in</md-button>
+        </md-card-actions>
+
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-raised md-accent" type="button" ng-disabled="updating" ng-click="socialLogin('facebook');">
+            Login with Facebook
+          </md-button>
+          <md-button class="md-raised md-accent" type="button" ng-disabled="updating" ng-click="socialLogin('google');">
+            Login with Google
+          </md-button>
         </md-card-actions>
       </form>
     </md-card-content>
