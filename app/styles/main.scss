@@ -1,7 +1,11 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
+$mdi-font-path: "../bower_components/mdi/fonts/";
+
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
 // bower:scss
 @import "bootstrap-sass-official/assets/stylesheets/_bootstrap.scss";
+@import "mdi/scss/materialdesignicons.scss";
 // endbower
 
 .browsehappy {
@@ -68,5 +72,27 @@ md-toast.md-warning-toast-theme {
 md-toast.md-error-toast-theme {
   .md-toast-content {
     background-color: red;
+  }
+}
+
+/* Sign in buttons */
+.md-button.tl-facebook-button, .md-button.tl-google-button {
+  md-icon {
+    font-size: 24px;
+  }
+}
+.md-button.tl-facebook-button:not([disabled]), .md-button.tl-facebook-button:not([disabled]):hover {
+  background-color: #337ab7;
+  border-color: #2e6da4;
+  md-icon {
+    color: #fff;
+  }
+}
+
+.md-button.tl-google-button:not([disabled]), .md-button.tl-google-button:not([disabled]):hover {
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  md-icon {
+    color: #fff;
   }
 }

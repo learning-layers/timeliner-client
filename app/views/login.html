@@ -14,7 +14,7 @@
         <md-input-container class="md-icon-float md-block">
           <label>Email</label>
           <md-icon>email</md-icon>
-          <input name="email" ng-model="model.email" type="email" required>
+          <input name="email" ng-model="model.email" type="email" ng-disabled="updating" required>
           <div ng-messages="loginForm.email.$error">
             <div ng-message="required">This is required!</div>
             <div ng-message="email">This doesn't look like an email</div>
@@ -23,23 +23,26 @@
         <md-input-container class="md-icon-float md-block">
           <label>Password</label>
           <md-icon>vpn_key</md-icon>
-          <input name="password" ng-model="model.password" type="password" required>
+          <input name="password" ng-model="model.password" type="password" ng-disabled="updating" required>
           <div ng-messages="loginForm.password.$error">
             <div ng-message="required">This is required!</div>
           </div>
         </md-input-container>
 
         <md-card-actions layout="row" layout-align="end center">
+          <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="Sign in with Facebook" type="button" ng-disabled="updating" ng-click="socialLogin('facebook');">
+            <md-tooltip md-direction="top" class="tooltip-text">
+              Sign in with Facebook
+            </md-tooltip>
+            <md-icon md-font-set="mdi" md-font-icon="mdi-facebook"></md-icon>
+          </md-button>
+          <md-button class="md-raised md-icon-button tl-google-button" aria-label="Sign in with Google" type="button" ng-disabled="updating" ng-click="socialLogin('google');">
+            <md-tooltip md-direction="top" class="tooltip-text">
+              Sign in with Google
+            </md-tooltip>
+            <md-icon md-font-set="mdi" md-font-icon="mdi-google-plus"></md-icon>
+          </md-button>
           <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating">Sign in</md-button>
-        </md-card-actions>
-
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised md-accent" type="button" ng-disabled="updating" ng-click="socialLogin('facebook');">
-            Login with Facebook
-          </md-button>
-          <md-button class="md-raised md-accent" type="button" ng-disabled="updating" ng-click="socialLogin('google');">
-            Login with Google
-          </md-button>
         </md-card-actions>
       </form>
     </md-card-content>

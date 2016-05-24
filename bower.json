@@ -14,7 +14,8 @@
     "angular-recaptcha": "^3.0.3",
     "angular-material": "^1.0.8",
     "moment": "^2.13.0",
-    "angular-translate": "^2.11.0"
+    "angular-translate": "^2.11.0",
+    "mdi": "^1.6.50"
   },
   "devDependencies": {
     "angular-mocks": "^1.4.0"
@@ -27,6 +28,12 @@
         "less/bootstrap.less",
         "dist/css/bootstrap.css",
         "dist/js/bootstrap.js"
+      ]
+    },
+    "mdi": {
+      "main": [
+          "fonts/*",
+          "scss/materialdesignicons.scss"
       ]
     }
   }

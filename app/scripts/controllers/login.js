@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($window, $scope, $state, AuthService, SystemMessagesService, appConfig) {
+  .controller('LoginCtrl', function ($window, $scope, $state, $location, AuthService, SystemMessagesService, appConfig) {
     var timeoutId;
 
     $scope.updating = false;
@@ -66,4 +66,22 @@ angular.module('timelinerApp')
       timeoutId = addProgressIndictorTimeout();
       $window.location = appConfig.backendUrl + '/auth/connect/' + provider;
     };
+
+    var locationSearch = $location.search();
+
+    if ( locationSearch.code && locationSearch.message ){
+      if (locationSearch.code === '200' && locationSearch.message === 'user_denied' ) {
+        SystemMessagesService.showWarning('Sign in impossible. You have denied the access!');
+      } else if ( locationSearch.code === '400' && locationSearch.message === 'bad_request' ) {
+        SystemMessagesService.showError('Unable to find authentication response data!');
+      } else if ( locationSearch.code === '404' && locationSearch.message === 'could_not_load_profile_data' ) {
+        SystemMessagesService.showError('Could not load requested profile data!');
+      } else if ( locationSearch.code === '400' && locationSearch.message === 'email_is_missing' ) {
+        SystemMessagesService.showError('Email address missing. Please make sure that app is allowed to access email address.');
+      } else if ( locationSearch.code === '500' && locationSearch.message === 'internal_server_error' ) {
+        SystemMessagesService.showError('Unable to sign you in due to unknown error.');
+      } else if ( locationSearch.code === '409' && locationSearch.message === 'email_already_used' ) {
+        SystemMessagesService.showError('Email address is already in use.');
+      }
+    }
   });
