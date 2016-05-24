@@ -29,20 +29,20 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
         $title: function() { return 'Log in'; }
       }
     })
+    .state('login.auth', {
+      url: '/:state',
+      templateUrl: 'views/login.html',
+      controller: 'LoginCtrl',
+      resolve: {
+        $title: function() { return 'Log in'; }
+      }
+    })
     .state('confirm', {
       url: '/confirm/:key',
       templateUrl: 'views/confirmation.html',
       controller: 'ConfirmationCtrl',
       resolve: {
         $title: function() { return 'Complete your profile'; }
-      }
-    })
-    .state('auth', {
-      url: '/auth/:state',
-      template: '<md-progress-linear md-mode="indeterminate"></md-progress-linear>',
-      controller: 'SocialLoginCtrl',
-      resolve: {
-        $title: function() { return 'Complete social login'; }
       }
     });
 

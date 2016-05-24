@@ -67,9 +67,35 @@ angular.module('timelinerApp')
       $window.location = appConfig.backendUrl + '/auth/connect/' + provider;
     };
 
+    if ( $state.params.state ) {
+      $scope.updating = true;
+      $scope.showProgressIndicator = true;
+
+      AuthService.loginSocial({
+        state: $state.params.state
+      }, function(response) {
+        $scope.updating = false;
+        $scope.showProgressIndicator = false;
+
+        AuthService.setAuthCookie({
+          authToken: response.data.token
+        });
+        AuthService.setCurrentUser(response.data.user);
+        SystemMessagesService.showSuccess('Welcome back ' + response.data.user.name.first + ' ' + response.data.user.name.last + ', you have successfully logged in.');
+        $state.go('home');
+      }, function() {
+        $scope.updating = false;
+        $scope.showProgressIndicator = false;
+
+        // TODO Add some error handling
+        SystemMessagesService.showError('Login failed.');
+        $state.go('login');
+      });
+    }
+
     var locationSearch = $location.search();
 
-    if ( locationSearch.code && locationSearch.message ){
+    if ( locationSearch.code && locationSearch.message ) {
       if (locationSearch.code === '200' && locationSearch.message === 'user_denied' ) {
         SystemMessagesService.showWarning('Sign in impossible. You have denied the access!');
       } else if ( locationSearch.code === '400' && locationSearch.message === 'bad_request' ) {
