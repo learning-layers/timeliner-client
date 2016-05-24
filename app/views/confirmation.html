@@ -10,7 +10,7 @@
     </md-card-title>
 
     <md-card-content>
-      <form name="registerForm" ng-submit="confirmUser()" uib-collapse="confirmationSuccessful">
+      <form name="registerForm" ng-submit="confirmUser()" ng-hide="confirmationSuccessful">
         <md-input-container class="md-icon-float md-block">
           <label>Email</label>
           <md-icon>email</md-icon>

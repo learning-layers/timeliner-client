@@ -12,7 +12,7 @@
       </md-card-title>
 
       <md-card-content>
-        <form name="registerForm" ng-submit="createUser()" uib-collapse="success">
+        <form name="registerForm" ng-submit="createUser()" ng-hide="success">
           <md-input-container class="md-icon-float md-block">
             <label>Email</label>
             <md-icon>email</md-icon>
@@ -23,7 +23,7 @@
           </md-input-container>
           <div layout="column" layout-align="start center">
 
-              <div vc-recaptcha key="captchaKey" theme="dark" ng-model="register.captchaResponse" uib-collapse="registerForm.email.$pristine"></div>
+              <div vc-recaptcha key="captchaKey" theme="dark" ng-model="register.captchaResponse" class="animated fadeInDown" ng-if="!registerForm.email.$pristine"></div>
 
               <md-button class="md-raised md-accent larger" type="submit" ng-disabled="updating || registerForm.$invalid">Register</md-button>
 

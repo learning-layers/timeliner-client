@@ -16,7 +16,6 @@ angular
     'ngSanitize',
     'ui.router',
     'htk.common',
-    'ui.bootstrap',
     'vcRecaptcha',
     'ngMaterial',
     'ngMessages',
