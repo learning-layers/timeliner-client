@@ -19,11 +19,11 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
   color: #777;
 }
 
-.badge{
+md-chips .md-chip {
   height: 25px;
   padding-top: 0px;
   text-align: center;
-  color: white;
+  color: #fff;
   border-radius: 10px;
 
   // TODO temporary hardcoded colors, should use mdColor if it becomes available in ngMaterial 1.1.0
