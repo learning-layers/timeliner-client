@@ -1,0 +1,20 @@
+<div ng-cloak>
+  <md-toolbar>
+    <h2 class="md-toolbar-tools">
+      <span>Projects</span>
+    </h2>
+  </md-toolbar>
+  <md-content>
+    <md-list>
+      <md-list-item class="md-3-line" ng-repeat="project in projects">
+        <div class="md-list-item-text">
+          <h3>{{project.title}} ({{project.participants.length}})</h3>
+          <h4>Creator: {{project.creator.name.first}} {{project.creator.name.last}} Owner: {{project.owner.name.first}} {{project.owner.name.last}}</h4>
+          <p>From: {{project.start}} Until: {{project.end}} Created {{project.created}} Updated: {{project.updated}}</p>
+        </div>
+        <md-button class="md-secondary">Open</md-button>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</div>

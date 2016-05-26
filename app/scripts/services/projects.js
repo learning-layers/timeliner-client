@@ -13,6 +13,10 @@ angular.module('timelinerApp')
     var apiLocation = appConfig.backendUrl + '/api/projects';
 
     var projectsResource =  $resource(apiLocation, {}, {
+      all: {
+        url: apiLocation,
+        method: 'GET'
+      },
       mine: {
         url: apiLocation + '/mine',
         method: 'GET'
@@ -31,6 +35,7 @@ angular.module('timelinerApp')
     // Public API here
     return {
       create: projectsResource.create,
-      mine: projectsResource.mine
+      mine: projectsResource.mine,
+      all: projectsResource.all
     };
   });

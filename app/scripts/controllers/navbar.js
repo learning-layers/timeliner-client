@@ -8,17 +8,21 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService) {
     $scope.logout = function() {
       AuthService.removeAuthCookie();
       $state.go('home');
+    };
+
+    $scope.manage = function() {
+      $state.go('manage.main');
     };
 
     $scope.getCurrentUserName = function() {
       var currentUser = AuthService.getCurrentUser();
 
       if (currentUser) {
-        return currentUser.name.first + ' ' + currentUser.name.last;
+        return UsersService.getFullName(currentUser);
       }
 
       return '@unknown';

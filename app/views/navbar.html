@@ -16,6 +16,14 @@
           {{getCurrentUserName()}}
         </md-button>
         <md-menu-content width="4" >
+          <md-menu-item ng-if="isAdminLoggedIn()">
+            <md-button ng-click="manage()">
+              <div layout="row">
+                <p flex>Manage</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+
           <md-menu-item>
             <md-button disabled="">
               <div layout="row">

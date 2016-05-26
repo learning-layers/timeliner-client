@@ -20,4 +20,10 @@ describe('Service: projects', function () {
     expect(ProjectsService.mine).toBeDefined();
     expect(typeof ProjectsService.mine).toBe('function');
   });
+
+  it('should have all method defined', function () {
+    expect(ProjectsService.all).toBeDefined();
+    expect(typeof ProjectsService.all).toBe('function');
+  });
+  
 });

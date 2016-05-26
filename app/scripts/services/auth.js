@@ -122,6 +122,13 @@ angular.module('timelinerApp')
 
         return false;
       },
+      isAdminLoggedIn: function() {
+        if ( currentUser ) {
+          return currentUser.isAdmin;
+        }
+
+        return false;
+      },
       getCurrentUser: function() {
         return currentUser;
       },
