@@ -1,5 +1,10 @@
 <md-list ng-cloak>
-<md-subheader class="md-no-sticky">Users</md-subheader>
+<md-subheader class="md-no-sticky">
+  <md-button class="md-icon-button" aria-label="Back" ng-click="goBack()">
+    <md-icon>navigate_before</md-icon>
+  </md-button>
+  Users
+</md-subheader>
 <md-list-item ng-repeat="user in users" ng-click="showUserProfile(user, $event)" aria-label="Show user profile">
   <img alt="{{ getFullName(user) }}" ng-src="{{ user.image || 'images/profile128.png' }}" class="md-avatar" />
   <p>{{ getFullName(user) }}</p>

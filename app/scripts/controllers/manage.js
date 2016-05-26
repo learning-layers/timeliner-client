@@ -8,10 +8,8 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ManageCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('ManageCtrl', function ($scope, $state) {
+    $scope.doManage = function(section) {
+      $state.go('manage.' + section);
+    };
   });
