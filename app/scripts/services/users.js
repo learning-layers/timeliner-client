@@ -16,12 +16,20 @@ angular.module('timelinerApp')
           all: {
             url: apiLocation,
             method: 'GET'
+          },
+          manageAdmin: {
+            url: apiLocation + '/:user/manage/admin',
+            method: 'PUT',
+            params: {
+              user: '@user',
+            }
           }
         });
 
         // Public API here
         return {
           all: usersResource.all,
+          manageAdmin: usersResource.manageAdmin,
           getFullName: function(user) {
             return ( user && user.name ) ? user.name.first + ' ' + user.name.last : '@unknown';
           }

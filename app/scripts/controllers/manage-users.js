@@ -22,9 +22,19 @@ angular.module('timelinerApp')
       console.log('showUserProfile', user, event);
     };
 
-    $scope.addRemoveAdmin = function(user, event) {
-      // TODO Implement me
-      console.log('addRemoveAdmin', user, event);
+    $scope.addRemoveAdmin = function(user) {
+      UsersService.manageAdmin({
+        user: user._id
+      }, {
+        isAdmin: ( user.isAdmin ) ? false : true
+      }, function(response) {
+        if ( response.data._id === user._id ) {
+          user.isAdmin = response.data.isAdmin;
+        }
+      }, function(response) {
+        // TODO Make sure to notify user in case of errors
+        $log.debug('Error', response);
+      });
     };
 
     UsersService.all({}, function(response) {
