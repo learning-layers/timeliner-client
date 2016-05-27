@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ManageUsersCtrl', function ($scope, $state, $log, UsersService) {
+  .controller('ManageUsersCtrl', function ($scope, $state, $log, UsersService, AuthService) {
     $scope.goBack = function() {
       $state.go('manage.main');
     };
@@ -35,6 +35,12 @@ angular.module('timelinerApp')
         // TODO Make sure to notify user in case of errors
         $log.debug('Error', response);
       });
+    };
+
+    $scope.isAdminActionDisabled = function(user) {
+      var currentUser = AuthService.getCurrentUser();
+
+      return currentUser._id === user._id;
     };
 
     UsersService.all({}, function(response) {

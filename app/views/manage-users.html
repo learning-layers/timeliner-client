@@ -8,6 +8,6 @@
 <md-list-item ng-repeat="user in users" ng-click="showUserProfile(user, $event)" aria-label="Show user profile">
   <img alt="{{ getFullName(user) }}" ng-src="{{ user.image || 'images/profile128.png' }}" class="md-avatar" />
   <p>{{ getFullName(user) }}</p>
-  <md-icon md-font-set="mdi" md-font-icon="mdi-account-convert" ng-click="addRemoveAdmin(user, $event)" aria-label="Add or Remove admin" class="md-secondary" ng-class="{ 'tl-add': !user.isAdmin, 'tl-remove': user.isAdmin }"></md-icon>
+  <md-icon md-font-set="mdi" md-font-icon="mdi-account-convert" ng-click="addRemoveAdmin(user, $event)" aria-label="Add or Remove admin" class="md-secondary" ng-class="{ 'tl-add': !user.isAdmin, 'tl-remove': user.isAdmin }" ng-disabled="isAdminActionDisabled(user)"></md-icon>
 </md-list-item>
 </md-list>
