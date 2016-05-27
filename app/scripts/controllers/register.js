@@ -18,7 +18,7 @@ angular.module('timelinerApp')
       AuthService.register($scope.register, function (res) {
         $scope.updating = false;
         $scope.error = null;
-        $scope.success = res;
+        $scope.success = res.data;
         $scope.register.email = '';
       }, function (error) {
         $scope.error = error.status;
