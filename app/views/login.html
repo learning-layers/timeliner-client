@@ -42,6 +42,12 @@
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-google-plus"></md-icon>
           </md-button>
+          <md-button class="md-raised md-icon-button tl-linkedin-button" aria-label="Sign in with LinkedIn" type="button" ng-disabled="updating" ng-click="socialLogin('linkedin2');">
+            <md-tooltip md-direction="top" class="tooltip-text">
+              Sign in with LinkedIn
+            </md-tooltip>
+            <md-icon md-font-set="mdi" md-font-icon="mdi-linkedin"></md-icon>
+          </md-button>
           <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating">Sign in</md-button>
         </md-card-actions>
       </form>
