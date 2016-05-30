@@ -134,6 +134,12 @@ angular.module('timelinerApp')
       },
       setCurrentUser: function(user) {
         currentUser = user;
+      },
+      setCookieAndUser: function(token, user) {
+        this.setAuthCookie({
+          authToken: token
+        });
+        this.setCurrentUser(user);
       }
     };
 

@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($window, $scope, $state, $location, AuthService, SystemMessagesService, appConfig) {
+  .controller('LoginCtrl', function ($window, $scope, $state, $location, AuthService, SystemMessagesService, UsersService, appConfig) {
     var timeoutId;
 
     $scope.updating = false;
@@ -42,12 +42,10 @@ angular.module('timelinerApp')
       }, function(response) {
         $scope.updating = false;
         clearProgressInficatorTimeout(timeoutId);
-        AuthService.setAuthCookie({
-          authToken: response.data.token
-        });
         $scope.model = {};
-        AuthService.setCurrentUser(response.data.user);
-        SystemMessagesService.showSuccess('Welcome back ' + response.data.user.name.first + ' ' + response.data.user.name.last + ', you have successfully logged in.');
+
+        AuthService.setCookieAndUser(response.data.token, response.data.user);
+        SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
         $state.go('home');
       }, function(response) {
         $scope.updating = false;
@@ -77,11 +75,8 @@ angular.module('timelinerApp')
         $scope.updating = false;
         $scope.showProgressIndicator = false;
 
-        AuthService.setAuthCookie({
-          authToken: response.data.token
-        });
-        AuthService.setCurrentUser(response.data.user);
-        SystemMessagesService.showSuccess('Welcome back ' + response.data.user.name.first + ' ' + response.data.user.name.last + ', you have successfully logged in.');
+        AuthService.setCookieAndUser(response.data.token, response.data.user);
+        SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
         $state.go('home');
       }, function() {
         $scope.updating = false;
