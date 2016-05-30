@@ -8,11 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ManageUsersCtrl', function ($scope, $state, $log, UsersService, AuthService) {
-    $scope.goBack = function() {
-      $state.go('manage.main');
-    };
-
+  .controller('ManageUsersCtrl', function ($scope, $log, UsersService, AuthService) {
     $scope.getFullName = function(user) {
       return UsersService.getFullName(user);
     };

@@ -46,14 +46,15 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
     .state('manage', {
       abstract: true,
       url: '/manage',
-      template: '<ui-view/>'
-    })
-    .state('manage.main', {
-      url: '',
       templateUrl: 'views/manage.html',
-      controller: 'ManageCtrl',
+      controller: 'ManageCtrl'
+    })
+    .state('manage.overview', {
+      url: '',
+      templateUrl: 'views/manage-overview.html',
+      controller: 'ManageOverviewCtrl',
       resolve: {
-        $title: function() { return 'Manage'; }
+        $title: function() { return 'Manage Overview'; }
       },
       requireAdmin: true
     })

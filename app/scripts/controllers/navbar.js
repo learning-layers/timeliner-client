@@ -15,7 +15,7 @@ angular.module('timelinerApp')
     };
 
     $scope.manage = function() {
-      $state.go('manage.main');
+      $state.go('manage.overview');
     };
 
     $scope.getCurrentUserName = function() {
