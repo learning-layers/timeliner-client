@@ -12,8 +12,8 @@ angular.module('timelinerApp')
 
     $scope.form = {};
 
-    AuthService.checkConfirmationKeyValidity({key: $stateParams.key}, function (success) {
-      $scope.userEmail = success.email;
+    AuthService.checkConfirmationKeyValidity({key: $stateParams.key}, function (res) {
+      $scope.userEmail = res.data.email;
     }, function () {
       $scope.invalidKey = true;
     });

@@ -19,12 +19,12 @@ angular.module('timelinerApp')
 
     if ( AuthService.isLoggedIn() && !AuthService.getCurrentUser() ) {
       AuthService.me(function(response) {
-        AuthService.setCurrentUser(response.user);
+        AuthService.setCurrentUser(response.data);
         $rootScope.$broadcast('$tlCurrentUserLoaded');
-      }, function(response) {
+      }, function(error) {
         // TODO Check if more meaningful message could be shown based on response
         // Remove the console.error() call
-        console.error('Loading ME failed', response);
+        console.error('Loading ME failed', error);
         SystemMessagesService.showError('Could not load currently logged in user data!');
       });
     }
