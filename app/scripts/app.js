@@ -66,5 +66,11 @@ angular.module('timelinerApp')
     $mdDateLocaleProvider.firstDayOfWeek = 1;
   })
   .config(function($translateProvider) {
-    $translateProvider.preferredLanguage('en');
+    $translateProvider.useStaticFilesLoader({
+      prefix: '/resources/locale-',
+      suffix: '.json'
+    });
+    $translateProvider.preferredLanguage('en_US');
+    $translateProvider.useSanitizeValueStrategy('sanitize');
+    $translateProvider.useMissingTranslationHandlerLog();
   });

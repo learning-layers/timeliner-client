@@ -14,13 +14,6 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
         $title: function() { return 'Welcome'; }
       }
     })
-    .state('about', {
-      url: '/about',
-      templateUrl: 'views/about.html',
-      resolve: {
-        $title: function() { return 'About'; }
-      }
-    })
     .state('login', {
       url: '/login',
       templateUrl: 'views/login.html',

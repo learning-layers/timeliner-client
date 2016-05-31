@@ -1,0 +1,52 @@
+{
+  "GENERAL": {
+    "EMAIL": "E-mail",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PASSWORD": "Password",
+    "FORM": {
+      "REPEAT_PASSWORD": "Repeat password",
+      "MESSAGES": {
+        "REQUIRED": "This field is required!",
+        "PASSWORD_MATCH": "Passwords don't match",
+        "INVALID_EMAIL": "This doesn't look like an email"
+      }
+    }
+  },
+  "VIEWS": {
+    "CONFIRMATION": {
+      "HEADLINE": "Welcome back! Just one more step...",
+      "SUBHEAD": "Complete your profile",
+      "REGISTER_BTN": "Register",
+      "REGISTRATION_COMPLETED": "User registration completed.",
+      "INVALID_KEY": "Wrong or expired link!"
+    },
+    "LOGIN": {
+      "HEADLINE": "Welcome back!",
+      "SUBHEAD": "Log in",
+      "SIGN_IN_BTN": "Sign in",
+      "FB_BTN_TOOLTIP": "Sign in with Facebook",
+      "GOOGLE_BTN_TOOLTIP": "Sign in with Google",
+      "LINKEDIN_BTN_TOOLTIP": "Sign in with LinkedIn"
+    },
+    "PROJECT_LIST": {
+      "HEADLINE": "My projects (participant status)",
+      "NEW_PROJECT_BTN": "New project",
+      "PENDING": "Pending projects",
+      "ACTIVE": "Active projects",
+      "JOIN": "Join",
+      "DECLINE": "Decline",
+      "LEAVE": "Leave",
+      "DELETE": "Delete project",
+      "EDIT": "Edit",
+      "LIST_TITLES": {
+        "TITLE": "Title",
+        "START_DATE": "Start date",
+        "END_DATE": "End date",
+        "OWNER": "Owner",
+        "PARTICIPANTS": "Participants",
+        "ACTIONS": "Actions"
+      }
+    }
+  }
+}

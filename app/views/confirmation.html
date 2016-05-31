@@ -1,62 +1,62 @@
-<div class="alert alert-danger" ng-if="invalidKey">Wrong or expired link!</div>
+<div class="alert alert-danger" ng-if="invalidKey" translate>VIEWS.CONFIRMATION.INVALID_KEY</div>
 
 <div layout="row" layout-align="center" ng-if="userEmail">
   <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 500px">
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">Welcome back! Just one more step...</span>
-        <span class="md-subhead">Complete your profile</span>
+        <span class="md-headline" translate>VIEWS.CONFIRMATION.HEADLINE</span>
+        <span class="md-subhead" translate>VIEWS.CONFIRMATION.SUBHEAD</span>
       </md-card-title-text>
     </md-card-title>
 
     <md-card-content>
       <form name="registerForm" ng-submit="confirmUser()" ng-hide="confirmationSuccessful">
         <md-input-container class="md-icon-float md-block">
-          <label>Email</label>
+          <label translate>GENERAL.EMAIL</label>
           <md-icon>email</md-icon>
           <input name="email" ng-model="userEmail" type="email" disabled>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-          <label>First name</label>
+          <label translate>GENERAL.FIRST_NAME</label>
           <md-icon>person</md-icon>
           <input name="firstName" ng-model="form.name.first" type="text" required>
           <div ng-messages="registerForm.firstName.$error">
-            <div ng-message="required">This is required!</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
           </div>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-          <label>Last name</label>
+          <label translate>GENERAL.LAST_NAME</label>
           <md-icon>person</md-icon>
           <input name="lastName" ng-model="form.name.last" type="text" required>
           <div ng-messages="registerForm.lastName.$error">
-            <div ng-message="required">This is required!</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
           </div>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-          <label>Password</label>
+          <label translate>GENERAL.PASSWORD</label>
           <md-icon>vpn_key</md-icon>
           <input name="password" ng-model="form.password" type="password" required>
           <div ng-messages="loginForm.password.$error">
-            <div ng-message="required">This is required!</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
           </div>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-          <label>Repeat password</label>
+          <label translate>GENERAL.FORM.REPEAT_PASSWORD</label>
           <md-icon>vpn_key</md-icon>
           <input name="password2" ng-model="form.password2" type="password" pw-check="form.password" required>
           <div ng-messages="registerForm.password2.$error">
-            <div ng-message="required">This is required!</div>
-            <div ng-message="pwmatch">Passwords don't match</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="pwmatch" translate>GENERAL.FORM.MESSAGES.PASSWORD_MATCH</div>
           </div>
         </md-input-container>
 
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised md-accent" type="submit" ng-disabled="registerForm.$invalid || updating">Register</md-button>
+          <md-button class="md-raised md-accent" type="submit" ng-disabled="registerForm.$invalid || updating" translate="VIEWS.CONFIRMATION.REGISTER_BTN" aria-label="{{ 'VIEWS.CONFIRMATION.REGISTER_BTN' | translate }}"></md-button>
         </md-card-actions>
       </form>
 
-      <div class="alert alert-success animated fadeInDown" ng-if="confirmationSuccessful">
-        User registration completed.
+      <div class="alert alert-success animated fadeInDown" ng-if="confirmationSuccessful" translate>
+        VIEWS.CONFIRMATION.REGISTRATION_COMPLETED
       </div>
     </md-card-content>
   </md-card>

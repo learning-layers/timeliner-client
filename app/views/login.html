@@ -4,51 +4,51 @@
 
     <md-card-title>
       <md-card-title-text>
-        <span class="md-headline">Welcome back!</span>
-        <span class="md-subhead">Log in</span>
+        <span class="md-headline" translate>VIEWS.LOGIN.HEADLINE</span>
+        <span class="md-subhead" translate>VIEWS.LOGIN.SUBHEAD</span>
       </md-card-title-text>
     </md-card-title>
 
     <md-card-content>
       <form name="loginForm" ng-submit="login()">
         <md-input-container class="md-icon-float md-block">
-          <label>Email</label>
+            <label translate>GENERAL.EMAIL</label>
           <md-icon>email</md-icon>
           <input name="email" ng-model="model.email" type="email" ng-disabled="updating" required>
           <div ng-messages="loginForm.email.$error">
-            <div ng-message="required">This is required!</div>
-            <div ng-message="email">This doesn't look like an email</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="email" translate>GENERAL.FORM.MESSAGES.INVALID_EMAIL</div>
           </div>
         </md-input-container>
         <md-input-container class="md-icon-float md-block">
-          <label>Password</label>
+          <label translate>GENERAL.PASSWORD</label>
           <md-icon>vpn_key</md-icon>
           <input name="password" ng-model="model.password" type="password" ng-disabled="updating" required>
           <div ng-messages="loginForm.password.$error">
-            <div ng-message="required">This is required!</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
           </div>
         </md-input-container>
 
         <md-card-actions layout="row" layout-align="end center">
-          <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="Sign in with Facebook" type="button" ng-disabled="updating" ng-click="socialLogin('facebook');">
+          <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="{{ 'VIEWS.LOGIN.FB_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="socialLogin('facebook');">
             <md-tooltip md-direction="top" class="tooltip-text">
-              Sign in with Facebook
+              {{ 'VIEWS.LOGIN.FB_BTN_TOOLTIP' | translate }}
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-facebook"></md-icon>
           </md-button>
-          <md-button class="md-raised md-icon-button tl-google-button" aria-label="Sign in with Google" type="button" ng-disabled="updating" ng-click="socialLogin('google');">
+          <md-button class="md-raised md-icon-button tl-google-button" aria-label="{{ 'VIEWS.LOGIN.GOOGLE_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="socialLogin('google');">
             <md-tooltip md-direction="top" class="tooltip-text">
-              Sign in with Google
+              {{ 'VIEWS.LOGIN.GOOGLE_BTN_TOOLTIP' | translate }}
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-google-plus"></md-icon>
           </md-button>
-          <md-button class="md-raised md-icon-button tl-linkedin-button" aria-label="Sign in with LinkedIn" type="button" ng-disabled="updating" ng-click="socialLogin('linkedin2');">
+          <md-button class="md-raised md-icon-button tl-linkedin-button" aria-label="{{ 'VIEWS.LOGIN.LINKEDIN_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="socialLogin('linkedin2');">
             <md-tooltip md-direction="top" class="tooltip-text">
-              Sign in with LinkedIn
+              {{ 'VIEWS.LOGIN.LINKEDIN_BTN_TOOLTIP' | translate }}
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-linkedin"></md-icon>
           </md-button>
-          <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating">Sign in</md-button>
+          <md-button class="md-raised md-accent" type="submit" ng-disabled="loginForm.$invalid || updating" translate="VIEWS.LOGIN.SIGN_IN_BTN"></md-button>
         </md-card-actions>
       </form>
     </md-card-content>
