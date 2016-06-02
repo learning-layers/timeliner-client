@@ -9,10 +9,6 @@
  */
 angular.module('timelinerApp')
   .controller('ManageUsersCtrl', function ($scope, $log, UsersService, AuthService) {
-    $scope.getFullName = function(user) {
-      return UsersService.getFullName(user);
-    };
-
     $scope.showUserProfile = function(user, event) {
       // TODO Implement me
       console.log('showUserProfile', user, event);

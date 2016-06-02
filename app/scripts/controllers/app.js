@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('AppCtrl', function ($rootScope, $scope, AuthService, SystemMessagesService) {
+  .controller('AppCtrl', function ($rootScope, $scope, AuthService, SystemMessagesService, UsersService) {
     $scope.isLoggedIn = function() {
       return AuthService.isLoggedIn();
     };
@@ -28,4 +28,9 @@ angular.module('timelinerApp')
         SystemMessagesService.showError('Could not load currently logged in user data!');
       });
     }
+
+    $scope.getUserFullName = function(user) {
+      return UsersService.getFullName(user);
+    };
+
   });

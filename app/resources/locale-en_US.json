@@ -1,19 +1,52 @@
 {
   "GENERAL": {
+    "TIMELINER": "Timeliner",
     "EMAIL": "E-mail",
     "FIRST_NAME": "First name",
     "LAST_NAME": "Last name",
     "PASSWORD": "Password",
+    "CREATED": "Created",
+    "UPDATED": "Updated",
+    "OPEN": "Open",
     "FORM": {
+      "REQUIRED_EXT": "(required)",
       "REPEAT_PASSWORD": "Repeat password",
       "MESSAGES": {
         "REQUIRED": "This field is required!",
         "PASSWORD_MATCH": "Passwords don't match",
-        "INVALID_EMAIL": "This doesn't look like an email"
+        "INVALID_EMAIL": "This doesn't look like an email",
+        "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long"
+      }
+    },
+    "TOASTS": {
+      "SUCCESSES": {
+        "": ""
+      },
+      "ERRORS": {
+        "SERVER_ERROR": "Server error, please contact admin."
       }
     }
   },
+  "NAVBAR": {
+    "LOGIN_BTN": "Log in",
+    "MENU_ARIA": "User menu",
+    "MANAGE": "Manage",
+    "EDIT_PROFILE": "Edit profile",
+    "LOGOUT": "Log out"
+  },
   "VIEWS": {
+    "LANDING": {
+      "HEADLINE": "Welcome to Timeliner! Enter your email now to start lining your time.",
+      "ALREADY_MEMBER": "Already a member?",
+      "TOASTS": {
+        "SUCCESSES": {
+          "USER_CREATED": "User created, temporary confirmation link (this will be sent with email to the user)"
+        },
+        "ERRORS": {
+          "EMAIL_EXISTS": "This email is already registered!"
+        }
+      }
+    },
     "CONFIRMATION": {
       "HEADLINE": "Welcome back! Just one more step...",
       "SUBHEAD": "Complete your profile",
@@ -46,6 +79,24 @@
         "OWNER": "Owner",
         "PARTICIPANTS": "Participants",
         "ACTIONS": "Actions"
+      },
+      "CREATE_PROJECT": {
+        "HEADLINE": "Create new project",
+        "TITLE": "Project title"
+
+      }
+    },
+    "MANAGE": {
+      "OVERVIEW": {
+        "TITLE": "Overview"
+      },
+      "USERS": {
+        "TITLE": "Users"
+      },
+      "PROJECTS": {
+        "TITLE": "Projects",
+        "CREATOR": "Creator",
+        "CREATED": "Created"
       }
     }
   }

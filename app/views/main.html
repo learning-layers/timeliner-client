@@ -18,7 +18,7 @@
 
   <md-list>
     <div> <!-- TODO only show this block if user has pending projects (and list them here) -->
-      <md-subheader class="md-no-sticky"><span translate>VIEWS.PROJECT_LIST.PENDING</span></md-subheader>
+      <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
       <md-list-item class="secondary-button-padding" ng-click="openProject()">
         <div flex="50">Something pending</div>
         <div flex="10">27.08.2016</div>
@@ -26,26 +26,26 @@
         <div flex="10">Mati Mets</div>
         <div flex="20">{{ ::displayParticipants(project.participants) }}</div>
         <md-menu md-position-mode="target-right target">
-          <md-button aria-label="More options" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          <md-button aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.ACTIONS' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
             <md-icon md-menu-origin>more_vert</md-icon>
           </md-button>
           <md-menu-content width="4">
             <md-menu-item>
               <md-button class="md-accent" ng-click="doJoin($event)" aria-label="{{ 'VIEWS.PROJECT_LIST.JOIN' | translate }}">
                 <md-icon md-menu-align-target>check_circle</md-icon>
-                <span translate>VIEWS.PROJECT_LIST.JOIN</span>
+                <translate>VIEWS.PROJECT_LIST.JOIN</translate>
               </md-button>
             </md-menu-item>
             <md-menu-item>
               <md-button disabled="disabled" ng-click="doDecline()" aria-label="{{ 'VIEWS.PROJECT_LIST.DECLINE' | translate }}">
                 <md-icon>cancel</md-icon>
-                <span translate>VIEWS.PROJECT_LIST.DECLINE</span>
+                <translate>VIEWS.PROJECT_LIST.DECLINE</translate>
               </md-button>
             </md-menu-item>
           </md-menu-content>
         </md-menu>
       </md-list-item>
-      <md-subheader class="md-no-sticky"><span translate>VIEWS.PROJECT_LIST.ACTIVE</span></md-subheader>
+      <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.ACTIVE</translate></md-subheader>
       <md-divider></md-divider>
     </div>
 
@@ -53,7 +53,7 @@
       <div flex="50">{{ ::project.title }}</div> <!-- TODO remove this duplication of list items (except for menu buttons) -->
       <div flex="10">{{ ::displayDate(project.start) }}</div>
       <div flex="10">{{ ::displayDate(project.end) }}</div>
-      <div flex="10">{{ ::(project.owner.name.first + ' ' + project.owner.name.last) }}</div>
+      <div flex="10">{{ ::getUserFullName(project.owner) }}</div>
       <div flex="20">
         <!-- TODO make these chips/badges functional -->
         <md-chips>
@@ -76,27 +76,27 @@
       </div>
 
       <md-menu md-position-mode="target-right target">
-        <md-button aria-label="More options" class="md-icon-button" ng-click="$mdOpenMenu($event)">
+        <md-button aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.ACTIONS' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
           <md-icon md-menu-origin>more_vert</md-icon>
         </md-button>
         <md-menu-content width="4">
           <md-menu-item>
-            <md-button ng-click="doEdit()" aria-label="VIEWS.PROJECT_LIST.EDIT">
+            <md-button ng-click="doEdit()" aria-label="{{ 'VIEWS.PROJECT_LIST.EDIT' | translate }}">
               <md-icon md-menu-align-target>edit</md-icon>
-              <span translate>VIEWS.PROJECT_LIST.EDIT</span>
+              <translate>VIEWS.PROJECT_LIST.EDIT</translate>
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-disabled="!canLeaveProject(project)" ng-click="doLeave()" aria-label="{{ 'VIEWS.PROJECT_LIST.LEAVE' | translate }}">
+            <md-button ng-disabled="::!canLeaveProject(project)" ng-click="doLeave()" aria-label="{{ 'VIEWS.PROJECT_LIST.LEAVE' | translate }}">
               <md-icon>cancel</md-icon>
-              <span translate>VIEWS.PROJECT_LIST.LEAVE</span>
+              <translate>VIEWS.PROJECT_LIST.LEAVE</translate>
             </md-button>
           </md-menu-item>
           <md-menu-divider></md-menu-divider>
           <md-menu-item>
-            <md-button class="md-warn" ng-disabled="!canDeleteProject(project)" ng-click="doDelete()" aria-label="{{ 'VIEWS.PROJECT_LIST.DECLINE' | translate }}">
+            <md-button class="md-warn" ng-disabled="::!canDeleteProject(project)" ng-click="doDelete()" aria-label="{{ 'VIEWS.PROJECT_LIST.DECLINE' | translate }}">
               <md-icon>delete_forever</md-icon>
-              <span translate>VIEWS.PROJECT_LIST.DELETE</span>
+              <translate>VIEWS.PROJECT_LIST.DELETE</translate>
             </md-button>
           </md-menu-item>
         </md-menu-content>
