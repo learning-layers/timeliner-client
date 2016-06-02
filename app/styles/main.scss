@@ -7,6 +7,8 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
 @import "mdi/scss/materialdesignicons.scss";
 // endbower
 
+@import "icomoon-timeliner.css";
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -114,7 +116,7 @@ md-icon.tl-remove {
 }
 
 
-/* mdi tunes */
-.mdi {
+/* mdi and icomoon-timeliner tunes */
+.mdi , .icomoon-timeliner {
   font-size: 24px;
 }
