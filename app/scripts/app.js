@@ -67,7 +67,7 @@ angular.module('timelinerApp')
   })
   .config(function($translateProvider) {
     $translateProvider.useStaticFilesLoader({
-      prefix: '/resources/locale-',
+      prefix: '/locales/locale-',
       suffix: '.json'
     });
     $translateProvider.preferredLanguage('en_US');

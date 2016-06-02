@@ -8,6 +8,8 @@
     "CREATED": "Created",
     "UPDATED": "Updated",
     "OPEN": "Open",
+    "CLOSE": "Close",
+    "CANCEL": "Cancel",
     "FORM": {
       "REQUIRED_EXT": "(required)",
       "REPEAT_PASSWORD": "Repeat password",
@@ -15,6 +17,8 @@
         "REQUIRED": "This field is required!",
         "PASSWORD_MATCH": "Passwords don't match",
         "INVALID_EMAIL": "This doesn't look like an email",
+        "INVALID_DATE": "The entered value is not a date!",
+        "MIN_DATE": "End date can't be earlier than the start date!",
         "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long"
       }
     },
@@ -82,8 +86,9 @@
       },
       "CREATE_PROJECT": {
         "HEADLINE": "Create new project",
-        "TITLE": "Project title"
-
+        "TITLE": "Project title",
+        "NEXT_STEP_BTN": "Next step",
+        "CREATE_BTN": "Create project"
       }
     },
     "MANAGE": {

@@ -1,0 +1,47 @@
+{
+  "GENERAL": {
+    "EMAIL": "Interneti-postkast",
+    "FIRST_NAME": "First name",
+    "LAST_NAME": "Last name",
+    "PASSWORD": "Ülisalajane sõna",
+    "FORM": {
+      "REPEAT_PASSWORD": "Repeat password",
+      "MESSAGES": {
+        "REQUIRED": "Eu, see on vajalik lahter!",
+        "PASSWORD_MATCH": "Passwords don't match",
+        "INVALID_EMAIL": "No misasja, see pole ju interneti-postkasti aadress"
+      }
+    }
+  },
+  "VIEWS": {
+    "CONFIRMATION": {
+      "HEADLINE": "Welcome back! Just one more step...",
+      "SUBHEAD": "Complete your profile",
+      "REGISTER_BTN": "Register",
+      "REGISTRATION_COMPLETED": "User registration completed.",
+      "INVALID_KEY": "Wrong or expired link!"
+    },
+    "LOGIN": {
+      "HEADLINE": "Jou mees!",
+      "SUBHEAD": "Logi sisse",
+      "SIGN_IN_BTN": "Davai",
+      "FB_BTN_TOOLTIP": "FEISSBUUUK",
+      "GOOGLE_BTN_TOOLTIP": "GUUGEL",
+      "LINKEDIN_BTN_TOOLTIP": "LinkedIn"
+    },
+    "PROJECT_LIST": {
+      "HEADLINE": "My projects (participant status)",
+      "NEW_PROJECT_BTN": "New project",
+      "PENDING": "Pending kala",
+      "ACTIVE": "Active projects",
+      "LIST_TITLES": {
+        "TITLE": "Tiiiitel",
+        "START_DATE": "Start date",
+        "END_DATE": "End date",
+        "OWNER": "Owner",
+        "PARTICIPANTS": "Participants",
+        "ACTIONS": "Actions"
+      }
+    }
+  }
+}

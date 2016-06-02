@@ -1,33 +1,54 @@
 <md-content>
   <md-toolbar class="md-hue-1">
     <div class="md-toolbar-tools">
-      <md-button class="md-icon-button" aria-label="Timeline homepage" ui-sref="home">
+      <md-button class="md-icon-button" ui-sref="home">
         <md-icon>home</md-icon>
       </md-button>
       <h2>
-        <span>Timeliner</span>
+        <translate>GENERAL.TIMELINER</translate>
       </h2>
       <span flex=""></span>
-      <md-button aria-label="Log in" ng-if="!isLoggedIn()" ui-sref="login">Log in</md-button>
+      <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
+        <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
+          <md-icon>language</md-icon>
+        </md-button>
+        <md-menu-content width="4" >
+          <md-menu-item>
+            <md-button ng-click="changeLanguage('en_US')">
+              <div layout="row">
+                <p flex>English</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="changeLanguage('et_EE')">
+              <div layout="row">
+                <p flex>Estonian (TEST)</p>
+              </div>
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+      <md-button aria-label="Log in" ng-if="!isLoggedIn()" ui-sref="login" translate="NAVBAR.LOGIN_BTN"></md-button>
 
       <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
-        <md-button aria-label="User menu" ng-click="$mdOpenMenu($event)">
+        <md-button aria-label="{{ 'NAVBAR.MENU_ARIA' | translate }}" ng-click="$mdOpenMenu($event)">
           <md-icon>person</md-icon>
-          {{getCurrentUserName()}}
+          {{ getCurrentUserName() }}
         </md-button>
         <md-menu-content width="4" >
           <md-menu-item ng-if="isAdminLoggedIn()">
             <md-button ng-click="manage()">
               <div layout="row">
-                <p flex>Manage</p>
+                <p flex translate>NAVBAR.MANAGE</p>
               </div>
             </md-button>
           </md-menu-item>
 
           <md-menu-item>
-            <md-button disabled="">
+            <md-button disabled="true">
               <div layout="row">
-                <p flex>Edit profile</p>
+                <p flex translate>NAVBAR.EDIT_PROFILE</p>
               </div>
             </md-button>
           </md-menu-item>
@@ -35,7 +56,7 @@
           <md-menu-item>
             <md-button ng-click="logout()">
               <div layout="row">
-                <p flex>Log out</p>
+                <p flex translate>NAVBAR.LOGOUT</p>
                 <md-icon md-menu-align-target style="margin: auto 3px auto 0;">exit_to_app</md-icon>
               </div>
             </md-button>

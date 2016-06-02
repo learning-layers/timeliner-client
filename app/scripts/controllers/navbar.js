@@ -8,10 +8,14 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate) {
     $scope.logout = function() {
       AuthService.removeAuthCookie();
       $state.go('home');
+    };
+    
+    $scope.changeLanguage = function (lang) {
+      $translate.use(lang);
     };
 
     $scope.manage = function() {

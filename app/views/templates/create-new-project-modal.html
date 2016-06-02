@@ -1,45 +1,41 @@
-<md-dialog aria-label="Create new project" ng-cloak>
+<md-dialog ng-cloak>
   <form name="newProjectForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2>Create new project</h2>
+        <h2 translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.HEADLINE</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()">
-          <md-icon aria-label="Close dialog">close</md-icon>
+          <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-dialog-content>
       <div layout="column" layout-align="none center" class="md-dialog-content">
         <md-input-container class="md-block">
-          <label>Project title (required)</label>
+          <label><translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
           <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required>
           <div ng-messages="newProjectForm.title.$error">
-            <div ng-message="required">This is required.</div>
-            <div ng-message="md-maxlength">The name has to be less than 50 characters long.</div>
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
           </div>
         </md-input-container>
-        <md-datepicker name="startDate" ng-model="model.start" md-placeholder="Start date (required)" md-max-date="model.end" required ng-disabled="updating">
+        <md-datepicker name="startDate" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.START_DATE' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" required ng-disabled="updating">
         </md-datepicker>
         <div class="validation-messages" ng-messages="newProjectForm.startDate.$error">
-          <div ng-message="valid">The entered value is not a date!</div>
-          <div ng-message="required">This date is required!</div>
+          <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+          <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
         </div>
-        <md-datepicker name="endDate" ng-model="model.end" md-placeholder="End date" md-min-date="model.start" ng-disabled="updating">
+        <md-datepicker name="endDate" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.END_DATE' | translate }}" md-min-date="model.start" ng-disabled="updating">
         </md-datepicker>
         <div class="validation-messages" ng-messages="newProjectForm.endDate.$error">
-          <div ng-message="valid">The entered value is not a date!</div>
-          <div ng-message="mindate">End date can't be earlier than the start date!</div>
+          <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+          <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
         </div>
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
-      <md-button ng-click="cancel()">
-        Cancel
-      </md-button>
-      <md-button type="submit" class="md-accent" ng-disabled="updating || newProjectForm.$invalid">
-        Create
-      </md-button>
+      <md-button ng-click="cancel()" translate="GENERAL.CANCEL"></md-button>
+      <md-button type="submit" class="md-accent" ng-disabled="updating || newProjectForm.$invalid" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN"></md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
