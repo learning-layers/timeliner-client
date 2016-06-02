@@ -8,8 +8,19 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia) {
-    $scope.projects = [];
+  .controller('MainCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
+    function findCurrentParticipant(project) {
+      var currentUser = AuthService.getCurrentUser();
+
+      return _.find(project.participants, function(participant) {
+        return participant.user._id === currentUser._id;
+      });
+    }
+
+    $scope.pendingProjects = [];
+    $scope.activeProjects = [];
+
+    $scope.updating = false;
 
     $scope.canDeleteProject = function(project) {
       var currentUser = AuthService.getCurrentUser();
@@ -57,7 +68,7 @@ angular.module('timelinerApp')
         })
         .then(function(project) {
           $log.debug('Dialog returned project:', project);
-          $scope.projects.push(project);
+          $scope.activeProjects.push(project);
         }, function() {
           $log.debug('Dialog dismissed.');
         });
@@ -66,6 +77,43 @@ angular.module('timelinerApp')
         return $mdMedia('xs') || $mdMedia('sm');
       }, function(wantsFullScreen) {
         $scope.customFullscreen = (wantsFullScreen === true);
+      });
+    };
+
+    $scope.doJoin = function(project, index) {
+      // TODO Ask for confirmation
+      $scope.updating = true;
+
+      ProjectsService.accept({
+        id: project._id
+      }, {}, function() {
+        $scope.pendingProjects.splice(index, 1);
+
+        var currentParticipant = findCurrentParticipant(project);
+        currentParticipant.status = 'active';
+
+        $scope.activeProjects.push(project);
+        $scope.updating = false;
+      }, function(response) {
+        // TODO Handle error
+        $log.debug(response);
+        $scope.updating = false;
+      });
+    };
+
+    $scope.doDecline = function(project, index) {
+      // TODO Ask for confirmation
+      $scope.updating = true;
+
+      ProjectsService.reject({
+        id: project._id
+      }, {}, function() {
+        $scope.pendingProjects.splice(index, 1);
+        $scope.updating = false;
+      }, function(response) {
+        // TODO Handle error
+        $log.debug(response);
+        $scope.updating = false;
       });
     };
 
@@ -83,7 +131,25 @@ angular.module('timelinerApp')
 
     if ( $scope.isLoggedIn() ) {
       ProjectsService.mine({}, function(result) {
-        $scope.projects = result.data;
+        if ( result.data.length > 0 ) {
+          var pendingProjects = [];
+          var activeProjects = [];
+
+          angular.forEach(result.data, function(project) {
+            var currentParticipant = findCurrentParticipant(project);
+
+            // TODO See if it makes semse to also determine active status
+            // This way some strange cases would just be left out
+            if ( currentParticipant.status === 'pending' ) {
+              pendingProjects.push(project);
+            } else {
+              activeProjects.push(project);
+            }
+          });
+
+          $scope.pendingProjects = pendingProjects;
+          $scope.activeProjects = activeProjects;
+        }
       }, function(err) {
         $log.debug('My projects ERROR', err);
       });

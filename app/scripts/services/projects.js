@@ -29,6 +29,16 @@ angular.module('timelinerApp')
         url: apiLocation + '/:id',
         key: '@id',
         method: 'GET'
+      },
+      accept: {
+        url: apiLocation + '/:id/participants/accept',
+        key: '@id',
+        method: 'POST'
+      },
+      reject: {
+        url: apiLocation + '/:id/participants/reject',
+        key: '@id',
+        method: 'POST'
       }
     });
 
@@ -36,6 +46,8 @@ angular.module('timelinerApp')
     return {
       create: projectsResource.create,
       mine: projectsResource.mine,
-      all: projectsResource.all
+      all: projectsResource.all,
+      accept: projectsResource.accept,
+      reject: projectsResource.reject
     };
   });
