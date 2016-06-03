@@ -13,7 +13,7 @@
       <div layout="column" layout-align="none center" class="md-dialog-content">
         <md-input-container class="md-block">
           <label><translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
-          <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required>
+          <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required md-autofocus>
           <div ng-messages="newProjectForm.title.$error">
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
             <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
