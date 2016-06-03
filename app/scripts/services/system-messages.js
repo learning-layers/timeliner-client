@@ -8,7 +8,7 @@
  * Factory in the timelinerApp.
  */
 angular.module('timelinerApp')
-  .factory('SystemMessagesService', function ($mdToast) {
+  .factory('SystemMessagesService', function ($mdToast, $translate) {
     var position = 'top right',
         types = ['info', 'success', 'warning', 'error'];
 
@@ -21,6 +21,8 @@ angular.module('timelinerApp')
         $mdToast.show(
           $mdToast.simple()
             .textContent(text)
+            .action($translate.instant('GENERAL.CLOSE'))
+            .highlightAction(true)
             .position(position)
             .theme(type + '-toast')
         );
