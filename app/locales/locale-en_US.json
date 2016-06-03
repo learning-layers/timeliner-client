@@ -113,5 +113,13 @@
         "CREATED": "Created"
       }
     }
+  },
+  "TOASTS": {
+    "SUCCESSES": {
+      "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in."
+    },
+    "ERRORS": {
+      "SERVER_ERROR": "Server error, please contact admin."
+    }
   }
 }

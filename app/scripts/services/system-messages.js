@@ -13,31 +13,31 @@ angular.module('timelinerApp')
         types = ['info', 'success', 'warning', 'error'];
 
     return {
-      show: function(type, text) {
+      show: function(type, text, params) {
         if (types.indexOf(type) === -1 ) {
           type = types[0];
         }
 
         $mdToast.show(
           $mdToast.simple()
-            .textContent(text)
+            .textContent($translate.instant(text, params))
             .action($translate.instant('GENERAL.CLOSE'))
             .highlightAction(true)
             .position(position)
             .theme(type + '-toast')
         );
       },
-      showInfo: function(text) {
-        this.show('info', text);
+      showInfo: function(text, params) {
+        this.show('info', text, params);
       },
-      showSuccess: function(text) {
-        this.show('success', text);
+      showSuccess: function(text, params) {
+        this.show('success', text, params);
       },
-      showWarning: function(text) {
-        this.show('warning', text);
+      showWarning: function(text, params) {
+        this.show('warning', text, params);
       },
-      showError: function(text) {
-        this.show('error', text);
+      showError: function(text, params) {
+        this.show('error', text, params);
       }
     };
   });

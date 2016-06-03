@@ -45,7 +45,7 @@ angular.module('timelinerApp')
         $scope.model = {};
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
-        SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
+        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function(response) {
         $scope.updating = false;
