@@ -29,7 +29,7 @@
           </md-menu-item>
         </md-menu-content>
       </md-menu>
-      <md-button aria-label="Log in" ng-if="!isLoggedIn()" ui-sref="login" translate="NAVBAR.LOGIN_BTN"></md-button>
+      <md-button aria-label="{{ 'NAVBAR.LOGIN_BTN' | translate }}" ng-if="!isLoggedIn()" ui-sref="login" translate="NAVBAR.LOGIN_BTN"></md-button>
 
       <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
         <md-button aria-label="{{ 'NAVBAR.MENU_ARIA' | translate }}" ng-click="$mdOpenMenu($event)">
