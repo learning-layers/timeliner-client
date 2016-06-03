@@ -23,15 +23,18 @@ angular
   ]);
 
 angular.module('timelinerApp')
-  .run(['$rootScope', '$state', '$timeout', function ($rootScope, $state, $timeout) {
+  .run(['$rootScope', '$state', '$timeout', '$translate', function ($rootScope, $state, $timeout, $translate) {
     $rootScope.$on('$stateChangeSuccess', function() {
-      var title = getTitleValue($state.$current.locals.globals.$title);
+
       $timeout(function () {
-        document.title = title;
+        $translate($state.$current.locals.globals.$title).then(function (translation) {
+          document.title = getFullTitle(translation);
+        });
       });
+
     });
 
-    function getTitleValue(title) {
+    function getFullTitle(title) {
       var titlePrefix = 'Timeliner - ';
       return titlePrefix + title;
     }

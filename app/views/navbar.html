@@ -8,6 +8,9 @@
         <translate>GENERAL.TIMELINER</translate>
       </h2>
       <span flex=""></span>
+      <md-button class="md-icon-button" ui-sref="projects.list" ng-if="isLoggedIn()">
+        <md-icon>list</md-icon>
+      </md-button>
       <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
         <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)">
           <md-icon>language</md-icon>

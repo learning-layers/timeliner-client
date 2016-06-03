@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('MainCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
+  .controller('ProjectListCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
     function findCurrentParticipant(project) {
       var currentUser = AuthService.getCurrentUser();
 

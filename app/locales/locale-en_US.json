@@ -31,6 +31,15 @@
       }
     }
   },
+  "TITLES": {
+    "HOME": "Welcome",
+    "LOGIN": "Log in",
+    "CONFIRM": "Confirm ",
+    "PROJECTS_LIST": "My projects",
+    "MANAGE_OVERVIEW": "Manage overview",
+    "MANAGE_PROJECTS": "Project management",
+    "MANAGE_USERS": "User management"
+  },
   "NAVBAR": {
     "LOGIN_BTN": "Log in",
     "MENU_ARIA": "User menu",

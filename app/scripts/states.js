@@ -8,24 +8,25 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
   $stateProvider
     .state('home', {
       url: '/',
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl',
+      templateUrl: 'views/landing.html',
+      controller: 'RegisterCtrl',
       resolve: {
-        $title: function() { return 'Welcome'; }
+        $title: function() { return 'TITLES.HOME'; }
       }
     })
+
     .state('login', {
       url: '/login',
       templateUrl: 'views/login.html',
       controller: 'LoginCtrl',
       resolve: {
-        $title: function() { return 'Log in'; }
+        $title: function() { return 'TITLES.LOGIN'; }
       }
     })
     .state('login.auth', {
       url: '/:state',
       resolve: {
-        $title: function() { return 'Log in'; }
+        $title: function() { return 'TITLES.LOGIN'; }
       }
     })
     .state('confirm', {
@@ -33,9 +34,25 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/confirmation.html',
       controller: 'ConfirmationCtrl',
       resolve: {
-        $title: function() { return 'Complete your profile'; }
+        $title: function() { return 'TITLES.CONFIRM'; }
       }
     })
+
+    .state('projects', {
+      abstract: true,
+      url: '/projects',
+      template: '<ui-view />'
+    })
+    .state('projects.list', {
+      url: '',
+      templateUrl: 'views/project-list.html',
+      controller: 'ProjectListCtrl',
+      resolve: {
+        $title: function() { return 'TITLES.PROJECTS_LIST'; }
+      },
+      requireAuth: true
+    })
+
     .state('manage', {
       abstract: true,
       url: '/manage',
@@ -47,7 +64,7 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/manage-overview.html',
       controller: 'ManageOverviewCtrl',
       resolve: {
-        $title: function() { return 'Manage Overview'; }
+        $title: function() { return 'TITLES.MANAGE_OVERVIEW'; }
       },
       requireAdmin: true
     })
@@ -56,7 +73,7 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/manage-users.html',
       controller: 'ManageUsersCtrl',
       resolve: {
-        $title: function() { return 'Manage Users'; }
+        $title: function() { return 'TITLES.MANAGE_USERS'; }
       },
       requireAdmin: true
     })
@@ -65,15 +82,23 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/manage-projects.html',
       controller: 'ManageProjectsCtrl',
       resolve: {
-        $title: function() { return 'Manage Projects'; }
+        $title: function() { return 'TITLES.MANAGE_PROJECTS'; }
       },
       requireAdmin: true
     });
 
 }).run(function($rootScope, $state, AuthService, SystemMessagesService) {
+  function ensureAuthenticated(event) {
+    if ( !AuthService.isLoggedIn() ) {
+      $state.transitionTo('login');
+      event.preventDefault();
+      SystemMessagesService.showWarning('You must be logged in to see that');
+    }
+  }
+
   function ensureAdmin(event) {
     if ( !AuthService.isAdminLoggedIn() ) {
-      $state.transitionTo('home');
+      $state.transitionTo('projects.list');
       event.preventDefault();
       SystemMessagesService.showWarning('Administrator privileges required!');
     }
@@ -81,14 +106,14 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
 
   // Possible arguments: event, toState, toParams, fromState, fromParams
   $rootScope.$on('$stateChangeStart', function(event, toState) {
-    if ( toState.requireAdmin ) {
-      if ( !AuthService.getCurrentUser() ) {
-        $rootScope.$on('$tlCurrentUserLoaded', function() {
-          ensureAdmin(event);
-        });
-      } else {
-        ensureAdmin(event);
-      }
+    if ( toState.requireAuth ) {
+      ensureAuthenticated(event);
     }
+
+    if ( toState.requireAdmin ) {
+      ensureAuthenticated(event);
+      ensureAdmin(event);
+    }
+
   });
 });

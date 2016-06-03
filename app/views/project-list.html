@@ -1,10 +1,8 @@
-<div layout="row" ng-if="isLoggedIn()">
+<div layout="row">
   <md-button class="md-raised md-accent" type="submit" ng-click="createNewProject($event)" translate="VIEWS.PROJECT_LIST.NEW_PROJECT_BTN" aria-label="{{ ::'VIEWS.PROJECT_LIST.NEW_PROJECT_BTN' | translate }}"></md-button>
 </div>
-<!-- TODO make registration as a part of route resolving and redirect to a standalone view-->
-<div ng-include src="'views/register.html'" ng-if="!isLoggedIn()"></div>
 
-<div ng-if="isLoggedIn()">
+<div>
   <h2 translate>VIEWS.PROJECT_LIST.HEADLINE</h2>
 
   <div layout="row" layout-align="end" layout-padding="5">

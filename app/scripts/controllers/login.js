@@ -46,7 +46,7 @@ angular.module('timelinerApp')
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
         SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
-        $state.go('home');
+        $state.go('projects.list');
       }, function(response) {
         $scope.updating = false;
         clearProgressInficatorTimeout(timeoutId);
@@ -77,7 +77,7 @@ angular.module('timelinerApp')
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
         SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
-        $state.go('home');
+        $state.go('projects.list');
       }, function() {
         $scope.updating = false;
         $scope.showProgressIndicator = false;
