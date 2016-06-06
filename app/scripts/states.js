@@ -41,16 +41,23 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
     .state('projects', {
       abstract: true,
       url: '/projects',
-      template: '<ui-view />'
+      templateUrl: 'views/project-list-main.html',
+      controller: 'ProjectListCtrl'
     })
     .state('projects.list', {
       url: '',
       templateUrl: 'views/project-list.html',
-      controller: 'ProjectListCtrl',
       resolve: {
         $title: function() { return 'TITLES.PROJECTS_LIST'; }
       },
       requireAuth: true
+    })
+    .state('projects.timeline', {
+      url: '/timeline',
+      templateUrl: 'views/project-timeline-list.html',
+      resolve: {
+        $title: function() { return 'TITLES.PROJECTS_TIMELINE_LIST'; }
+      }
     })
 
     .state('manage', {

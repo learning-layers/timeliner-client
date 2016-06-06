@@ -36,6 +36,7 @@
     "LOGIN": "Log in",
     "CONFIRM": "Confirm ",
     "PROJECTS_LIST": "My projects",
+    "PROJECTS_TIMELINE_LIST": "My projects timeline",
     "MANAGE_OVERVIEW": "Manage overview",
     "MANAGE_PROJECTS": "Project management",
     "MANAGE_USERS": "User management"
@@ -78,6 +79,8 @@
     "PROJECT_LIST": {
       "HEADLINE": "My projects (participant status)",
       "NEW_PROJECT_BTN": "New project",
+      "LIST_BTN": "Projects list",
+      "TIMELINE_LIST_BTN": "Projects timeline",
       "PENDING": "Pending projects",
       "ACTIVE": "Active projects",
       "JOIN": "Join",

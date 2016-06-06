@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectListCtrl', function ($scope, $log, $filter, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
+  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
     function findCurrentParticipant(project) {
       var currentUser = AuthService.getCurrentUser();
 
@@ -19,8 +19,19 @@ angular.module('timelinerApp')
 
     $scope.pendingProjects = [];
     $scope.activeProjects = [];
+    $scope.allProjects = [];
 
     $scope.updating = false;
+
+    $scope.switchListingView = function(state) {
+      if ( $state.current.name !== state ) {
+        $state.go(state);
+      }
+    };
+
+    $scope.isActiveListingView = function(state) {
+      return $state.current.name === state;
+    };
 
     $scope.canDeleteProject = function(project) {
       var currentUser = AuthService.getCurrentUser();
@@ -69,6 +80,7 @@ angular.module('timelinerApp')
         .then(function(project) {
           $log.debug('Dialog returned project:', project);
           $scope.activeProjects.push(project);
+          $scope.allProjects.push(project);
         }, function() {
           $log.debug('Dialog dismissed.');
         });
@@ -134,6 +146,8 @@ angular.module('timelinerApp')
         if ( result.data.length > 0 ) {
           var pendingProjects = [];
           var activeProjects = [];
+
+          $scope.allProjects = result.data;
 
           angular.forEach(result.data, function(project) {
             var currentParticipant = findCurrentParticipant(project);

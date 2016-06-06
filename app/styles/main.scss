@@ -120,3 +120,45 @@ md-icon.tl-remove {
 .mdi , .icomoon-timeliner {
   font-size: 24px;
 }
+
+/* timelines */
+
+.vis-timeline {
+  img.tl-timeline-participant {
+    width: 24px;
+    height: 24px;
+  }
+
+  .vis-current-time {
+    background-color: #e6e0d5;
+  }
+
+  .vis-item.vis-range.tl-timeline-project {
+    display: initial;
+    background-color: #444953;
+    border: none;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+
+    .tl-timeline-project-content {
+      color: #ccc;
+
+      .tl-timeline-project-title {
+        margin-left: 5px;
+        margin-right: 5px;
+        display: inline-block;
+        line-height: 30px;
+        //font-size: 16px;
+        font-weight: 600;
+      }
+
+      .tl-timeline-project-participants {
+        display: inline-block;
+
+        .tl-timeline-participant {
+          margin-right: 3px;
+        }
+      }
+    }
+  }
+}

@@ -32,6 +32,9 @@ angular.module('timelinerApp')
           manageAdmin: usersResource.manageAdmin,
           getFullName: function(user) {
             return ( user && user.name ) ? user.name.first + ' ' + user.name.last : '@unknown';
+          },
+          getImage: function(user) {
+            return user.image ? user.image : 'images/profile128.png';
           }
         };
   });

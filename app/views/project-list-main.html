@@ -1,0 +1,24 @@
+<div layout="row">
+  <md-button class="md-raised md-accent" type="submit" ng-click="createNewProject($event)" translate="VIEWS.PROJECT_LIST.NEW_PROJECT_BTN" aria-label="{{ ::'VIEWS.PROJECT_LIST.NEW_PROJECT_BTN' | translate }}"></md-button>
+
+  <span flex></span>
+
+  <md-button class="md-icon-button" ng-class="{ 'md-raised': isActiveListingView('projects.list') }" aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_BTN' | translate }}" type="button" ng-click="switchListingView('projects.list', $event);">
+    <md-tooltip md-direction="top" class="tooltip-text">
+      <translate>VIEWS.PROJECT_LIST.LIST_BTN</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-list"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" ng-class="{ 'md-raised': isActiveListingView('projects.timeline') }" aria-label="{{ 'VIEWS.PROJECT_LIST.TIMELINE_LIST_BTN' | translate }}" type="button" ng-disabled="updating" ng-click="switchListingView('projects.timeline', $event);">
+    <md-tooltip md-direction="top" class="tooltip-text">
+      <translate>VIEWS.PROJECT_LIST.TIMELINE_LIST_BTN</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-timeline"></md-icon>
+  </md-button>
+</div>
+
+<div>
+  <h2 translate>VIEWS.PROJECT_LIST.HEADLINE</h2>
+
+  <ui-view/ >
+</div>
