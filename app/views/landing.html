@@ -3,7 +3,7 @@
     <img src="images/logo.png" alt="Timeliner Logo">
     <span class="md-display-4" translate>GENERAL.TIMELINER</span>
   </div>
-  <div layout="row" layout-align="center">
+  <div layout="row" layout-align="center" ng-if="!isLoggedIn()">
     <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 600px">
       <md-card-title>
         <md-card-title-text>
@@ -41,7 +41,7 @@
       </md-card-content>
     </md-card>
   </div>
-  <div layout="row" layout-align="center center">
+  <div layout="row" layout-align="center center" ng-if="!isLoggedIn()">
     <translate>VIEWS.LANDING.ALREADY_MEMBER</translate>
     <md-button class="md-accent" ui-sref="login" translate="NAVBAR.LOGIN_BTN" aria-label="{{ 'NAVBAR.LOGIN_BTN' | translate}}"></md-button>
   </div>
