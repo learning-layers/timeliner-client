@@ -34,7 +34,7 @@ angular.module('timelinerApp')
             return ( user && user.name ) ? user.name.first + ' ' + user.name.last : '@unknown';
           },
           getImage: function(user) {
-            return user.image ? user.image : 'images/profile128.png';
+            return (user && user.image) ? user.image : 'images/profile128.png';
           }
         };
   });

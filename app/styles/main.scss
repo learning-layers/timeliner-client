@@ -9,6 +9,10 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
 
 @import "icomoon-timeliner.css";
 
+@mixin tl-rounded-image() {
+  border-radius: 50%;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -19,6 +23,13 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
 /* Custom page footer */
 .footer {
   color: #777;
+}
+
+.tl-current-user-image {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  @include tl-rounded-image;
 }
 
 md-chips .md-chip {
@@ -127,6 +138,8 @@ md-icon.tl-remove {
   img.tl-timeline-participant {
     width: 24px;
     height: 24px;
+    vertical-align: middle;
+    @include tl-rounded-image;
   }
 
   .vis-current-time {

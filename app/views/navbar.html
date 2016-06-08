@@ -35,8 +35,8 @@
       <md-button aria-label="{{ 'NAVBAR.LOGIN_BTN' | translate }}" ng-if="!isLoggedIn()" ui-sref="login" translate="NAVBAR.LOGIN_BTN"></md-button>
 
       <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
-        <md-button aria-label="{{ 'NAVBAR.MENU_ARIA' | translate }}" ng-click="$mdOpenMenu($event)">
-          <md-icon>person</md-icon>
+        <md-button aria-label="{{ 'NAVBAR.MENU_ARIA' | translate }}" ng-click="$mdOpenMenu($event)" ng-show="isCurrentUserLoaded()">
+          <img class="tl-current-user-image" ng-src="{{ getCurrentUserImage() }}" alt="person">
           {{ getCurrentUserName() }}
         </md-button>
         <md-menu-content width="4" >

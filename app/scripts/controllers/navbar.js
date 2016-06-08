@@ -13,7 +13,7 @@ angular.module('timelinerApp')
       AuthService.removeAuthCookie();
       $state.go('home');
     };
-    
+
     $scope.changeLanguage = function (lang) {
       $translate.use(lang);
     };
@@ -22,13 +22,19 @@ angular.module('timelinerApp')
       $state.go('manage.overview');
     };
 
+    $scope.isCurrentUserLoaded = function() {
+      return !!AuthService.getCurrentUser();
+    };
+
     $scope.getCurrentUserName = function() {
       var currentUser = AuthService.getCurrentUser();
 
-      if (currentUser) {
-        return UsersService.getFullName(currentUser);
-      }
+      return UsersService.getFullName(currentUser);
+    };
 
-      return '@unknown';
+    $scope.getCurrentUserImage = function() {
+      var currentUser = AuthService.getCurrentUser();
+
+      return UsersService.getImage(currentUser);
     };
   });
