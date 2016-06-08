@@ -136,9 +136,10 @@ md-icon.tl-remove {
 
 .vis-timeline {
   img.tl-timeline-participant {
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
     vertical-align: middle;
+    border: 1px solid #fff;
     @include tl-rounded-image;
   }
 
