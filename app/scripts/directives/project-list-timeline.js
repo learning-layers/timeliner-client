@@ -14,12 +14,56 @@ angular.module('timelinerApp')
       zoomMin: 2.63e+9 // 1 month
     };
 
+    function determineFull(containerWidth, elementWidth, elementsCount) {
+      if ( elementsCount === 1 ) {
+        return 1;
+      } else if ( ( elementsCount * elementWidth ) <= containerWidth ) {
+        return elementsCount;
+      } else {
+        var leftWidth = containerWidth - ( ( elementsCount + 1 ) * ( elementWidth / 2 ) );
+
+        if ( leftWidth >= elementWidth / 2 ) {
+          var additionalFullElements = Math.floor( ( leftWidth / ( elementWidth / 2 ) ) );
+
+          return additionalFullElements + 1;
+        }
+      }
+
+      return 1;
+    }
+
+    function findAndApply(element) {
+      var elements = angular.element(element[0].querySelectorAll('.tl-timeline-project'));
+
+      if ( elements && elements.length > 0 ) {
+        _(elements).each(function(singleProjectElement) {
+          var imageElements = angular.element(singleProjectElement.querySelectorAll('img.tl-timeline-participant'));
+          if ( imageElements && imageElements.length > 1 ) {
+            var containerWidth = singleProjectElement.clientWidth;
+            //var imageElementWidth = imageElements[0].clientWidth;
+            // TODO It does not count for margins
+            var imageElementWidth = imageElements[0].offsetWidth;
+            var fullCount = determineFull(containerWidth, imageElementWidth, imageElements.length);
+            _(imageElements).each(function(imageElement, index) {
+              imageElement.style.position = 'relative';
+              imageElement.style.zIndex = 10 + imageElements.length - index;
+              if ( index >= fullCount ) {
+                imageElement.style.left = ( '-' + ( ( index - fullCount + 1 ) * ( imageElementWidth / 2 ) ) + 'px' );
+              } else {
+                imageElement.style.left = '';
+              }
+            });
+          }
+        });
+      }
+    }
+
     function buildItemContent(project) {
       return '<div class="tl-timeline-project-content">' +
         '<div class="tl-timeline-project-participants">' +
-          _(project.participants).map(function(participant) {
-            return '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
-          }).join('') +
+        _(project.participants).map(function(participant) {
+          return '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
+        }).join('') +
         '</div>' +
       '</div>';
     }
@@ -88,6 +132,10 @@ angular.module('timelinerApp')
               });
               timeline.redraw();
             }
+            // XXX Need to really determine the time when redraw has finished
+            setTimeout(function() {
+              findAndApply(element);
+            }, 100);
           });
         });
       }
