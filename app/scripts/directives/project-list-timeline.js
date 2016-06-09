@@ -121,6 +121,10 @@ angular.module('timelinerApp')
           });
 
           timeline.on('rangechanged', function(data) {
+            timeline.once('changed', function() {
+              findAndApply(element);
+            });
+
             var ids = items.getIds({
               filter: function(item) {
                 return item.hasEnd === false;
@@ -132,10 +136,6 @@ angular.module('timelinerApp')
               });
               timeline.redraw();
             }
-            // XXX Need to really determine the time when redraw has finished
-            setTimeout(function() {
-              findAndApply(element);
-            }, 100);
           });
         });
       }
