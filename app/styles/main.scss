@@ -9,6 +9,8 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
 
 @import "icomoon-timeliner.css";
 
+$tl-timeline-visible-border-bottom-color: #23252b;
+
 @mixin tl-rounded-image() {
   border-radius: 50%;
 }
@@ -135,6 +137,36 @@ md-icon.tl-remove {
 /* timelines */
 
 .vis-timeline {
+  border: none;
+
+  .vis-panel.vis-left {
+    .vis-labelset {
+      .vis-label {
+        border-bottom-color: $tl-timeline-visible-border-bottom-color;
+      }
+    }
+  }
+
+  .vis-foreground {
+    .vis-group {
+      border-bottom-color: $tl-timeline-visible-border-bottom-color;
+    }
+  }
+
+  .vis-panel.vis-center, .vis-panel.vis-left, .vis-panel.vis-right, .vis-panel.vis-top, .vis-panel.vis-bottom {
+    border: none;
+  }
+
+  .vis-time-axis {
+    .vis-grid {
+      border-left-color: #444953;
+    }
+  }
+
+  .vis-labelset .vis-label {
+    color: #7b7e84;
+  }
+
   img.tl-timeline-participant {
     width: 30px;
     height: 30px;
@@ -173,6 +205,12 @@ md-icon.tl-remove {
           margin-right: 3px;
         }
       }
+    }
+  }
+
+  .vis-time-axis {
+    .vis-text {
+      color: #ccc;
     }
   }
 }
