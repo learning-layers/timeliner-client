@@ -15,9 +15,7 @@ angular.module('timelinerApp')
     };
 
     function buildItemContent(project) {
-      // TODO Consider using a template
       return '<div class="tl-timeline-project-content">' +
-        '<div class="tl-timeline-project-title">' + $sanitize(project.title) + '</div>' +
         '<div class="tl-timeline-project-participants">' +
           _(project.participants).map(function(participant) {
             return '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
