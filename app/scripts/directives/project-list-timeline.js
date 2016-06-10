@@ -11,19 +11,24 @@ angular.module('timelinerApp')
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
-      zoomMin: 2.63e+9 // 1 month
+      zoomMin: 2.63e+9, // 1 month
+      selectable: false
     };
 
-    function determineFull(containerWidth, elementWidth, elementsCount) {
+    function determineFull(containerWidth, elementWidth, elementsCount, factor) {
+      if ( factor < 2 ) {
+        throw new Error('Factor is required to be greater or equal to two, instead a value of ' + factor.toString() + ' was provided!');
+      }
+
       if ( elementsCount === 1 ) {
         return 1;
       } else if ( ( elementsCount * elementWidth ) <= containerWidth ) {
         return elementsCount;
       } else {
-        var leftWidth = containerWidth - ( ( elementsCount + 1 ) * ( elementWidth / 2 ) );
+        var leftWidth = containerWidth - ( ( elementsCount + ( factor - 1 ) ) * ( elementWidth / factor ) );
 
-        if ( leftWidth >= elementWidth / 2 ) {
-          var additionalFullElements = Math.floor( ( leftWidth / ( elementWidth / 2 ) ) );
+        if ( leftWidth >= elementWidth / factor  * ( factor - 1 ) ) {
+          var additionalFullElements = Math.floor( ( leftWidth / ( elementWidth / factor * ( factor - 1 ) ) ) );
 
           return additionalFullElements + 1;
         }
@@ -33,6 +38,7 @@ angular.module('timelinerApp')
     }
 
     function findAndApply(element) {
+      var factor = 10;
       var elements = angular.element(element[0].querySelectorAll('.tl-timeline-project'));
 
       if ( elements && elements.length > 0 ) {
@@ -43,14 +49,15 @@ angular.module('timelinerApp')
             //var imageElementWidth = imageElements[0].clientWidth;
             // TODO It does not count for margins
             var imageElementWidth = imageElements[0].offsetWidth;
-            var fullCount = determineFull(containerWidth, imageElementWidth, imageElements.length);
+            // This accounts for contained nested element margins
+            var fullCount = determineFull(containerWidth - 10, imageElementWidth + 2, imageElements.length, factor);
             _(imageElements).each(function(imageElement, index) {
               imageElement.style.position = 'relative';
-              imageElement.style.zIndex = 10 + imageElements.length - index;
+              imageElement.style.zIndex = imageElements.length - index;
               if ( index >= fullCount ) {
-                imageElement.style.left = ( '-' + ( ( index - fullCount + 1 ) * ( imageElementWidth / 2 ) ) + 'px' );
+                imageElement.style.left = '-' + ( imageElementWidth * ( index + 1 - fullCount ) / factor * ( factor - 1 ) ) + 'px';
               } else {
-                imageElement.style.left = '';
+                imageElement.style.left = '0px';
               }
             });
           }
@@ -75,6 +82,7 @@ angular.module('timelinerApp')
       },
       link: function postLink(scope, element, attrs) {
         $log.debug(scope, element, attrs);
+        var maxZindex = 2;
         var timeline = null;
 
         // TODO Add handling for updates
@@ -95,6 +103,10 @@ angular.module('timelinerApp')
           var items = new $window.vis.DataSet([]);
 
           angular.forEach(scope.data, function(project) {
+            if ( maxZindex < project.participants.length ) {
+              maxZindex = project.participants.length;
+            }
+
             groups.add({
               className: 'tl-timeline-project-group',
               content: project.title, // XXX Need to generate some
@@ -120,10 +132,20 @@ angular.module('timelinerApp')
             items: items
           });
 
+          var findAndApplyTimeout;
+
           timeline.on('rangechanged', function(data) {
             timeline.once('changed', function() {
-              findAndApply(element);
+              if ( findAndApplyTimeout ) {
+                clearTimeout(findAndApplyTimeout);
+                findAndApplyTimeout = null;
+              }
+              findAndApplyTimeout = setTimeout(function() {
+                findAndApply(element);
+              }, 50);
             });
+
+            angular.element(element[0].querySelector('.vis-current-time'))[0].style.zIndex = maxZindex + 1;
 
             var ids = items.getIds({
               filter: function(item) {
