@@ -57,7 +57,8 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/project-timeline-list.html',
       resolve: {
         $title: function() { return 'TITLES.PROJECTS_TIMELINE_LIST'; }
-      }
+      },
+      requireAuth: true
     })
 
     .state('manage', {
