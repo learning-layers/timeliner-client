@@ -1,5 +1,10 @@
 <div layout="row">
-  <md-button class="md-raised md-accent" type="submit" ng-click="createNewProject($event)" translate="VIEWS.PROJECT_LIST.NEW_PROJECT_BTN" aria-label="{{ ::'VIEWS.PROJECT_LIST.NEW_PROJECT_BTN' | translate }}"></md-button>
+  <md-button class="md-icon-button md-raised md-accent" aria-label="{{ 'VIEWS.PROJECT_LIST.NEW_PROJECT_BTN' | translate }}" type="button" ng-click="createNewProject($event)">
+    <md-tooltip md-direction="top" class="tooltip-text">
+      <translate>VIEWS.PROJECT_LIST.NEW_PROJECT_BTN</translate>
+    </md-tooltip>
+    <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
+  </md-button>
 
   <span flex></span>
 
