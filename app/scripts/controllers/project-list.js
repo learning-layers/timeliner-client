@@ -8,15 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _) {
-    function findCurrentParticipant(project) {
-      var currentUser = AuthService.getCurrentUser();
-
-      return _.find(project.participants, function(participant) {
-        return participant.user._id === currentUser._id;
-      });
-    }
-
+  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _, $translate) {
     $scope.pendingProjects = [];
     $scope.activeProjects = [];
     $scope.allProjects = [];
@@ -92,53 +84,137 @@ angular.module('timelinerApp')
       });
     };
 
-    $scope.doJoin = function(project, index) {
-      // TODO Ask for confirmation
-      $scope.updating = true;
+    $scope.doJoin = function(project, index, ev) {
+      $mdDialog.show(
+        $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title($translate.instant('VIEWS.PROJECT_LIST.JOIN_DIALOG.TITLE'))
+          .textContent($translate.instant('VIEWS.PROJECT_LIST.JOIN_DIALOG.TEXT'))
+          .ariaLabel($translate.instant('VIEWS.PROJECT_LIST.JOIN_DIALOG.ARIA_LABEL'))
+          .targetEvent(ev)
+          .ok($translate.instant('GENERAL.CONFIRM'))
+          .cancel($translate.instant('GENERAL.CLOSE'))
+      ).then(function() {
+        $scope.updating = true;
 
-      ProjectsService.accept({
-        id: project._id
-      }, {}, function() {
-        $scope.pendingProjects.splice(index, 1);
+        ProjectsService.accept({
+          id: project._id
+        }, {}, function() {
+          $scope.pendingProjects.splice(index, 1);
 
-        var currentParticipant = findCurrentParticipant(project);
-        currentParticipant.status = 'active';
+          var currentParticipant = ProjectsService.findCurrentParticipant(project);
+          currentParticipant.status = 'active';
 
-        $scope.activeProjects.push(project);
-        $scope.updating = false;
-      }, function(response) {
-        // TODO Handle error
-        $log.debug(response);
-        $scope.updating = false;
+          $scope.activeProjects.push(project);
+          $scope.updating = false;
+        }, function(response) {
+          // TODO Handle error
+          $log.debug(response);
+          $scope.updating = false;
+        });
       });
     };
 
-    $scope.doDecline = function(project, index) {
-      // TODO Ask for confirmation
-      $scope.updating = true;
+    $scope.doDecline = function(project, index, ev) {
+      $mdDialog.show(
+        $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title($translate.instant('VIEWS.PROJECT_LIST.DECLINE_DIALOG.TITLE'))
+          .textContent($translate.instant('VIEWS.PROJECT_LIST.DECLINE_DIALOG.TEXT'))
+          .ariaLabel($translate.instant('VIEWS.PROJECT_LIST.DECLINE_DIALOG.ARIA_LABEL'))
+          .targetEvent(ev)
+          .ok($translate.instant('GENERAL.CONFIRM'))
+          .cancel($translate.instant('GENERAL.CLOSE'))
+      ).then(function() {
+        $scope.updating = true;
 
-      ProjectsService.reject({
-        id: project._id
-      }, {}, function() {
-        $scope.pendingProjects.splice(index, 1);
-        $scope.updating = false;
-      }, function(response) {
-        // TODO Handle error
-        $log.debug(response);
-        $scope.updating = false;
+        ProjectsService.reject({
+          id: project._id
+        }, {}, function() {
+          $scope.pendingProjects.splice(index, 1);
+          $scope.updating = false;
+        }, function(response) {
+          // TODO Handle error
+          $log.debug(response);
+          $scope.updating = false;
+        });
       });
     };
 
-    $scope.doEdit = function(project) {
-      $log.debug('Edit called for project', project);
+    $scope.doEdit = function(project, ev) {
+      $log.debug('Edit called for project', project, ev);
     };
 
-    $scope.doLeave = function(project) {
-      $log.debug('Leave called for project', project);
+    $scope.doLeave = function(project, index, ev) {
+      $log.debug('Leave called for project', project, index, ev);
     };
 
-    $scope.doDelete = function(project) {
-      $log.debug('Delete called for project', project);
+    $scope.doDelete = function(project, index, ev) {
+      $log.debug('Delete called for project', project, index, ev);
+    };
+
+    $scope.doShowOnTimeline = function(project, ev) {
+      var currentParticipant = ProjectsService.findCurrentParticipant(project);
+
+      $mdDialog.show(
+        $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_SHOW_DIALOG.TITLE'))
+          .textContent($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_SHOW_DIALOG.TEXT'))
+          .ariaLabel($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_SHOW_DIALOG.ARIA_LABEL'))
+          .targetEvent(ev)
+          .ok($translate.instant('GENERAL.CONFIRM'))
+          .cancel($translate.instant('GENERAL.CLOSE'))
+      ).then(function() {
+        $scope.updating = true;
+
+        ProjectsService.show({
+          id: project._id
+        }, {}, function() {
+          currentParticipant.showOnTimeline = true;
+          $scope.updating = false;
+        }, function(response) {
+          // TODO Handle error
+          $log.debug(response);
+          $scope.updating = false;
+        });
+      });
+    };
+
+    $scope.doHideFromTimeline = function(project, ev) {
+      var currentParticipant = ProjectsService.findCurrentParticipant(project);
+
+      $mdDialog.show(
+        $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_HIDE_DIALOG.TITLE'))
+          .textContent($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_HIDE_DIALOG.TEXT'))
+          .ariaLabel($translate.instant('VIEWS.PROJECT_LIST.TIMELINE_HIDE_DIALOG.ARIA_LABEL'))
+          .targetEvent(ev)
+          .ok($translate.instant('GENERAL.CONFIRM'))
+          .cancel($translate.instant('GENERAL.CLOSE'))
+      ).then(function() {
+        $scope.updating = true;
+
+        ProjectsService.hide({
+          id: project._id
+        }, {}, function() {
+          currentParticipant.showOnTimeline = false;
+          $scope.updating = false;
+        }, function(response) {
+          // TODO Handle error
+          $log.debug(response);
+          $scope.updating = false;
+        });
+      });
+    };
+
+    $scope.isShownOnTimeline = function(project) {
+      return ProjectsService.isShownOnTimeline(project);
     };
 
     if ( $scope.isLoggedIn() ) {
@@ -150,7 +226,7 @@ angular.module('timelinerApp')
           $scope.allProjects = result.data;
 
           angular.forEach(result.data, function(project) {
-            var currentParticipant = findCurrentParticipant(project);
+            var currentParticipant = ProjectsService.findCurrentParticipant(project);
 
             // TODO See if it makes semse to also determine active status
             // This way some strange cases would just be left out

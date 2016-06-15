@@ -8,7 +8,7 @@
 </div>
 
 <md-list>
-  <div ng-if="pendingProjects && pendingProjects.length > 0"> <!-- TODO only show this block if user has pending projects (and list them here) -->
+  <div ng-if="pendingProjects && pendingProjects.length > 0">
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="project in pendingProjects" ng-click="openProject()">
       <div flex="50">{{ ::project.title }}</div>
@@ -79,14 +79,26 @@
             </md-button>
           </md-menu-item>
           <md-menu-item>
-            <md-button ng-disabled="::!canLeaveProject(project)" ng-click="doLeave()" aria-label="{{ 'VIEWS.PROJECT_LIST.LEAVE' | translate }}">
+            <md-button ng-disabled="::!canLeaveProject(project)" ng-click="doLeave(project, $index, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.LEAVE' | translate }}">
               <md-icon>cancel</md-icon>
               <translate>VIEWS.PROJECT_LIST.LEAVE</translate>
             </md-button>
           </md-menu-item>
+          <md-menu-item ng-if="!isShownOnTimeline(project)">
+            <md-button ng-click="doShowOnTimeline(project, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.SHOW_ON_TIMELINE' | translate }}">
+              <md-icon md-font-set="mdi" md-font-icon="mdi-eye"></md-icon>
+              <translate>VIEWS.PROJECT_LIST.SHOW_ON_TIMELINE</translate>
+            </md-button>
+          </md-menu-item>
+          <md-menu-item ng-if="isShownOnTimeline(project)">
+            <md-button ng-click="doHideFromTimeline(project, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.HIDE_FROM_TIMELINE' | translate }}">
+              <md-icon md-font-set="mdi" md-font-icon="mdi-eye-off"></md-icon>
+              <translate>VIEWS.PROJECT_LIST.HIDE_FROM_TIMELINE</translate>
+            </md-button>
+          </md-menu-item>
           <md-menu-divider></md-menu-divider>
           <md-menu-item>
-            <md-button class="md-warn" ng-disabled="::!canDeleteProject(project)" ng-click="doDelete()" aria-label="{{ 'VIEWS.PROJECT_LIST.DECLINE' | translate }}">
+            <md-button class="md-warn" ng-disabled="::!canDeleteProject(project)" ng-click="doDelete(project, $index, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.DECLINE' | translate }}">
               <md-icon>delete_forever</md-icon>
               <translate>VIEWS.PROJECT_LIST.DELETE</translate>
             </md-button>

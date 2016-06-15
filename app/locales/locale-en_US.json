@@ -10,6 +10,7 @@
     "OPEN": "Open",
     "CLOSE": "Close",
     "CANCEL": "Cancel",
+    "CONFIRM": "Confirm",
     "FORM": {
       "REQUIRED_EXT": "(required)",
       "REPEAT_PASSWORD": "Repeat password",
@@ -88,6 +89,8 @@
       "LEAVE": "Leave",
       "DELETE": "Delete project",
       "EDIT": "Edit",
+      "SHOW_ON_TIMELINE": "Show on timeline",
+      "HIDE_FROM_TIMELINE": "Hide from timeline",
       "LIST_TITLES": {
         "TITLE": "Title",
         "START_DATE": "Start date",
@@ -101,6 +104,26 @@
         "TITLE": "Project title",
         "NEXT_STEP_BTN": "Next step",
         "CREATE_BTN": "Create project"
+      },
+      "JOIN_DIALOG": {
+        "TITLE": "Would you like to accept an invitation to join the project?",
+        "TEXT": "You could leave at any time you see fit.",
+        "ARIA_LABEL": "Accept project invitation"
+      },
+      "DECLINE_DIALOG": {
+        "TITLE": "Would you like to delcline an invitation to the project?",
+        "TEXT": "You could be invited again later.",
+        "ARIA_LABEL": "Decline project invitation"
+      },
+      "TIMELINE_SHOW_DIALOG": {
+        "TITLE": "Would you like to show the project on the timeline?",
+        "TEXT": "Project will be shown in the timeline view.",
+        "ARIA_LABEL": "Show project on timeline"
+      },
+      "TIMELINE_HIDE_DIALOG": {
+        "TITLE": "Would you like to hide the project from the timeline?",
+        "TEXT": "Project will no longer be shown in the timeline view.",
+        "ARIA_LABEL": "Hide project from timeline"
       }
     },
     "MANAGE": {

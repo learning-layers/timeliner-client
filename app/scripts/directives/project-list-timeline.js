@@ -7,7 +7,7 @@
  * # projectListTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectListTimeline', function ($log, $window, $sanitize, $timeout, _, UsersService) {
+  .directive('projectListTimeline', function ($log, $window, $sanitize, $timeout, _, UsersService, ProjectsService) {
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
@@ -103,6 +103,10 @@ angular.module('timelinerApp')
           var items = new $window.vis.DataSet([]);
 
           angular.forEach(scope.data, function(project) {
+            if ( !ProjectsService.isShownOnTimeline(project) ) {
+              return;
+            }
+
             if ( maxZindex < project.participants.length ) {
               maxZindex = project.participants.length;
             }
