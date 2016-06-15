@@ -7,7 +7,7 @@
  * # projectListTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectListTimeline', function ($log, $window, $sanitize, _, UsersService) {
+  .directive('projectListTimeline', function ($log, $window, $sanitize, $timeout, _, UsersService) {
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
@@ -137,10 +137,10 @@ angular.module('timelinerApp')
           timeline.on('rangechanged', function(data) {
             timeline.once('changed', function() {
               if ( findAndApplyTimeout ) {
-                clearTimeout(findAndApplyTimeout);
+                $timeout.cancel(findAndApplyTimeout);
                 findAndApplyTimeout = null;
               }
-              findAndApplyTimeout = setTimeout(function() {
+              findAndApplyTimeout = $timeout(function() {
                 findAndApply(element);
               }, 50);
             });
@@ -159,6 +159,12 @@ angular.module('timelinerApp')
               timeline.redraw();
             }
           });
+        });
+
+        element.on('$destroy', function() {
+          if ( timeline !== null ) {
+            timeline.destroy();
+          }
         });
       }
     };
