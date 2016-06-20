@@ -97,13 +97,24 @@
         "END_DATE": "End date",
         "OWNER": "Owner",
         "PARTICIPANTS": "Participants",
-        "ACTIONS": "Actions"
+        "ACTIONS": "Actions",
+        "DESCRIPTION": "Description",
+        "GOAL": "Goal"
       },
       "CREATE_PROJECT": {
         "HEADLINE": "Create new project",
         "TITLE": "Project title",
         "NEXT_STEP_BTN": "Next step",
         "CREATE_BTN": "Create project"
+      },
+      "EDIT_PROJECT": {
+        "HEADLINE": "Edit project",
+        "STATE_ACTIVE": "Active",
+        "STATE_FINISHED": "Finished",
+        "DESCRIPTION": "Project description",
+        "GOAL": "Project goal",
+        "STATUS": "Project status",
+        "UPDATE_BTN": "Update"
       },
       "JOIN_DIALOG": {
         "TITLE": "Would you like to accept an invitation to join the project?",

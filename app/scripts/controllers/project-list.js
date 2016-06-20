@@ -144,7 +144,32 @@ angular.module('timelinerApp')
     };
 
     $scope.doEdit = function(project, ev) {
-      $log.debug('Edit called for project', project, ev);
+      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
+      var projectId = project._id;
+      $mdDialog.show({
+          controller: 'EditProjectModalInstanceCtrl',
+          templateUrl: 'views/templates/edit-project-modal.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen,
+          locals: {
+            project: project
+          }
+        })
+        .then(function(project) {
+          $log.debug('Dialog returned project:', project);
+          $scope.activeProjects[_($scope.activeProjects).findIndex(function(p) { return p._id === projectId; })] = project;
+          $scope.allProjects[_($scope.allProjects).findIndex(function(p) { return p._id === projectId; })] = project;
+        }, function() {
+          $log.debug('Dialog dismissed.');
+        });
+
+      $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
+        return $mdMedia('xs') || $mdMedia('sm');
+      }, function(wantsFullScreen) {
+        $scope.customFullscreen = (wantsFullScreen === true);
+      });
     };
 
     $scope.doLeave = function(project, index, ev) {

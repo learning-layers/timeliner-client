@@ -30,6 +30,10 @@ angular.module('timelinerApp')
         key: '@id',
         method: 'GET'
       },
+      update: {
+        url: apiLocation + '/:id',
+        method: 'PUT'
+      },
       accept: {
         url: apiLocation + '/:id/participants/accept',
         key: '@id',
@@ -65,6 +69,7 @@ angular.module('timelinerApp')
         return !!currentParticipant.showOnTimeline;
       },
       create: projectsResource.create,
+      update: projectsResource.update,
       mine: projectsResource.mine,
       all: projectsResource.all,
       accept: projectsResource.accept,
