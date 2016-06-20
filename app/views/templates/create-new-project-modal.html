@@ -1,10 +1,12 @@
 <md-dialog ng-cloak>
+  <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
+
   <form name="newProjectForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
         <h2 translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.HEADLINE</h2>
         <span flex></span>
-        <md-button class="md-icon-button" ng-click="cancel()">
+        <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
           <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
         </md-button>
       </div>
@@ -34,8 +36,8 @@
       </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
-      <md-button ng-click="cancel()" translate="GENERAL.CANCEL"></md-button>
-      <md-button type="submit" class="md-accent" ng-disabled="updating || newProjectForm.$invalid" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN"></md-button>
+      <md-button ng-click="cancel()" ng-disabled="updating" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
+      <md-button type="submit" class="md-accent" ng-disabled="updating || newProjectForm.$invalid" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN' | translate }}"></md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
