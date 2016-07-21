@@ -69,6 +69,7 @@ angular.module('timelinerApp')
         return !!currentParticipant.showOnTimeline;
       },
       create: projectsResource.create,
+      get: projectsResource.get,
       update: projectsResource.update,
       mine: projectsResource.mine,
       all: projectsResource.all,

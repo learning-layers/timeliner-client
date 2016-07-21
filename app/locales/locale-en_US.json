@@ -137,6 +137,15 @@
         "ARIA_LABEL": "Hide project from timeline"
       }
     },
+    "PROJECT": {
+      "NEW_BTN": {
+        "TITLE": "Add new...",
+        "RESOURCE": "Resource",
+        "TASK": "Task",
+        "NOTE": "Note",
+        "MILESTONE": "Milestone"
+      }
+    },
     "MANAGE": {
       "OVERVIEW": {
         "TITLE": "Overview"

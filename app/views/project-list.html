@@ -41,7 +41,7 @@
 
   <div ng-if="activeProjects && activeProjects.length > 0">
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.ACTIVE</translate></md-subheader>
-    <md-list-item class="secondary-button-padding" ng-repeat="project in activeProjects" ng-click="openProject()">
+    <md-list-item class="secondary-button-padding" ng-repeat="project in activeProjects" ui-sref="project({id: project._id})">
       <div flex="50">{{ ::project.title }}</div> <!-- TODO remove this duplication of list items (except for menu buttons) -->
       <div flex="10">{{ ::displayDate(project.start) }}</div>
       <div flex="10">{{ ::displayDate(project.end) }}</div>

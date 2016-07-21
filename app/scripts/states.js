@@ -61,6 +61,17 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       requireAuth: true
     })
 
+    .state('project', {
+      url: '/project/:id',
+      templateUrl: 'views/project-view.html',
+      controller: 'ProjectViewCtrl',
+      resolve: {
+        // TODO get project title as page title?
+        //$title: function() { return ''; }
+      },
+      requireAuth: true
+    })
+
     .state('manage', {
       abstract: true,
       url: '/manage',
