@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, $timeout, _, UsersService, ProjectsService) {
+  .directive('projectTimeline', function ($log, $window) {
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
@@ -22,7 +22,6 @@ angular.module('timelinerApp')
       },
       link: function postLink(scope, element, attrs) {
         $log.debug(scope, element, attrs);
-        var maxZindex = 2;
         var timeline = null;
 
         // TODO Add handling for updates
