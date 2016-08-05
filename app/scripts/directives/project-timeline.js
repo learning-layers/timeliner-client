@@ -41,6 +41,19 @@ angular.module('timelinerApp')
           var groups = new $window.vis.DataSet([]);
           var items = new $window.vis.DataSet([]);
 
+          groups.add({
+            className: 'tl-project-timeline-milestones',
+            content: 'Milestones', // XXX Needs to be translated
+            id: 'timeline-milestones',
+            title: 'Milestones' // XXX Needs to be translated
+          });
+          groups.add({
+            className: 'tl-project-timeline-annotations',
+            content: 'Annotations', // XXX Needs to be translated
+            id: 'timeline-annotations',
+            title: 'Annotations' // XXX Needs to be translated
+          });
+
           timeline.setData({
             groups: groups,
             items: items
