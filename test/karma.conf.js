@@ -36,6 +36,7 @@ module.exports = function(config) {
       'bower_components/angular-translate-handler-log/angular-translate-handler-log.js',
       'bower_components/lodash/lodash.js',
       'bower_components/vis/dist/vis.js',
+      'bower_components/socket.io-client/socket.io.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/directives/htk.common/module.js',
