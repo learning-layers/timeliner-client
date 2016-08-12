@@ -59,12 +59,18 @@ angular.module('timelinerApp')
 
         // TODO Add handling for updates
         // Full redraw on update does not seems to be reasonable
+        // XXX This one only listens to changes on the main collection, not
+        // nested subcollections
+        // Explanation: this will probably only rtigger redraw on initial data load
+        // or whole contained collections being replaced by new ones
         scope.$watchCollection('data', function() {
           if ( scope.data === null ) {
             return;
           }
 
           if ( timeline !== null ) {
+            // TODO See if the data sets would also need to be destroyed
+            // Another way would be to just clear the data sets and reuse old ones
             timeline.destroy();
           }
 
