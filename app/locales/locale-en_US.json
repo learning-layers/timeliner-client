@@ -21,7 +21,9 @@
         "INVALID_DATE": "The entered value is not a date!",
         "MIN_DATE": "End date can't be earlier than the start date!",
         "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long"
-      }
+      },
+      "TITLE": "Title",
+      "DESCRIPTION": "Description"
     },
     "TOASTS": {
       "SUCCESSES": {
@@ -142,8 +144,13 @@
         "TITLE": "Add new...",
         "RESOURCE": "Resource",
         "TASK": "Task",
-        "NOTE": "Note",
+        "ANNOTATION": "Annotation",
         "MILESTONE": "Milestone"
+      },
+      "CREATE_ANNOTATION": {
+        "HEADLINE": "Create new annotation",
+        "DATE": "Timeline date",
+        "CREATE_BTN": "Create annotation"
       }
     },
     "MANAGE": {
@@ -162,7 +169,8 @@
   },
   "TOASTS": {
     "SUCCESSES": {
-      "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in."
+      "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in.",
+      "ANNOTATION_CREATED": "New annotation successfully created."
     },
     "ERRORS": {
       "SERVER_ERROR": "Server error, please contact admin."

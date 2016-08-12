@@ -216,4 +216,15 @@ md-icon.tl-remove {
       color: #ccc;
     }
   }
+
+  .vis-item.vis-point.tl-project-timeline-annotation {
+    .icon-note {
+      color: #cac5bb;
+      font-size: 30px;
+    }
+  }
+
+  .vis-item.vis-dot.tl-project-timeline-annotation {
+    display: none;
+  }
 }

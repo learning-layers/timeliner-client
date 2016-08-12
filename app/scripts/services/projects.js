@@ -51,6 +51,20 @@ angular.module('timelinerApp')
       show: {
         url: apiLocation + '/:id/timeline/show',
         method: 'POST'
+      },
+      getProjectAnnotations: {
+        url: apiLocation + '/:project/annotations'
+      },
+      createAnnotation: {
+        url: apiLocation + '/:project/annotations',
+        method: 'POST'
+      },
+      updateAnnotation: {
+        url: apiLocation + '/:project/annotations/:id',
+        method: 'PUT'
+      },
+      deleteAnnotation: {
+        url: apiLocation + '/:project/annotations/:id'
       }
     });
 
@@ -76,6 +90,10 @@ angular.module('timelinerApp')
       accept: projectsResource.accept,
       reject: projectsResource.reject,
       hide: projectsResource.hide,
-      show: projectsResource.show
+      show: projectsResource.show,
+      getProjectAnnotations: projectsResource.getProjectAnnotations,
+      createAnnotation: projectsResource.createAnnotation,
+      updateAnnotation: projectsResource.updateAnnotation,
+      deleteAnnotation: projectsResource.deleteAnnotation
     };
   });

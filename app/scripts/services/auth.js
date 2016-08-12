@@ -106,6 +106,7 @@ angular.module('timelinerApp')
     return {
       getAuthCookie: getAuthCookie,
       setAuthCookie: setAuthCookie,
+      getAuthToken: getAuthToken,
       removeAuthCookie: removeAuthCookie,
       register: authResource.register,
       confirm: authResource.confirm,

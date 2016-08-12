@@ -1,10 +1,10 @@
 <md-dialog flex="70" ng-cloak>
   <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
 
-  <form name="newProjectForm" ng-submit="submit()">
+  <form name="newAnnotationForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2 translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.HEADLINE</h2>
+        <h2 translate>VIEWS.PROJECT.CREATE_ANNOTATION.HEADLINE</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
           <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
@@ -14,30 +14,29 @@
     <md-dialog-content>
       <div layout="column" layout-align="none center" class="md-dialog-content">
         <md-input-container class="md-block">
-          <label><translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
+          <label><translate>GENERAL.FORM.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
           <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required md-autofocus>
-          <div ng-messages="newProjectForm.title.$error">
+          <div ng-messages="newAnnotationForm.title.$error">
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
             <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
           </div>
         </md-input-container>
-        <md-datepicker name="startDate" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.START_DATE' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" required ng-disabled="updating">
+
+        <md-input-container class="md-block">
+          <label><translate>GENERAL.FORM.DESCRIPTION</translate></label>
+          <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
+        </md-input-container>
+
+        <md-datepicker name="date" ng-model="model.date" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.DATE' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
         </md-datepicker>
-        <div class="validation-messages" ng-messages="newProjectForm.startDate.$error">
+        <div class="validation-messages" ng-messages="newAnnotationForm.date.$error">
           <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
           <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
         </div>
-        <md-datepicker name="endDate" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.END_DATE' | translate }}" md-min-date="model.start" ng-disabled="updating">
-        </md-datepicker>
-        <div class="validation-messages" ng-messages="newProjectForm.endDate.$error">
-          <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
-          <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
-        </div>
-      </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
       <md-button ng-click="cancel()" ng-disabled="updating" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
-      <md-button type="submit" class="md-accent" ng-disabled="updating || newProjectForm.$invalid" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN' | translate }}"></md-button>
+      <md-button type="submit" class="md-accent" ng-disabled="updating || newAnnotationForm.$invalid" translate="VIEWS.PROJECT.CREATE_ANNOTATION.CREATE_BTN" aria-label="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.CREATE_BTN' | translate }}"></md-button>
     </md-dialog-actions>
   </form>
 </md-dialog>
