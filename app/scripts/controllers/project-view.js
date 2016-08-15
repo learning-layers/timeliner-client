@@ -8,16 +8,25 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService) {
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
       annotations: []
     };
 
+    var socketJoinCallback = function(data) {
+      $log.debug('Socket JOIN', data);
+    };
+
     if ( $scope.isLoggedIn() ) {
       ProjectsService.get({id: $stateParams.id}, function(result) {
         $scope.project = result.data;
+
+        SocketService.emit('join', {
+          id: $scope.project._id
+        });
+        SocketService.on('join', socketJoinCallback);
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
@@ -68,5 +77,13 @@ angular.module('timelinerApp')
       $log.debug(ev, data);
       // Passing in custom event raises an error (it is just an object, not real event)
       $scope.addAnnotation(null, data);
+    });
+
+    $scope.$on('$destroy', function() {
+      // TODO See if more clean-up is required
+      SocketService.emit('leave', {
+        id: $scope.project._id
+      });
+      SocketService.off('join', socketJoinCallback);
     });
   });

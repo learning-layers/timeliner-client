@@ -41,6 +41,11 @@ angular.module('timelinerApp')
       });
       socket.on('authenticate', function(data) {
         $log.debug('Socket authentication response', data);
+        if ( data.success !== true ) {
+          $log.error('Socket authentication failed', data);
+          // TODO It makes sense to notify the user or even close the connection
+          // Maybe try reconnecting (although it will most probably be pointless)
+        }
       });
 
       // Make sure socket is authenticated
@@ -72,6 +77,16 @@ angular.module('timelinerApp')
             }
           });
         });
+      },
+      off: function(eventName, callback) {
+        socket.removeAllListeners(eventName);
+        if ( eventName && callback ) {
+          socket.off(eventName, callback);
+        } else if ( eventName ) {
+          socket.off(eventName);
+        } else {
+          socket.off();
+        }
       }
     };
   });
