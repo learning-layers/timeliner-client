@@ -4,7 +4,7 @@
  * @ngdoc service
  * @name timelinerApp.SystemMessagesService
  * @description
- * # systemMessages
+ * # SystemMessagesService
  * Factory in the timelinerApp.
  */
 angular.module('timelinerApp')

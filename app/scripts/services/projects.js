@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc service
- * @name timelinerApp.projects
+ * @name timelinerApp.ProjectsService
  * @description
- * # projects
+ * # ProjectsService
  * Factory in the timelinerApp.
  */
 angular.module('timelinerApp')
