@@ -33,6 +33,19 @@ angular.module('timelinerApp')
       return '<span class="icon-' + type + '"' + ( ( styles.length > 0 ) ? ' styles="' + styles.join(';') + '"' : '' ) + ( ( title ) ? 'title="' + title + '"' : '' ) +'></span>';
     }
 
+    function generateAnnotationDataSetItem(annotation) {
+      return {
+        id: annotation._id,
+        className: 'tl-project-timeline-annotation',
+        content: generateIconHtml('note'),
+        group: 'timeline-annotations',
+        type: 'point',
+        start: new Date(annotation.date),
+        title: annotation.title,
+        editable: true
+      };
+    }
+
     return {
       restrict: 'E',
       scope: {
@@ -41,20 +54,22 @@ angular.module('timelinerApp')
       link: function postLink(scope, element, attrs) {
         $log.debug(scope, element, attrs);
         var timeline = null;
+        var items = null;
+        var groups = null;
 
-        timelineOptions.onAdd = function(item, callback) {
-          scope.$emit('timeliner:timeline:item:add', {
-            item: item,
-            callback: function(item) {
-              if ( item.group === 'timeline-annotations' ) {
-                item.className = 'tl-project-timeline-annotation';
-                item.content = generateIconHtml('note');
-                item.type = 'point';
-                item.editable = true;
-              }
-              callback(item);
-            }
-          });
+        timelineOptions.onAdd = function(item) {
+          scope.$emit('tl:timeline:item:add', item);
+        };
+        timelineOptions.onUpdate = function(item) {
+          if ( item.editable === true ) {
+            scope.$emit('tl:timeline:item:update', item);
+          }
+        };
+        timelineOptions.onMove = function(item, callback) {
+          if ( item.editable === true ) {
+            scope.$emit('tl:timeline:item:move', item);
+            callback(item);
+          }
         };
 
         // TODO Add handling for updates
@@ -77,8 +92,8 @@ angular.module('timelinerApp')
           timeline = new $window.vis.Timeline(element[0]);
           timeline.setOptions(timelineOptions);
 
-          var groups = new $window.vis.DataSet([]);
-          var items = new $window.vis.DataSet([]);
+          groups = new $window.vis.DataSet([]);
+          items = new $window.vis.DataSet([]);
 
           groups.add({
             className: 'tl-project-timeline-milestones',
@@ -95,16 +110,7 @@ angular.module('timelinerApp')
 
           if ( scope.data.annotations.length > 0 ) {
             _(scope.data.annotations).each(function(annotation) {
-              items.add({
-                className: 'tl-project-timeline-annotation',
-                content: generateIconHtml('note'),
-                group: 'timeline-annotations',
-                id: annotation._id,
-                start: new Date(annotation.date),
-                title: annotation.title,
-                type: 'point',
-                editable: true
-              });
+              items.add(generateAnnotationDataSetItem(annotation));
             });
           }
 
@@ -113,6 +119,11 @@ angular.module('timelinerApp')
             items: items
           });
 
+        });
+
+        scope.$on('tl:timeline:add:annotation', function(ev, annotation) {
+          ev.preventDefault();
+          items.add(generateAnnotationDataSetItem(annotation));
         });
       }
     };
