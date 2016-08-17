@@ -40,7 +40,7 @@ angular.module('timelinerApp')
         content: generateIconHtml('note'),
         group: 'timeline-annotations',
         type: 'point',
-        start: new Date(annotation.date),
+        start: new Date(annotation.start),
         title: annotation.title,
         editable: true
       };

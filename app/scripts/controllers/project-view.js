@@ -73,7 +73,7 @@ angular.module('timelinerApp')
           fullscreen: useFullScreen,
           locals: {
             project: $scope.project,
-            date: ( item && item.start ) ? new Date( item.start ) : null
+            start: ( item && item.start ) ? new Date( item.start ) : null
           }
         })
         .then(function(annotation) {

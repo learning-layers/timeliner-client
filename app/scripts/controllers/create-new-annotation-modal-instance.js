@@ -8,13 +8,13 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateNewAnnotationModalInstanceCtrl', function ($scope, $mdDialog, $log, project, date, ProjectsService, SystemMessagesService) {
+  .controller('CreateNewAnnotationModalInstanceCtrl', function ($scope, $mdDialog, $log, project, start, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
     $scope.model = {
       title: '',
       description: '',
-      date: ( date ) ? date: new Date()
+      start: ( start ) ? start: new Date()
     };
 
     $scope.submit = function() {
@@ -24,7 +24,7 @@ angular.module('timelinerApp')
       }, {
         title: $scope.model.title,
         description: $scope.model.description,
-        date: $scope.model.date
+        start: $scope.model.start
       }, function(response) {
         $log.debug('Annotation creation success', response);
         $scope.updating = false;

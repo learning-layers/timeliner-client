@@ -19,7 +19,7 @@ describe('Controller: CreateNewAnnotationModalInstanceCtrl', function () {
       project: {
         _id: 'id'
       },
-      date: new Date()
+      start: new Date()
       // place here mocked dependencies
     });
   }));

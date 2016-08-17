@@ -27,9 +27,9 @@
           <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
-        <md-datepicker name="date" ng-model="model.date" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.DATE' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
+        <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
         </md-datepicker>
-        <div class="validation-messages" ng-messages="newAnnotationForm.date.$error">
+        <div class="validation-messages" ng-messages="newAnnotationForm.start.$error">
           <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
           <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
         </div>

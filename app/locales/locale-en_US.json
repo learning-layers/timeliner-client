@@ -149,7 +149,7 @@
       },
       "CREATE_ANNOTATION": {
         "HEADLINE": "Create new annotation",
-        "DATE": "Timeline date",
+        "START": "Timeline date",
         "CREATE_BTN": "Create annotation"
       }
     },
