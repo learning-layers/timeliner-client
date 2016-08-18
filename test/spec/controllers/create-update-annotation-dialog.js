@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: CreateNewAnnotationModalInstanceCtrl', function () {
+describe('Controller: CreateUpdateAnnotationDialogCtrl', function () {
 
   // load the controller's module
   beforeEach(module('timelinerApp'));
@@ -13,13 +13,15 @@ describe('Controller: CreateNewAnnotationModalInstanceCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     $mdDialog = jasmine.createSpyObj('$mdDialog', ['hide', 'cancel']);
-    CreateNewAnnotationModalInstanceCtrl = $controller('CreateNewAnnotationModalInstanceCtrl', {
+    CreateNewAnnotationModalInstanceCtrl = $controller('CreateUpdateAnnotationDialogCtrl', {
       $scope: scope,
       $mdDialog: $mdDialog,
       project: {
         _id: 'id'
       },
-      start: new Date()
+      annotation: {
+        start: new Date()
+      }
       // place here mocked dependencies
     });
   }));

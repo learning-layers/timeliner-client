@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService, _) {
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
@@ -62,18 +62,18 @@ angular.module('timelinerApp')
       });
     }
 
-    $scope.addAnnotation = function(ev, item) {
+    $scope.addOrUpdateAnnotation = function(ev, annotation) {
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       $mdDialog.show({
-          controller: 'CreateNewAnnotationModalInstanceCtrl',
-          templateUrl: 'views/templates/create-new-annotation-modal.html',
+          controller: 'CreateUpdateAnnotationDialogCtrl',
+          templateUrl: 'views/templates/create-update-annotation-dialog.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
           fullscreen: useFullScreen,
           locals: {
             project: $scope.project,
-            start: ( item && item.start ) ? new Date( item.start ) : null
+            annotation: annotation
           }
         })
         .then(function(annotation) {
@@ -94,7 +94,9 @@ angular.module('timelinerApp')
       ev.preventDefault();
       // Passing in custom event raises an error (it is just an object, not real event)
       if ( data.group === 'timeline-annotations' ) {
-        $scope.addAnnotation(null, data);
+        $scope.addOrUpdateAnnotation(null, {
+          start: data.start
+        });
       } else {
         $log.error('Unhandled type added', ev, data);
       }
@@ -102,8 +104,13 @@ angular.module('timelinerApp')
 
     $scope.$on('tl:timeline:item:update', function(ev, data) {
       ev.preventDefault();
-      $log.debug(ev, data);
-      // TODO Need to edit an object
+      if ( data.group === 'timeline-annotations' ) {
+        $scope.addOrUpdateAnnotation(null, _($scope.projectTimelineData.annotations).find(function(o) {
+          return o._id === data.id;
+        }));
+      } else {
+        $log.error('Unhandled type updated', ev, data);
+      }
     });
 
     $scope.$on('tl:timeline:item:move', function(ev, data) {

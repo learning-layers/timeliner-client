@@ -4,7 +4,8 @@
   <form name="newAnnotationForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2 translate>VIEWS.PROJECT.CREATE_ANNOTATION.HEADLINE</h2>
+        <h2 ng-if="!isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.CREATE_HEADLINE</h2>
+        <h2 ng-if="isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.UPDATE_HEADLINE</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
           <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
@@ -27,7 +28,7 @@
           <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
-        <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
+        <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
         </md-datepicker>
         <div class="validation-messages" ng-messages="newAnnotationForm.start.$error">
           <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
@@ -35,8 +36,14 @@
         </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
+      <md-switch ng-show="isEdit()" ng-disabled="updating" ng-model="activateDelete" aria-label="{{ 'GENERAL.ACTIVATE_DELETE' | translate }}" class="md-warn">
+      </md-switch>
+      <md-button ng-show="isEdit()" ng-disabled="!activateDelete || updating" ng-click="delete()" translate="GENERAL.DELETE" aria-label="{{ 'GENERAL.DELETE' | translate }}" class="md-warn"></md-button>
       <md-button ng-click="cancel()" ng-disabled="updating" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
-      <md-button type="submit" class="md-accent" ng-disabled="updating || newAnnotationForm.$invalid" translate="VIEWS.PROJECT.CREATE_ANNOTATION.CREATE_BTN" aria-label="{{ 'VIEWS.PROJECT.CREATE_ANNOTATION.CREATE_BTN' | translate }}"></md-button>
+      <md-button ng-show="!isEdit()" type="submit" class="md-accent" ng-disabled="updating || newAnnotationForm.$invalid" translate="GENERAL.CREATE" aria-label="{{ 'GENERAL.CREATE' | translate }}"></md-button>
+      <md-button ng-show="isEdit()" type="submit" class="md-accent" ng-disabled="updating || newAnnotationForm.$invalid" translate="GENERAL.UPDATE" aria-label="{{ 'GENERAL.UPDATE' | translate }}"></md-button>
+
+
     </md-dialog-actions>
   </form>
 </md-dialog>

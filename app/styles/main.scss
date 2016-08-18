@@ -227,4 +227,10 @@ md-icon.tl-remove {
   .vis-item.vis-dot.tl-project-timeline-annotation {
     display: none;
   }
+
+  .vis-item.vis-editable {
+    .vis-delete {
+      display: none;
+    }
+  }
 }

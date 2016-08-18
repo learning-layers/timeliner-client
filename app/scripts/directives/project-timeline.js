@@ -71,6 +71,9 @@ angular.module('timelinerApp')
             callback(item);
           }
         };
+        timelineOptions.onRemove = function() {
+          // Prevent removal as that should be disabled anyway
+        };
 
         // TODO Add handling for updates
         // Full redraw on update does not seems to be reasonable

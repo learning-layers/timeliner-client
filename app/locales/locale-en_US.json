@@ -11,6 +11,10 @@
     "CLOSE": "Close",
     "CANCEL": "Cancel",
     "CONFIRM": "Confirm",
+    "DELETE": "Delete",
+    "CREATE": "Create",
+    "UPDATE": "Update",
+    "ACTIVATE_DELETE": "Activate deletion",
     "FORM": {
       "REQUIRED_EXT": "(required)",
       "REPEAT_PASSWORD": "Repeat password",
@@ -147,10 +151,10 @@
         "ANNOTATION": "Annotation",
         "MILESTONE": "Milestone"
       },
-      "CREATE_ANNOTATION": {
-        "HEADLINE": "Create new annotation",
-        "START": "Timeline date",
-        "CREATE_BTN": "Create annotation"
+      "CREATE_UPDATE_ANNOTATION": {
+        "CREATE_HEADLINE": "Create new annotation",
+        "UPDATE_HEADLINE": "Upate an annotation",
+        "START": "Timeline date"
       }
     },
     "MANAGE": {
@@ -170,7 +174,9 @@
   "TOASTS": {
     "SUCCESSES": {
       "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in.",
-      "ANNOTATION_CREATED": "New annotation successfully created."
+      "ANNOTATION_CREATED": "New annotation successfully created.",
+      "ANNOTATION_UPDATED": "Annotation successfully updated.",
+      "ANNOTATION_REMOVED": "Annotation successfully removed."
     },
     "ERRORS": {
       "SERVER_ERROR": "Server error, please contact admin."
