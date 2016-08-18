@@ -25,12 +25,22 @@ angular.module('timelinerApp')
       $scope.$broadcast('tl:timeline:add:annotation', annotation);
     };
 
-    var socketUpdateAnnotationCallback = function(data) {
-      $log.debig('Socket update:annotation', data);
+    var socketUpdateAnnotationCallback = function(annotation) {
+      $log.debug('Socket update:annotation', annotation);
+      var index = _($scope.projectTimelineData.annotations).findIndex(function(o) {
+        return o._id === annotation._id;
+      });
+      $scope.projectTimelineData.annotations[index] = annotation;
+      $scope.$broadcast('tl:timeline:update:annotation', annotation);
     };
 
-    var socketDeleteAnnotationCallback = function(data) {
-      $log.debug('Socket delete:annotation', data);
+    var socketDeleteAnnotationCallback = function(annotation) {
+      $log.debug('Socket delete:annotation', annotation);
+      var index = _($scope.projectTimelineData.annotations).findIndex(function(o) {
+        return o._id === annotation._id;
+      });
+      $scope.projectTimelineData.annotations.splice(index, 1);
+      $scope.$broadcast('tl:timeline:delete:annotation', annotation);
     };
 
     // XXX Thsi should probably be fully moving through Socket

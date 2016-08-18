@@ -128,6 +128,13 @@ angular.module('timelinerApp')
           ev.preventDefault();
           items.add(generateAnnotationDataSetItem(annotation));
         });
+        scope.$on('tl:timeline:update:annotation', function(ev, annotation) {
+          ev.preventDefault();
+          items.update(generateAnnotationDataSetItem(annotation));
+        });
+        scope.$on('tl:timeline:delete:annotation', function(ev, annotation) {
+          items.remove(annotation._id);
+        });
       }
     };
   });

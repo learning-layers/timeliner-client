@@ -27,7 +27,7 @@ angular.module('timelinerApp')
       if ( $scope.isEdit() ) {
         ProjectsService.updateAnnotation({
           project: project._id,
-          id: $scope.model.id
+          id: $scope.model._id
         }, {
           title: $scope.model.title,
           description: $scope.model.description,
@@ -63,7 +63,7 @@ angular.module('timelinerApp')
     $scope.delete = function() {
       ProjectsService.deleteAnnotation({
         project: project._id,
-        id: $scope.model.id
+        id: $scope.model._id
       }, function(response) {
         $log.debug('Annotation delete success', response);
         $scope.updating = false;

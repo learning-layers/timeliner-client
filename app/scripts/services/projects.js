@@ -64,7 +64,8 @@ angular.module('timelinerApp')
         method: 'PUT'
       },
       deleteAnnotation: {
-        url: apiLocation + '/:project/annotations/:id'
+        url: apiLocation + '/:project/annotations/:id',
+        method: 'DELETE'
       }
     });
 
