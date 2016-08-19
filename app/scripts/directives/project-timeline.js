@@ -135,6 +135,12 @@ angular.module('timelinerApp')
         scope.$on('tl:timeline:delete:annotation', function(ev, annotation) {
           items.remove(annotation._id);
         });
+        scope.$on('tl:timeline:move:annotation', function(ev, annotation) {
+          items.update({
+            id: annotation._id,
+            start: annotation.start
+          });
+        });
       }
     };
   });

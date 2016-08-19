@@ -44,8 +44,13 @@ angular.module('timelinerApp')
     };
 
     // XXX Thsi should probably be fully moving through Socket
-    var socketMoveAnnotationCallback = function(data) {
-      $log.debug('Socket move:annotation', data);
+    var socketMoveAnnotationCallback = function(annotation) {
+      $log.debug('Socket move:annotation', annotation);
+      var index = _($scope.projectTimelineData.annotations).findIndex(function(o) {
+        return o._id === annotation._id;
+      });
+      $scope.projectTimelineData.annotations[index].start = annotation.start;
+      $scope.$broadcast('tl:timeline:move:annotation', annotation);
     };
 
     if ( $scope.isLoggedIn() ) {
@@ -125,8 +130,14 @@ angular.module('timelinerApp')
 
     $scope.$on('tl:timeline:item:move', function(ev, data) {
       ev.preventDefault();
-      $log.debug(ev, data);
-      // TODO Need to handle moved
+      if ( data.group === 'timeline-annotations' ) {
+        SocketService.emit('move:annotation', {
+          _id: data.id,
+          start: data.start
+        });
+      } else {
+        $log.error('Unhandled type moved', ev, data);
+      }
     });
 
     $scope.$on('$destroy', function() {
