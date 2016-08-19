@@ -16,7 +16,9 @@ describe('Controller: CreateNewProjectModalInstanceCtrl', function () {
     $mdDialog = jasmine.createSpyObj('$mdDialog', ['hide', 'cancel']);
     CreateNewProjectModalInstanceCtrl = $controller('CreateNewProjectModalInstanceCtrl', {
       $scope: scope,
-      $mdDialog: $mdDialog
+      $mdDialog: $mdDialog,
+      project: {
+      }
       // place here mocked dependencies
     });
   }));
