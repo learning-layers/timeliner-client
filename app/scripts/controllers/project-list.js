@@ -66,8 +66,11 @@ angular.module('timelinerApp')
           templateUrl: 'views/templates/create-new-project-modal.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose:true,
-          fullscreen: useFullScreen
+          clickOutsideToClose: false,
+          fullscreen: useFullScreen,
+          locals: {
+            project: null
+          }
         })
         .then(function(project) {
           $log.debug('Dialog returned project:', project);
@@ -147,11 +150,11 @@ angular.module('timelinerApp')
       var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       var projectId = project._id;
       $mdDialog.show({
-          controller: 'EditProjectModalInstanceCtrl',
-          templateUrl: 'views/templates/edit-project-modal.html',
+          controller: 'CreateNewProjectModalInstanceCtrl',
+          templateUrl: 'views/templates/create-new-project-modal.html',
           parent: angular.element(document.body),
           targetEvent: ev,
-          clickOutsideToClose:true,
+          clickOutsideToClose: false,
           fullscreen: useFullScreen,
           locals: {
             project: project

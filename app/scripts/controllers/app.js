@@ -33,4 +33,8 @@ angular.module('timelinerApp')
       return UsersService.getFullName(user);
     };
 
+    $scope.getUserImage = function(user) {
+      return UsersService.getImage(user);
+    };
+
   });

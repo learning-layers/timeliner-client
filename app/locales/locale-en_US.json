@@ -110,7 +110,8 @@
       "CREATE_PROJECT": {
         "HEADLINE": "Create new project",
         "TITLE": "Project title",
-        "NEXT_STEP_BTN": "Next step",
+        "NEXT_BTN": "Next",
+        "BACK_BTN": "Back",
         "CREATE_BTN": "Create project"
       },
       "EDIT_PROJECT": {

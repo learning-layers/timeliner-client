@@ -34,6 +34,26 @@ $tl-timeline-visible-border-bottom-color: #23252b;
   @include tl-rounded-image;
 }
 
+.tl-projectlist-owner-image {
+  max-height: 40px;
+  vertical-align: middle;
+  @include tl-rounded-image;
+}
+
+.tl-participants-block {
+  display: inline-block;
+
+  .tl-participant {
+    max-height: 35px;
+    vertical-align: middle;
+    @include tl-rounded-image;
+    margin-left: 1px;
+    margin-right: 1px;
+    -webkit-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+  }
+}
+
 md-chips .md-chip {
   height: 25px;
   padding-top: 0px;
@@ -233,4 +253,5 @@ md-icon.tl-remove {
       display: none;
     }
   }
+}
 }
