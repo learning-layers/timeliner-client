@@ -1,3 +1,6 @@
+'use strict';
+
+
 /**
  * Created by sander on 19/08/16.
  */
@@ -24,5 +27,5 @@ angular.module('timelinerApp')
           scope.activeTab--;
         };
       }
-    }
+    };
   });
