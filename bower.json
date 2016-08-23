@@ -10,7 +10,7 @@
     "angular-ui-router": "ui-router#^0.2.18",
     "animate-css": "~3.5.1",
     "angular-recaptcha": "^3.0.3",
-    "angular-material": "^1.0.9",
+    "angular-material": "^1.1.0",
     "moment": "^2.13.0",
     "angular-translate": "^2.11.0",
     "mdi": "^1.6.50",
