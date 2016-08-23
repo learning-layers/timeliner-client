@@ -66,6 +66,21 @@ angular.module('timelinerApp')
       deleteAnnotation: {
         url: apiLocation + '/:project/annotations/:id',
         method: 'DELETE'
+      },
+      getProjectMilestones: {
+        url: apiLocation + '/:project/milestones'
+      },
+      createMilestone: {
+        url: apiLocation + '/:project/milestones',
+        method: 'POST'
+      },
+      updateMilestone: {
+        url: apiLocation + '/:project/milestones/:id',
+        method: 'PUT'
+      },
+      deleteMilestone: {
+        url: apiLocation + '/:project/milestones/:id',
+        method: 'DELETE'
       }
     });
 
@@ -95,6 +110,10 @@ angular.module('timelinerApp')
       getProjectAnnotations: projectsResource.getProjectAnnotations,
       createAnnotation: projectsResource.createAnnotation,
       updateAnnotation: projectsResource.updateAnnotation,
-      deleteAnnotation: projectsResource.deleteAnnotation
+      deleteAnnotation: projectsResource.deleteAnnotation,
+      getProjectMilestones: projectsResource.getProjectMilestones,
+      createMilestone: projectsResource.createMilestone,
+      updateMilestone: projectsResource.updateMilestone,
+      deleteMilestone: projectsResource.deleteMilestone
     };
   });

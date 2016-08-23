@@ -1,11 +1,11 @@
 <md-dialog flex="70">
   <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
 
-  <form name="annotationForm" ng-submit="submit()">
+  <form name="milestoneForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2 ng-if="!isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.CREATE_HEADLINE</h2>
-        <h2 ng-if="isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.UPDATE_HEADLINE</h2>
+        <h2 ng-if="!isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_MILESTONE.CREATE_HEADLINE</h2>
+        <h2 ng-if="isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_MILESTONE.UPDATE_HEADLINE</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
           <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
@@ -17,7 +17,7 @@
         <md-input-container class="md-block">
           <label><translate>GENERAL.FORM.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
           <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required md-autofocus>
-          <div ng-messages="annotationForm.title.$error">
+          <div ng-messages="milestoneForm.title.$error">
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
             <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
           </div>
@@ -29,21 +29,33 @@
         </md-input-container>
 
         <div layout="column" layout-align="center center">
-          <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_ANNOTATION.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
+          <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_MILESTONE.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" required ng-disabled="updating">
           </md-datepicker>
-          <div class="validation-messages" ng-messages="annotationForm.start.$error">
+          <div class="validation-messages" ng-messages="milestoneForm.start.$error">
             <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
           </div>
         </div>
+
+        <md-input-container>
+          <label><translate>VIEWS.PROJECT.CREATE_UPDATE_MILESTONE.COLOR</translate></label>
+          <md-select name="color" ng-model="model.color">
+            <md-option value="1">Blue</md-option>
+            <md-option value="2">Yellow</md-option>
+            <md-option value="3">Orange</md-option>
+            <md-option value="4">Green</md-option>
+            <md-option value="5">Purple</md-option>
+            <md-option value="6">White</md-option>
+          </md-select>
+      </md-input-container>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
       <md-switch ng-show="isEdit()" ng-disabled="updating" ng-model="activateDelete" aria-label="{{ 'GENERAL.ACTIVATE_DELETE' | translate }}" class="md-warn">
       </md-switch>
       <md-button ng-show="isEdit()" ng-disabled="!activateDelete || updating" ng-click="delete()" translate="GENERAL.DELETE" aria-label="{{ 'GENERAL.DELETE' | translate }}" class="md-warn"></md-button>
       <md-button ng-click="cancel()" ng-disabled="updating" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
-      <md-button ng-show="!isEdit()" type="submit" class="md-accent" ng-disabled="updating || annotationForm.$invalid" translate="GENERAL.CREATE" aria-label="{{ 'GENERAL.CREATE' | translate }}"></md-button>
-      <md-button ng-show="isEdit()" type="submit" class="md-accent" ng-disabled="updating || annotationForm.$invalid" translate="GENERAL.UPDATE" aria-label="{{ 'GENERAL.UPDATE' | translate }}"></md-button>
+      <md-button ng-show="!isEdit()" type="submit" class="md-accent" ng-disabled="updating || milestoneForm.$invalid" translate="GENERAL.CREATE" aria-label="{{ 'GENERAL.CREATE' | translate }}"></md-button>
+      <md-button ng-show="isEdit()" type="submit" class="md-accent" ng-disabled="updating || milestoneForm.$invalid" translate="GENERAL.UPDATE" aria-label="{{ 'GENERAL.UPDATE' | translate }}"></md-button>
 
 
     </md-dialog-actions>

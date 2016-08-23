@@ -46,6 +46,19 @@ angular.module('timelinerApp')
       };
     }
 
+    function generateMilestoneDataSetItem(milestone) {
+      return {
+        id: milestone._id,
+        className: 'tl-project-timeline-milestone tl-milestone-color-' + milestone.color,
+        content: generateIconHtml('milestone'),
+        group: 'timeline-milestones',
+        type: 'box',
+        start: new Date(milestone.start),
+        title: milestone.title,
+        editable: true
+      };
+    }
+
     return {
       restrict: 'E',
       scope: {
@@ -117,6 +130,12 @@ angular.module('timelinerApp')
             });
           }
 
+          if ( scope.data.milestones.length > 0 ) {
+            _(scope.data.milestones).each(function(milestone) {
+              items.add(generateMilestoneDataSetItem(milestone));
+            });
+          }
+
           timeline.setData({
             groups: groups,
             items: items
@@ -139,6 +158,24 @@ angular.module('timelinerApp')
           items.update({
             id: annotation._id,
             start: annotation.start
+          });
+        });
+
+        scope.$on('tl:timeline:add:milestone', function(ev, milestone) {
+          ev.preventDefault();
+          items.add(generateMilestoneDataSetItem(milestone));
+        });
+        scope.$on('tl:timeline:update:milestone', function(ev, milestone) {
+          ev.preventDefault();
+          items.update(generateMilestoneDataSetItem(milestone));
+        });
+        scope.$on('tl:timeline:delete:milestone', function(ev, milestone) {
+          items.remove(milestone._id);
+        });
+        scope.$on('tl:timeline:move:milestone', function(ev, milestone) {
+          items.update({
+            id: milestone._id,
+            start: milestone.start
           });
         });
       }

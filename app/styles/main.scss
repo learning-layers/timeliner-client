@@ -1,6 +1,13 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $mdi-font-path: "../bower_components/mdi/fonts/";
 
+$tl-color-blue: #2898c7;
+$tl-color-yellow: #e3a616;
+$tl-color-orange: #e14a0f;
+$tl-color-green: #82ad1a;
+$tl-color-purple: #b553c0;
+$tl-color-white: #d9d4c9;
+
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 // bower:scss
@@ -246,6 +253,57 @@ md-icon.tl-remove {
 
   .vis-item.vis-dot.tl-project-timeline-annotation {
     display: none;
+  }
+
+  .vis-item.vis-box.tl-project-timeline-milestone {
+    border: none;
+    background-color: transparent;
+
+  }
+
+  .vis-item.vis-line.tl-project-timeline-milestone {
+    border: 1px dashed;
+    background-color: transparent;
+    z-index: 1;
+  }
+
+  .vis-item.vis-line, .vis-item.vis-dot, .vis-item.vis-box {
+    &.tl-milestone-color-1 {
+      border-color: $tl-color-blue;
+      .icon-milestone {
+        color: $tl-color-blue;
+      }
+    }
+    &.tl-milestone-color-2 {
+      border-color: $tl-color-yellow;
+      .icon-milestone {
+        color: $tl-color-yellow;
+      }
+    }
+    &.tl-milestone-color-3 {
+      border-color: $tl-color-orange;
+      .icon-milestone {
+        color: $tl-color-orange;
+      }
+    }
+    &.tl-milestone-color-4 {
+      border-color: $tl-color-green;
+      .icon-milestone {
+        color: $tl-color-green;
+      }
+    }
+    &.tl-milestone-color-5 {
+      border-color: $tl-color-purple;
+      .icon-milestone {
+        color: $tl-color-purple;
+      }
+    }
+    &.tl-milestone-color-6 {
+      border-color: $tl-color-white;
+      .icon-milestone {
+        color: $tl-color-white;
+      }
+    }
   }
 
   .vis-item.vis-editable {

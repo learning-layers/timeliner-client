@@ -25,6 +25,10 @@ angular
 angular.module('timelinerApp')
   .run(['$rootScope', '$state', '$timeout', '$translate', function ($rootScope, $state, $timeout, $translate) {
     $rootScope.$on('$stateChangeSuccess', function() {
+      function getFullTitle(title) {
+        var titlePrefix = 'Timeliner - ';
+        return titlePrefix + title;
+      }
 
       $timeout(function () {
         $translate($state.$current.locals.globals.$title).then(function (translation) {
@@ -33,11 +37,6 @@ angular.module('timelinerApp')
       });
 
     });
-
-    function getFullTitle(title) {
-      var titlePrefix = 'Timeliner - ';
-      return titlePrefix + title;
-    }
   }])
   .config(function($mdThemingProvider) {
     $mdThemingProvider

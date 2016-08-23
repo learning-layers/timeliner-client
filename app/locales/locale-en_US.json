@@ -156,6 +156,12 @@
         "CREATE_HEADLINE": "Create new annotation",
         "UPDATE_HEADLINE": "Upate an annotation",
         "START": "Timeline date"
+      },
+      "CREATE_UPDATE_MILESTONE": {
+        "CREATE_HEADLINE": "Create new milestone",
+        "UPDATE_HEADLINE": "Update a milestone",
+        "START": "Timeline date",
+        "COLOR": "Color"
       }
     },
     "MANAGE": {
@@ -177,7 +183,10 @@
       "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in.",
       "ANNOTATION_CREATED": "New annotation successfully created.",
       "ANNOTATION_UPDATED": "Annotation successfully updated.",
-      "ANNOTATION_REMOVED": "Annotation successfully removed."
+      "ANNOTATION_REMOVED": "Annotation successfully removed.",
+      "MILESTONE_CREATED": "New milestone successfully created.",
+      "MILESTONE_UPDATED": "Milestone successfully updated.",
+      "MILESTONE_REMOVED": "Milestone successfully removed."
     },
     "ERRORS": {
       "SERVER_ERROR": "Server error, please contact admin."
