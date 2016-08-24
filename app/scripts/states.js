@@ -106,7 +106,7 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       requireAdmin: true
     });
 
-}).run(function($rootScope, $state, AuthService, SystemMessagesService) {
+}).run(function($rootScope, $state, AuthService, SystemMessagesService, $window, $location, appConfig) {
   function ensureAuthenticated(event) {
     if ( !AuthService.isLoggedIn() ) {
       $state.transitionTo('login');
@@ -135,4 +135,13 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
     }
 
   });
+
+  if ( appConfig.gaTrackingId ) {
+    $window.ga('create', appConfig.gaTrackingId, 'auto');
+    //$window.ga('send', 'pageview');
+
+    $rootScope.$on('$stateChangeSuccess', function() {
+      $window.ga('send', 'pageview', $location.path());
+    });
+  }
 });
