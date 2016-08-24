@@ -1,6 +1,9 @@
 $icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $mdi-font-path: "../bower_components/mdi/fonts/";
 
+$tl-timeline-text-color: #ccc;
+$tl-timeline-selected-text-color: #fff785;
+
 $tl-color-blue: #2898c7;
 $tl-color-yellow: #e3a616;
 $tl-color-orange: #e14a0f;
@@ -166,6 +169,10 @@ md-icon.tl-remove {
 .vis-timeline {
   border: none;
 
+  [class^="icon-"], [class*=" icon-"] {
+    font-size: 30px;
+  }
+
   .vis-panel.vis-left {
     .vis-labelset {
       .vis-label {
@@ -214,7 +221,7 @@ md-icon.tl-remove {
     border-radius: 6px;
 
     .tl-timeline-project-content {
-      color: #ccc;
+      color: $tl-timeline-text-color;
 
       .tl-timeline-project-title {
         margin-left: 5px;
@@ -240,14 +247,15 @@ md-icon.tl-remove {
 
   .vis-time-axis {
     .vis-text {
-      color: #ccc;
+      color: $tl-timeline-text-color;
     }
   }
 
   .vis-item.vis-point.tl-project-timeline-annotation {
+    background-color: transparent;
+
     .icon-note {
       color: #cac5bb;
-      font-size: 30px;
     }
   }
 
@@ -259,6 +267,11 @@ md-icon.tl-remove {
     border: none;
     background-color: transparent;
 
+    .icon-milestone {
+      position: relative;
+      left: 10.5px;
+      bottom: -13px;
+    }
   }
 
   .vis-item.vis-line.tl-project-timeline-milestone {
@@ -303,6 +316,19 @@ md-icon.tl-remove {
       .icon-milestone {
         color: $tl-color-white;
       }
+    }
+  }
+
+  .vis-item-content {
+    .tl-annotation-title, .tl-milestone-title {
+      color: $tl-timeline-text-color;
+      font-size: 14px;
+    }
+  }
+
+  .vis-item.vis-selected {
+    .tl-annotation-title, .tl-milestone-title {
+      color: $tl-timeline-selected-text-color;
     }
   }
 

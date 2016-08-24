@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, _) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _) {
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
@@ -37,11 +37,11 @@ angular.module('timelinerApp')
       return {
         id: annotation._id,
         className: 'tl-project-timeline-annotation',
-        content: generateIconHtml('note'),
+        content: '<div class="tl-annotation-title">' + $sanitize(annotation.title) + '</div>' + generateIconHtml('note'),
         group: 'timeline-annotations',
         type: 'point',
         start: new Date(annotation.start),
-        title: annotation.title,
+        title: annotation.description,
         editable: true
       };
     }
@@ -50,11 +50,11 @@ angular.module('timelinerApp')
       return {
         id: milestone._id,
         className: 'tl-project-timeline-milestone tl-milestone-color-' + milestone.color,
-        content: generateIconHtml('milestone'),
+        content: '<div class="tl-annotation-title">' + $sanitize(milestone.title) + '</div>' + generateIconHtml('milestone'),
         group: 'timeline-milestones',
         type: 'box',
         start: new Date(milestone.start),
-        title: milestone.title,
+        title: milestone.description,
         editable: true
       };
     }
