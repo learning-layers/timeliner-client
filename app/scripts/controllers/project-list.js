@@ -245,6 +245,12 @@ angular.module('timelinerApp')
       return ProjectsService.isShownOnTimeline(project);
     };
 
+    $scope.openProjectMenu = function(ev, $mdOpenMenu) {
+      if ( ev.target.nodeName.toLowerCase() === 'md-icon' ) {
+        $mdOpenMenu(ev);
+      }
+    };
+
     if ( $scope.isLoggedIn() ) {
       ProjectsService.mine({}, function(result) {
         if ( result.data.length > 0 ) {
