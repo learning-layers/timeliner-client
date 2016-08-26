@@ -136,7 +136,7 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
 
   });
 
-  if ( appConfig.gaTrackingId ) {
+  if ( appConfig.gaTrackingId && $window.ga ) {
     $window.ga('create', appConfig.gaTrackingId, 'auto');
     //$window.ga('send', 'pageview');
 
