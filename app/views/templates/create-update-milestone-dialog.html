@@ -39,15 +39,8 @@
 
         <md-input-container>
           <label><translate>VIEWS.PROJECT.CREATE_UPDATE_MILESTONE.COLOR</translate></label>
-          <md-select name="color" ng-model="model.color">
-            <md-option value="1">Blue</md-option>
-            <md-option value="2">Yellow</md-option>
-            <md-option value="3">Orange</md-option>
-            <md-option value="4">Green</md-option>
-            <md-option value="5">Purple</md-option>
-            <md-option value="6">White</md-option>
-          </md-select>
-      </md-input-container>
+          <tl-color-select color="model.color"></tl-color-select>
+        </md-input-container>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
       <md-switch ng-show="isEdit()" ng-disabled="updating" ng-model="activateDelete" aria-label="{{ 'GENERAL.ACTIVATE_DELETE' | translate }}" class="md-warn">

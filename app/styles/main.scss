@@ -338,3 +338,58 @@ md-icon.tl-remove {
     }
   }
 }
+
+.tl-color-select {
+  display: block;
+
+  &.tl-color-select-fix-title {
+    padding-top: 35px;
+  }
+
+  .tl-color-select-outer {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    margin-right: 10px;
+    outline: none;
+
+    .tl-color-select-inner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius:4px;
+      margin: 5px;
+      cursor: pointer;
+
+      &.tl-color-1 {
+        background-color: $tl-color-blue;
+      }
+
+      &.tl-color-2 {
+        background-color: $tl-color-yellow;
+      }
+
+      &.tl-color-3 {
+        background-color: $tl-color-orange;
+      }
+
+      &.tl-color-4 {
+        background-color: $tl-color-green;
+      }
+
+      &.tl-color-5 {
+        background-color: $tl-color-purple;
+      }
+
+      &.tl-color-6 {
+        background-color: $tl-color-white;
+      }
+    }
+  }
+
+  .tl-color-select-outer.tl-color-selected {
+    background-color: #23252b;
+    border-radius: 4px;
+  }
+}

@@ -1,0 +1,5 @@
+<span class="tl-color-select">
+  <span ng-repeat="color in colors" class="tl-color-select-outer" ng-class="{ 'tl-color-selected': isCurrentColor(color) }" ng-click="setCurrentColor(color)">
+    <span class="tl-color-select-inner tl-color-{{color}}"></span>
+  </span>
+</span>

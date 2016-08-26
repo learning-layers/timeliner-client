@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('htk.common')
   .directive('pwCheck', [function () {
     return {
@@ -11,5 +13,5 @@ angular.module('htk.common')
           ctrl.$setValidity('pwmatch', value[0] === value[1] );
         });
       }
-    }
+    };
   }]);
