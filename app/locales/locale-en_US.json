@@ -189,7 +189,15 @@
       "MILESTONE_REMOVED": "Milestone successfully removed."
     },
     "ERRORS": {
-      "SERVER_ERROR": "Server error, please contact admin."
+      "SERVER_ERROR": "Server error, please contact administrator.",
+      "AUTHENTICATION_FAILED": "Authentication failed, please try again!",
+      "SOCIAL_LOGIN_FAILED": "Social login failed!",
+      "SOCIAL_USER_DENIED": "Sign in impossible. You have denied the access for the application!",
+      "SOCIAL_BAD_REQUEST": "Unable to find authentication response data!",
+      "SOCIAL_NO_PROFILE": "Could not load requested profile data!",
+      "SOCIAL_EMAIL_MISSING": "Email address missing. Please make sure that application is allowed to access email address.",
+      "SOCIAL_SERVER_ERROR": "Unable to sign you in due to unknown error.",
+      "SOCIAL_EMAIL_IN_USE": "Email address is already in use."
     }
   }
 }

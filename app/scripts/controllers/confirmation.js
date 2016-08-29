@@ -15,7 +15,7 @@ angular.module('timelinerApp')
     AuthService.checkConfirmationKeyValidity({key: $stateParams.key}, function (res) {
       $scope.userEmail = res.data.email;
     }, function () {
-      $scope.invalidKey = true;
+      SystemMessagesService.showError('VIEWS.CONFIRMATION.INVALID_KEY');
     });
 
     $scope.confirmUser = function () {
@@ -27,10 +27,12 @@ angular.module('timelinerApp')
         $scope.form = {};
         $scope.confirmationSuccessful = true;
         AuthService.setCookieAndUser(response.data.token, response.data.user);
-        SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
+        SystemMessagesService.showSuccess('VIEWS.CONFIRMATION.REGISTRATION_COMPLETED');
+        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('home');
       }, function () {
         $scope.updating = false;
+        SystemMessagesService.showError('GENERAL.TOASTS.ERRORS.SERVER_ERROR');
       });
     };
   });

@@ -52,9 +52,9 @@ angular.module('timelinerApp')
         clearProgressInficatorTimeout(timeoutId);
 
         if ( response.status === 401 ) {
-          SystemMessagesService.showError('Authentication failed, please try again!');
+          SystemMessagesService.showError('TOASTS.ERRORS.AUTHENTICATION_FAILED');
         } else {
-          SystemMessagesService.showError('Server error, please contact administrator!');
+          SystemMessagesService.showError('TOASTS.ERRORS.SERVER_ERROR');
         }
       });
     };
@@ -76,14 +76,13 @@ angular.module('timelinerApp')
         $scope.showProgressIndicator = false;
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
-        SystemMessagesService.showSuccess('Welcome back ' + UsersService.getFullName(response.data.user) + ', you have successfully logged in.');
+        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function() {
         $scope.updating = false;
         $scope.showProgressIndicator = false;
 
-        // TODO Add some error handling
-        SystemMessagesService.showError('Login failed.');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_LOGIN_FAILED');
         $state.go('login');
       });
     }
@@ -92,17 +91,17 @@ angular.module('timelinerApp')
 
     if ( locationSearch.code && locationSearch.message ) {
       if (locationSearch.code === '200' && locationSearch.message === 'user_denied' ) {
-        SystemMessagesService.showWarning('Sign in impossible. You have denied the access!');
+        SystemMessagesService.showWarning('TOASTS.ERRORS.SOCIAL_USER_DENIED');
       } else if ( locationSearch.code === '400' && locationSearch.message === 'bad_request' ) {
-        SystemMessagesService.showError('Unable to find authentication response data!');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_BAD_REQUEST');
       } else if ( locationSearch.code === '404' && locationSearch.message === 'could_not_load_profile_data' ) {
-        SystemMessagesService.showError('Could not load requested profile data!');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_NO_PROFILE');
       } else if ( locationSearch.code === '400' && locationSearch.message === 'email_is_missing' ) {
-        SystemMessagesService.showError('Email address missing. Please make sure that app is allowed to access email address.');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_EMAIL_MISSING');
       } else if ( locationSearch.code === '500' && locationSearch.message === 'internal_server_error' ) {
-        SystemMessagesService.showError('Unable to sign you in due to unknown error.');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_SERVER_ERROR');
       } else if ( locationSearch.code === '409' && locationSearch.message === 'email_already_used' ) {
-        SystemMessagesService.showError('Email address is already in use.');
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCIAL_EMAIL_IN_USE');
       }
     }
   });

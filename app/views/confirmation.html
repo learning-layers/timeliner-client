@@ -1,7 +1,7 @@
-<div class="alert alert-danger" ng-if="invalidKey" translate>VIEWS.CONFIRMATION.INVALID_KEY</div>
-
 <div layout="row" layout-align="center" ng-if="userEmail">
   <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 500px">
+    <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
+
     <md-card-title>
       <md-card-title-text>
         <span class="md-headline" translate>VIEWS.CONFIRMATION.HEADLINE</span>
@@ -54,10 +54,6 @@
           <md-button class="md-raised md-accent" type="submit" ng-disabled="registerForm.$invalid || updating" translate="VIEWS.CONFIRMATION.REGISTER_BTN" aria-label="{{ 'VIEWS.CONFIRMATION.REGISTER_BTN' | translate }}"></md-button>
         </md-card-actions>
       </form>
-
-      <div class="alert alert-success animated fadeInDown" ng-if="confirmationSuccessful" translate>
-        VIEWS.CONFIRMATION.REGISTRATION_COMPLETED
-      </div>
     </md-card-content>
   </md-card>
 </div>
