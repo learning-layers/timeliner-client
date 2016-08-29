@@ -5,6 +5,7 @@
   </div>
   <div layout="row" layout-align="center" ng-if="!isLoggedIn()">
     <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 600px">
+      <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
       <md-card-title>
         <md-card-title-text>
           <span class="md-headline" translate>VIEWS.LANDING.HEADLINE</span>
@@ -29,15 +30,6 @@
 
           </div>
         </form>
-        <div class="alert alert-success animated fadeInDown" ng-if="success">
-          <translate>VIEWS.LANDING.TOASTS.SUCCESSES.USER_CREATED</translate>: <a ui-sref="confirm({key: success.key})">{{ success.key }}</a>
-        </div>
-        <div class="alert alert-danger animated fadeInDown" ng-if="error == 409">
-          <translate>VIEWS.LANDING.TOASTS.ERRORS.EMAIL_EXISTS</translate>
-        </div>
-        <div class="alert alert-danger animated fadeInDown" ng-if="error && error != 409">
-          <translate>GENERAL.TOASTS.ERRORS.SERVER_ERROR</translate>
-        </div>
       </md-card-content>
     </md-card>
   </div>
