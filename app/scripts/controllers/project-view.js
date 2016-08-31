@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService, _) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService, _, SystemMessagesService) {
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
@@ -48,7 +48,10 @@ angular.module('timelinerApp')
     }
 
     var socketJoinCallback = function(data) {
-      $log.debug('Socket JOIN', data);
+      if ( !data.user && data.success !== true ) {
+        SystemMessagesService.showError('TOASTS.ERRORS.SOCKET_JOIN_ERROR');
+        $log.debug('Socket JOIN failed', data);
+      }
     };
 
     var socketCreateAnnotationCallback = function(annotation) {

@@ -41,6 +41,85 @@
 
 <p>Project <strong>{{ project.title }}</strong> loaded!</p>
 
+<div layout-gt-sm="row" layout="column">
+  <div flex-gt-sm="20" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="participant in project.participants">
+          <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ ::getUserFullName(participant.user) }}</h3>
+            <h4>{{ :: participant.status }}</h4>
+            <p>{{ participant.user.email }}</p>
+          </div>
+          <md-divider></md-divider>
+        </md-list-item>
+      </md-list>
+    </md-content>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div flex-gt-sm="20" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+      </md-list>
+    </md-content>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div flex-gt-sm="20" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span translate>VIEWS.PROJECT.PANELS.DOCUMENTS.HEADER</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+      </md-list>
+    </md-content>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div flex-gt-sm="20" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span translate>VIEWS.PROJECT.PANELS.TASKS.HEADER</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+      </md-list>
+    </md-content>
+  </div>
+
+  <md-divider></md-divider>
+
+  <div flex-gt-sm="20" flex>
+    <md-toolbar layout="row" class="md-hue-3">
+      <div class="md-toolbar-tools">
+        <span translate>VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.HEADER</span>
+      </div>
+    </md-toolbar>
+    <md-content>
+      <md-list flex>
+      </md-list>
+    </md-content>
+  </div>
+</div>
+
 <div>
   <project-timeline data="projectTimelineData"></project-timeline>
 </div>

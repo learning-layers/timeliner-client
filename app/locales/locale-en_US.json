@@ -162,6 +162,23 @@
         "UPDATE_HEADLINE": "Update a milestone",
         "START": "Timeline date",
         "COLOR": "Color"
+      },
+      "PANELS": {
+        "PARTICIPANTS": {
+          "HEADER": "Participants"
+        },
+        "RESOURCES": {
+          "HEADER": "Resources"
+        },
+        "DOCUMENTS": {
+          "HEADER": "Documents"
+        },
+        "TASKS": {
+          "HEADER": "Tasks"
+        },
+        "ACTIVITY_STREAM": {
+          "HEADER": "Activity stream"
+        }
       }
     },
     "MANAGE": {
@@ -197,7 +214,8 @@
       "SOCIAL_NO_PROFILE": "Could not load requested profile data!",
       "SOCIAL_EMAIL_MISSING": "Email address missing. Please make sure that application is allowed to access email address.",
       "SOCIAL_SERVER_ERROR": "Unable to sign you in due to unknown error.",
-      "SOCIAL_EMAIL_IN_USE": "Email address is already in use."
+      "SOCIAL_EMAIL_IN_USE": "Email address is already in use.",
+      "SOCKET_JOIN_ERROR": "Could not join project channel, real-time updates will be disabled!"
     }
   }
 }
