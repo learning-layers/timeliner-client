@@ -16,6 +16,7 @@ angular.module('timelinerApp')
       annotations: []
     };
 
+
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
     $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
       return $mdMedia('xs') || $mdMedia('sm');
@@ -47,66 +48,78 @@ angular.module('timelinerApp')
       });
     }
 
-    var socketJoinCallback = function(data) {
+    function socketConnectCallback() {
+      if ( $scope.project ) {
+        SocketService.emit('join', {
+          id: $scope.project._id
+        });
+      }
+    }
+
+    function socketDisconnectCallback() {
+      SocketService.once('connect', socketConnectCallback);
+    }
+
+    function socketJoinCallback(data) {
       if ( !data.user && data.success !== true ) {
         SystemMessagesService.showError('TOASTS.ERRORS.SOCKET_JOIN_ERROR');
         $log.debug('Socket JOIN failed', data);
       }
-    };
+    }
 
-    var socketCreateAnnotationCallback = function(annotation) {
+    function socketCreateAnnotationCallback(annotation) {
       $log.debug('Socket create:annotation', annotation);
       $scope.projectTimelineData.annotations.push(annotation);
       $scope.$broadcast('tl:timeline:add:annotation', annotation);
-    };
+    }
 
-    var socketUpdateAnnotationCallback = function(annotation) {
+    function socketUpdateAnnotationCallback(annotation) {
       $log.debug('Socket update:annotation', annotation);
       var index = findAnnotationIndex(annotation);
       $scope.projectTimelineData.annotations[index] = annotation;
       $scope.$broadcast('tl:timeline:update:annotation', annotation);
-    };
+    }
 
-    var socketDeleteAnnotationCallback = function(annotation) {
+    function socketDeleteAnnotationCallback(annotation) {
       $log.debug('Socket delete:annotation', annotation);
       var index = findAnnotationIndex(annotation);
       $scope.projectTimelineData.annotations.splice(index, 1);
       $scope.$broadcast('tl:timeline:delete:annotation', annotation);
-    };
+    }
 
-    var socketMoveAnnotationCallback = function(annotation) {
+    function socketMoveAnnotationCallback(annotation) {
       $log.debug('Socket move:annotation', annotation);
       var index = findAnnotationIndex(annotation);
       $scope.projectTimelineData.annotations[index].start = annotation.start;
       $scope.$broadcast('tl:timeline:move:annotation', annotation);
-    };
+    }
 
-    var socketCreateMilestoneCallback = function(milestone) {
+    function socketCreateMilestoneCallback(milestone) {
       $log.debug('Socket create:milestone', milestone);
       $scope.projectTimelineData.milestones.push(milestone);
       $scope.$broadcast('tl:timeline:add:milestone', milestone);
-    };
+    }
 
-    var socketUpdateMilestoneCallback = function(milestone) {
+    function socketUpdateMilestoneCallback(milestone) {
       $log.debug('Socket update:milestone', milestone);
       var index = findMilestoneIndex(milestone);
       $scope.projectTimelineData.milestones[index] = milestone;
       $scope.$broadcast('tl:timeline:update:milestone', milestone);
-    };
+    }
 
-    var socketDeleteMilestoneCallback = function(milestone) {
+    function socketDeleteMilestoneCallback(milestone) {
       $log.debug('Socket delete:milestone', milestone);
       var index = findMilestoneIndex(milestone);
       $scope.projectTimelineData.milestones.splice(index, 1);
       $scope.$broadcast('tl:timeline:delete:milestone', milestone);
-    };
+    }
 
-    var socketMoveMilestoneCallback = function(milestone) {
+    function socketMoveMilestoneCallback(milestone) {
       $log.debug('Socket move:milestone', milestone);
       var index = findMilestoneIndex(milestone);
       $scope.projectTimelineData.milestones[index].start = milestone.start;
       $scope.$broadcast('tl:timeline:move:milestone', milestone);
-    };
+    }
 
     if ( $scope.isLoggedIn() ) {
       ProjectsService.get({id: $stateParams.id}, function(result) {
@@ -115,6 +128,7 @@ angular.module('timelinerApp')
         SocketService.emit('join', {
           id: $scope.project._id
         });
+        SocketService.on('disconnect', socketDisconnectCallback);
         SocketService.on('join', socketJoinCallback);
         SocketService.on('create:annotation', socketCreateAnnotationCallback);
         SocketService.on('update:annotation', socketUpdateAnnotationCallback);
@@ -241,6 +255,7 @@ angular.module('timelinerApp')
       SocketService.emit('leave', {
         id: $scope.project._id
       });
+      SocketService.off('disconnect', socketDisconnectCallback);
       SocketService.off('join', socketJoinCallback);
       SocketService.off('create:annotation', socketCreateAnnotationCallback);
       SocketService.off('update:annotation', socketUpdateAnnotationCallback);
