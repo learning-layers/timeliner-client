@@ -63,7 +63,7 @@ angular.module('timelinerApp')
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: task.title,
+        content: '<div class="tl-task-title">' + $sanitize(task.title) + '</div>',
         group: 'timeline-tasks',
         type: 'range',
         start: task.start,

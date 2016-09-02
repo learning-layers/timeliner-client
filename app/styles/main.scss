@@ -320,14 +320,17 @@ md-icon.tl-remove {
   }
 
   .vis-item-content {
-    .tl-annotation-title, .tl-milestone-title {
+    .tl-annotation-title, .tl-milestone-title, .tl-task-title {
       color: $tl-timeline-text-color;
       font-size: 14px;
+    }
+    .tl-task-title {
+      color: #d4e8f4;
     }
   }
 
   .vis-item.vis-selected {
-    .tl-annotation-title, .tl-milestone-title {
+    .tl-annotation-title, .tl-milestone-title, .tl-task-title {
       color: $tl-timeline-selected-text-color;
     }
   }
@@ -336,6 +339,11 @@ md-icon.tl-remove {
     .vis-delete {
       display: none;
     }
+  }
+
+  .vis-item.vis-range.tl-project-timeline-task {
+    background-color: #2aa1d3;
+    border: 5px solid #2aa1d3;
   }
 }
 
