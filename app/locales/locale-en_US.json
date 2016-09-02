@@ -163,6 +163,12 @@
         "START": "Timeline date",
         "COLOR": "Color"
       },
+      "CREATE_UPDATE_TASK": {
+        "CREATE_HEADLINE": "Create new task",
+        "UPDATE_HEADLINE": "Update a task",
+        "START": "Timeline start date",
+        "END": "Timeline end date"
+      },
       "PANELS": {
         "PARTICIPANTS": {
           "HEADER": "Participants"
@@ -179,6 +185,11 @@
         "ACTIVITY_STREAM": {
           "HEADER": "Activity stream"
         }
+      },
+      "TIMELINE": {
+        "MILESTONES": "Milestones",
+        "ANNOTATIONS": "Annotations",
+        "TASKS": "Tasks"
       }
     },
     "MANAGE": {
@@ -203,7 +214,10 @@
       "ANNOTATION_REMOVED": "Annotation successfully removed.",
       "MILESTONE_CREATED": "New milestone successfully created.",
       "MILESTONE_UPDATED": "Milestone successfully updated.",
-      "MILESTONE_REMOVED": "Milestone successfully removed."
+      "MILESTONE_REMOVED": "Milestone successfully removed.",
+      "TASK_CREATED": "New task successfully created.",
+      "TASK_UPDATED": "Task successfully updated.",
+      "TASK_REMOVED": "Task successfully removed."
     },
     "ERRORS": {
       "SERVER_ERROR": "Server error, please contact administrator.",

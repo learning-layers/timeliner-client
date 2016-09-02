@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, _) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate) {
     var timelineOptions = {
       groupOrder: 'position',
       zoomMax: 1.578e+11, // 5 years
@@ -55,6 +55,20 @@ angular.module('timelinerApp')
         type: 'box',
         start: new Date(milestone.start),
         title: milestone.description,
+        editable: true
+      };
+    }
+
+    function generateTaskDataSetItem(task) {
+      return {
+        id: task._id,
+        className: 'tl-project-timeline-task',
+        content: task.title,
+        group: 'timeline-tasks',
+        type: 'range',
+        start: task.start,
+        end: task.end,
+        title: task.description,
         editable: true
       };
     }
@@ -111,17 +125,24 @@ angular.module('timelinerApp')
           groups = new $window.vis.DataSet([]);
           items = new $window.vis.DataSet([]);
 
+          // TODO Any translatable texts should be updated once language is changed
           groups.add({
             className: 'tl-project-timeline-milestones',
-            content: 'Milestones', // XXX Needs to be translated
+            content: $translate.instant('VIEWS.PROJECT.TIMELINE.MILESTONES'),
             id: 'timeline-milestones',
-            title: 'Milestones' // XXX Needs to be translated
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.MILESTONES')
           });
           groups.add({
             className: 'tl-project-timeline-annotations',
-            content: 'Annotations', // XXX Needs to be translated
+            content: $translate.instant('VIEWS.PROJECT.TIMELINE.ANNOTATIONS'),
             id: 'timeline-annotations',
-            title: 'Annotations' // XXX Needs to be translated
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.ANNOTATIONS')
+          });
+          groups.add({
+            className: 'tl-project-timeline-tasks',
+            content: $translate.instant('VIEWS.PROJECT.TIMELINE.TASKS'),
+            id: 'timeline-tasks',
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.TASKS')
           });
 
           if ( scope.data.annotations.length > 0 ) {
@@ -133,6 +154,14 @@ angular.module('timelinerApp')
           if ( scope.data.milestones.length > 0 ) {
             _(scope.data.milestones).each(function(milestone) {
               items.add(generateMilestoneDataSetItem(milestone));
+            });
+          }
+
+          if ( scope.data.tasks.length > 0 ) {
+            _(scope.data.tasks).each(function(task) {
+              if ( task.start && task.end ) {
+                items.add(generateTaskDataSetItem(task));
+              }
             });
           }
 
@@ -176,6 +205,31 @@ angular.module('timelinerApp')
           items.update({
             id: milestone._id,
             start: milestone.start
+          });
+        });
+
+        scope.$on('tl:timeline:add:task', function(ev, task) {
+          ev.preventDefault();
+          if ( task.start && task.end ) {
+            items.add(generateTaskDataSetItem(task));
+          }
+        });
+        scope.$on('tl:timeline:update:task', function(ev, task) {
+          ev.preventDefault();
+          if ( task.start && task.end ) {
+            items.update(generateTaskDataSetItem(task));
+          } else {
+            items.remove(task._id);
+          }
+        });
+        scope.$on('tl:timeline:delete:task', function(ev, task) {
+          items.remove(task._id);
+        });
+        scope.$on('tl:timeline:move:task', function(ev, task) {
+          items.update({
+            id: task._id,
+            start: task.start,
+            end: task.end
           });
         });
       }

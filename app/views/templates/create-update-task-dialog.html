@@ -1,0 +1,57 @@
+<md-dialog flex="70">
+  <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
+
+  <form name="taskForm" ng-submit="submit()">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2 ng-if="!isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_TASK.CREATE_HEADLINE</h2>
+        <h2 ng-if="isEdit()" translate>VIEWS.PROJECT.CREATE_UPDATE_TASK.UPDATE_HEADLINE</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
+          <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div layout="column" class="md-dialog-content">
+        <md-input-container class="md-block">
+          <label><translate>GENERAL.FORM.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
+          <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required md-autofocus>
+          <div ng-messages="taskForm.title.$error">
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
+          </div>
+        </md-input-container>
+
+        <md-input-container class="md-block">
+          <label><translate>GENERAL.FORM.DESCRIPTION</translate></label>
+          <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
+        </md-input-container>
+
+        <div layout="row" layout-align="center">
+          <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" ng-disabled="updating">
+          </md-datepicker>
+          <div class="validation-messages" ng-messages="taskForm.start.$error">
+            <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+            <div ng-message="maxdate" translate>GENERAL.FORM.MESSAGES.MAX_DATE</div>
+          </div>
+          <md-datepicker name="end" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.END' | translate }}" md-min-date="model.start" ng-disabled="updating">
+          </md-datepicker>
+          <div class="validation-messages" ng-messages="taskForm.endDate.$error">
+            <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+            <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
+          </div>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row" layout-align="end center">
+      <md-switch ng-show="isEdit()" ng-disabled="updating" ng-model="activateDelete" aria-label="{{ 'GENERAL.ACTIVATE_DELETE' | translate }}" class="md-warn">
+      </md-switch>
+      <md-button ng-show="isEdit()" ng-disabled="!activateDelete || updating" ng-click="delete()" translate="GENERAL.DELETE" aria-label="{{ 'GENERAL.DELETE' | translate }}" class="md-warn"></md-button>
+      <md-button ng-click="cancel()" ng-disabled="updating" translate="GENERAL.CANCEL" aria-label="{{ 'GENERAL.CANCEL' | translate }}"></md-button>
+      <md-button ng-show="!isEdit()" type="submit" class="md-accent" ng-disabled="updating || taskForm.$invalid" translate="GENERAL.CREATE" aria-label="{{ 'GENERAL.CREATE' | translate }}"></md-button>
+      <md-button ng-show="isEdit()" type="submit" class="md-accent" ng-disabled="updating || taskForm.$invalid" translate="GENERAL.UPDATE" aria-label="{{ 'GENERAL.UPDATE' | translate }}"></md-button>
+
+
+    </md-dialog-actions>
+  </form>
+</md-dialog>

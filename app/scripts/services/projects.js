@@ -81,6 +81,21 @@ angular.module('timelinerApp')
       deleteMilestone: {
         url: apiLocation + '/:project/milestones/:id',
         method: 'DELETE'
+      },
+      getProjectTasks: {
+        url: apiLocation + '/:project/tasks'
+      },
+      createTask: {
+        url: apiLocation + '/:project/tasks',
+        method: 'POST'
+      },
+      updateTask: {
+        url: apiLocation + '/:project/tasks/:id',
+        method: 'PUT'
+      },
+      deleteTask: {
+        url: apiLocation + '/:project/tasks/:id',
+        method: 'DELETE'
       }
     });
 
@@ -114,6 +129,10 @@ angular.module('timelinerApp')
       getProjectMilestones: projectsResource.getProjectMilestones,
       createMilestone: projectsResource.createMilestone,
       updateMilestone: projectsResource.updateMilestone,
-      deleteMilestone: projectsResource.deleteMilestone
+      deleteMilestone: projectsResource.deleteMilestone,
+      getProjectTasks: projectsResource.getProjectTasks,
+      createTask: projectsResource.createTask,
+      updateTask: projectsResource.updateTask,
+      deleteTask: projectsResource.deleteTask
     };
   });

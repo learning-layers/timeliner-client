@@ -15,7 +15,7 @@
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-resource"></md-icon>
       </md-button>
-      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TASK' | translate }}" class="md-fab md-raised md-mini" ng-click="addTask()" disabled="true">
+      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TASK' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateTask()">
         <md-tooltip md-direction="bottom" class="tooltip-text">
           <translate>VIEWS.PROJECT.NEW_BTN.TASK</translate>
         </md-tooltip>
@@ -101,6 +101,15 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
+        <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks">
+          <img ng-src="{{ ::getUserImage(task.user) }}" class="md-avatar" alt="{{ ::getUserFullName(task.user) }}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ task.title }}</h3>
+            <p>{{ task.description }}</p>
+          </div>
+          <md-icon class="md-secondary" ng-click="addOrUpdateTask($event, task)" aria-label="Edit">mode_edit</md-icon>
+          <md-divider></md-divider>
+        </md-list-item>
       </md-list>
     </md-content>
   </div>

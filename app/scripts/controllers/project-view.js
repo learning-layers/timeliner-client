@@ -13,7 +13,8 @@ angular.module('timelinerApp')
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
       milestones: [],
-      annotations: []
+      annotations: [],
+      tasks: []
     };
 
 
@@ -44,6 +45,18 @@ angular.module('timelinerApp')
 
     function findMilestoneById(id) {
       return _($scope.projectTimelineData.milestones).find(function(o){
+        return o._id === id;
+      });
+    }
+
+    function findTaskIndex(task) {
+      return _($scope.projectTimelineData.tasks).findIndex(function(o) {
+        return o._id === task._id;
+      });
+    }
+
+    function findTaskById(id) {
+      return _($scope.projectTimelineData.tasks).find(function(o) {
         return o._id === id;
       });
     }
@@ -121,6 +134,34 @@ angular.module('timelinerApp')
       $scope.$broadcast('tl:timeline:move:milestone', milestone);
     }
 
+    function socketCreateTaskCallback(task) {
+      $log.debug('Socket create:task', task);
+      $scope.projectTimelineData.tasks.push(task);
+      $scope.$broadcast('tl:timeline:add:task', task);
+    }
+
+    function socketUpdateTaskCallback(task) {
+      $log.debug('Socket update:task', task);
+      var index = findTaskIndex(task);
+      $scope.projectTimelineData.tasks[index] = task;
+      $scope.$broadcast('tl:timeline:update:task', task);
+    }
+
+    function socketDeleteTaskCallback(task) {
+      $log.debug('Socket delete:task', task);
+      var index = findTaskIndex(task);
+      $scope.projectTimelineData.tasks.splice(index, 1);
+      $scope.$broadcast('tl:timeline:delete:task', task);
+    }
+
+    function socketMoveTaskCallback(task) {
+      $log.debug('Socket move:task', task);
+      var index = findTaskIndex(task);
+      $scope.projectTimelineData.tasks[index].start = task.start;
+      $scope.projectTimelineData.tasks[index].end = task.end;
+      $scope.$broadcast('tl:timeline:move:task', task);
+    }
+
     if ( $scope.isLoggedIn() ) {
       ProjectsService.get({id: $stateParams.id}, function(result) {
         $scope.project = result.data;
@@ -138,6 +179,10 @@ angular.module('timelinerApp')
         SocketService.on('update:milestone', socketUpdateMilestoneCallback);
         SocketService.on('delete:milestone', socketDeleteMilestoneCallback);
         SocketService.on('move:milestone', socketMoveMilestoneCallback);
+        SocketService.on('create:task', socketCreateTaskCallback);
+        SocketService.on('update:task', socketUpdateTaskCallback);
+        SocketService.on('delete:task', socketDeleteTaskCallback);
+        SocketService.on('move:task', socketMoveTaskCallback);
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
@@ -150,17 +195,25 @@ angular.module('timelinerApp')
         project: $stateParams.id
       }, function(result) {
         $scope.projectTimelineData.milestones = result.data;
-        $log.debug(result);
+        $log.debug('Loaded milestones', result);
       }, function(err) {
-        $log.debug('ERROR getting project milestones', err);
+        $log.error('ERROR getting project milestones', err);
       });
       ProjectsService.getProjectAnnotations({
         project: $stateParams.id
       }, function(result) {
         $scope.projectTimelineData.annotations = result.data;
-        $log.debug(result);
+        $log.debug('Loaded annotations', result);
       }, function(err) {
-        $log.debug('ERROR getting project annotations', err);
+        $log.error('ERROR getting project annotations', err);
+      });
+      ProjectsService.getProjectTasks({
+        project: $stateParams.id
+      }, function(result) {
+        $scope.projectTimelineData.tasks = result.data;
+        $log.debug('Loaded tasks', result);
+      }, function(err) {
+        $log.error('ERROR getting project tasks', err);
       });
     }
 
@@ -206,6 +259,28 @@ angular.module('timelinerApp')
         });
     };
 
+    $scope.addOrUpdateTask = function(ev, task) {
+      $mdDialog.show({
+          controller: 'CreateUpdateTaskDialogCtrl',
+          templateUrl: 'views/templates/create-update-task-dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen,
+          locals: {
+            project: $scope.project,
+            task: task
+          }
+        })
+        .then(function(task) {
+          // TODO Show annotation created toast
+          $log.debug('Dialog returned task:', task);
+        }, function() {
+          // Dialog dismissed, do nothing for now
+        });
+    };
+
+
     $scope.$on('tl:timeline:item:add',function(ev, data) {
       ev.preventDefault();
       // Passing in custom event raises an error (it is just an object, not real event)
@@ -216,6 +291,12 @@ angular.module('timelinerApp')
       } else if ( data.group === 'timeline-milestones' ) {
         $scope.addOrUpdateMilestone(null, {
           start: data.start
+        });
+      } else if ( data.group === 'timeline-tasks' ) {
+        // TODO Make sure to determine the end date in a better way
+        $scope.addOrUpdateTask(null, {
+          start: data.start,
+          end: new Date( (new Date(data.start)).valueOf() +  ( 5 * 24 * 60 * 60 * 1000 ) )
         });
       } else {
         $log.error('Unhandled type added', ev, data);
@@ -228,6 +309,8 @@ angular.module('timelinerApp')
         $scope.addOrUpdateAnnotation(null, findAnnotationById(data.id));
       } else if ( data.group === 'timeline-milestones' ) {
         $scope.addOrUpdateMilestone(null, findMilestoneById(data.id));
+      } else if ( data.group === 'timeline-tasks' ) {
+        $scope.addOrUpdateTask(null, findTaskById(data.id));
       } else {
         $log.error('Unhandled type updated', ev, data);
       }
@@ -244,6 +327,12 @@ angular.module('timelinerApp')
         SocketService.emit('move:milestone', {
           _id: data.id,
           start: data.start
+        });
+      } else if ( data.group === 'timeline-tasks' ) {
+        SocketService.emit('move:task', {
+          _id: data.id,
+          start:data.start,
+          end: data.end
         });
       } else {
         $log.error('Unhandled type moved', ev, data);
@@ -265,5 +354,9 @@ angular.module('timelinerApp')
       SocketService.off('update:milestone', socketUpdateMilestoneCallback);
       SocketService.off('delete:milestone', socketDeleteMilestoneCallback);
       SocketService.off('move:milestone', socketMoveMilestoneCallback);
+      SocketService.off('create:task', socketCreateTaskCallback);
+      SocketService.off('update:task', socketUpdateTaskCallback);
+      SocketService.off('delete:task', socketDeleteTaskCallback);
+      SocketService.off('move:task', socketMoveTaskCallback);
     });
   });
