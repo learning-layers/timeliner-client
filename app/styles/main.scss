@@ -83,10 +83,6 @@ md-chips .md-chip {
   }
 }
 
-.tooltip-text { // TODO temporary override, see if this has been fixed in newer versions of ngMaterial
-  color: #000;
-}
-
 /* Custom validation errors for datepicker */
 .validation-messages {
   font-size: 12px;

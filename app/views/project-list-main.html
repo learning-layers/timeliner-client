@@ -1,6 +1,6 @@
 <div layout="row">
   <md-button class="md-icon-button md-raised md-accent" aria-label="{{ 'VIEWS.PROJECT_LIST.NEW_PROJECT_BTN' | translate }}" type="button" ng-click="createNewProject($event)">
-    <md-tooltip md-direction="top" class="tooltip-text">
+    <md-tooltip md-direction="top">
       <translate>VIEWS.PROJECT_LIST.NEW_PROJECT_BTN</translate>
     </md-tooltip>
     <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
@@ -9,13 +9,13 @@
   <span flex></span>
 
   <md-button class="md-icon-button" ng-class="{ 'md-raised': isActiveListingView('projects.list') }" aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_BTN' | translate }}" type="button" ng-click="switchListingView('projects.list', $event);">
-    <md-tooltip md-direction="top" class="tooltip-text">
+    <md-tooltip md-direction="top">
       <translate>VIEWS.PROJECT_LIST.LIST_BTN</translate>
     </md-tooltip>
     <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-list"></md-icon>
   </md-button>
   <md-button class="md-icon-button" ng-class="{ 'md-raised': isActiveListingView('projects.timeline') }" aria-label="{{ 'VIEWS.PROJECT_LIST.TIMELINE_LIST_BTN' | translate }}" type="button" ng-disabled="updating" ng-click="switchListingView('projects.timeline', $event);">
-    <md-tooltip md-direction="top" class="tooltip-text">
+    <md-tooltip md-direction="top">
       <translate>VIEWS.PROJECT_LIST.TIMELINE_LIST_BTN</translate>
     </md-tooltip>
     <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-timeline"></md-icon>

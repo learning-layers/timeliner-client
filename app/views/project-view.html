@@ -2,33 +2,33 @@
   <md-fab-speed-dial md-open="fabOpen" md-direction="right" class="md-fling">
     <md-fab-trigger>
       <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TITLE' | translate }}" class="md-fab md-accent">
-        <md-tooltip md-direction="bottom" class="tooltip-text">
+        <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.TITLE</translate>
         </md-tooltip>
         <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
       </md-button>
     </md-fab-trigger>
     <md-fab-actions>
-      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.RESOURCE' | translate }}" class="md-fab md-raised md-mini" ng-click="addResource()" disabled="true">
-        <md-tooltip md-direction="bottom" class="tooltip-text">
+      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.RESOURCE' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateResource($event)">
+        <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.RESOURCE</translate>
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-resource"></md-icon>
       </md-button>
       <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TASK' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateTask()">
-        <md-tooltip md-direction="bottom" class="tooltip-text">
+        <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.TASK</translate>
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-task"></md-icon>
       </md-button>
       <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.ANNOTATION' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateAnnotation($event)">
-        <md-tooltip md-direction="bottom" class="tooltip-text">
+        <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.ANNOTATION</translate>
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-note"></md-icon>
       </md-button>
       <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.MILESTONE' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateMilestone($event)">
-        <md-tooltip md-direction="bottom" class="tooltip-text">
+        <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.MILESTONE</translate>
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-milestone"></md-icon>
