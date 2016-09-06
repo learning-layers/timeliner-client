@@ -16,6 +16,7 @@ angular.module('timelinerApp')
       annotations: [],
       tasks: []
     };
+    $scope.resouces = [];
 
 
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
@@ -60,6 +61,13 @@ angular.module('timelinerApp')
         return o._id === id;
       });
     }
+
+    function findResourceIndex(resource) {
+      return _($scope.resources).findIndex(function(o) {
+        return o._id === resource._id;
+      });
+    }
+
 
     function socketConnectCallback() {
       if ( $scope.project ) {
@@ -162,6 +170,23 @@ angular.module('timelinerApp')
       $scope.$broadcast('tl:timeline:move:task', task);
     }
 
+    function socketCreateResourceCallback(resource) {
+      $log.debug('Socket create:resource', resource);
+      $scope.resources.push(resource);
+    }
+
+    function socketUpdateResourceCallback(resource) {
+      $log.debug('Socket update:resource', resource);
+      var index = findResourceIndex(resource);
+      $scope.resources[index] = resource;
+    }
+
+    function socketDeleteResourceCallback(resource) {
+      $log.debug('Socket delete:resource', resource);
+      var index = findResourceIndex(resource);
+      $scope.resources.splice(index, 1);
+    }
+
     if ( $scope.isLoggedIn() ) {
       ProjectsService.get({id: $stateParams.id}, function(result) {
         $scope.project = result.data;
@@ -183,6 +208,9 @@ angular.module('timelinerApp')
         SocketService.on('update:task', socketUpdateTaskCallback);
         SocketService.on('delete:task', socketDeleteTaskCallback);
         SocketService.on('move:task', socketMoveTaskCallback);
+        SocketService.on('create:resource', socketCreateResourceCallback);
+        SocketService.on('update:resource', socketUpdateResourceCallback);
+        SocketService.on('delete:resource', socketDeleteResourceCallback);
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
@@ -214,6 +242,14 @@ angular.module('timelinerApp')
         $log.debug('Loaded tasks', result);
       }, function(err) {
         $log.error('ERROR getting project tasks', err);
+      });
+      ProjectsService.getProjectResources({
+        project: $stateParams.id
+      }, function(result) {
+        $scope.resources = result.data;
+        $log.debug('Loaded resources', result);
+      }, function(err) {
+        $log.error('ERROR getting project resources', err);
       });
     }
 
@@ -252,7 +288,7 @@ angular.module('timelinerApp')
           }
         })
         .then(function(milestone) {
-          // TODO Show annotation created toast
+          // TODO Show milestone created toast
           $log.debug('Dialog returned milestone:', milestone);
         }, function() {
           // Dialog dismissed, do nothing for now
@@ -273,13 +309,33 @@ angular.module('timelinerApp')
           }
         })
         .then(function(task) {
-          // TODO Show annotation created toast
+          // TODO Show task created toast
           $log.debug('Dialog returned task:', task);
         }, function() {
           // Dialog dismissed, do nothing for now
         });
     };
 
+    $scope.addOrUpdateResource = function(ev, resource) {
+      $mdDialog.show({
+          controller: 'CreateUpdateResourceDialogCtrl',
+          templateUrl: 'views/templates/create-update-resource-dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen,
+          locals: {
+            project: $scope.project,
+            resource: resource
+          }
+        })
+        .then(function(resource) {
+          // TODO Show resource created toast
+          $log.debug('Dialog returned resource:', resource);
+        }, function() {
+          // Dialog dismissed, do nothing for now
+        });
+    };
 
     $scope.$on('tl:timeline:item:add',function(ev, data) {
       ev.preventDefault();
@@ -358,5 +414,8 @@ angular.module('timelinerApp')
       SocketService.off('update:task', socketUpdateTaskCallback);
       SocketService.off('delete:task', socketDeleteTaskCallback);
       SocketService.off('move:task', socketMoveTaskCallback);
+      SocketService.off('create:resource', socketCreateResourceCallback);
+      SocketService.off('update:resource', socketUpdateResourceCallback);
+      SocketService.off('delete:resource', socketDeleteResourceCallback);
     });
   });

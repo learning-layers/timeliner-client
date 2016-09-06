@@ -73,6 +73,16 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="resource in resources">
+          <img ng-src="{{ ::getUserImage(resource.user) }}" class="md-avatar" alt="{{ ::getUserFullName(resource.user) }}" />
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ resource.title }}</h3>
+            <h4>{{ resource.description }}</h4>
+            <p>{{ :: resource.url || resource.file.name }}</p>
+          </div>
+          <md-icon class="md-secondary" ng-click="addOrUpdateResource($event, resource)" aria-label="Edit">mode_edit</md-icon>
+          <md-divider></md-divider>
+        </md-list-item>
       </md-list>
     </md-content>
   </div>

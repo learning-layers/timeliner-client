@@ -96,6 +96,24 @@ angular.module('timelinerApp')
       deleteTask: {
         url: apiLocation + '/:project/tasks/:id',
         method: 'DELETE'
+      },
+      getProjectResources: {
+        url: apiLocation + '/:project/resources'
+      },
+      createResource: {
+        url: apiLocation + '/:project/resources',
+        method: 'POST',
+        headers: {
+          'Content-Type': undefined
+        }
+      },
+      updateResource: {
+        url: apiLocation + '/:project/resources/:id',
+        method: 'PUT'
+      },
+      deleteResource: {
+        url: apiLocation + '/:project/resources/:id',
+        method: 'DELETE'
       }
     });
 
@@ -133,6 +151,10 @@ angular.module('timelinerApp')
       getProjectTasks: projectsResource.getProjectTasks,
       createTask: projectsResource.createTask,
       updateTask: projectsResource.updateTask,
-      deleteTask: projectsResource.deleteTask
+      deleteTask: projectsResource.deleteTask,
+      getProjectResources: projectsResource.getProjectResources,
+      createResource: projectsResource.createResource,
+      updateResource: projectsResource.updateResource,
+      deleteResource: projectsResource.deleteResource
     };
   });
