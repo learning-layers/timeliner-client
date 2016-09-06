@@ -14,7 +14,7 @@ angular.module('timelinerApp')
       scope: {
         color: '='
       },
-      link: function postLink(scope, element) {
+      link: function postLink(scope) {
         scope.colors = [1, 2, 3, 4, 5, 6];
 
         scope.isCurrentColor = function(color) {
@@ -24,11 +24,6 @@ angular.module('timelinerApp')
         scope.setCurrentColor = function(color) {
           scope.color = color;
         };
-
-        if ( element.parent().find('label') ) {
-          var colorSelectElement = angular.element(element[0].firstChild);
-          colorSelectElement.attr('class', colorSelectElement.attr('class') + ' tl-color-select-fix-title');
-        }
       }
     };
   });
