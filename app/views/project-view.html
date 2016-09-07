@@ -65,7 +65,7 @@
 
   <md-divider></md-divider>
 
-  <div flex-gt-sm="20" flex>
+  <div flex-gt-sm="20" flex ng-controller="ResourcesPanelCtrl">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</span>
@@ -80,6 +80,7 @@
             <h4>{{ resource.description }}</h4>
             <p>{{ :: resource.url || resource.file.name }}</p>
           </div>
+          <md-icon class="md-secondary" ng-click="openResource($event, resource)" aria-label="Open or Download">{{ ::getResourceOpenIcon(resource) }}</md-icon>
           <md-icon class="md-secondary" ng-click="addOrUpdateResource($event, resource)" aria-label="Edit">mode_edit</md-icon>
           <md-divider></md-divider>
         </md-list-item>
