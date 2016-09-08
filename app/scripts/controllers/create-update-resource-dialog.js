@@ -23,6 +23,16 @@ angular.module('timelinerApp')
       return !!$scope.model._id;
     };
 
+    $scope.canSubmit = function() {
+      if ( !$scope.isEdit() && $scope.isFileType ) {
+        if ( !$scope.model.file ) {
+          return false;
+        }
+      }
+
+      return true;
+    };
+
     $scope.submit = function() {
       $scope.updating = true;
       if ( $scope.isEdit() ) {
@@ -46,10 +56,10 @@ angular.module('timelinerApp')
         form.append('title', $scope.model.title);
         form.append('description', $scope.model.description);
 
-        if ( $scope.model.url ) {
+        if ( !$scope.isFileType ) {
           form.append('url', $scope.model.url);
         }
-        if ( $scope.model.file ) {
+        if ( $scope.isFileType ) {
           form.append('file', $scope.model.file);
         }
 

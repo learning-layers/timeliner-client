@@ -169,6 +169,15 @@
         "START": "Timeline start date",
         "END": "Timeline end date"
       },
+      "CREATE_UPDATE_RESOURCE": {
+        "CREATE_HEADLINE": "Add new resource",
+        "UPDATE_HEADLINE": "Update a resource",
+        "RESOURCE_TYPE": "Resource type",
+        "TYPE_URL": "URL",
+        "TYPE_FILE": "File",
+        "URL": "URL",
+        "FILE": "File to be uploaded"
+      },
       "PANELS": {
         "PARTICIPANTS": {
           "HEADER": "Participants"
