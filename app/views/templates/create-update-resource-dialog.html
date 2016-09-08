@@ -28,7 +28,7 @@
           <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
-        <md-input-container class="md-block">
+        <md-input-container class="md-block" ng-if="!isEdit()">
           <label class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.RESOURCE_TYPE</translate></label>
           <md-switch ng-model="isFileType" aria-label="Add a file">
             <translate ng-if="!isFileType">VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.TYPE_URL</translate>

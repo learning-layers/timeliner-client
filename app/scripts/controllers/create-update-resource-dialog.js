@@ -11,6 +11,10 @@ angular.module('timelinerApp')
   .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, $log, project, resource, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
+    if ( resource && resource.file ) {
+      $scope.isFileType = true;
+    }
+
     $scope.model = {
       _id: ( resource && resource._id ) ? resource._id : null,
       title: ( resource && resource.title ) ? resource.title: '',
