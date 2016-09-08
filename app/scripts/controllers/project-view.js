@@ -352,7 +352,7 @@ angular.module('timelinerApp')
         // TODO Make sure to determine the end date in a better way
         $scope.addOrUpdateTask(null, {
           start: data.start,
-          end: new Date( (new Date(data.start)).valueOf() +  ( 5 * 24 * 60 * 60 * 1000 ) )
+          end: new Date( (new Date(data.start)).valueOf() +  ( 1 * 24 * 60 * 60 * 1000 ) )
         });
       } else {
         $log.error('Unhandled type added', ev, data);
