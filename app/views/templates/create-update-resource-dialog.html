@@ -28,26 +28,18 @@
           <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
-        <md-input-container class="md-block" ng-if="!isEdit()">
-          <label class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.RESOURCE_TYPE</translate></label>
-          <md-switch ng-model="isFileType" aria-label="Add a file">
-            <translate ng-if="!isFileType">VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.TYPE_URL</translate>
-            <translate ng-if="isFileType">VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.TYPE_FILE</translate>
-          </md-switch>
-        </md-input-container>
-
-        <md-input-container class="md-block" ng-if="!isFileType">
+        <md-input-container class="md-block">
           <label><translate>VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.URL</translate></label>
-          <input type="url" name="url" ng-model="model.url" ng-disabled="updating || isEdit()" md-maxlength="255" required>
+          <input type="url" name="url" ng-model="model.url" ng-disabled="updating || isFileSelected()" md-maxlength="255">
           <div ng-messages="resourceForm.url.$error">
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
             <div ng-message="md-maxlength" translate translate-values="{LENGTH: 255}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
           </div>
         </md-input-container>
 
-        <md-input-container class="md-block" ng-if="isFileType">
+        <md-input-container class="md-block">
           <label class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.FILE</translate></label>
-          <tl-file-upload data="model.file" ng-disabled="updating || isEdit()" required></tl-file-upload>
+          <tl-file-upload data="model.file" ng-disabled="updating || isUrlSelected() || ( resourceForm.url.$touched && resourceForm.url.$viewValue !== '' )"></tl-file-upload>
         </md-input-container>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">

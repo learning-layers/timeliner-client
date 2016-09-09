@@ -11,10 +11,6 @@ angular.module('timelinerApp')
   .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, $log, project, resource, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
-    if ( resource && resource.file ) {
-      $scope.isFileType = true;
-    }
-
     $scope.model = {
       _id: ( resource && resource._id ) ? resource._id : null,
       title: ( resource && resource.title ) ? resource.title: '',
@@ -27,11 +23,17 @@ angular.module('timelinerApp')
       return !!$scope.model._id;
     };
 
+    $scope.isFileSelected = function() {
+      return !!$scope.model.file;
+    };
+
+    $scope.isUrlSelected = function() {
+      return !!$scope.model.url;
+    };
+
     $scope.canSubmit = function() {
-      if ( !$scope.isEdit() && $scope.isFileType ) {
-        if ( !$scope.model.file ) {
-          return false;
-        }
+      if ( !( $scope.model.file || $scope.model.url ) ) {
+        return false;
       }
 
       return true;
@@ -60,10 +62,10 @@ angular.module('timelinerApp')
         form.append('title', $scope.model.title);
         form.append('description', $scope.model.description);
 
-        if ( !$scope.isFileType ) {
+        if ( $scope.model.url ) {
           form.append('url', $scope.model.url);
         }
-        if ( $scope.isFileType ) {
+        if ( $scope.model.file ) {
           form.append('file', $scope.model.file);
         }
 

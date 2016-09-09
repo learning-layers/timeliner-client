@@ -109,7 +109,10 @@ angular.module('timelinerApp')
       },
       updateResource: {
         url: apiLocation + '/:project/resources/:id',
-        method: 'PUT'
+        method: 'PUT',
+        headers: {
+          'Content-Type': undefined
+        }
       },
       deleteResource: {
         url: apiLocation + '/:project/resources/:id',
