@@ -1,7 +1,7 @@
 <div layout="row" layout-align="none center" ng-cloak>
   <md-fab-speed-dial md-open="fabOpen" md-direction="right" class="md-fling">
     <md-fab-trigger>
-      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TITLE' | translate }}" class="md-fab md-accent">
+      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TITLE' | translate }}" class="md-fab md-accent md-mini">
         <md-tooltip md-direction="bottom">
           <translate>VIEWS.PROJECT.NEW_BTN.TITLE</translate>
         </md-tooltip>
@@ -110,7 +110,7 @@
     <md-content>
       <md-list flex>
         <md-list-item class="md-3-line" ng-repeat="resource in resources">
-          <img ng-src="{{ ::getUserImage(resource.user) }}" class="md-avatar" alt="{{ ::getUserFullName(resource.user) }}" />
+          <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(resource) }}" class="md-avatar-icon"></md-icon>
           <div class="md-list-item-text" layout="column">
             <h3>{{ resource.title }}</h3>
             <h4>{{ resource.description }}</h4>
