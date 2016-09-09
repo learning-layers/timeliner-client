@@ -37,6 +37,42 @@
   </md-fab-speed-dial>
 
   <span flex></span>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.MOVE_LEFT' | translate }}" type="button" ng-click="timelineMoveLeft($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.MOVE_LEFT</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-left"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.MOVE_RIGHT' | translate }}" type="button" ng-click="timelineMoveRight($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.MOVE_RIGHT</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-right"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.ZOOM_IN' | translate }}" type="button" ng-click="timelineZoomIn($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.ZOOM_IN</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-in"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.ZOOM_OUT' | translate }}" type="button" ng-click="timelineZoomOut($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.ZOOM_OUT</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-out"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.FIT_TO_SCREEN' | translate }}" type="button" ng-click="timelineFitToScreen($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.FIT_TO_SCREEN</translate>
+    </md-tooltip>
+    <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-resize"></md-icon>
+  </md-button>
+  <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.RESET_PANELS' | translate }}" type="button" ng-click="resetPanels($event)">
+    <md-tooltip md-direction="top">
+      <translate>VIEWS.PROJECT.ACTIONS.RESET_PANELS</translate>
+    </md-tooltip>
+    <md-icon>restore</md-icon>
+  </md-button>
 </div>
 
 <p>Project <strong>{{ project.title }}</strong> loaded!</p>

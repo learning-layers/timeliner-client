@@ -152,6 +152,14 @@
         "ANNOTATION": "Annotation",
         "MILESTONE": "Milestone"
       },
+      "ACTIONS": {
+        "MOVE_LEFT": "Move timeline left",
+        "MOVE_RIGHT": "Move timeline right",
+        "ZOOM_IN": "Zoom timeline in",
+        "ZOOM_OUT": "Zoom timeline out",
+        "FIT_TO_SCREEN": "Fit timeline to screen",
+        "RESET_PANELS": "Reset panels"
+      },
       "CREATE_UPDATE_ANNOTATION": {
         "CREATE_HEADLINE": "Create new annotation",
         "UPDATE_HEADLINE": "Upate an annotation",
