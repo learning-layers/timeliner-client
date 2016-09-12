@@ -1,4 +1,6 @@
-<div layout="row" layout-align="none center" ng-cloak>
+<md-progress-linear md-mode="indeterminate" ng-show="loadingData"></md-progress-linear>
+
+<div layout="row" layout-align="none center" ng-cloak ng-hide="loadingData">
   <md-fab-speed-dial md-open="fabOpen" md-direction="right" class="md-fling">
     <md-fab-trigger>
       <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.TITLE' | translate }}" class="md-fab md-accent md-mini">
@@ -75,9 +77,9 @@
   </md-button>
 </div>
 
-<p>Project <strong>{{ project.title }}</strong> loaded!</p>
+<p ng-hide="loadingData">Project <strong>{{ project.title }}</strong> loaded!</p>
 
-<div layout-gt-sm="row" layout="column">
+<div layout-gt-sm="row" layout="column" ng-hide="loadingData">
   <div flex-gt-sm="20" flex>
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
@@ -176,6 +178,6 @@
   </div>
 </div>
 
-<div>
+<div ng-hide="loadingData">
   <project-timeline data="projectTimelineData"></project-timeline>
 </div>

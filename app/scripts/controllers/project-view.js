@@ -8,7 +8,8 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, appConfig, ProjectsService, SocketService, _, SystemMessagesService) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService) {
+    $scope.loadingData = false;
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
@@ -188,7 +189,9 @@ angular.module('timelinerApp')
     }
 
     if ( $scope.isLoggedIn() ) {
-      ProjectsService.get({id: $stateParams.id}, function(result) {
+      $scope.loadingData = true;
+
+      var projectResource = ProjectsService.get({ id: $stateParams.id }, function(result) {
         $scope.project = result.data;
 
         SocketService.emit('join', {
@@ -214,12 +217,11 @@ angular.module('timelinerApp')
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
+        $scope.loadingData = false;
       });
-      // XXX Might make sense to wait untill all the data needed to build out the timeline is fetched and only then set
-      // the data as needed, this way there would be less full rebuild iterations for the timeline
-      // Show some spinner in the meantime
+
       // XXX Need to decide when should the Socket kick-in and how to store updates that come before data is loaded
-      ProjectsService.getProjectMilestones({
+      var milestoneResource = ProjectsService.getProjectMilestones({
         project: $stateParams.id
       }, function(result) {
         $scope.projectTimelineData.milestones = result.data;
@@ -227,7 +229,7 @@ angular.module('timelinerApp')
       }, function(err) {
         $log.error('ERROR getting project milestones', err);
       });
-      ProjectsService.getProjectAnnotations({
+      var annotationResource = ProjectsService.getProjectAnnotations({
         project: $stateParams.id
       }, function(result) {
         $scope.projectTimelineData.annotations = result.data;
@@ -235,7 +237,7 @@ angular.module('timelinerApp')
       }, function(err) {
         $log.error('ERROR getting project annotations', err);
       });
-      ProjectsService.getProjectTasks({
+      var taskResource = ProjectsService.getProjectTasks({
         project: $stateParams.id
       }, function(result) {
         $scope.projectTimelineData.tasks = result.data;
@@ -243,13 +245,20 @@ angular.module('timelinerApp')
       }, function(err) {
         $log.error('ERROR getting project tasks', err);
       });
-      ProjectsService.getProjectResources({
+      var resourceResource = ProjectsService.getProjectResources({
         project: $stateParams.id
       }, function(result) {
         $scope.resources = result.data;
         $log.debug('Loaded resources', result);
       }, function(err) {
         $log.error('ERROR getting project resources', err);
+      });
+
+      // Make sure to signal end of data loading
+      $q.all([projectResource.$promise, milestoneResource.$promise, annotationResource.$promise, taskResource.$promise, resourceResource.$promise]).then(function() {
+        $scope.loadingData = false;
+      }, function() {
+        $scope.loadingData = false;
       });
     }
 
