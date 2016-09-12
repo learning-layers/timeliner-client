@@ -113,7 +113,7 @@ angular.module('timelinerApp')
           $scope.updating = false;
         }, function(response) {
           // TODO Handle error
-          $log.debug(response);
+          $log.debug('Project join error', response);
           $scope.updating = false;
         });
       });
@@ -140,7 +140,7 @@ angular.module('timelinerApp')
           $scope.updating = false;
         }, function(response) {
           // TODO Handle error
-          $log.debug(response);
+          $log.debug('Join decline error', response);
           $scope.updating = false;
         });
       });
@@ -206,7 +206,7 @@ angular.module('timelinerApp')
           $scope.updating = false;
         }, function(response) {
           // TODO Handle error
-          $log.debug(response);
+          $log.debug('Show on timeline error', response);
           $scope.updating = false;
         });
       });
@@ -235,7 +235,7 @@ angular.module('timelinerApp')
           $scope.updating = false;
         }, function(response) {
           // TODO Handle error
-          $log.debug(response);
+          $log.debug('Hide from timeline error', response);
           $scope.updating = false;
         });
       });
