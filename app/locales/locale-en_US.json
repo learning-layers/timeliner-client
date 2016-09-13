@@ -190,8 +190,8 @@
         "RESOURCES": {
           "HEADER": "Resources"
         },
-        "DOCUMENTS": {
-          "HEADER": "Documents"
+        "OUTCOMES": {
+          "HEADER": "Outcomes"
         },
         "TASKS": {
           "HEADER": "Tasks"
