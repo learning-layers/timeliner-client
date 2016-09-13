@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateAnnotationDialogCtrl', function ($scope, $mdDialog, $log, project, annotation, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateAnnotationDialogCtrl', function ($scope, $mdDialog, project, annotation, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
     $scope.model = {
@@ -33,12 +33,11 @@ angular.module('timelinerApp')
           description: $scope.model.description,
           start: $scope.model.start
         }, function(response) {
-          $log.debug('Annotation update success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_UPDATED');
-        }, function(err) {
-          $log.error('Annotation update error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
           $scope.updating = false;
         });
       } else {
@@ -49,12 +48,11 @@ angular.module('timelinerApp')
           description: $scope.model.description,
           start: $scope.model.start
         }, function(response) {
-          $log.debug('Annotation creation success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_CREATED');
-        }, function(err) {
-          $log.error('Annotation creation error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
           $scope.updating = false;
         });
       }
@@ -65,12 +63,11 @@ angular.module('timelinerApp')
         project: project._id,
         id: $scope.model._id
       }, function(response) {
-        $log.debug('Annotation delete success', response);
         $scope.updating = false;
         $mdDialog.hide(response.data);
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_REMOVED');
-      }, function(err) {
-        $log.error('Annotation removal error', err);
+      }, function(response) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
         $scope.updating = false;
       });
     };

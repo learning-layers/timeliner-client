@@ -243,7 +243,24 @@
       "SOCIAL_EMAIL_MISSING": "Email address missing. Please make sure that application is allowed to access email address.",
       "SOCIAL_SERVER_ERROR": "Unable to sign you in due to unknown error.",
       "SOCIAL_EMAIL_IN_USE": "Email address is already in use.",
-      "SOCKET_JOIN_ERROR": "Could not join project channel, real-time updates will be disabled!"
+      "SOCKET_JOIN_ERROR": "Could not join project channel, real-time updates will be disabled!",
+      "REQUIRED_PARAMETER_MISSING": "At least one required input missing!",
+      "END_DATE_BEFORE_START": "End date can not be before start date!",
+      "BOTH_DATES_OR_NONE": "Either both dates should be provided or none at all!",
+      "STATUS_CHANGE_BY_NOT_OWNER": "Only owner can change project status!",
+      "AREADY_IS_A_PARTICIPANT": "This user already is a participant of this project!",
+      "OWNER_CAN_NOT_LEAVE": "Owner can not leave the project!",
+      "OWNER_CAN_NOT_BE_REMOVED": "Owner can not be removed from the project!",
+      "TOASTS.ERRORS.NOT_A_PROJECT_PARTICIPANT": "You are not a participant of this project!",
+      "PERMISSION_ERROR": "Permission error, access denied!",
+      "NOT_FOUND": "Requested resource could not be found!",
+      "URL_OR_FILE": "Either url or file should be provided, not both!",
+      "INTERNAL_SERVER_ERROR": "Internal server error. Please try again or contact administrator if it perists!",
+      "BAD_REQUEST": "Bad request!",
+      "UNAUTHORIZED'": "Unauthorized!",
+      "FORBIDDEN": "Forbidden!",
+      "NOT_FOUND": "Not found!",
+      "METHOD_NOT_ALLOWED": "Method not allowed!"
     }
   }
 }

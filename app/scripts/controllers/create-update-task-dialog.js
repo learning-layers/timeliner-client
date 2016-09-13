@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateTaskDialogCtrl', function ($scope, $mdDialog, $log, project, task, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateTaskDialogCtrl', function ($scope, $mdDialog, project, task, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
     $scope.model = {
@@ -35,12 +35,11 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           end: $scope.model.end,
         }, function(response) {
-          $log.debug('Task update success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
-        }, function(err) {
-          $log.error('Task update error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
           $scope.updating = false;
         });
       } else {
@@ -52,12 +51,11 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           end: $scope.model.end
         }, function(response) {
-          $log.debug('Task creation success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_CREATED');
-        }, function(err) {
-          $log.error('Task creation error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
           $scope.updating = false;
         });
       }
@@ -68,12 +66,11 @@ angular.module('timelinerApp')
         project: project._id,
         id: $scope.model._id
       }, function(response) {
-        $log.debug('Task delete success', response);
         $scope.updating = false;
         $mdDialog.hide(response.data);
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_REMOVED');
-      }, function(err) {
-        $log.error('Task removal error', err);
+      }, function(response) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
         $scope.updating = false;
       });
     };

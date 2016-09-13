@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, $log, project, resource, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, project, resource, ProjectsService, SystemMessagesService) {
     function getFormData() {
       var formData = new FormData();
       formData.append('title', $scope.model.title);
@@ -61,24 +61,22 @@ angular.module('timelinerApp')
           project: project._id,
           id: $scope.model._id
         }, getFormData(), function(response) {
-          $log.debug('Resource update success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_UPDATED');
-        }, function(err) {
-          $log.error('Resource update error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
           $scope.updating = false;
         });
       } else {
         ProjectsService.createResource({
           project: project._id
         }, getFormData(), function(response) {
-          $log.debug('Resource creation success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_CREATED');
-        }, function(err) {
-          $log.error('Resource creation error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
           $scope.updating = false;
         });
       }
@@ -89,12 +87,11 @@ angular.module('timelinerApp')
         project: project._id,
         id: $scope.model._id
       }, function(response) {
-        $log.debug('Resource delete success', response);
         $scope.updating = false;
         $mdDialog.hide(response.data);
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_REMOVED');
-      }, function(err) {
-        $log.error('Resource removal error', err);
+      }, function(response) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
         $scope.updating = false;
       });
     };

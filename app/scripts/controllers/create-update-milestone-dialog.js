@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateMilestoneDialogCtrl', function ($scope, $mdDialog, $log, project, milestone, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateMilestoneDialogCtrl', function ($scope, $mdDialog, project, milestone, ProjectsService, SystemMessagesService) {
     $scope.updating = false;
 
     $scope.model = {
@@ -35,12 +35,11 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           color: $scope.model.color
         }, function(response) {
-          $log.debug('Milestone update success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_UPDATED');
-        }, function(err) {
-          $log.error('Milestone update error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
           $scope.updating = false;
         });
       } else {
@@ -52,12 +51,11 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           color: $scope.model.color
         }, function(response) {
-          $log.debug('Milestone creation success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_CREATED');
-        }, function(err) {
-          $log.error('Milestone creation error', err);
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
           $scope.updating = false;
         });
       }
@@ -68,12 +66,11 @@ angular.module('timelinerApp')
         project: project._id,
         id: $scope.model._id
       }, function(response) {
-        $log.debug('Milestone delete success', response);
         $scope.updating = false;
         $mdDialog.hide(response.data);
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_REMOVED');
-      }, function(err) {
-        $log.error('Milestone removal error', err);
+      }, function(response) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
         $scope.updating = false;
       });
     };
