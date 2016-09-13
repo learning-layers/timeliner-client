@@ -346,6 +346,30 @@ angular.module('timelinerApp')
         });
     };
 
+    $scope.timelineMoveLeft = function(ev) {
+      $scope.$broadcast('tl:timeline:move_left', ev);
+    };
+
+    $scope.timelineMoveRight = function(ev) {
+      $scope.$broadcast('tl:timeline:move_right', ev);
+    };
+
+    $scope.timelineZoomIn = function(ev) {
+      $scope.$broadcast('tl:timeline:zoom_in', ev);
+    };
+
+    $scope.timelineZoomOut = function(ev) {
+      $scope.$broadcast('tl:timeline:zoom_out', ev);
+    };
+
+    $scope.timelineFitToScreen = function(ev) {
+      $scope.$broadcast('tl:timeline:fit_to_screen', ev);
+    };
+
+    $scope.resetPanels = function(ev) {
+      $log.error('Not implemented', ev);
+    };
+
     $scope.$on('tl:timeline:item:add',function(ev, data) {
       ev.preventDefault();
       // Passing in custom event raises an error (it is just an object, not real event)

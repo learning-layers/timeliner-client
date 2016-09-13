@@ -73,6 +73,26 @@ angular.module('timelinerApp')
       };
     }
 
+    function moveTimeline(timeline, percentage) {
+      var range = timeline.getWindow(),
+          interval = range.end - range.start;
+
+      timeline.setWindow({
+        start: range.start.valueOf() - (interval * percentage),
+        end: range.end.valueOf() - (interval * percentage)
+      });
+    }
+
+    function zoomTimeline(timeline, percentage) {
+      var range = timeline.getWindow(),
+          interval = range.end - range.start;
+
+      timeline.setWindow({
+        start: range.start.valueOf() - (interval * percentage),
+        end: range.end.valueOf() + (interval * percentage)
+      });
+    }
+
     return {
       restrict: 'E',
       scope: {
@@ -170,6 +190,27 @@ angular.module('timelinerApp')
             items: items
           });
 
+        });
+
+        scope.$on('tl:timeline:move_left', function(ev) {
+          ev.preventDefault();
+          moveTimeline(timeline, 0.2);
+        });
+        scope.$on('tl:timeline:move_right', function(ev) {
+          ev.preventDefault();
+          moveTimeline(timeline, -0.2);
+        });
+        scope.$on('tl:timeline:zoom_in', function(ev) {
+          ev.preventDefault();
+          zoomTimeline(timeline, -0.2);
+        });
+        scope.$on('tl:timeline:zoom_out', function(ev) {
+          ev.preventDefault();
+          zoomTimeline(timeline, 0.2);
+        });
+        scope.$on('tl:timeline:fit_to_screen', function(ev) {
+          ev.preventDefault();
+          timeline.fit();
         });
 
         scope.$on('tl:timeline:add:annotation', function(ev, annotation) {
