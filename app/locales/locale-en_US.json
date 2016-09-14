@@ -150,7 +150,8 @@
         "RESOURCE": "Resource",
         "TASK": "Task",
         "ANNOTATION": "Annotation",
-        "MILESTONE": "Milestone"
+        "MILESTONE": "Milestone",
+        "OUTCOME": "Outcome"
       },
       "ACTIONS": {
         "MOVE_LEFT": "Move timeline left",

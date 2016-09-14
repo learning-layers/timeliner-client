@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('AppCtrl', function ($rootScope, $scope, AuthService, SystemMessagesService, UsersService) {
+  .controller('AppCtrl', function ($rootScope, $scope, $filter, AuthService, SystemMessagesService, UsersService) {
     $scope.isLoggedIn = function() {
       return AuthService.isLoggedIn();
     };
@@ -37,4 +37,17 @@ angular.module('timelinerApp')
       return UsersService.getImage(user);
     };
 
+    $scope.displayDate = function(dateString, withTime) {
+      var dateFormat = 'dd.MM.yyyy';
+
+      if ( withTime ) {
+        dateFormat += ' HH:mm';
+      }
+
+      if ( dateString ) {
+        return $filter('date')(new Date(dateString), dateFormat);
+      }
+
+      return dateString;
+    };
   });

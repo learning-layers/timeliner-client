@@ -35,6 +35,12 @@
         </md-tooltip>
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-milestone"></md-icon>
       </md-button>
+      <md-button aria-label="{{ 'VIEWS.PROJECT.NEW_BTN.OUTCOME' | translate }}" class="md-fab md-raised md-mini" ng-click="addOrUpdateOutcome($event)">
+        <md-tooltip md-direction="bottom">
+          <translate>VIEWS.PROJECT.NEW_BTN.OUTCOME</translate>
+        </md-tooltip>
+        <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file"></md-icon>
+      </md-button>
     </md-fab-actions>
   </md-fab-speed-dial>
 
@@ -136,6 +142,16 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="outcome in projectTimelineData.outcomes">
+          <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file" class="md-avatar-icon"></md-icon>
+          <div class="md-list-item-text" layout="column">
+            <h3>{{ outcome.title }}</h3>
+            <h4>{{ outcome.description }}</h4>
+            <p>{{ ::displayDate(outcome.created) }}</p>
+          </div>
+          <md-icon class="md-secondary" ng-click="addOrUpdateOutcome($event, outcome)" aria-label="Edit">mode_edit</md-icon>
+          <md-divider></md-divider>
+        </md-list-item>
       </md-list>
     </md-content>
   </div>

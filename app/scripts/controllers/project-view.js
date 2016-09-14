@@ -15,7 +15,8 @@ angular.module('timelinerApp')
     $scope.projectTimelineData = {
       milestones: [],
       annotations: [],
-      tasks: []
+      tasks: [],
+      outomes: []
     };
     $scope.resouces = [];
 
@@ -253,9 +254,22 @@ angular.module('timelinerApp')
       }, function(err) {
         $log.error('ERROR getting project resources', err);
       });
+      var outcomeResource = ProjectsService.getProjectOutcomes({
+        project: $stateParams.id
+      }, function(result) {
+        $scope.projectTimelineData.outcomes = result.data;
+        $log.debug('Loaded outcomes', result);
+      }, function(err) {
+        $log.error('ERROR getting project outcomes', err);
+      });
 
       // Make sure to signal end of data loading
-      $q.all([projectResource.$promise, milestoneResource.$promise, annotationResource.$promise, taskResource.$promise, resourceResource.$promise]).then(function() {
+      $q.all([projectResource.$promise,
+        milestoneResource.$promise,
+        annotationResource.$promise,
+        taskResource.$promise,
+        resourceResource.$promise,
+        outcomeResource.$promise]).then(function() {
         $scope.loadingData = false;
       }, function() {
         $scope.loadingData = false;
@@ -341,6 +355,26 @@ angular.module('timelinerApp')
         .then(function(resource) {
           // TODO Show resource created toast
           $log.debug('Dialog returned resource:', resource);
+        }, function() {
+          // Dialog dismissed, do nothing for now
+        });
+    };
+
+    $scope.addOrUpdateOutcome = function(ev, outcome) {
+      $mdDialog.show({
+          controller: 'CreateUpdateOutcomeDialogCtrl',
+          templateUrl: 'views/templates/create-update-outcome-dialog.html',
+          parent: angular.element(document.body),
+          targetEvent: ev,
+          clickOutsideToClose:true,
+          fullscreen: useFullScreen,
+          locals: {
+            project: $scope.project,
+            outcome: outcome
+          }
+        })
+        .then(function(outcome) {
+          $log.debug('Dialog returned outcome:', outcome);
         }, function() {
           // Dialog dismissed, do nothing for now
         });

@@ -37,14 +37,6 @@ angular.module('timelinerApp')
       return project.owner._id !== currentUser._id;
     };
 
-    $scope.displayDate = function(dateString) {
-      if ( dateString ) {
-        return $filter('date')(new Date(dateString), 'dd.MM.yyyy');
-      }
-
-      return dateString;
-    };
-
     $scope.displayParticipants = function(participants) {
       if ( participants && participants.length > 0 ) {
         var names = [];
