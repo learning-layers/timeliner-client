@@ -70,6 +70,12 @@ angular.module('timelinerApp')
       });
     }
 
+    function findOutcomeIndex(outcome) {
+      return _($scope.projectTimelineData.outcomes).findIndex(function(o) {
+        return o._id === outcome._id;
+      });
+    }
+
 
     function socketConnectCallback() {
       if ( $scope.project ) {
@@ -189,6 +195,26 @@ angular.module('timelinerApp')
       $scope.resources.splice(index, 1);
     }
 
+    function socketCreateOutcomeCallback(outcome) {
+      $log.debug('Socket create:outcome', outcome);
+      $scope.projectTimelineData.outcomes.push(outcome);
+      $scope.$broadcast('tl:timeline:add:outcome', outcome);
+    }
+
+    function socketUpdateOutcomeCallback(outcome) {
+      $log.debug('Socket update:outcome', outcome);
+      var index = findOutcomeIndex(outcome);
+      $scope.projectTimelineData.outcomes[index] = outcome;
+      $scope.$broadcast('tl:timeline:update:outcome', outcome);
+    }
+
+    function socketDeleteOutcomeCallback(outcome) {
+      $log.debug('Socket delete:outcome', outcome);
+      var index = findOutcomeIndex(outcome);
+      $scope.projectTimelineData.outcomes.splice(index, 1);
+      $scope.$broadcast('tl:timeline:delete:outcome', outcome);
+    }
+
     if ( $scope.isLoggedIn() ) {
       $scope.loadingData = true;
 
@@ -215,6 +241,9 @@ angular.module('timelinerApp')
         SocketService.on('create:resource', socketCreateResourceCallback);
         SocketService.on('update:resource', socketUpdateResourceCallback);
         SocketService.on('delete:resource', socketDeleteResourceCallback);
+        SocketService.on('create:outcome', socketCreateOutcomeCallback);
+        SocketService.on('update:outcome', socketUpdateOutcomeCallback);
+        SocketService.on('delete:outcome', socketDeleteOutcomeCallback);
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
@@ -484,5 +513,8 @@ angular.module('timelinerApp')
       SocketService.off('create:resource', socketCreateResourceCallback);
       SocketService.off('update:resource', socketUpdateResourceCallback);
       SocketService.off('delete:resource', socketDeleteResourceCallback);
+      SocketService.off('create:outcome', socketCreateOutcomeCallback);
+      SocketService.off('update:outcome', socketUpdateOutcomeCallback);
+      SocketService.off('delete:outcome', socketDeleteOutcomeCallback);
     });
   });
