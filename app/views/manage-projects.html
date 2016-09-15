@@ -9,10 +9,10 @@
             <translate>VIEWS.PROJECT_LIST.LIST_TITLES.OWNER</translate>: {{ ::getUserFullName(project.owner) }}
           </h4>
           <p>
-            <translate>VIEWS.PROJECT_LIST.LIST_TITLES.START_DATE</translate>: {{ ::project.start }}
-            <translate>VIEWS.PROJECT_LIST.LIST_TITLES.END_DATE</translate>: {{ ::project.end }}
-            <translate>GENERAL.CREATED</translate>: {{ ::project.created }}
-            <translate>GENERAL.UPDATED</translate>: {{ ::project.updated }}
+            <translate>VIEWS.PROJECT_LIST.LIST_TITLES.START_DATE</translate>: {{ ::project.start | tlDate }}
+            <translate>VIEWS.PROJECT_LIST.LIST_TITLES.END_DATE</translate>: {{ ::project.end | tlDate }}
+            <translate>GENERAL.CREATED</translate>: {{ ::project.created | tlDate }}
+            <translate>GENERAL.UPDATED</translate>: {{ ::project.updated | tlDate }}
           </p>
         </div>
         <md-button class="md-secondary" translate="GENERAL.OPEN"></md-button>
