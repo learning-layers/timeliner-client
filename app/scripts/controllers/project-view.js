@@ -498,6 +498,39 @@ angular.module('timelinerApp')
       }
     });
 
+    $(document).on('tl:timeline:item:addObject', function(ev, data) {
+
+      // TODO check if already exists before sending data
+
+      var objectType;
+
+      if(data.dragType == 'participant'){
+        objectType = 'participants'
+      } else if (data.dragType == 'resource') {
+        objectType = 'resources';
+        SystemMessagesService.showWarning('Not yet implemented');
+      }
+
+      if(data.dropType == 'task' && data.dragType == 'participant'){
+        ProjectsService.addObjectToTask({
+          project: $scope.project._id,
+          task: data.dropId,
+          objectType: objectType,
+          objectId: data.dragId
+        }, {}, function(response) {
+          $log.debug('Task update success', response);
+          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
+        }, function(err) {
+          if (err.status == 409) {
+            SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');
+          } else {
+            $log.error('Task update error', err);
+            SystemMessagesService.showError('TOASTS.ERRORS.SERVER_ERROR');
+          }
+        });
+      }
+    });
+
     $scope.$on('$destroy', function() {
       // TODO See if more clean-up is required
       SocketService.emit('leave', {

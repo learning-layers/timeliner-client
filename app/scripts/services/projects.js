@@ -138,6 +138,10 @@ angular.module('timelinerApp')
       deleteOutcome: {
         url: apiLocation + '/:project/outcomes/:id',
         method: 'DELETE'
+      },
+      addObjectToTask: {
+        url: apiLocation + '/:project/tasks/:task/:objectType/:objectId',
+        method: 'POST'
       }
     });
 
@@ -263,6 +267,7 @@ angular.module('timelinerApp')
       getProjectOutcomes: projectsResource.getProjectOutcomes,
       createOutcome: projectsResource.createOutcome,
       updateOutcome: projectsResource.updateOutcome,
-      deleteOutcome: projectsResource.deleteOutcome
+      deleteOutcome: projectsResource.deleteOutcome,
+      addObjectToTask: projectsResource.addObjectToTask
     };
   });

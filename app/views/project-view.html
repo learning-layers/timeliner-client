@@ -94,8 +94,8 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
-        <md-list-item class="md-3-line" ng-repeat="participant in project.participants">
-          <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" />
+        <md-list-item class="md-3-line" ng-repeat="participant in project.participants" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::participant._id }}" data-tl-drag-type="participant">
+          <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" draggable="false"/>
           <div class="md-list-item-text" layout="column">
             <h3>{{ ::getUserFullName(participant.user) }}</h3>
             <h4>{{ :: participant.status }}</h4>
@@ -117,7 +117,7 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
-        <md-list-item class="md-3-line" ng-repeat="resource in resources">
+        <md-list-item class="md-3-line" ng-repeat="resource in resources" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::resource._id }}" data-tl-drag-type="resource">
           <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(resource) }}" class="md-avatar-icon"></md-icon>
           <div class="md-list-item-text" layout="column">
             <h3>{{ resource.title }}</h3>
@@ -166,8 +166,8 @@
     </md-toolbar>
     <md-content>
       <md-list flex>
-        <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks">
-          <img ng-src="{{ ::getUserImage(task.user) }}" class="md-avatar" alt="{{ ::getUserFullName(task.user) }}" />
+        <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks" ondrop="objectDropped(event)" ondragover="allowDrop(event)"  ondragleave="dragTargetEnd(event)" data-tl-drop-id="{{ ::task._id }}" data-tl-drop-type="task">
+          <img ng-src="{{ ::getUserImage(task.user) }}" class="md-avatar" alt="{{ ::getUserFullName(task.user) }}" draggable="false"/>
           <div class="md-list-item-text" layout="column">
             <h3>{{ task.title }}</h3>
             <p>{{ task.description }}</p>

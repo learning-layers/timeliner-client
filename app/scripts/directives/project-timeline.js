@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService, UsersService) {
     var timelineOptions = {
       groupOrder: 'order',
       zoomMax: 1.578e+11, // 5 years
@@ -17,7 +17,8 @@ angular.module('timelinerApp')
         remove: false,
         updateGroup: false,
         updateTime: true
-      }
+      },
+      dataAttributes: ['tl-drop-id', 'tl-drop-type']
     };
     var outcomeIndex = 2;
     var outcomeColor = 1;
@@ -74,11 +75,68 @@ angular.module('timelinerApp')
       };
     }
 
+    function getMainDropElement(target) {
+      if(target.dataset.tlDropId){
+        return target;
+      } else {
+        return $(target).parents('[data-tl-drop-id]');
+      }
+    }
+
+    window.allowDrop = function(ev){
+      // TODO check somehow if item is droppable on this element (exists, correct type etc)
+      ev.preventDefault();
+      $(getMainDropElement(ev.target)).addClass('drop-target');
+    };
+
+    window.dragTargetEnd = function(ev){
+      $(getMainDropElement(ev.target)).removeClass('drop-target');
+    };
+
+    window.objectDropped = function (ev) {
+      ev.preventDefault();
+      var target = $(getMainDropElement(ev.target));
+      target.removeClass('drop-target');
+      var dragDropData = {};
+
+      $log.debug(JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType);
+      //return;
+      dragDropData.dragId = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragId;
+      dragDropData.dragType = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType;
+      dragDropData.dropId = target.data('tlDropId');
+      dragDropData.dropType = target.data('tlDropType');
+
+      //$log.debug('dropped: ', dragDropData.dragType, dragDropData.dragId, 'on target', dragDropData.dropType, dragDropData.dropId);
+
+      $(document).trigger('tl:timeline:item:addObject', dragDropData);
+    };
+
+    window.objectDragStart = function (ev) {
+      ev.dataTransfer.setData('application/json', JSON.stringify({
+        tlDragId: ev.target.dataset.tlDragId,
+        tlDragType: ev.target.dataset.tlDragType
+      }));
+    };
+
+    function generateParticipantBlockHtml(participants) {
+      var html = '<div class="tl-timeline-project-participants">';
+
+      angular.forEach(participants, function (participant) {
+       html += '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
+      });
+
+      html += '</div>';
+
+      return html;
+    }
+
     function generateTaskDataSetItem(task) {
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: '<div class="tl-task-title">' + $sanitize(task.title) + '</div>',
+        content: '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + '</div>',
+        'tl-drop-id': task._id,
+        'tl-drop-type': 'task',
         group: 'timeline-tasks',
         type: 'range',
         start: new Date(task.start),

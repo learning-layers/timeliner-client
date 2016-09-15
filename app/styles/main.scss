@@ -397,6 +397,21 @@ md-icon.tl-remove {
     }
     .tl-task-title {
       color: #d4e8f4;
+      display: inline-block;
+      line-height: 30px;
+    }
+
+    .tl-timeline-project-participants {
+      display: inline-block;
+      margin-left: 10px;
+      //float: right;
+
+      .tl-timeline-participant {
+        margin-left: 1px;
+        margin-right: 1px;
+        -webkit-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+      }
     }
   }
 
@@ -415,7 +430,19 @@ md-icon.tl-remove {
   .vis-item.vis-range.tl-project-timeline-task {
     background-color: #2aa1d3;
     border: 5px solid #2aa1d3;
+
+    .vis-item-content {
+      display: block;
+      padding: 0;
+    }
   }
+}
+
+.drop-target {
+  background-color: rgba(14, 223, 0, 0.34);
+  -webkit-box-shadow:inset 0px 0px 0px 2px #40ca0e;
+  -moz-box-shadow:inset 0px 0px 0px 2px #40ca0e;
+  box-shadow:inset 0px 0px 0px 2px #40ca0e;
 }
 
 .tl-color-select {

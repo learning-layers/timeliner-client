@@ -268,7 +268,8 @@
       "UNAUTHORIZED'": "Unauthorized!",
       "FORBIDDEN": "Forbidden!",
       "NOT_FOUND": "Not found!",
-      "METHOD_NOT_ALLOWED": "Method not allowed!"
+      "METHOD_NOT_ALLOWED": "Method not allowed!",
+      "PARTICIPANT_EXISTS": "Participant already exists!"
     }
   }
 }
