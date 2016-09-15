@@ -12,8 +12,8 @@
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="project in pendingProjects" ng-click="openProject()">
       <div flex="40">{{ ::project.title }}</div>
-      <div flex="10">{{ ::displayDate(project.start) }}</div>
-      <div flex="10">{{ ::displayDate(project.end) }}</div>
+      <div flex="10">{{ ::project.start | tlDate }}</div>
+      <div flex="10">{{ ::project.end | tlDate }}</div>
       <div flex="10">{{ ::getUserFullName(project.owner) }}</div>
       <div flex="30">{{ ::displayParticipants(project.participants) }}</div>
       <md-menu md-position-mode="target-right target">
@@ -43,8 +43,8 @@
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.ACTIVE</translate></md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="project in activeProjects" ui-sref="project({id: project._id})">
       <div flex="40">{{ ::project.title }}</div> <!-- TODO remove this duplication of list items (except for menu buttons) -->
-      <div flex="10">{{ ::displayDate(project.start) }}</div>
-      <div flex="10">{{ ::displayDate(project.end) }}</div>
+      <div flex="10">{{ ::project.start | tlDate }}</div>
+      <div flex="10">{{ ::project.end | tlDate }}</div>
       <div flex="10">
         <img ng-src="{{ ::getUserImage(project.owner) }}"  alt="Owner image" class="tl-projectlist-owner-image" title="{{ ::getUserFullName(project.owner) }}" />
       </div>

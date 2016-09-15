@@ -147,7 +147,7 @@
           <div class="md-list-item-text" layout="column">
             <h3>{{ outcome.title }}</h3>
             <h4>{{ outcome.description }}</h4>
-            <p>{{ ::displayDate(outcome.created) }}</p>
+            <p>{{ ::outcome.created | tlDate }}</p>
           </div>
           <md-icon class="md-secondary" ng-click="addOrUpdateOutcome($event, outcome)" aria-label="Edit">mode_edit</md-icon>
           <md-divider></md-divider>

@@ -184,6 +184,13 @@
         "URL": "URL",
         "FILE": "File"
       },
+      "CREATE_UPDATE_OUTCOME": {
+        "CREATE_HEADLINE": "Add new outcome",
+        "UPDATE_HEADLINE": "Update an outcome",
+        "FILE_CREATE": "File",
+        "FILE_UPDATE": "Upload a file to create a new version",
+        "VERSIONS": "Existing outcome versions"
+      },
       "PANELS": {
         "PARTICIPANTS": {
           "HEADER": "Participants"
