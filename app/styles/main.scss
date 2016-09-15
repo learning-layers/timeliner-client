@@ -336,6 +336,60 @@ md-icon.tl-remove {
     }
   }
 
+  .vis-group.tl-project-timeline-outcome {
+    &.tl-outcome-color-1 {
+      .icon-file, .mdi {
+        color: $tl-color-blue;
+      }
+    }
+    &.tl-outcome-color-2 {
+      .icon-file, .mdi {
+        color: $tl-color-yellow;
+      }
+    }
+    &.tl-outcome-color-3 {
+      .icon-file, .mdi {
+        color: $tl-color-orange;
+      }
+    }
+    &.tl-outcome-color-4 {
+      .icon-file, .mdi {
+        color: $tl-color-green;
+      }
+    }
+    &.tl-outcome-color-5 {
+      .icon-file, .mdi {
+        color: $tl-color-purple;
+      }
+    }
+    &.tl-outcome-color-6 {
+      .icon-file, .mdi {
+        color: $tl-color-white;
+      }
+    }
+  }
+
+  .vis-label.tl-project-timeline-outcome {
+    &.tl-outcome-color-1 {
+      border-left: 5px solid $tl-color-blue;
+    }
+    &.tl-outcome-color-2 {
+      border-left: 5px solid $tl-color-yellow;
+    }
+    &.tl-outcome-color-3 {
+      border-left: 5px solid $tl-color-orange;
+    }
+    &.tl-outcome-color-4 {
+      border-left: 5px solid $tl-color-green;
+    }
+    &.tl-outcome-color-5 {
+      border-left: 5px solid $tl-color-purple;
+    }
+    &.tl-outcome-color-6 {
+      border-left: 5px solid $tl-color-white;
+    }
+  }
+
   .vis-item-content {
     .tl-annotation-title, .tl-milestone-title, .tl-task-title {
       color: $tl-timeline-text-color;

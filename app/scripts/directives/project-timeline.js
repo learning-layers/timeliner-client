@@ -19,6 +19,8 @@ angular.module('timelinerApp')
         updateTime: true
       }
     };
+    var outcomeIndex = 2;
+    var outcomeColor = 1;
 
     function generateIconHtml(type, color, title) {
       var styles = [];
@@ -86,6 +88,35 @@ angular.module('timelinerApp')
       };
     }
 
+    function getNextOutcomeIndex() {
+      return outcomeIndex++;
+    }
+
+    function getNextOutcomeColor() {
+      if ( outcomeColor <= 6 ) {
+        return outcomeColor++;
+      } else if ( outcomeColor > 6 ){
+        outcomeColor = 1;
+      }
+
+      return outcomeColor++;
+    }
+
+    function generateOutcomeDataSetItem(outcome, isUpdate) {
+      var outcomeItem = {
+        content: $sanitize(outcome.title),
+        id: 'timeline-outcome-' + outcome._id,
+        title: outcome.description
+      };
+
+      if ( !isUpdate ) {
+        outcomeItem.className = 'tl-project-timeline-outcome tl-outcome-color-' + getNextOutcomeColor();
+        outcomeItem.order = getNextOutcomeIndex();
+      }
+
+      return outcomeItem;
+    }
+
     function generateVersionDataSetItem(outcomeId, version) {
       return {
         id: version._id,
@@ -94,7 +125,7 @@ angular.module('timelinerApp')
         content: generateMdiIconHtml(ProjectsService.getIcon(version)),
         group: 'timeline-outcome-' + outcomeId,
         start: new Date(version.created),
-        title: '',
+        title: $sanitize(version.file.name),
         type: 'point',
         editable: false
       };
@@ -144,7 +175,13 @@ angular.module('timelinerApp')
         var groups = null;
 
         timelineOptions.onAdd = function(item) {
-          scope.$emit('tl:timeline:item:add', item);
+          if ( item.group && item.group.startsWith('timeline-outcome-') ) {
+            item.id = item.group.replace('timeline-outcome-', '');
+            item.group = 'timeline-outcomes';
+            scope.$emit('tl:timeline:item:update', item);
+          } else {
+            scope.$emit('tl:timeline:item:add', item);
+          }
         };
         timelineOptions.onUpdate = function(item) {
           if ( item.editable === true ) {
@@ -178,6 +215,8 @@ angular.module('timelinerApp')
             // TODO See if the data sets would also need to be destroyed
             // Another way would be to just clear the data sets and reuse old ones
             timeline.destroy();
+            outcomeIndex = 2;
+            outcomeColor = 1;
           }
 
           timeline = new $window.vis.Timeline(element[0]);
@@ -230,14 +269,8 @@ angular.module('timelinerApp')
           }
 
           if ( scope.data.outcomes.length > 0 ) {
-            _(scope.data.outcomes).each(function(outcome, index) {
-              groups.add({
-                className: 'tl-project-timeline-outcome',
-                content: $sanitize(outcome.title),
-                id: 'timeline-outcome-' + outcome._id,
-                title: $sanitize(outcome.description),
-                order: 2 + index
-              });
+            _(scope.data.outcomes).each(function(outcome) {
+              groups.add(generateOutcomeDataSetItem(outcome, false));
 
               _(outcome.versions).each(function(version) {
                 items.add(generateVersionDataSetItem(outcome._id, version));
@@ -334,6 +367,35 @@ angular.module('timelinerApp')
             start: task.start,
             end: task.end
           });
+        });
+
+        scope.$on('tl:timeline:add:outcome', function(ev, outcome) {
+          ev.preventDefault();
+          groups.add(generateOutcomeDataSetItem(outcome, false));
+
+          _(outcome.versions).each(function(version) {
+            items.add(generateVersionDataSetItem(outcome._id, version));
+          });
+
+          items.add(generateOutcomeLifeSpanDataSetItem(outcome._id, outcome.versions[0].created, outcome.versions[outcome.versions.length-1].created));
+        });
+        scope.$on('tl:timeline:update:outcome', function(ev, outcome) {
+          ev.preventDefault();
+          groups.update(generateOutcomeDataSetItem(outcome, true));
+
+          _(outcome.versions).each(function(version) {
+            items.update(generateVersionDataSetItem(outcome._id, version));
+          });
+
+          items.update(generateOutcomeLifeSpanDataSetItem(outcome._id, outcome.versions[0].created, outcome.versions[outcome.versions.length-1].created));
+        });
+        scope.$on('tl:timeline:delete:outcome', function(ev, outcome) {
+          groups.remove('timeline-outcome-' + outcome._id);
+
+          _(outcome.versions).each(function(version) {
+            items.remove(version._id);
+          });
+          items.remove(outcome._id + '-life-span');
         });
       }
     };

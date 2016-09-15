@@ -76,6 +76,11 @@ angular.module('timelinerApp')
       });
     }
 
+    function findOutcomeById(id) {
+      return _($scope.projectTimelineData.outcomes).find(function(o) {
+        return o._id === id;
+      });
+    }
 
     function socketConnectCallback() {
       if ( $scope.project ) {
@@ -463,6 +468,8 @@ angular.module('timelinerApp')
         $scope.addOrUpdateMilestone(null, findMilestoneById(data.id));
       } else if ( data.group === 'timeline-tasks' ) {
         $scope.addOrUpdateTask(null, findTaskById(data.id));
+      } else if ( data.group === 'timeline-outcomes' ) {
+        $scope.addOrUpdateOutcome(null, findOutcomeById(data.id));
       } else {
         $log.error('Unhandled type updated', ev, data);
       }
