@@ -7,11 +7,11 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService) {
     var timelineOptions = {
-      groupOrder: 'position',
+      groupOrder: 'order',
       zoomMax: 1.578e+11, // 5 years
-      zoomMin: 2.63e+9, // 1 month
+      zoomMin: 8.64e+7, // 1 day
       editable: {
         add: true,
         remove: false,
@@ -31,6 +31,19 @@ angular.module('timelinerApp')
       }
 
       return '<span class="icon-' + type + '"' + ( ( styles.length > 0 ) ? ' styles="' + styles.join(';') + '"' : '' ) + ( ( title ) ? 'title="' + title + '"' : '' ) +'></span>';
+    }
+
+    function generateMdiIconHtml(type, color, title) {
+      var styles = [];
+
+      if ( color ) {
+        styles.append('color:' + color);
+      }
+      if ( !title ) {
+        title = '';
+      }
+
+      return '<span class="mdi ' + type + '"' + ( ( styles.length > 0 ) ? ' styles="' + styles.join(';') + '"' : '' ) + ( ( title ) ? 'title="' + title + '"' : '' ) +'></span>';
     }
 
     function generateAnnotationDataSetItem(annotation) {
@@ -66,10 +79,36 @@ angular.module('timelinerApp')
         content: '<div class="tl-task-title">' + $sanitize(task.title) + '</div>',
         group: 'timeline-tasks',
         type: 'range',
-        start: task.start,
-        end: task.end,
+        start: new Date(task.start),
+        end: new Date(task.end),
         title: task.description,
         editable: true
+      };
+    }
+
+    function generateVersionDataSetItem(outcomeId, version) {
+      return {
+        id: version._id,
+        outcomeId: outcomeId,
+        className: 'tl-project-timeline-outcome-version',
+        content: generateMdiIconHtml(ProjectsService.getIcon(version)),
+        group: 'timeline-outcome-' + outcomeId,
+        start: new Date(version.created),
+        title: '',
+        type: 'point',
+        editable: false
+      };
+    }
+
+    function generateOutcomeLifeSpanDataSetItem(outcomeId, start, end) {
+      return {
+        id: outcomeId + '-life-span',
+        className: 'tl-project-timeline-outcome-life-span',
+        content: '',
+        group: 'timeline-outcome-' + outcomeId,
+        start: new Date(start),
+        end: new Date(end),
+        type: 'background'
       };
     }
 
@@ -110,6 +149,8 @@ angular.module('timelinerApp')
         timelineOptions.onUpdate = function(item) {
           if ( item.editable === true ) {
             scope.$emit('tl:timeline:item:update', item);
+          } else if ( item.className === 'tl-project-timeline-outcome-version' ) {
+            $window.open( ProjectsService.generateOutcomeDownloadUrl(item.outcomeId, item.id), '_blank');
           }
         };
         timelineOptions.onMove = function(item, callback) {
@@ -150,19 +191,22 @@ angular.module('timelinerApp')
             className: 'tl-project-timeline-milestones',
             content: $translate.instant('VIEWS.PROJECT.TIMELINE.MILESTONES'),
             id: 'timeline-milestones',
-            title: $translate.instant('VIEWS.PROJECT.TIMELINE.MILESTONES')
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.MILESTONES'),
+            order: 1
           });
           groups.add({
             className: 'tl-project-timeline-annotations',
             content: $translate.instant('VIEWS.PROJECT.TIMELINE.ANNOTATIONS'),
             id: 'timeline-annotations',
-            title: $translate.instant('VIEWS.PROJECT.TIMELINE.ANNOTATIONS')
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.ANNOTATIONS'),
+            order: 9998
           });
           groups.add({
             className: 'tl-project-timeline-tasks',
             content: $translate.instant('VIEWS.PROJECT.TIMELINE.TASKS'),
             id: 'timeline-tasks',
-            title: $translate.instant('VIEWS.PROJECT.TIMELINE.TASKS')
+            title: $translate.instant('VIEWS.PROJECT.TIMELINE.TASKS'),
+            order: 9999
           });
 
           if ( scope.data.annotations.length > 0 ) {
@@ -182,6 +226,24 @@ angular.module('timelinerApp')
               if ( task.start && task.end ) {
                 items.add(generateTaskDataSetItem(task));
               }
+            });
+          }
+
+          if ( scope.data.outcomes.length > 0 ) {
+            _(scope.data.outcomes).each(function(outcome, index) {
+              groups.add({
+                className: 'tl-project-timeline-outcome',
+                content: $sanitize(outcome.title),
+                id: 'timeline-outcome-' + outcome._id,
+                title: $sanitize(outcome.description),
+                order: 2 + index
+              });
+
+              _(outcome.versions).each(function(version) {
+                items.add(generateVersionDataSetItem(outcome._id, version));
+              });
+
+              items.add(generateOutcomeLifeSpanDataSetItem(outcome._id, outcome.versions[0].created, outcome.versions[outcome.versions.length-1].created));
             });
           }
 

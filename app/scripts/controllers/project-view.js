@@ -16,7 +16,7 @@ angular.module('timelinerApp')
       milestones: [],
       annotations: [],
       tasks: [],
-      outomes: []
+      outcomes: []
     };
     $scope.resouces = [];
 

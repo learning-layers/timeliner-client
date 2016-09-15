@@ -165,13 +165,16 @@ md-icon.tl-remove {
 .vis-timeline {
   border: none;
 
-  [class^="icon-"], [class*=" icon-"] {
+  [class^="icon-"], [class*=" icon-"], [class^="mdi-"], [class*=" mdi-"] {
     font-size: 30px;
   }
 
   .vis-panel.vis-left {
     .vis-labelset {
       .vis-label {
+        color: $tl-timeline-text-color;
+        text-transform: uppercase;
+        font-weight: bold;
         border-bottom-color: $tl-timeline-visible-border-bottom-color;
       }
     }
@@ -274,6 +277,24 @@ md-icon.tl-remove {
     border: 1px dashed;
     background-color: transparent;
     z-index: 1;
+  }
+
+  .vis-item.vis-point.tl-project-timeline-outcome-version {
+    border: none;
+    cursor: pointer !important;
+    background-color: transparent;
+
+    .icon-file, .mdi {
+      color: #cac5bb;
+    }
+  }
+
+  .vis-item.vis-dot.tl-project-timeline-outcome-version {
+    display: none;
+  }
+
+  .vis-item.vis-background.tl-project-timeline-outcome-life-span {
+    background-color: #444953;
   }
 
   .vis-item.vis-line, .vis-item.vis-dot, .vis-item.vis-box {

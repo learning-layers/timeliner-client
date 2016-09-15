@@ -232,6 +232,9 @@ angular.module('timelinerApp')
 
         return icon;
       },
+      generateOutcomeDownloadUrl: function(outcomeId, versionId) {
+        return appConfig.backendUrl + '/download/outcomes/' + outcomeId + '/versions/' + versionId;
+      },
       create: projectsResource.create,
       get: projectsResource.get,
       update: projectsResource.update,

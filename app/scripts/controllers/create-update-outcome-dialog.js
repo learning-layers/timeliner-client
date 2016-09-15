@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateOutcomeDialogCtrl', function ($scope, $mdDialog, $window, project, outcome, ProjectsService, SystemMessagesService, appConfig) {
+  .controller('CreateUpdateOutcomeDialogCtrl', function ($scope, $mdDialog, $window, project, outcome, ProjectsService, SystemMessagesService) {
     function getFormData() {
       var formData = new FormData();
       formData.append('title', $scope.model.title);
@@ -123,7 +123,7 @@ angular.module('timelinerApp')
 
     $scope.downloadVersion = function(ev, version) {
       if ( version.file ) {
-        $window.open( appConfig.backendUrl + '/download/outcomes/' + outcome._id + '/versions/' + version._id, '_blank');
+        $window.open( ProjectsService.generateOutcomeDownloadUrl(outcome._id, version._id), '_blank');
       }
     };
   });
