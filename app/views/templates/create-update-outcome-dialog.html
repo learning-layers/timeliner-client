@@ -40,10 +40,11 @@
             <md-list-item class="md-3-line" ng-repeat="version in versions">
               <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(version) }}" class="md-avatar-icon"></md-icon>
               <div class="md-list-item-text" layout="column">
-                <h3>{{ ::$index+1 }}. {{ ::version.file.name }}</h3>
+                <h3><a ng-href="{{ ::getVersionDownloadLink(version) }}" target="_blank">{{ ::$index+1 }}. {{ ::version.file.name }}</a></h3>
                 <h4>{{ ::version.created | tlDate : true }}</h4>
                 <p>{{ ::bytesToHumanReadable(version.file.size) }}</p>
               </div>
+              <img ng-src="{{ ::getUserImage(version.creator) }}" class="md-avatar" alt="icon" title="{{ ::getUserFullName(version.creator) }}" draggable="false"/>
               <md-icon class="md-secondary" ng-click="downloadVersion($event, version)" aria-label="Download">file_download</md-icon>
               <md-divider ng-if="!$last"></md-divider>
             </md-list-item>
