@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService, UsersService) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService, UsersService, $) {
     var timelineOptions = {
       groupOrder: 'order',
       zoomMax: 1.578e+11, // 5 years
@@ -34,19 +34,6 @@ angular.module('timelinerApp')
       }
 
       return '<span class="icon-' + type + '"' + ( ( styles.length > 0 ) ? ' styles="' + styles.join(';') + '"' : '' ) + ( ( title ) ? 'title="' + title + '"' : '' ) +'></span>';
-    }
-
-    function generateMdiIconHtml(type, color, title) {
-      var styles = [];
-
-      if ( color ) {
-        styles.append('color:' + color);
-      }
-      if ( !title ) {
-        title = '';
-      }
-
-      return '<span class="mdi ' + type + '"' + ( ( styles.length > 0 ) ? ' styles="' + styles.join(';') + '"' : '' ) + ( ( title ) ? 'title="' + title + '"' : '' ) +'></span>';
     }
 
     function generateAnnotationDataSetItem(annotation) {
@@ -180,7 +167,7 @@ angular.module('timelinerApp')
         id: version._id,
         outcomeId: outcomeId,
         className: 'tl-project-timeline-outcome-version',
-        content: generateMdiIconHtml(ProjectsService.getIcon(version)),
+        content: generateIconHtml('file'),
         group: 'timeline-outcome-' + outcomeId,
         start: new Date(version.created),
         title: $sanitize(version.file.name),

@@ -9,4 +9,8 @@ angular.module('htk.common', [])
     function($window) {
       return $window._;
     }]
+  ).factory('$', ['$window',
+    function($window) {
+      return $window.$;
+    }]
   );

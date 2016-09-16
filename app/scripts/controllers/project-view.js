@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $) {
     $scope.loadingData = false;
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
@@ -504,14 +504,14 @@ angular.module('timelinerApp')
 
       var objectType;
 
-      if(data.dragType == 'participant'){
-        objectType = 'participants'
-      } else if (data.dragType == 'resource') {
+      if(data.dragType === 'participant'){
+        objectType = 'participants';
+      } else if (data.dragType === 'resource') {
         objectType = 'resources';
         SystemMessagesService.showWarning('Not yet implemented');
       }
 
-      if(data.dropType == 'task' && data.dragType == 'participant'){
+      if(data.dropType === 'task' && data.dragType === 'participant'){
         ProjectsService.addObjectToTask({
           project: $scope.project._id,
           task: data.dropId,
@@ -521,7 +521,7 @@ angular.module('timelinerApp')
           $log.debug('Task update success', response);
           SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
         }, function(err) {
-          if (err.status == 409) {
+          if (err.status === 409) {
             SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');
           } else {
             $log.error('Task update error', err);
