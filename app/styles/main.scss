@@ -25,6 +25,12 @@ $tl-timeline-visible-border-bottom-color: #23252b;
   border-radius: 50%;
 }
 
+@mixin tl-rotate($value) {
+  -ms-transform: rotate($value);
+  -webkit-transform: rotate($value);
+  transform: rotate($value);
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
@@ -495,4 +501,8 @@ md-icon.tl-remove {
     background-color: #23252b;
     border-radius: 4px;
   }
+}
+
+.tl-rotate-180 {
+  @include tl-rotate(180deg);
 }
