@@ -517,9 +517,9 @@ angular.module('timelinerApp')
           task: data.dropId,
           objectType: objectType,
           objectId: data.dragId
-        }, {}, function(response) {
-          $log.debug('Task update success', response);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
+        }, {}, function() {
+          //$log.debug('Task update success', response);
+          //SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
         }, function(err) {
           if (err.status === 409) {
             SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');

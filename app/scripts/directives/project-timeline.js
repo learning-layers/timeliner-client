@@ -18,7 +18,8 @@ angular.module('timelinerApp')
         updateGroup: false,
         updateTime: true
       },
-      dataAttributes: ['tl-drop-id', 'tl-drop-type']
+      dataAttributes: ['tl-drop-id', 'tl-drop-type'],
+      stack: false
     };
     var outcomeIndex = 2;
     var outcomeColor = 1;
@@ -129,7 +130,8 @@ angular.module('timelinerApp')
         start: new Date(task.start),
         end: new Date(task.end),
         title: task.description,
-        editable: true
+        editable: true,
+        subgroup: 'timeline-tasks-' + task._id
       };
     }
 
