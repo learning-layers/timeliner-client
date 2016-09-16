@@ -127,7 +127,7 @@ angular.module('timelinerApp')
 
     $scope.downloadVersion = function(ev, version) {
       if ( version.file ) {
-        $window.open( $scope.getVersionDownloadLink(version), '_blank');
+        $window.open( $scope.getVersionDownloadLink(version) + '?dl', '_blank');
       }
     };
 

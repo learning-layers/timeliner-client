@@ -236,6 +236,9 @@ angular.module('timelinerApp')
 
         return icon;
       },
+      generateResourceDownloadUrl: function(resourceId) {
+        return  appConfig.backendUrl + '/download/resources/' + resourceId;
+      },
       generateOutcomeDownloadUrl: function(outcomeId, versionId) {
         return appConfig.backendUrl + '/download/outcomes/' + outcomeId + '/versions/' + versionId;
       },

@@ -9,11 +9,19 @@
  */
 angular.module('timelinerApp')
   .controller('ResourcesPanelCtrl', function ($scope, $window, appConfig, ProjectsService) {
+    $scope.getResourceUrl = function(resource) {
+      if ( resource.url ) {
+        return resource.url;
+      } else if ( resource.file ) {
+        return ProjectsService.generateResourceDownloadUrl(resource._id);
+      }
+    };
+
     $scope.openResource = function(ev, resource) {
       if ( resource.url ) {
         $window.open(resource.url, '_blank');
       } else if ( resource.file ) {
-        $window.open( appConfig.backendUrl + '/download/resources/' + resource._id, '_blank');
+        $window.open( $scope.getResourceUrl(resource) + '?dl', '_blank');
       }
     };
 
