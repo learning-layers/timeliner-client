@@ -20,7 +20,7 @@
         <md-button ng-disabled="updating" aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.ACTIONS' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
           <md-icon md-menu-origin>more_vert</md-icon>
         </md-button>
-        <md-menu-content width="4">
+        <md-menu-content width="4" md-colors="{ background: 'primary-700' }">
           <md-menu-item>
             <md-button class="md-accent" ng-click="doJoin(project, $index, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.JOIN' | translate }}">
               <md-icon md-menu-align-target>check_circle</md-icon>
@@ -62,7 +62,7 @@
         <md-button aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.ACTIONS' | translate }}" class="md-icon-button" ng-click="openProjectMenu($event, $mdOpenMenu)">
           <md-icon md-menu-origin>more_vert</md-icon>
         </md-button>
-        <md-menu-content width="4">
+        <md-menu-content width="4" md-colors="{ background: 'primary-700' }">
           <md-menu-item>
             <md-button ng-click="doEdit(project, $event)" aria-label="{{ 'VIEWS.PROJECT_LIST.EDIT' | translate }}">
               <md-icon md-menu-align-target>edit</md-icon>
