@@ -508,10 +508,10 @@ angular.module('timelinerApp')
         objectType = 'participants';
       } else if (data.dragType === 'resource') {
         objectType = 'resources';
-        SystemMessagesService.showWarning('Not yet implemented');
+        //SystemMessagesService.showWarning('Not yet implemented');
       }
 
-      if(data.dropType === 'task' && data.dragType === 'participant'){
+      if(data.dropType === 'task'){
         ProjectsService.addObjectToTask({
           project: $scope.project._id,
           task: data.dropId,
@@ -522,7 +522,12 @@ angular.module('timelinerApp')
           //SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
         }, function(err) {
           if (err.status === 409) {
-            SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');
+            if (data.dragType === 'participant') {
+              SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');
+            } else if (data.dragType === 'resource') {
+              SystemMessagesService.showError('TOASTS.ERRORS.RESOURCE_EXISTS');
+            }
+
           } else {
             $log.error('Task update error', err);
             SystemMessagesService.showError('TOASTS.ERRORS.SERVER_ERROR');

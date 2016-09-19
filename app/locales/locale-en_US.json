@@ -269,7 +269,8 @@
       "FORBIDDEN": "Forbidden!",
       "NOT_FOUND": "Not found!",
       "METHOD_NOT_ALLOWED": "Method not allowed!",
-      "PARTICIPANT_EXISTS": "Participant already exists!"
+      "PARTICIPANT_EXISTS": "Participant already exists!",
+      "RESOURCE_EXISTS": "Resource already exists!"
     }
   }
 }

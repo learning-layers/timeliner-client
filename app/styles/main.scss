@@ -206,7 +206,8 @@ md-icon.tl-remove {
     color: #7b7e84;
   }
 
-  img.tl-timeline-participant {
+  img.tl-timeline-participant,
+  img.tl-timeline-task-participant {
     width: 30px;
     height: 30px;
     vertical-align: middle;
@@ -407,18 +408,26 @@ md-icon.tl-remove {
       line-height: 30px;
     }
 
-    .tl-timeline-project-participants {
+    .tl-timeline-task-participants,
+    .tl-timeline-task-resources {
       display: inline-block;
       margin-left: 10px;
       //float: right;
 
-      .tl-timeline-participant {
+      .tl-timeline-task-participant {
         margin-left: 1px;
         margin-right: 1px;
         -webkit-transition: all 0.5s ease;
         transition: all 0.5s ease;
       }
+
+      .tl-timeline-task-resource {
+        font-size: 24px;
+        color: #ffffff;
+        vertical-align: middle;
+      }
     }
+
   }
 
   .vis-item.vis-selected {

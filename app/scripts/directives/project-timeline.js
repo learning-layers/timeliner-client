@@ -107,14 +107,24 @@ angular.module('timelinerApp')
     };
 
     function generateParticipantBlockHtml(participants) {
-      var html = '<div class="tl-timeline-project-participants">';
+      var html = '<div class="tl-timeline-task-participants">';
 
       angular.forEach(participants, function (participant) {
-       html += '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
+       html += '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-task-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
       });
 
       html += '</div>';
+      return html;
+    }
 
+    function generateResourceBlockHtml(resources) {
+      var html = '<div class="tl-timeline-task-resources">';
+
+      angular.forEach(resources, function (resource) {
+        html += '<span class="mdi ' + ProjectsService.getIcon(resource) + ' tl-timeline-task-resource" title="' + resource.title + '"></span>';
+      });
+
+      html += '</div>';
       return html;
     }
 
@@ -122,7 +132,7 @@ angular.module('timelinerApp')
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + '</div>',
+        content: '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
         'tl-drop-id': task._id,
         'tl-drop-type': 'task',
         group: 'timeline-tasks',
