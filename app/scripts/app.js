@@ -59,7 +59,8 @@ angular.module('timelinerApp')
       .dark()
       .primaryPalette('tlPalette', {
         'default': '500',
-        'hue-1': '900'
+        'hue-1': '900',
+        'hue-3': '700'
       })
       .backgroundPalette('tlPalette', {
         'default': '800',
