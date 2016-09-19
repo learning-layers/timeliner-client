@@ -39,18 +39,33 @@ angular.module('timelinerApp')
     });
   }])
   .config(function($mdThemingProvider) {
+    var tlPalette = $mdThemingProvider.extendPalette('blue-grey', {
+      '50': 'd5d5d7',
+      '100': 'c0c1c3',
+      '200': 'abacaf',
+      '300': '96989b',
+      '400': '818387',
+      '500': '6c6e73',
+      '600': '575a5f',
+      '700': '42454b',
+      '800': '2e3138',
+      '900': '222222'
+    });
+
+  $mdThemingProvider.definePalette('tlPalette', tlPalette);
+
     $mdThemingProvider
       .theme('default')
       .dark()
-      .primaryPalette('blue-grey', {
+      .primaryPalette('tlPalette', {
         'default': '500',
-        'hue-1': '700'
+        'hue-1': '900'
       })
-      .backgroundPalette('blue-grey', {
+      .backgroundPalette('tlPalette', {
         'default': '800',
         'hue-1': '900'
       })
-      .accentPalette('green');
+      .accentPalette('light-blue');
       $mdThemingProvider.theme('info-toast');
       $mdThemingProvider.theme('success-toast');
       $mdThemingProvider.theme('warning-toast');
