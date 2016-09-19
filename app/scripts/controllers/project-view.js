@@ -19,6 +19,7 @@ angular.module('timelinerApp')
       outcomes: []
     };
     $scope.resouces = [];
+    $scope.activities = [];
 
 
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
@@ -220,6 +221,11 @@ angular.module('timelinerApp')
       $scope.$broadcast('tl:timeline:delete:outcome', outcome);
     }
 
+    function socketCreateActivityCallback(activity) {
+      $log.debug('Socket create:activity', activity);
+      $scope.activities.unshift(activity);
+    }
+
     if ( $scope.isLoggedIn() ) {
       $scope.loadingData = true;
 
@@ -249,6 +255,7 @@ angular.module('timelinerApp')
         SocketService.on('create:outcome', socketCreateOutcomeCallback);
         SocketService.on('update:outcome', socketUpdateOutcomeCallback);
         SocketService.on('delete:outcome', socketDeleteOutcomeCallback);
+        SocketService.on('create:activity', socketCreateActivityCallback);
       }, function(err) {
         // TODO It would make sense to display a meaningful system message if that ever happened
         $log.debug('ERROR getting project', err);
@@ -296,6 +303,14 @@ angular.module('timelinerApp')
       }, function(err) {
         $log.error('ERROR getting project outcomes', err);
       });
+      var activityResource = ProjectsService.getProjectActivities({
+        project: $stateParams.id
+      }, function(result) {
+        $scope.activities = result.data;
+        $log.debug('Loaded activities', result);
+      }, function(err) {
+        $log.error('ERROR getting project activities', err);
+      });
 
       // Make sure to signal end of data loading
       $q.all([projectResource.$promise,
@@ -303,7 +318,8 @@ angular.module('timelinerApp')
         annotationResource.$promise,
         taskResource.$promise,
         resourceResource.$promise,
-        outcomeResource.$promise]).then(function() {
+        outcomeResource.$promise,
+        activityResource.$promise]).then(function() {
         $scope.loadingData = false;
       }, function() {
         $scope.loadingData = false;
@@ -561,5 +577,6 @@ angular.module('timelinerApp')
       SocketService.off('create:outcome', socketCreateOutcomeCallback);
       SocketService.off('update:outcome', socketUpdateOutcomeCallback);
       SocketService.off('delete:outcome', socketDeleteOutcomeCallback);
+      SocketService.off('create:activity', socketCreateActivityCallback);
     });
   });

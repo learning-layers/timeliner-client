@@ -142,6 +142,9 @@ angular.module('timelinerApp')
       addObjectToTask: {
         url: apiLocation + '/:project/tasks/:task/:objectType/:objectId',
         method: 'POST'
+      },
+      getProjectActivities: {
+        url: apiLocation + '/:project/activities'
       }
     });
 
@@ -271,6 +274,7 @@ angular.module('timelinerApp')
       createOutcome: projectsResource.createOutcome,
       updateOutcome: projectsResource.updateOutcome,
       deleteOutcome: projectsResource.deleteOutcome,
-      addObjectToTask: projectsResource.addObjectToTask
+      addObjectToTask: projectsResource.addObjectToTask,
+      getProjectActivities: projectsResource.getProjectActivities
     };
   });
