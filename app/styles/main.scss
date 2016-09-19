@@ -515,3 +515,11 @@ md-icon.tl-remove {
 .tl-rotate-180 {
   @include tl-rotate(180deg);
 }
+
+.md-fab-action-item {
+  .md-button.md-fab.md-mini {
+    line-height: 36px;
+    width: 36px;
+    height: 36px;
+  }
+}
