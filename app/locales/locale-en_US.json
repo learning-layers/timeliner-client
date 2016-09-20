@@ -205,7 +205,16 @@
           "HEADER": "Tasks"
         },
         "ACTIVITY_STREAM": {
-          "HEADER": "Activity stream"
+          "HEADER": "Activity stream",
+          "TAB": {
+            "CHAT": "Chat",
+            "STREAM": "Stream"
+          },
+          "MESSAGE_FORM": {
+            "MESSAGE": {
+              "PLACEHOLDER": "Type message text"
+            }
+          }
         }
       },
       "TIMELINE": {

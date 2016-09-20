@@ -145,6 +145,13 @@ angular.module('timelinerApp')
       },
       getProjectActivities: {
         url: apiLocation + '/:project/activities'
+      },
+      getProjectMessages: {
+        url: apiLocation + '/:project/messages'
+      },
+      createMessage: {
+        url: apiLocation + '/:project/messages',
+        method: 'POST'
       }
     });
 
@@ -275,6 +282,8 @@ angular.module('timelinerApp')
       updateOutcome: projectsResource.updateOutcome,
       deleteOutcome: projectsResource.deleteOutcome,
       addObjectToTask: projectsResource.addObjectToTask,
-      getProjectActivities: projectsResource.getProjectActivities
+      getProjectActivities: projectsResource.getProjectActivities,
+      getProjectMessages: projectsResource.getProjectMessages,
+      createMessage: projectsResource.createMessage
     };
   });

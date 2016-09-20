@@ -91,7 +91,7 @@
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</span>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="Close">
             <md-icon>close</md-icon>
         </md-button>
       </div>
@@ -118,7 +118,7 @@
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</span>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="Close">
             <md-icon>close</md-icon>
         </md-button>
       </div>
@@ -151,7 +151,7 @@
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.OUTCOMES.HEADER</span>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="Close">
             <md-icon>close</md-icon>
         </md-button>
       </div>
@@ -179,7 +179,7 @@
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.TASKS.HEADER</span>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="Close">
             <md-icon>close</md-icon>
         </md-button>
       </div>
@@ -201,28 +201,57 @@
 
   <md-divider></md-divider>
 
-  <div flex-gt-sm="20" flex>
+  <div flex-gt-sm="20" flex ng-controller="ActivityStreamPanelCtrl">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.HEADER</span>
         <span flex></span>
-        <md-button class="md-icon-button" aria-label="More">
+        <md-button class="md-icon-button" aria-label="Close">
             <md-icon>close</md-icon>
         </md-button>
       </div>
     </md-toolbar>
     <md-content style="max-height:230px;">
-      <md-list flex class="md-dense">
-        <md-list-item class="md-3-line" ng-repeat="activity in activities">
-          <img ng-src="{{ ::getUserImage(activity.creator) }}" class="md-avatar" alt="{{ ::getUserFullName(activity.creator) }}">
-          <div class="md-list-item-text" layout="column">
-            <h3>{{ activity.activityType }} : {{ activity.objectType }}</h3>
-            <h4>{{ ::activity.created | tlDate : true }}</h4>
-            <p>{{ activity.data.title }}</p>
-          </div>
-          <md-divider></md-divider>
-        </md-list-item>
-      </md-list>
+      <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
+        <md-tab label="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.TAB.CHAT' | translate }}">
+          <md-content class="md-padding">
+            <div>
+              <form name="messageForm" ng-submit="submitMessage()" novalidate>
+                <div layout="row" layout-align="space-between center">
+                  <md-input-container class="md-block" flex="100">
+                    <textarea ng-model="model.message" name="message" md-maxlength="150" rows="1" md-no-autogrow="true" md-select-on-focus placeholder="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.MESSAGE_FORM.MESSAGE.PLACEHOLDER' | translate }}"></textarea>
+                  </md-input-container>
+                  <md-button type="submit" class="md-icon-button" aria-label="Send" ng-disabled="!canSubmitMessage()">
+                    <md-icon>send</md-icon>
+                  </md-button>
+                </div>
+              </form>
+            </div>
+            <md-list flex class="md-dense">
+              <md-list-item class="md-2-line" ng-repeat="message in messages">
+                <img ng-src="{{ ::getUserImage(message.creator) }}" class="md-avatar" alt="{{ ::getUserFullName(message.creator) }}">
+                <div class="md-list-item-text" layout="column">
+                  <h3>{{ ::message.created | tlDate : true }}</h3>
+                  <p>{{ message.message }}</p>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+          </md-content>
+        </md-tab>
+        <md-tab label="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.TAB.STREAM' | translate }}">
+          <md-list flex class="md-dense">
+            <md-list-item class="md-3-line" ng-repeat="activity in activities">
+              <img ng-src="{{ ::getUserImage(activity.creator) }}" class="md-avatar" alt="{{ ::getUserFullName(activity.creator) }}">
+              <div class="md-list-item-text" layout="column">
+                <h3>{{ activity.activityType }} : {{ activity.objectType }}</h3>
+                <h4>{{ ::activity.created | tlDate : true }}</h4>
+                <p>{{ activity.data.title }}</p>
+              </div>
+              <md-divider></md-divider>
+            </md-list-item>
+          </md-list>
+        </md-tab>
+      </md-tabs>
     </md-content>
   </div>
 </div>
