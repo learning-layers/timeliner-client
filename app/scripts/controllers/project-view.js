@@ -334,7 +334,8 @@ angular.module('timelinerApp')
         resourceResource.$promise,
         outcomeResource.$promise,
         activityResource.$promise,
-        messageResource.$promise]).then(function() {
+        messageResource.$promise]
+      ).then(function() {
         $scope.loadingData = false;
       }, function() {
         $scope.loadingData = false;
@@ -539,7 +540,8 @@ angular.module('timelinerApp')
         objectType = 'participants';
       } else if (data.dragType === 'resource') {
         objectType = 'resources';
-        //SystemMessagesService.showWarning('Not yet implemented');
+      } else if (data.dragType === 'outcome') {
+        objectType = 'outcomes';
       }
 
       if(data.dropType === 'task'){
@@ -557,6 +559,8 @@ angular.module('timelinerApp')
               SystemMessagesService.showError('TOASTS.ERRORS.PARTICIPANT_EXISTS');
             } else if (data.dragType === 'resource') {
               SystemMessagesService.showError('TOASTS.ERRORS.RESOURCE_EXISTS');
+            } else if (data.dragType === 'outcome') {
+              SystemMessagesService.showError('TOASTS.ERRORS.OUTCOME_EXISTS');
             }
 
           } else {

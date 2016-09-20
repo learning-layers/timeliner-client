@@ -23,6 +23,7 @@ angular.module('timelinerApp')
     };
     var outcomeIndex = 2;
     var outcomeColor = 1;
+    var outcomeColors = {};
 
     function generateIconHtml(type, color, title) {
       var styles = [];
@@ -128,11 +129,22 @@ angular.module('timelinerApp')
       return html;
     }
 
+    function generateOutcomeBlockHtml(outcomes) {
+      var html = '<div class="tl-timeline-task-outcomes">';
+
+      angular.forEach(outcomes, function (outcome) {
+        html += '<span class="tl-timeline-task-outcome tl-outcome-color-' + outcomeColors[outcome._id] + '" title="' + outcome.title + '"></span>';
+      });
+
+      html += '</div>';
+      return html;
+    }
+
     function generateTaskDataSetItem(task) {
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
+        content: generateOutcomeBlockHtml(task.outcomes) + '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)" class="tl-timeline-task-content"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
         'tl-drop-id': task._id,
         'tl-drop-type': 'task',
         group: 'timeline-tasks',
@@ -141,7 +153,8 @@ angular.module('timelinerApp')
         end: new Date(task.end),
         title: task.description,
         editable: true,
-        subgroup: 'timeline-tasks-' + task._id
+        subgroup: 'timeline-tasks-' + task._id,
+        outcomes: task.outcomes
       };
     }
 
@@ -167,7 +180,7 @@ angular.module('timelinerApp')
       };
 
       if ( !isUpdate ) {
-        outcomeItem.className = 'tl-project-timeline-outcome tl-outcome-color-' + getNextOutcomeColor();
+        outcomeItem.className = 'tl-project-timeline-outcome tl-outcome-color-' + outcome.color;
         outcomeItem.order = getNextOutcomeIndex();
       }
 
@@ -317,16 +330,10 @@ angular.module('timelinerApp')
             });
           }
 
-          if ( scope.data.tasks.length > 0 ) {
-            _(scope.data.tasks).each(function(task) {
-              if ( task.start && task.end ) {
-                items.add(generateTaskDataSetItem(task));
-              }
-            });
-          }
-
           if ( scope.data.outcomes.length > 0 ) {
             _(scope.data.outcomes).each(function(outcome) {
+              outcome.color = getNextOutcomeColor();
+              outcomeColors[outcome._id] = outcome.color;
               groups.add(generateOutcomeDataSetItem(outcome, false));
 
               _(outcome.versions).each(function(version) {
@@ -334,6 +341,14 @@ angular.module('timelinerApp')
               });
 
               items.add(generateOutcomeLifeSpanDataSetItem(outcome._id, outcome.versions[0].created, outcome.versions[outcome.versions.length-1].created));
+            });
+          }
+
+          if ( scope.data.tasks.length > 0 ) {
+            _(scope.data.tasks).each(function(task) {
+              if ( task.start && task.end ) {
+                items.add(generateTaskDataSetItem(task));
+              }
             });
           }
 
@@ -428,6 +443,8 @@ angular.module('timelinerApp')
 
         scope.$on('tl:timeline:add:outcome', function(ev, outcome) {
           ev.preventDefault();
+          outcome.color = getNextOutcomeColor();
+          outcomeColors[outcome._id] = outcome.color;
           groups.add(generateOutcomeDataSetItem(outcome, false));
 
           _(outcome.versions).each(function(version) {

@@ -4,7 +4,9 @@ $mdi-font-path: "../bower_components/mdi/fonts/";
 $tl-timeline-text-color: #ccc;
 $tl-timeline-selected-text-color: #fff785;
 
-$tl-color-blue: #2898c7;
+$tl-color-cyan: #4fddd4;
+//$tl-color-blue: #2898c7;
+$tl-color-blue: $tl-color-cyan;
 $tl-color-yellow: #e3a616;
 $tl-color-orange: #e14a0f;
 $tl-color-green: #82ad1a;
@@ -412,6 +414,12 @@ md-icon.tl-remove {
       line-height: 30px;
     }
 
+    .tl-timeline-task-content {
+      display: inline-block;
+      padding: 5px;
+      margin-left: 20px;
+    }
+
     .tl-timeline-task-participants,
     .tl-timeline-task-resources {
       display: inline-block;
@@ -432,6 +440,38 @@ md-icon.tl-remove {
       }
     }
 
+    .tl-timeline-task-outcomes {
+      display: inline-block;
+      height: 100%;
+      position: absolute;
+      top: 0;
+
+      .tl-timeline-task-outcome {
+        display: inline-block;
+        //width: 5px;
+        height: 100%;
+
+        &.tl-outcome-color-1 {
+          border-left: 5px solid $tl-color-blue;
+        }
+        &.tl-outcome-color-2 {
+          border-left: 5px solid $tl-color-yellow;
+        }
+        &.tl-outcome-color-3 {
+          border-left: 5px solid $tl-color-orange;
+        }
+        &.tl-outcome-color-4 {
+          border-left: 5px solid $tl-color-green;
+        }
+        &.tl-outcome-color-5 {
+          border-left: 5px solid $tl-color-purple;
+        }
+        &.tl-outcome-color-6 {
+          border-left: 5px solid $tl-color-white;
+        }
+      }
+    }
+
   }
 
   .vis-item.vis-selected {
@@ -448,7 +488,7 @@ md-icon.tl-remove {
 
   .vis-item.vis-range.tl-project-timeline-task {
     background-color: #2aa1d3;
-    border: 5px solid #2aa1d3;
+    border: none;
 
     .vis-item-content {
       display: block;
