@@ -134,6 +134,10 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       ensureAdmin(event);
     }
 
+    if ( toState.name === 'home' && AuthService.isLoggedIn() ) {
+      $state.transitionTo('projects.list');
+      event.preventDefault();
+    }
   });
 
   if ( appConfig.gaTrackingId && $window.ga ) {
