@@ -54,7 +54,7 @@ angular.module('timelinerApp')
         if ( response.status === 401 ) {
           SystemMessagesService.showError('TOASTS.ERRORS.AUTHENTICATION_FAILED');
         } else {
-          SystemMessagesService.showError('TOASTS.ERRORS.SERVER_ERROR');
+          SystemMessagesService.showError('TOASTS.ERRORS.INTERNAL_SERVER_ERROR');
         }
       });
     };

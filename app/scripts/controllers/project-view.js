@@ -565,7 +565,7 @@ angular.module('timelinerApp')
 
           } else {
             $log.error('Task update error', err);
-            SystemMessagesService.showError('TOASTS.ERRORS.SERVER_ERROR');
+            SystemMessagesService.showError('TOASTS.ERRORS.INTERNAL_SERVER_ERROR');
           }
         });
       }

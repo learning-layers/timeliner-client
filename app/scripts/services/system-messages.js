@@ -87,7 +87,7 @@ angular.module('timelinerApp')
               message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
               break;
             default:
-            message = 'TOASTS.ERRORS.SERVER_ERROR';
+            message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
           }
         } else {
           switch(response.status) {
@@ -110,7 +110,7 @@ angular.module('timelinerApp')
               message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
               break;
             default:
-              message = 'TOASTS.ERRORS.SERVER_ERROR';
+              message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
           }
         }
 

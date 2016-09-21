@@ -26,7 +26,7 @@ angular.module('timelinerApp')
         if ( error.status === 409 ) {
           SystemMessagesService.showError('VIEWS.LANDING.TOASTS.ERRORS.EMAIL_EXISTS');
         } else {
-          SystemMessagesService.showError('GENERAL.TOASTS.ERRORS.SERVER_ERROR');
+          SystemMessagesService.showError('TOASTS.ERRORS.INTERNAL_SERVER_ERROR');
         }
         vcRecaptchaService.reload();
       });

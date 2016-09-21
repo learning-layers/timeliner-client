@@ -28,14 +28,6 @@
       },
       "TITLE": "Title",
       "DESCRIPTION": "Description"
-    },
-    "TOASTS": {
-      "SUCCESSES": {
-        "": ""
-      },
-      "ERRORS": {
-        "SERVER_ERROR": "Server error, please contact admin."
-      }
     }
   },
   "TITLES": {
@@ -251,7 +243,6 @@
       "TASK_REMOVED": "Task successfully removed."
     },
     "ERRORS": {
-      "SERVER_ERROR": "Server error, please contact administrator.",
       "AUTHENTICATION_FAILED": "Authentication failed, please try again!",
       "SOCIAL_LOGIN_FAILED": "Social login failed!",
       "SOCIAL_USER_DENIED": "Sign in impossible. You have denied the access for the application!",

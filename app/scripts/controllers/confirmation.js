@@ -32,7 +32,7 @@ angular.module('timelinerApp')
         $state.go('home');
       }, function () {
         $scope.updating = false;
-        SystemMessagesService.showError('GENERAL.TOASTS.ERRORS.SERVER_ERROR');
+        SystemMessagesService.showError('TOASTS.ERRORS.INTERNAL_SERVER_ERROR');
       });
     };
   });
