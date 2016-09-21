@@ -7,13 +7,14 @@
     <md-card flex="100" flex-gt-sm="noshrink" style="max-width: 600px">
       <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
       <md-card-title>
-        <md-card-title-text>
-          <span class="md-headline" translate>VIEWS.LANDING.HEADLINE</span>
+        <md-card-title-text class="tl-text-align-center">
+          <span class="md-headline" translate ng-hide="success">VIEWS.LANDING.HEADLINE</span>
+          <span class="md-headline" translate ng-show="success">VIEWS.LANDING.HEADLINE_USER_CREATED</span>
         </md-card-title-text>
       </md-card-title>
 
-      <md-card-content>
-        <form name="registerForm" ng-submit="createUser()" ng-hide="success">
+      <md-card-content ng-hide="success">
+        <form name="registerForm" ng-submit="createUser()">
           <md-input-container class="md-icon-float md-block">
             <label translate>GENERAL.EMAIL</label>
             <md-icon>email</md-icon>
@@ -26,11 +27,11 @@
 
               <div vc-recaptcha key="captchaKey" theme="dark" ng-model="register.captchaResponse" class="animated fadeInDown" ng-if="!registerForm.email.$pristine"></div>
 
-              <md-button class="md-raised md-accent larger" type="submit" ng-disabled="updating || registerForm.$invalid" translate="VIEWS.CONFIRMATION.REGISTER_BTN"></md-button>
+              <md-button class="md-raised md-accent larger" type="submit" ng-disabled="updating || registerForm.$invalid" translate="VIEWS.CONFIRMATION.REGISTER_BTN" aria-label="Register"></md-button>
 
           </div>
         </form>
-        <h5 layout="row" layout-align="center center" md-colors="::{color: 'primary-300'}">...or register with a social network account:</h5>
+        <h5 layout="row" layout-align="center center" md-colors="::{color: 'primary-300'}" translate>VIEWS.LOGIN.REGISTER_WITH_SOCIAL_NETWORK</h5>
         <div layout="row" layout-align="center center">
           <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="{{ 'VIEWS.LOGIN.FB_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="">
             <md-tooltip md-direction="top" class="tooltip-text">

@@ -86,6 +86,9 @@ angular.module('timelinerApp')
             case 'internal_server_error':
               message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
               break;
+            case 'email_not_sent':
+              message = 'TOASTS.ERRORS.EMIAL_NOT_SENT';
+              break;
             default:
             message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
           }

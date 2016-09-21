@@ -50,10 +50,11 @@
   "VIEWS": {
     "LANDING": {
       "HEADLINE": "Welcome to Timeliner! Enter your email now to start lining your time.",
+      "HEADLINE_USER_CREATED": "Confirmation email has been sent. Please check your inbox in a few minutes.",
       "ALREADY_MEMBER": "Already a member?",
       "TOASTS": {
         "SUCCESSES": {
-          "USER_CREATED": "User created, temporary confirmation link (this will be sent with email to the user)"
+          "USER_CREATED": "Account created, confirmation link has been sent to an email address."
         },
         "ERRORS": {
           "EMAIL_EXISTS": "This email is already registered!"
@@ -70,6 +71,7 @@
     "LOGIN": {
       "HEADLINE": "Welcome back!",
       "SUBHEAD": "Log in",
+      "REGISTER_WITH_SOCIAL_NETWORK": "...or register with a social network account:",
       "SIGN_IN_BTN": "Sign in",
       "FB_BTN_TOOLTIP": "Sign in with Facebook",
       "GOOGLE_BTN_TOOLTIP": "Sign in with Google",
@@ -271,7 +273,8 @@
       "METHOD_NOT_ALLOWED": "Method not allowed!",
       "PARTICIPANT_EXISTS": "Participant already exists!",
       "RESOURCE_EXISTS": "Resource already exists!",
-      "OUTCOME_EXISTS": "Outcome already exists!"
+      "OUTCOME_EXISTS": "Outcome already exists!",
+      "EMAIL_NOT_SENT": "Email message could not be sent!"
     }
   }
 }
