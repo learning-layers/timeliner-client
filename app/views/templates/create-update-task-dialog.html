@@ -29,17 +29,23 @@
         </md-input-container>
 
         <div layout="row" layout-align="center">
-          <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" ng-disabled="updating">
-          </md-datepicker>
-          <div class="validation-messages" ng-messages="taskForm.start.$error">
-            <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
-            <div ng-message="maxdate" translate>GENERAL.FORM.MESSAGES.MAX_DATE</div>
+          <div>
+            <md-datepicker name="start" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.START' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" ng-disabled="updating" ng-required="isStartDateRequired()">
+            </md-datepicker>
+            <div class="validation-messages" ng-messages="taskForm.start.$error">
+              <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+              <div ng-message="required" translate>GENERAL.FORM.MESSAGES.BOTH_DATES_REQUIRED</div>
+              <div ng-message="maxdate" translate>GENERAL.FORM.MESSAGES.MAX_DATE</div>
+            </div>
           </div>
-          <md-datepicker name="end" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.END' | translate }}" md-min-date="model.start" ng-disabled="updating">
-          </md-datepicker>
-          <div class="validation-messages" ng-messages="taskForm.endDate.$error">
-            <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
-            <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
+          <div>
+            <md-datepicker name="end" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT.CREATE_UPDATE_TASK.END' | translate }}" md-min-date="model.start" ng-disabled="updating" ng-required="isEndDateRequired()">
+            </md-datepicker>
+            <div class="validation-messages" ng-messages="taskForm.end.$error">
+              <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
+              <div ng-message="required" translate>GENERAL.FORM.MESSAGES.BOTH_DATES_REQUIRED</div>
+              <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
+            </div>
           </div>
         </div>
     </md-dialog-content>

@@ -23,6 +23,14 @@ angular.module('timelinerApp')
       return !!$scope.model._id;
     };
 
+    $scope.isStartDateRequired = function() {
+      return !!$scope.model.end;
+    };
+
+    $scope.isEndDateRequired = function() {
+      return !!$scope.model.start;
+    };
+
     $scope.submit = function() {
       $scope.updating = true;
       if ( $scope.isEdit() ) {

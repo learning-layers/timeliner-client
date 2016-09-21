@@ -24,7 +24,8 @@
         "INVALID_EMAIL": "This doesn't look like an email",
         "INVALID_DATE": "The entered value is not a date!",
         "MIN_DATE": "End date can't be earlier than the start date!",
-        "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long"
+        "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long",
+        "BOTH_DATES_REQUIRED": "Fill both dates or leave them empty!"
       },
       "TITLE": "Title",
       "DESCRIPTION": "Description"
