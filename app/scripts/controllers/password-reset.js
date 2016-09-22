@@ -49,10 +49,11 @@ angular.module('timelinerApp')
         passwordResetKey: $stateParams.key,
         password: $scope.model.password,
       }, function () {
+        var resetEmail = $scope.model.email;
         $scope.updating = false;
         $scope.model = {};
         $scope.success = true;
-        $state.go('login');
+        $state.go('login', { email: resetEmail });
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.PASSWORD_RESET');
       }, function (response) {
         $scope.updating = false;

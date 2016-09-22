@@ -8,12 +8,16 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($window, $scope, $state, $location, AuthService, SystemMessagesService, UsersService, appConfig) {
+  .controller('LoginCtrl', function ($window, $scope, $state, $stateParams, $location, AuthService, SystemMessagesService, UsersService, appConfig) {
     var timeoutId;
 
     $scope.updating = false;
     $scope.showProgressIndicator = false;
     $scope.model = {};
+
+    if ( $stateParams.email ) {
+      $scope.model.email = $stateParams.email;
+    }
 
     function addProgressIndictorTimeout() {
       return setTimeout(function() {
