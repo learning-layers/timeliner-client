@@ -35,6 +35,7 @@
     "HOME": "Welcome",
     "LOGIN": "Log in",
     "CONFIRM": "Confirm ",
+    "PASSWORD_RESET": "Password reset",
     "PROJECTS_LIST": "My projects",
     "PROJECTS_TIMELINE_LIST": "My projects timeline",
     "MANAGE_OVERVIEW": "Manage overview",
@@ -76,7 +77,15 @@
       "SIGN_IN_BTN": "Sign in",
       "FB_BTN_TOOLTIP": "Sign in with Facebook",
       "GOOGLE_BTN_TOOLTIP": "Sign in with Google",
-      "LINKEDIN_BTN_TOOLTIP": "Sign in with LinkedIn"
+      "LINKEDIN_BTN_TOOLTIP": "Sign in with LinkedIn",
+      "FORGOT_PASSWORD": "Forgot your password?"
+    },
+    "PASSWORD_RESET": {
+      "HEADLINE": "Reset password",
+      "SUBHEAD": "Reset password for an existing account",
+      "REQUEST_RESET_BTN": "Request reset",
+      "RESET_BTN": "Reset",
+      "EMAIL_SENT": "Password reset email has been sent. Please check your inbox in a few minutes."
     },
     "PROJECT_LIST": {
       "HEADLINE": "My projects (participant status)",
@@ -243,7 +252,8 @@
       "MILESTONE_REMOVED": "Milestone successfully removed.",
       "TASK_CREATED": "New task successfully created.",
       "TASK_UPDATED": "Task successfully updated.",
-      "TASK_REMOVED": "Task successfully removed."
+      "TASK_REMOVED": "Task successfully removed.",
+      "PASSWORD_RESET": "Password reset successful. You can now login into the system."
     },
     "ERRORS": {
       "AUTHENTICATION_FAILED": "Authentication failed, please try again!",
@@ -275,7 +285,9 @@
       "PARTICIPANT_EXISTS": "Participant already exists!",
       "RESOURCE_EXISTS": "Resource already exists!",
       "OUTCOME_EXISTS": "Outcome already exists!",
-      "EMAIL_NOT_SENT": "Email message could not be sent!"
+      "EMAIL_NOT_SENT": "Email message could not be sent!",
+      "CAPTCHA_VERIFICATION_INVALID": "Captcha verification failed!",
+      "PASSWORD_RESET_FORBIDDEN": "Password reset for this account is forbidden!"
     }
   }
 }

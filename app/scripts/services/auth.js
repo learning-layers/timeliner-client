@@ -100,6 +100,17 @@ angular.module('timelinerApp')
       me: {
         url: apiLocation + '/me',
         method: 'GET'
+      },
+      requestReset: {
+        url: apiLocation + '/reset/request',
+        method: 'POST'
+      },
+      checkPasswordResetKeyValidity: {
+        url: apiLocation + '/reset/:key'
+      },
+      resetPassword: {
+        url: apiLocation + '/reset',
+        method: 'POST'
       }
     });
 
@@ -114,6 +125,9 @@ angular.module('timelinerApp')
       login: authResource.login,
       loginSocial: authResource.loginSocial,
       me: authResource.me,
+      requestReset: authResource.requestReset,
+      checkPasswordResetKeyValidity: authResource.checkPasswordResetKeyValidity,
+      resetPassword: authResource.resetPassword,
       isLoggedIn: function() {
         if ( hasAuthCookie ) {
           if ( getAuthToken() && getUserId() ) {

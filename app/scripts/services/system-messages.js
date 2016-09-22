@@ -75,7 +75,7 @@ angular.module('timelinerApp')
               message = 'TOASTS.ERRORS.PERMISSION_ERROR';
               break;
             case 'not_found':
-              message = 'TOASTS.ERROR.NOT_FOUND';
+              message = 'TOASTS.ERRORS.NOT_FOUND';
               break;
             case 'either_url_or_file_not_both':
               message = 'TOASTS.ERRORS.URL_OR_FILE';
@@ -88,6 +88,12 @@ angular.module('timelinerApp')
               break;
             case 'email_not_sent':
               message = 'TOASTS.ERRORS.EMIAL_NOT_SENT';
+              break;
+            case 'captcha_verification_invalid':
+              message = 'TOASTS.ERRORS.CAPTCHA_VERIFICATION_INVALID';
+              break;
+            case 'password_reset_forbidden':
+              message = 'TOASTS.ERRORS.PASSWORD_RESET_FORBIDDEN';
               break;
             default:
             message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';

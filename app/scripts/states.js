@@ -37,6 +37,22 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
         $title: function() { return 'TITLES.CONFIRM'; }
       }
     })
+    .state('reset', {
+      url: '/reset',
+      templateUrl: 'views/password-reset.html',
+      controller: 'PasswordResetCtrl',
+      resolve: {
+        $title: function() { return 'TITLES.PASSWORD_RESET'; }
+      }
+    })
+    .state('reset-confirm', {
+      url:'/reset/:key',
+      templateUrl: 'views/password-reset.html',
+      controller: 'PasswordResetCtrl',
+      resolve: {
+        $title: function() { return 'TITLES.PASSWORD_RESET'; }
+      }
+    })
 
     .state('projects', {
       abstract: true,
