@@ -128,29 +128,41 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
 }).run(function($rootScope, $state, AuthService, SystemMessagesService, $window, $location, appConfig) {
   function ensureAuthenticated(event) {
     if ( !AuthService.isLoggedIn() ) {
-      $state.transitionTo('login');
       event.preventDefault();
-      SystemMessagesService.showWarning('You must be logged in to see that');
+      $state.transitionTo('login');
+      SystemMessagesService.showWarning('TOASTS.WARNINGS.NAVIGATE_LOGIN_REQUIRED');
     }
   }
 
-  function ensureAdmin(event) {
-    if ( !AuthService.isAdminLoggedIn() ) {
-      $state.transitionTo('projects.list');
+  function ensureAdmin(event, toState, toParams) {
+    if ( AuthService.getCurrentUser() ) {
+      if ( !AuthService.isAdminLoggedIn() ) {
+        event.preventDefault();
+        $state.transitionTo('projects.list');
+        SystemMessagesService.showWarning('TOASTS.WARNINGS.NAVIGATE_ADMIN_REQUIRED');
+      }
+    } else {
       event.preventDefault();
-      SystemMessagesService.showWarning('Administrator privileges required!');
+      $rootScope.$on('$tlCurrentUserLoaded', function() {
+          if ( !AuthService.isAdminLoggedIn() ) {
+            $state.transitionTo('projects.list');
+            SystemMessagesService.showWarning('TOASTS.WARNINGS.NAVIGATE_ADMIN_REQUIRED');
+          } else {
+            $state.go(toState, toParams);
+          }
+      });
     }
   }
 
   // Possible arguments: event, toState, toParams, fromState, fromParams
-  $rootScope.$on('$stateChangeStart', function(event, toState) {
+  $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
     if ( toState.requireAuth ) {
       ensureAuthenticated(event);
     }
 
     if ( toState.requireAdmin ) {
       ensureAuthenticated(event);
-      ensureAdmin(event);
+      ensureAdmin(event, toState, toParams);
     }
 
     if ( toState.name === 'home' && AuthService.isLoggedIn() ) {

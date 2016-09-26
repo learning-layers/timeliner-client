@@ -255,6 +255,10 @@
       "TASK_REMOVED": "Task successfully removed.",
       "PASSWORD_RESET": "Password reset successful. You can now login into the system."
     },
+    "WARNINGS": {
+      "NAVIGATE_LOGIN_REQUIRED": "You must be logged in to see that!",
+      "NAVIGATE_ADMIN_REQUIRED": "Administrator privileges required!"
+    },
     "ERRORS": {
       "AUTHENTICATION_FAILED": "Authentication failed, please try again!",
       "SOCIAL_LOGIN_FAILED": "Social login failed!",
