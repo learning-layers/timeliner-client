@@ -578,3 +578,13 @@ img.md-avatar, img.tl-current-user-image {
 .tl-preserve-line-break {
   white-space: pre-wrap;
 }
+
+md-list-item.tl-activity {
+  .md-list-item-text {
+    p {
+      strong {
+        color: rgba(255,255,255,1.0);
+      }
+    }
+  }
+}

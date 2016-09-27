@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ActivityStreamPanelCtrl', function ($scope, ProjectsService, SystemMessagesService) {
+  .controller('ActivityStreamPanelCtrl', function ($scope, ProjectsService, SystemMessagesService, UsersService, $filter) {
     $scope.updating = false;
     $scope.model = {
       message: ''
@@ -37,5 +37,36 @@ angular.module('timelinerApp')
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
         $scope.updating = false;
       });
+    };
+
+    $scope.getActivityTranslateTemplate = function(activity) {
+      var template = 'STREAM.' + activity.objectType + '.' + activity.activityType;
+
+      return template.toUpperCase();
+    };
+
+    $scope.getActivityTranslateValues = function(activity) {
+      var values = {};
+
+      values.FULL_NAME = UsersService.getFullName(activity.actor);
+
+      if ( activity.data.title ) {
+        values.TITLE = activity.data.title;
+      }
+      if ( activity.data.start ) {
+        values.START = $filter('tlDate')(activity.data.start, false);
+      }
+      if ( activity.data.end ) {
+        values.END = $filter('tlDate')(activity.data.end, false);
+      }
+
+      return values;
+    };
+
+    $scope.getMessageTranslateValues = function(message) {
+      return {
+        DATE: $filter('tlDate')(message.created, true),
+        FULL_NAME: UsersService.getFullName(message.creator)
+      };
     };
   });

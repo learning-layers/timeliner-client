@@ -231,7 +231,7 @@
               <md-list-item class="md-2-line" ng-repeat="message in messages">
                 <img ng-src="{{ ::getUserImage(message.creator) }}" class="md-avatar" title="{{ ::getUserFullName(message.creator) }}" alt="avatar">
                 <div class="md-list-item-text" layout="column">
-                  <h3>{{ ::message.created | tlDate : true }}</h3>
+                  <h3 translate translate-values="{{ ::getMessageTranslateValues(message) }}">STREAM.MESSAGE_HEADING</h3>
                   <p class="tl-preserve-line-break">{{ message.message }}</p>
                 </div>
                 <md-divider></md-divider>
@@ -240,12 +240,11 @@
         </md-tab>
         <md-tab label="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.TAB.STREAM' | translate }}">
           <md-list flex class="md-dense">
-            <md-list-item class="md-3-line" ng-repeat="activity in activities">
-              <img ng-src="{{ ::getUserImage(activity.creator) }}" class="md-avatar" alt="{{ ::getUserFullName(activity.creator) }}">
+            <md-list-item class="md-2-line tl-activity" ng-repeat="activity in activities">
+              <img ng-src="{{ ::getUserImage(activity.creator) }}" class="md-avatar" title="{{ ::getUserFullName(activity.actor) }}" alt="avatar">
               <div class="md-list-item-text" layout="column">
-                <h3>{{ activity.activityType }} : {{ activity.objectType }}</h3>
-                <h4>{{ ::activity.created | tlDate : true }}</h4>
-                <p>{{ activity.data.title }}</p>
+                <h3>{{ ::activity.created | tlDate : true }}</h3>
+                <p translate translate-values="{{ ::getActivityTranslateValues(activity) }}">{{ ::getActivityTranslateTemplate(activity) }}</p>
               </div>
               <md-divider></md-divider>
             </md-list-item>

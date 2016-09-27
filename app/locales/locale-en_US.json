@@ -294,5 +294,36 @@
       "CAPTCHA_VERIFICATION_INVALID": "Captcha verification failed!",
       "PASSWORD_RESET_FORBIDDEN": "Password reset for this account is forbidden!"
     }
+  },
+  "STREAM": {
+    "MESSAGE_HEADING": "On {{ DATE }} by {{ FULL_NAME }}",
+    "ANNOTATION": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> added an annotation <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an annotation <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an annotation <strong>{{ TITLE }}</strong>",
+      "MOVE": "<strong>{{ FULL_NAME }}</strong> moved an annotation <strong>{{ TITLE }}</strong> to <strong>{{ START }}</strong>"
+    },
+    "MILESTONE": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> added a milestone <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed a milestone <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a milestone <strong>{{ TITLE }}</strong>",
+      "MOVE": "<strong>{{ FULL_NAME }}</strong> moved a milestone <strong>{{ TITLE }}</strong> to <strong>{{ START }}</strong>"
+    },
+    "TASK": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> added a task <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed a task <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a task <strong>{{ TITLE }}</strong>",
+      "MOVE": "<strong>{{ FULL_NAME }}</strong> moved or changed time span of a task <strong>{{ TITLE }}</strong> to be from <strong>{{ START }}</strong> to <strong>{{ END }}</strong>"
+    },
+    "RESOURCE": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> added a resource <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed a resource <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a resource <strong>{{ TITLE }}</strong>"
+    },
+    "OUTOME": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> added an outcome <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an outcome <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong>"
+    }
   }
 }
