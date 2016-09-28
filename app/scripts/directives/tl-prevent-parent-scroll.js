@@ -14,6 +14,7 @@ angular.module('timelinerApp')
       scope: false,
       link: function postLink(scope, element) {
         function onMouseWheel(ev) {
+            // TODO Might make sense to only prevent scroll if element is scrollable
             element[0].scrollTop -= (ev.originalEvent.wheelDeltaY || ev.originalEvent.wheelDelta || 0);
             ev.stopPropagation();
             ev.preventDefault();
