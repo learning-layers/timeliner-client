@@ -22,7 +22,6 @@ angular.module('timelinerApp')
     $scope.activities = [];
     $scope.messages = [];
 
-
     var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
     $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
       return $mdMedia('xs') || $mdMedia('sm');
@@ -311,7 +310,8 @@ angular.module('timelinerApp')
         $log.error('ERROR getting project outcomes', err);
       });
       var activityResource = ProjectsService.getProjectActivities({
-        project: $stateParams.id
+        project: $stateParams.id,
+        limit: appConfig.paginationSize
       }, function(result) {
         $scope.activities = result.data;
         $log.debug('Loaded activities', result);
@@ -319,11 +319,12 @@ angular.module('timelinerApp')
         $log.error('ERROR getting project activities', err);
       });
       var messageResource = ProjectsService.getProjectMessages({
-        project: $stateParams.id
+        project: $stateParams.id,
+        limit: appConfig.paginationSize
       }, function(result) {
         $scope.messages = result.data;
       }, function(err) {
-        $log.error('ERROR getting project activities', err);
+        $log.error('ERROR getting project messages', err);
       });
 
       // Make sure to signal end of data loading
