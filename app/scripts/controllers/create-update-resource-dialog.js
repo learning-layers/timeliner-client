@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, project, resource, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateResourceDialogCtrl', function ($scope, $mdDialog, project, resource, ProjectsService, SystemMessagesService, appConfig) {
     function getFormData() {
       var formData = new FormData();
       formData.append('title', $scope.model.title);
@@ -98,5 +98,9 @@ angular.module('timelinerApp')
 
     $scope.cancel = function() {
       $mdDialog.cancel();
+    };
+
+    $scope.getUploadFileSize = function() {
+      return ProjectsService.bytesToHumanReadable(appConfig.uploadFileSizeLimit, 0);
     };
   });

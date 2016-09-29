@@ -25,7 +25,7 @@
 
         <md-input-container class="md-block">
           <label><translate>GENERAL.FORM.DESCRIPTION</translate></label>
-          <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
+          <textarea ng-model="model.description" name="description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
         <md-input-container class="md-block">
@@ -33,13 +33,17 @@
           <input type="url" name="url" ng-model="model.url" ng-disabled="updating || isFileSelected()" md-maxlength="255">
           <div ng-messages="resourceForm.url.$error">
             <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
-            <div ng-message="md-maxlength" translate translate-values="{LENGTH: 255}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
+            <div ng-message="md-maxlength" translate translate-values="{ LENGTH: 255 }">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
           </div>
         </md-input-container>
 
         <md-input-container class="md-block">
           <label class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_RESOURCE.FILE</translate></label>
-          <tl-file-upload data="model.file" ng-disabled="updating || isUrlSelected() || ( resourceForm.url.$touched && resourceForm.url.$viewValue !== '' )"></tl-file-upload>
+          <tl-file-upload ng-model="model.file" name="file" ng-disabled="updating || isUrlSelected() || ( resourceForm.url.$touched && resourceForm.url.$viewValue !== '' )"></tl-file-upload>
+          <div ng-messages="resourceForm.file.$error">
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="size" translate translate-values="{ SIZE: getUploadFileSize() }">GENERAL.FORM.MESSAGES.FILE_SIZE</div>
+          </div>
         </md-input-container>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">

@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateOutcomeDialogCtrl', function ($scope, $mdDialog, $window, project, outcome, ProjectsService, SystemMessagesService, UsersService) {
+  .controller('CreateUpdateOutcomeDialogCtrl', function ($scope, $mdDialog, $window, project, outcome, ProjectsService, SystemMessagesService, UsersService, appConfig) {
     function getFormData() {
       var formData = new FormData();
       formData.append('title', $scope.model.title);
@@ -104,21 +104,11 @@ angular.module('timelinerApp')
     };
 
     $scope.getIcon = function(resource) {
-      return ProjectsService.getIcon(resource);
+      return ProjectsService.getResourceIcon(resource);
     };
 
     $scope.bytesToHumanReadable = function(size) {
-      var kb = 1024,
-          mb = kb * 1024,
-          gb = mb * 1024;
-
-      if ( size > gb ) {
-        return (size / gb).toFixed(2) + ' GB';
-      } else if ( size > mb ) {
-        return (size / mb).toFixed(2) + ' MB';
-      } else {
-        return ( size / kb).toFixed(2) + ' KB';
-      }
+      return ProjectsService.bytesToHumanReadable(size, 2);
     };
 
     $scope.getVersionDownloadLink = function(version) {
@@ -137,5 +127,9 @@ angular.module('timelinerApp')
 
     $scope.getUserImage = function(user) {
       return UsersService.getImage(user);
+    };
+
+    $scope.getUploadFileSize = function() {
+      return ProjectsService.bytesToHumanReadable(appConfig.uploadFileSizeLimit, 0);
     };
   });

@@ -25,7 +25,8 @@
         "INVALID_DATE": "The entered value is not a date!",
         "MIN_DATE": "End date can't be earlier than the start date!",
         "MAX_LENGTH": "This has to be less than {{ LENGTH }} characters long",
-        "BOTH_DATES_REQUIRED": "Fill both dates or leave them empty!"
+        "BOTH_DATES_REQUIRED": "Fill both dates or leave them empty!",
+        "FILE_SIZE": "Selected file exceeds the allowed size of {{ SIZE }}"
       },
       "TITLE": "Title",
       "DESCRIPTION": "Description"
@@ -246,14 +247,20 @@
     "SUCCESSES": {
       "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in.",
       "ANNOTATION_CREATED": "New annotation successfully created.",
-      "ANNOTATION_UPDATED": "Annotation successfully updated.",
+      "ANNOTATION_UPDATED": "Annotation successfully changed.",
       "ANNOTATION_REMOVED": "Annotation successfully removed.",
       "MILESTONE_CREATED": "New milestone successfully created.",
-      "MILESTONE_UPDATED": "Milestone successfully updated.",
+      "MILESTONE_UPDATED": "Milestone successfully changed.",
       "MILESTONE_REMOVED": "Milestone successfully removed.",
       "TASK_CREATED": "New task successfully created.",
       "TASK_UPDATED": "Task successfully updated.",
       "TASK_REMOVED": "Task successfully removed.",
+      "RESOURCE_CREATED": "New resource successfully created.",
+      "RESOURCE_UPDATED": "Resource successfully changed.",
+      "RESOURCE_REMOVED": "Resource successfully removed.",
+      "OUTCOME_CREATED": "New outcome successful created.",
+      "OUTCOME_UPDATED": "Outcome successful changed.",
+      "OUTCOME_REMOVED": "Outcome successful removed.",
       "PASSWORD_RESET": "Password reset successful. You can now login into the system."
     },
     "WARNINGS": {

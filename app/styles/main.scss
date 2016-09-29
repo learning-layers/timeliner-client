@@ -588,3 +588,18 @@ md-list-item.tl-activity {
     }
   }
 }
+
+tl-file-upload {
+  .tl-file-input-row-content {
+    md-icon.tl-file-icon {
+      margin-right: 10px;
+    }
+    md-icon.tl-file-icon, span.tl-file-name {
+      margin-bottom: 10px;
+    }
+    button.md-button {
+      position: relative;
+      top: -5px;
+    }
+  }
+}

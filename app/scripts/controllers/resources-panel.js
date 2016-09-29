@@ -30,6 +30,6 @@ angular.module('timelinerApp')
     };
 
     $scope.getIcon = function(resource) {
-      return ProjectsService.getIcon(resource);
+      return ProjectsService.getResourceIcon(resource);
     };
   });

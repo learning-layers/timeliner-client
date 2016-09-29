@@ -25,13 +25,17 @@
 
         <md-input-container class="md-block">
           <label><translate>GENERAL.FORM.DESCRIPTION</translate></label>
-          <textarea ng-model="model.description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
+          <textarea ng-model="model.description" name="description" md-maxlength="150" rows="3" md-placeholder="{{ 'GENERAL.FORM.DESCRIPTION' | translate }}" ng-disabled="updating"></textarea>
         </md-input-container>
 
         <md-input-container class="md-block">
           <label  ng-if="!isEdit() "class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_OUTCOME.FILE_CREATE</translate></label>
           <label  ng-if="isEdit() "class="md-container-ignore"><translate>VIEWS.PROJECT.CREATE_UPDATE_OUTCOME.FILE_UPDATE</translate></label>
-          <tl-file-upload data="model.file" ng-disabled="updating"></tl-file-upload>
+          <tl-file-upload ng-model="model.file" name="file" ng-disabled="updating" ng-required="!isEdit()"></tl-file-upload>
+          <div ng-messages="outcomeForm.file.$error">
+            <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
+            <div ng-message="size" translate translate-values="{ SIZE: getUploadFileSize() }">GENERAL.FORM.MESSAGES.FILE_SIZE</div>
+          </div>
         </md-input-container>
 
         <md-content ng-if="isEdit()">

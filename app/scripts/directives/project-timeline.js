@@ -122,7 +122,7 @@ angular.module('timelinerApp')
       var html = '<div class="tl-timeline-task-resources">';
 
       angular.forEach(resources, function (resource) {
-        html += '<span class="mdi ' + ProjectsService.getIcon(resource) + ' tl-timeline-task-resource" title="' + resource.title + '"></span>';
+        html += '<span class="mdi ' + ProjectsService.getResourceIcon(resource) + ' tl-timeline-task-resource" title="' + resource.title + '"></span>';
       });
 
       html += '</div>';
