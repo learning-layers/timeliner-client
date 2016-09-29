@@ -304,6 +304,11 @@
   },
   "STREAM": {
     "MESSAGE_HEADING": "On {{ DATE }} by {{ FULL_NAME }}",
+    "PROJECT": {
+      "CREATE": "<strong>{{ FULL_NAME }}</strong> created a project <strong>{{ TITLE }}</strong>",
+      "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed project <strong>{{ TITLE }}</strong>",
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed project <strong>{{ TITLE }}</strong>"
+    },
     "ANNOTATION": {
       "CREATE": "<strong>{{ FULL_NAME }}</strong> added an annotation <strong>{{ TITLE }}</strong>",
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an annotation <strong>{{ TITLE }}</strong>",

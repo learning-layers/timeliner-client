@@ -102,6 +102,14 @@ angular.module('timelinerApp')
       }
     }
 
+    function socketUpdateProjectCallback(project) {
+      $scope.project = project;
+    }
+
+    function socketDeleteProjectCallback(project) {
+      $log.error('Handling of delete project needed', project);
+    }
+
     function socketCreateAnnotationCallback(annotation) {
       $log.debug('Socket create:annotation', annotation);
       $scope.projectTimelineData.annotations.push(annotation);
@@ -242,6 +250,8 @@ angular.module('timelinerApp')
         });
         SocketService.on('disconnect', socketDisconnectCallback);
         SocketService.on('join', socketJoinCallback);
+        SocketService.on('update:project', socketUpdateProjectCallback);
+        SocketService.on('delete:project', socketDeleteProjectCallback);
         SocketService.on('create:annotation', socketCreateAnnotationCallback);
         SocketService.on('update:annotation', socketUpdateAnnotationCallback);
         SocketService.on('delete:annotation', socketDeleteAnnotationCallback);
@@ -579,6 +589,8 @@ angular.module('timelinerApp')
       });
       SocketService.off('disconnect', socketDisconnectCallback);
       SocketService.off('join', socketJoinCallback);
+      SocketService.off('update:project', socketUpdateProjectCallback);
+      SocketService.off('delete:project', socketDeleteProjectCallback);
       SocketService.off('create:annotation', socketCreateAnnotationCallback);
       SocketService.off('update:annotation', socketUpdateAnnotationCallback);
       SocketService.off('delete:annotation', socketDeleteAnnotationCallback);
