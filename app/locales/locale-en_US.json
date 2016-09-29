@@ -327,7 +327,7 @@
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed a resource <strong>{{ TITLE }}</strong>",
       "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a resource <strong>{{ TITLE }}</strong>"
     },
-    "OUTOME": {
+    "OUTCOME": {
       "CREATE": "<strong>{{ FULL_NAME }}</strong> added an outcome <strong>{{ TITLE }}</strong>",
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an outcome <strong>{{ TITLE }}</strong>",
       "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong>"
