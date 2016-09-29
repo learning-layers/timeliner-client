@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService) {
     $scope.logout = function() {
       AuthService.removeAuthCookie();
       $state.go('home');
@@ -36,5 +36,17 @@ angular.module('timelinerApp')
       var currentUser = AuthService.getCurrentUser();
 
       return UsersService.getImage(currentUser);
+    };
+
+    $scope.hasCurrentProject = function() {
+      return !!ProjectsService.getCurrentProject();
+    };
+
+    $scope.getCurrentProject = function() {
+      return ProjectsService.getCurrentProject();
+    };
+
+    $scope.editCurrentProject = function(ev) {
+      console.error('Edit project not implemented', ev);
     };
   });

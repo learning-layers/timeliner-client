@@ -155,6 +155,8 @@ angular.module('timelinerApp')
       }
     });
 
+    var currentProject;
+
     // Public API here
     return {
       findCurrentParticipant: function(project) {
@@ -275,6 +277,15 @@ angular.module('timelinerApp')
         } else {
           return ( size / kb).toFixed(digits) + ' KB';
         }
+      },
+      getCurrentProject: function() {
+        return currentProject;
+      },
+      setCurrentProject: function(project) {
+        currentProject = project;
+      },
+      unsetCurrentProject: function() {
+        this.setCurrentProject(null);
       },
       create: projectsResource.create,
       get: projectsResource.get,

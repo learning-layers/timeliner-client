@@ -104,6 +104,7 @@ angular.module('timelinerApp')
 
     function socketUpdateProjectCallback(project) {
       $scope.project = project;
+      ProjectsService.setCurrentProject($scope.project);
     }
 
     function socketDeleteProjectCallback(project) {
@@ -244,6 +245,7 @@ angular.module('timelinerApp')
 
       var projectResource = ProjectsService.get({ id: $stateParams.id }, function(result) {
         $scope.project = result.data;
+        ProjectsService.setCurrentProject($scope.project);
 
         SocketService.emit('join', {
           id: $scope.project._id
@@ -611,5 +613,7 @@ angular.module('timelinerApp')
       SocketService.off('delete:outcome', socketDeleteOutcomeCallback);
       SocketService.off('create:activity', socketCreateActivityCallback);
       SocketService.off('create:message', socketCreateMessageCallback);
+
+      ProjectsService.unsetCurrentProject();
     });
   });

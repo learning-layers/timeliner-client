@@ -5,7 +5,16 @@
         <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-logo"></md-icon>
       </md-button>
       <h2>
-        <translate>GENERAL.TIMELINER</translate>
+        <span>
+          <translate>GENERAL.TIMELINER</translate>
+          <span ng-if="hasCurrentProject()">
+            &nbsp;&nbsp;
+            <span>{{ getCurrentProject().title }} {{ getCurrentProject().start | tlDate }} - {{ getCurrentProject().end | tlDate }} </span>
+            <md-button class="md-icon-button" aria-label="Edit" ng-click="editCurrentProject($event)">
+              <md-icon>mode_edit</md-icon>
+            </md-button>
+          </span>
+        </span>
       </h2>
       <span flex=""></span>
       <md-menu md-position-mode="target-right target" ng-if="isLoggedIn()">
