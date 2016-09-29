@@ -144,7 +144,7 @@ angular.module('timelinerApp')
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: generateOutcomeBlockHtml(task.outcomes) + '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)" class="tl-timeline-task-content" style="margin-left: ' + task.outcomes.length*5 + 'px;"><div class="tl-task-title">' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
+        content: generateOutcomeBlockHtml(task.outcomes) + '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)" class="tl-timeline-task-content" style="margin-left: ' + task.outcomes.length*5 + 'px;"><div class="tl-task-title"><span class="mdi mdi-briefcase-check tl-timeline-outcome-icon"></span>' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
         'tl-drop-id': task._id,
         'tl-drop-type': 'task',
         group: 'timeline-tasks',

@@ -412,6 +412,13 @@ md-icon.tl-remove {
       color: #d4e8f4;
       display: inline-block;
       line-height: 30px;
+
+      .tl-timeline-outcome-icon {
+        font-size: 24px;
+        color: #ffffff;
+        vertical-align: middle;
+        padding-right: 5px;
+      }
     }
 
     .tl-timeline-task-content {
