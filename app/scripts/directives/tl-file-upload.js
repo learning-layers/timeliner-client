@@ -7,7 +7,7 @@
  * # tlFileUpload
  */
 angular.module('timelinerApp')
-  .directive('tlFileUpload', function ($mdUtil, appConfig, ProjectsService) {
+  .directive('tlFileUpload', function (appConfig, ProjectsService) {
     var template = '<div layout="row" layout-align="space-between start">' +
       '<div class="tl-file-input-row-content">' +
         '<input aria-label="file" ng-disabled="isDisabled()" type="file" ng-hide="true">' +
@@ -29,7 +29,7 @@ angular.module('timelinerApp')
       },
       link: function postLink(scope, element, attrs, ctrls) {
         var containerCtrl = ctrls[0];
-        var ngModelCtrl = ctrls[1] || $mdUtil.fakeNgModel();
+        var ngModelCtrl = ctrls[1];
         var parentForm = ctrls[2];
         var fileElement = element.find('input[type="file"]')[0];
 
@@ -37,19 +37,21 @@ angular.module('timelinerApp')
         var errorsSpacer = angular.element('<div class="md-errors-spacer">');
         element.after(errorsSpacer);
 
-        ngModelCtrl.$validators.size = function(modelValue, viewValue) {
-          if ( ngModelCtrl.$isEmpty(modelValue) ) {
-            // consider empty models to be valid
-            return true;
-          }
+        if ( ngModelCtrl ) {
+          ngModelCtrl.$validators.size = function(modelValue, viewValue) {
+            if ( ngModelCtrl.$isEmpty(modelValue) ) {
+              // consider empty models to be valid
+              return true;
+            }
 
-          if ( viewValue.size <= appConfig.uploadFileSizeLimit ) {
-            return true;
-          }
+            if ( viewValue.size <= appConfig.uploadFileSizeLimit ) {
+              return true;
+            }
 
-          // it is invalid
-          return false;
-        };
+            // it is invalid
+            return false;
+          };
+        }
 
         scope.isDisabled = function() {
           return attrs.disabled;
@@ -103,11 +105,15 @@ angular.module('timelinerApp')
           return ngModelCtrl.$invalid && (ngModelCtrl.$touched || (parentForm && parentForm.$submitted));
         };
 
-        scope.$watch(isErrorGetter, containerCtrl.setInvalid);
+        if ( containerCtrl ) {
+          scope.$watch(isErrorGetter, containerCtrl.setInvalid);
+        }
 
         scope.$on('$destroy', function() {
-          containerCtrl.setFocused(false);
-          containerCtrl.setHasValue(false);
+          if ( containerCtrl ) {
+            containerCtrl.setFocused(false);
+            containerCtrl.setHasValue(false);
+          }
           element.off('change');
           element.off('click');
         });
