@@ -49,7 +49,11 @@
     "MENU_ARIA": "User menu",
     "MANAGE": "Manage",
     "EDIT_PROFILE": "Edit profile",
-    "LOGOUT": "Log out"
+    "LOGOUT": "Log out",
+    "SOCKET": {
+      "RECONNECTING": "Connection lost, reconnect is in progress. Please wait until connection could be established.",
+      "DISCONNECTED": "Connection lost, reconnection failed. Please refresh or contact administrator it it persists."
+    }
   },
   "VIEWS": {
     "LANDING": {

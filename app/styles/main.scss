@@ -610,3 +610,11 @@ tl-file-upload {
     }
   }
 }
+
+.md-toolbar-tools.tl-socket-reconnecting {
+  background-color: #FF9100;
+}
+
+.md-toolbar-tools.tl-socket-disconnected {
+  background-color: #FF5252;
+}

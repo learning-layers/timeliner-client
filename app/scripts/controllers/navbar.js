@@ -8,7 +8,36 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService, $log, dialogHelper) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService, $log, dialogHelper, SocketService) {
+    var maxReconnectAttempts = 50;
+    var socketConnected = false;
+    var socketReconnecting = false;
+    var socketDisconnected = false;
+    var reconnectAttempt = 0;
+
+    SocketService.on('connect', function() {
+      socketConnected = true;
+      socketDisconnected = false;
+      socketReconnecting = false;
+      reconnectAttempt = 0;
+    });
+    SocketService.on('disconnect', function() {
+      socketConnected = false;
+      socketReconnecting = false;
+      socketDisconnected = true;
+      reconnectAttempt = 0;
+    });
+    SocketService.on('reconnect', function() {
+      socketReconnecting = true;
+    });
+    SocketService.on('reconnecting', function(attempt) {
+      socketReconnecting = true;
+      reconnectAttempt = attempt;
+    });
+    SocketService.on('reconnect_failed', function() {
+      socketReconnecting = false;
+    });
+
     $scope.logout = function() {
       AuthService.removeAuthCookie();
       $state.go('home');
@@ -54,5 +83,17 @@ angular.module('timelinerApp')
       }, function() {
         $log.debug('Dialog dismissed.');
       });
+    };
+
+    $scope.hasSocketConnectionIssues = function() {
+      return !socketConnected;
+    };
+
+    $scope.isSocketReconnecting = function() {
+      return socketReconnecting && reconnectAttempt <= maxReconnectAttempts;
+    };
+
+    $scope.isSocketDisconnected = function() {
+      return socketDisconnected || ( socketReconnecting && reconnectAttempt > maxReconnectAttempts);
     };
   });
