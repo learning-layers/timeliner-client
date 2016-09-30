@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService, $log, dialogHelper) {
     $scope.logout = function() {
       AuthService.removeAuthCookie();
       $state.go('home');
@@ -47,6 +47,12 @@ angular.module('timelinerApp')
     };
 
     $scope.editCurrentProject = function(ev) {
-      console.error('Edit project not implemented', ev);
+      var dialogPromise = dialogHelper.openProjectEditDialog($scope.getCurrentProject(), ev);
+
+      dialogPromise.then(function(project) {
+        $log.debug('Dialog returned project:', project);
+      }, function() {
+        $log.debug('Dialog dismissed.');
+      });
     };
   });

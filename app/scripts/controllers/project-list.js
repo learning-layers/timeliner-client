@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _, $translate) {
+  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _, $translate, dialogHelper) {
     $scope.pendingProjects = [];
     $scope.activeProjects = [];
     $scope.allProjects = [];
@@ -50,16 +50,14 @@ angular.module('timelinerApp')
       return '';
     };
 
-    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.createNewProject = function(ev) {
-      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
       $mdDialog.show({
           controller: 'CreateNewProjectModalInstanceCtrl',
           templateUrl: 'views/templates/create-new-project-modal.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose: false,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: null
           }
@@ -71,12 +69,6 @@ angular.module('timelinerApp')
         }, function() {
           $log.debug('Dialog dismissed.');
         });
-
-      $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
-        return $mdMedia('xs') || $mdMedia('sm');
-      }, function(wantsFullScreen) {
-        $scope.customFullscreen = (wantsFullScreen === true);
-      });
     };
 
     $scope.doJoin = function(project, index, ev) {
@@ -139,32 +131,15 @@ angular.module('timelinerApp')
     };
 
     $scope.doEdit = function(project, ev) {
-      var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-      var projectId = project._id;
-      $mdDialog.show({
-          controller: 'CreateNewProjectModalInstanceCtrl',
-          templateUrl: 'views/templates/create-new-project-modal.html',
-          parent: angular.element(document.body),
-          targetEvent: ev,
-          clickOutsideToClose: false,
-          fullscreen: useFullScreen,
-          locals: {
-            project: project
-          }
-        })
-        .then(function(project) {
+      var dialogPromise = dialogHelper.openProjectEditDialog(project, ev);
+
+      dialogPromise.then(function(project) {
           $log.debug('Dialog returned project:', project);
-          $scope.activeProjects[_($scope.activeProjects).findIndex(function(p) { return p._id === projectId; })] = project;
-          $scope.allProjects[_($scope.allProjects).findIndex(function(p) { return p._id === projectId; })] = project;
+          $scope.activeProjects[_($scope.activeProjects).findIndex(function(p) { return p._id === project._id; })] = project;
+          $scope.allProjects[_($scope.allProjects).findIndex(function(p) { return p._id === project._id; })] = project;
         }, function() {
           $log.debug('Dialog dismissed.');
         });
-
-      $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
-        return $mdMedia('xs') || $mdMedia('sm');
-      }, function(wantsFullScreen) {
-        $scope.customFullscreen = (wantsFullScreen === true);
-      });
     };
 
     $scope.doLeave = function(project, index, ev) {

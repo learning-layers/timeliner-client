@@ -8,10 +8,9 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper) {
     $scope.loadingData = false;
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
-    $scope.customFullscreen = $mdMedia('xs') || $mdMedia('sm');
     $scope.projectTimelineData = {
       milestones: [],
       annotations: [],
@@ -21,13 +20,6 @@ angular.module('timelinerApp')
     $scope.resouces = [];
     $scope.activities = [];
     $scope.messages = [];
-
-    var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;
-    $scope.$watch(function() { // TODO decide if this $mdMedia watcher is necessary
-      return $mdMedia('xs') || $mdMedia('sm');
-    }, function(wantsFullScreen) {
-      $scope.customFullscreen = (wantsFullScreen === true);
-    });
 
     function findAnnotationIndex(annotation) {
       return _($scope.projectTimelineData.annotations).findIndex(function(o) {
@@ -362,7 +354,7 @@ angular.module('timelinerApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: $scope.project,
             annotation: annotation
@@ -383,7 +375,7 @@ angular.module('timelinerApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: $scope.project,
             milestone: milestone
@@ -404,7 +396,7 @@ angular.module('timelinerApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: $scope.project,
             task: task
@@ -425,7 +417,7 @@ angular.module('timelinerApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: $scope.project,
             resource: resource
@@ -446,7 +438,7 @@ angular.module('timelinerApp')
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose:true,
-          fullscreen: useFullScreen,
+          fullscreen: dialogHelper.getUseFullScreen(),
           locals: {
             project: $scope.project,
             outcome: outcome
