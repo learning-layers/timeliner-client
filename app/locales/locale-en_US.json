@@ -117,21 +117,23 @@
         "DESCRIPTION": "Description",
         "GOAL": "Goal"
       },
-      "CREATE_PROJECT": {
-        "HEADLINE": "Create new project",
+      "CREATE_UPDATE_PROJECT": {
+        "HEADLINE": {
+          "CREATE": "Create new project",
+          "UPDATE": "Edit project"
+        },
         "TITLE": "Project title",
-        "NEXT_BTN": "Next",
-        "BACK_BTN": "Back",
-        "CREATE_BTN": "Create project"
-      },
-      "EDIT_PROJECT": {
-        "HEADLINE": "Edit project",
-        "STATE_ACTIVE": "Active",
-        "STATE_FINISHED": "Finished",
         "DESCRIPTION": "Project description",
         "GOAL": "Project goal",
         "STATUS": "Project status",
-        "UPDATE_BTN": "Update"
+        "STATE_ACTIVE": "Active",
+        "STATE_FINISHED": "Finished",
+        "NEXT_BTN": "Next",
+        "BACK_BTN": "Back",
+        "BTN": {
+          "CREATE": "Create project",
+          "UPDATE": "Update project"
+        }
       },
       "JOIN_DIALOG": {
         "TITLE": "Would you like to accept an invitation to join the project?",

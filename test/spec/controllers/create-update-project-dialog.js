@@ -1,11 +1,11 @@
 'use strict';
 
-describe('Controller: CreateNewProjectModalInstanceCtrl', function () {
+describe('Controller: CreateUpdateProjectDialogCtrl', function () {
 
   // load the controller's module
   beforeEach(module('timelinerApp'));
 
-  var CreateNewProjectModalInstanceCtrl,
+  var CreateUpdateProjectDialogCtrl,
     scope,
     $mdDialog;
 
@@ -14,7 +14,7 @@ describe('Controller: CreateNewProjectModalInstanceCtrl', function () {
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
     $mdDialog = jasmine.createSpyObj('$mdDialog', ['hide', 'cancel']);
-    CreateNewProjectModalInstanceCtrl = $controller('CreateNewProjectModalInstanceCtrl', {
+    CreateUpdateProjectDialogCtrl = $controller('CreateUpdateProjectDialogCtrl', {
       $scope: scope,
       $mdDialog: $mdDialog,
       project: {

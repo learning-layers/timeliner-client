@@ -1,6 +1,6 @@
 <md-dialog-actions layout="row">
-  <md-button ng-if="!firstTab" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.BACK_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_PROJECT.BACK_BTN' | translate }}" ng-click="prevTab()"></md-button>
+  <md-button ng-if="!firstTab" translate="VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.BACK_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.BACK_BTN' | translate }}" ng-click="prevTab()"></md-button>
   <span flex></span>
-  <md-button ng-if="!lastTab" class="md-accent" ng-disabled="nextDisabled" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.NEXT_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_PROJECT.NEXT_BTN' | translate }}" ng-click="nextTab()"></md-button>
-  <md-button ng-if="lastTab" type="submit" class="md-accent" ng-disabled="submitDisabled" translate="VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_PROJECT.CREATE_BTN' | translate }}"></md-button>
+  <md-button ng-if="!lastTab" class="md-accent" ng-disabled="nextDisabled" translate="VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.NEXT_BTN" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.NEXT_BTN' | translate }}" ng-click="nextTab()"></md-button>
+  <md-button ng-if="lastTab" type="submit" class="md-accent" ng-disabled="submitDisabled" translate="VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.BTN.CREATE" aria-label="{{ 'VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.BTN.CREATE' | translate }}"></md-button>
 </md-dialog-actions>

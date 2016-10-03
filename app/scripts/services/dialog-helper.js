@@ -15,8 +15,8 @@ angular.module('timelinerApp')
       },
       openProjectEditDialog: function(project, ev) {
         return $mdDialog.show({
-          controller: 'CreateNewProjectModalInstanceCtrl',
-          templateUrl: 'views/templates/create-new-project-modal.html',
+          controller: 'CreateUpdateProjectDialogCtrl',
+          templateUrl: 'views/templates/create-update-project-dialog.html',
           parent: angular.element(document.body),
           targetEvent: ev,
           clickOutsideToClose: false,

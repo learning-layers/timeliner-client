@@ -1,10 +1,11 @@
 <md-dialog flex="50">
   <md-progress-linear md-mode="indeterminate" ng-show="updating"></md-progress-linear>
 
-  <form name="newProjectForm" ng-submit="submit()">
+  <form name="projectForm" ng-submit="submit()">
     <md-toolbar>
       <div class="md-toolbar-tools">
-        <h2 translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.HEADLINE</h2>
+        <h2 ng-if="!isEdit()" translate>VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.HEADLINE.CREATE</h2>
+        <h2 ng-if="isEdit()" translate>VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.HEADLINE.UPDATE</h2>
         <span flex></span>
         <md-button class="md-icon-button" ng-click="cancel()" ng-disabled="updating">
           <md-icon aria-label="{{ 'GENERAL.CLOSE' | translate }}">close</md-icon>
@@ -18,57 +19,57 @@
             <h3>Basic project info</h3>
             <div layout="column" class="md-dialog-content">
               <md-input-container class="md-block">
-                <label><translate>VIEWS.PROJECT_LIST.CREATE_PROJECT.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
+                <label><translate>VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.TITLE</translate> <translate>GENERAL.FORM.REQUIRED_EXT</translate></label>
                 <input type="text" name="title" ng-model="model.title" ng-disabled="updating" md-maxlength="50" required md-autofocus>
-                <div ng-messages="newProjectForm.title.$error">
+                <div ng-messages="projectForm.title.$error">
                   <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
                   <div ng-message="md-maxlength" translate translate-values="{LENGTH: 50}">GENERAL.FORM.MESSAGES.MAX_LENGTH</div>
                 </div>
               </md-input-container>
 
               <md-input-container class="md-block">
-                <label><translate>VIEWS.PROJECT_LIST.EDIT_PROJECT.DESCRIPTION</translate></label>
+                <label><translate>VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.DESCRIPTION</translate></label>
                 <textarea ng-model="model.description" name="desc" md-maxlength="150" rows="3" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.DESCRIPTION' | translate }}" ng-disabled="updating" required></textarea>
               </md-input-container>
 
               <md-input-container class="md-block">
-                <label><translate>VIEWS.PROJECT_LIST.EDIT_PROJECT.GOAL</translate></label>
+                <label><translate>VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.GOAL</translate></label>
                 <textarea ng-model="model.goal" name="goal" md-maxlength="150" rows="3" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.GOAL' | translate }}" ng-disabled="updating" required></textarea>
               </md-input-container>
 
               <div layout="row" layout-align="center">
                 <md-datepicker name="startDate" ng-model="model.start" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.START_DATE' | translate }} {{ 'GENERAL.FORM.REQUIRED_EXT' | translate }}" md-max-date="model.end" required ng-disabled="updating">
                 </md-datepicker>
-                <div class="validation-messages" ng-messages="newProjectForm.startDate.$error">
+                <div class="validation-messages" ng-messages="projectForm.startDate.$error">
                   <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
                   <div ng-message="required" translate>GENERAL.FORM.MESSAGES.REQUIRED</div>
                 </div>
                 <md-datepicker name="endDate" ng-model="model.end" md-placeholder="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.END_DATE' | translate }}" md-min-date="model.start" ng-disabled="updating">
                 </md-datepicker>
-                <div class="validation-messages" ng-messages="newProjectForm.endDate.$error">
+                <div class="validation-messages" ng-messages="projectForm.endDate.$error">
                   <div ng-message="valid" translate>GENERAL.FORM.MESSAGES.INVALID_DATE</div>
                   <div ng-message="mindate" translate>GENERAL.FORM.MESSAGES.MIN_DATE</div>
                 </div>
               </div>
             </div>
-            <dialog-tabs-nav-buttons first-tab="true" active-tab="test" next-disabled="newProjectForm.title.$invalid || newProjectForm.desc.$invalid || newProjectForm.goal.$invalid || newProjectForm.startDate.$invalid"></dialog-tabs-nav-buttons>
+            <dialog-tabs-nav-buttons first-tab="true" active-tab="test" next-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid"></dialog-tabs-nav-buttons>
           </md-content>
         </md-tab>
-        <md-tab label="resources" ng-disabled="newProjectForm.title.$invalid || newProjectForm.desc.$invalid || newProjectForm.goal.$invalid || newProjectForm.startDate.$invalid">
+        <md-tab label="resources" ng-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid">
           <md-content class="md-padding">
             <h3>Resources</h3>
             <md-checkbox ng-model="dummy" aria-label="Dummy Resources" name="dummyResource" required>
               I have added some resources (I promise).
             </md-checkbox>
-            <dialog-tabs-nav-buttons active-tab="test" next-disabled="newProjectForm.dummyResource.$invalid"></dialog-tabs-nav-buttons>
+            <dialog-tabs-nav-buttons active-tab="test" next-disabled="projectForm.dummyResource.$invalid"></dialog-tabs-nav-buttons>
           </md-content>
         </md-tab>
-        <md-tab label="participants" ng-disabled="newProjectForm.title.$invalid || newProjectForm.desc.$invalid || newProjectForm.goal.$invalid || newProjectForm.startDate.$invalid || newProjectForm.dummyResource.$invalid">
+        <md-tab label="participants" ng-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid || projectForm.dummyResource.$invalid">
           <md-content class="md-padding">
             <h3>Participants</h3>
 
           </md-content>
-          <dialog-tabs-nav-buttons last-tab="true" active-tab="test" submit-disabled="updating || newProjectForm.$invalid"></dialog-tabs-nav-buttons>
+          <dialog-tabs-nav-buttons last-tab="true" active-tab="test" submit-disabled="updating || projectForm.$invalid"></dialog-tabs-nav-buttons>
         </md-tab>
       </md-tabs>
     </md-dialog-content>
