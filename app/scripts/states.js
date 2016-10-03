@@ -85,7 +85,14 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
       templateUrl: 'views/project-view.html',
       controller: 'ProjectViewCtrl',
       resolve: {
-        $title: function() { return 'TITLES.PROJECT_VIEW'; }
+        $title: function() { return 'TITLES.PROJECT_VIEW'; },
+        project: function($stateParams, ProjectsService) {
+          return ProjectsService.get({ id: $stateParams.id })
+            .$promise
+            .then(function(response) {
+              return response.data;
+            });
+          }
       },
       requireAuth: true
     })
@@ -167,6 +174,13 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
     if ( toState.name === 'home' && AuthService.isLoggedIn() ) {
       $state.transitionTo('projects.list');
       event.preventDefault();
+    }
+  });
+
+  $rootScope.$on('$stateChangeError',
+  function(event, toState, toParams, fromState, fromParams, error) {
+    if ( toState.name === 'project' ) {
+      SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(error));
     }
   });
 

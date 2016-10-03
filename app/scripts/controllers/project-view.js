@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper, project) {
     $scope.loadingData = false;
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.projectTimelineData = {
@@ -20,6 +20,9 @@ angular.module('timelinerApp')
     $scope.resouces = [];
     $scope.activities = [];
     $scope.messages = [];
+
+    $scope.project = project;
+    ProjectsService.setCurrentProject(project);
 
     function findAnnotationIndex(annotation) {
       return _($scope.projectTimelineData.annotations).findIndex(function(o) {
@@ -232,121 +235,114 @@ angular.module('timelinerApp')
       $scope.messages.unshift(message);
     }
 
-    if ( $scope.isLoggedIn() ) {
-      $scope.loadingData = true;
-
-      var projectResource = ProjectsService.get({ id: $stateParams.id }, function(result) {
-        $scope.project = result.data;
-        ProjectsService.setCurrentProject($scope.project);
-
-        SocketService.emit('join', {
-          id: $scope.project._id
-        });
-        SocketService.on('disconnect', socketDisconnectCallback);
-        SocketService.on('join', socketJoinCallback);
-        SocketService.on('update:project', socketUpdateProjectCallback);
-        SocketService.on('delete:project', socketDeleteProjectCallback);
-        SocketService.on('create:annotation', socketCreateAnnotationCallback);
-        SocketService.on('update:annotation', socketUpdateAnnotationCallback);
-        SocketService.on('delete:annotation', socketDeleteAnnotationCallback);
-        SocketService.on('move:annotation', socketMoveAnnotationCallback);
-        SocketService.on('create:milestone', socketCreateMilestoneCallback);
-        SocketService.on('update:milestone', socketUpdateMilestoneCallback);
-        SocketService.on('delete:milestone', socketDeleteMilestoneCallback);
-        SocketService.on('move:milestone', socketMoveMilestoneCallback);
-        SocketService.on('create:task', socketCreateTaskCallback);
-        SocketService.on('update:task', socketUpdateTaskCallback);
-        SocketService.on('delete:task', socketDeleteTaskCallback);
-        SocketService.on('move:task', socketMoveTaskCallback);
-        SocketService.on('create:resource', socketCreateResourceCallback);
-        SocketService.on('update:resource', socketUpdateResourceCallback);
-        SocketService.on('delete:resource', socketDeleteResourceCallback);
-        SocketService.on('create:outcome', socketCreateOutcomeCallback);
-        SocketService.on('update:outcome', socketUpdateOutcomeCallback);
-        SocketService.on('delete:outcome', socketDeleteOutcomeCallback);
-        SocketService.on('create:activity', socketCreateActivityCallback);
-        SocketService.on('create:message', socketCreateMessageCallback);
-      }, function(err) {
-        // TODO It would make sense to display a meaningful system message if that ever happened
-        $log.debug('ERROR getting project', err);
-        $scope.loadingData = false;
+    function socketEmitJoinAndSetupListeners() {
+      SocketService.emit('join', {
+        id: $scope.project._id
       });
-
-      // XXX Need to decide when should the Socket kick-in and how to store updates that come before data is loaded
-      var milestoneResource = ProjectsService.getProjectMilestones({
-        project: $stateParams.id
-      }, function(result) {
-        $scope.projectTimelineData.milestones = result.data;
-        $log.debug('Loaded milestones', result);
-      }, function(err) {
-        $log.error('ERROR getting project milestones', err);
-      });
-      var annotationResource = ProjectsService.getProjectAnnotations({
-        project: $stateParams.id
-      }, function(result) {
-        $scope.projectTimelineData.annotations = result.data;
-        $log.debug('Loaded annotations', result);
-      }, function(err) {
-        $log.error('ERROR getting project annotations', err);
-      });
-      var taskResource = ProjectsService.getProjectTasks({
-        project: $stateParams.id
-      }, function(result) {
-        $scope.projectTimelineData.tasks = result.data;
-        $log.debug('Loaded tasks', result);
-      }, function(err) {
-        $log.error('ERROR getting project tasks', err);
-      });
-      var resourceResource = ProjectsService.getProjectResources({
-        project: $stateParams.id
-      }, function(result) {
-        $scope.resources = result.data;
-        $log.debug('Loaded resources', result);
-      }, function(err) {
-        $log.error('ERROR getting project resources', err);
-      });
-      var outcomeResource = ProjectsService.getProjectOutcomes({
-        project: $stateParams.id
-      }, function(result) {
-        $scope.projectTimelineData.outcomes = result.data;
-        $log.debug('Loaded outcomes', result);
-      }, function(err) {
-        $log.error('ERROR getting project outcomes', err);
-      });
-      var activityResource = ProjectsService.getProjectActivities({
-        project: $stateParams.id,
-        limit: appConfig.paginationSize
-      }, function(result) {
-        $scope.activities = result.data;
-        $log.debug('Loaded activities', result);
-      }, function(err) {
-        $log.error('ERROR getting project activities', err);
-      });
-      var messageResource = ProjectsService.getProjectMessages({
-        project: $stateParams.id,
-        limit: appConfig.paginationSize
-      }, function(result) {
-        $scope.messages = result.data;
-      }, function(err) {
-        $log.error('ERROR getting project messages', err);
-      });
-
-      // Make sure to signal end of data loading
-      $q.all([projectResource.$promise,
-        milestoneResource.$promise,
-        annotationResource.$promise,
-        taskResource.$promise,
-        resourceResource.$promise,
-        outcomeResource.$promise,
-        activityResource.$promise,
-        messageResource.$promise]
-      ).then(function() {
-        $scope.loadingData = false;
-      }, function() {
-        $scope.loadingData = false;
-      });
+      SocketService.on('disconnect', socketDisconnectCallback);
+      SocketService.on('join', socketJoinCallback);
+      SocketService.on('update:project', socketUpdateProjectCallback);
+      SocketService.on('delete:project', socketDeleteProjectCallback);
+      SocketService.on('create:annotation', socketCreateAnnotationCallback);
+      SocketService.on('update:annotation', socketUpdateAnnotationCallback);
+      SocketService.on('delete:annotation', socketDeleteAnnotationCallback);
+      SocketService.on('move:annotation', socketMoveAnnotationCallback);
+      SocketService.on('create:milestone', socketCreateMilestoneCallback);
+      SocketService.on('update:milestone', socketUpdateMilestoneCallback);
+      SocketService.on('delete:milestone', socketDeleteMilestoneCallback);
+      SocketService.on('move:milestone', socketMoveMilestoneCallback);
+      SocketService.on('create:task', socketCreateTaskCallback);
+      SocketService.on('update:task', socketUpdateTaskCallback);
+      SocketService.on('delete:task', socketDeleteTaskCallback);
+      SocketService.on('move:task', socketMoveTaskCallback);
+      SocketService.on('create:resource', socketCreateResourceCallback);
+      SocketService.on('update:resource', socketUpdateResourceCallback);
+      SocketService.on('delete:resource', socketDeleteResourceCallback);
+      SocketService.on('create:outcome', socketCreateOutcomeCallback);
+      SocketService.on('update:outcome', socketUpdateOutcomeCallback);
+      SocketService.on('delete:outcome', socketDeleteOutcomeCallback);
+      SocketService.on('create:activity', socketCreateActivityCallback);
+      SocketService.on('create:message', socketCreateMessageCallback);
     }
 
+    // Setup and load additional data
+    socketEmitJoinAndSetupListeners();
+
+    $scope.loadingData = true;
+    // XXX Need to decide when should the Socket kick-in and how to store updates that come before data is loaded
+    var milestoneResource = ProjectsService.getProjectMilestones({
+      project: $stateParams.id
+    }, function(result) {
+      $scope.projectTimelineData.milestones = result.data;
+      $log.debug('Loaded milestones', result);
+    }, function(err) {
+      $log.error('ERROR getting project milestones', err);
+    });
+    var annotationResource = ProjectsService.getProjectAnnotations({
+      project: $stateParams.id
+    }, function(result) {
+      $scope.projectTimelineData.annotations = result.data;
+      $log.debug('Loaded annotations', result);
+    }, function(err) {
+      $log.error('ERROR getting project annotations', err);
+    });
+    var taskResource = ProjectsService.getProjectTasks({
+      project: $stateParams.id
+    }, function(result) {
+      $scope.projectTimelineData.tasks = result.data;
+      $log.debug('Loaded tasks', result);
+    }, function(err) {
+      $log.error('ERROR getting project tasks', err);
+    });
+    var resourceResource = ProjectsService.getProjectResources({
+      project: $stateParams.id
+    }, function(result) {
+      $scope.resources = result.data;
+      $log.debug('Loaded resources', result);
+    }, function(err) {
+      $log.error('ERROR getting project resources', err);
+    });
+    var outcomeResource = ProjectsService.getProjectOutcomes({
+      project: $stateParams.id
+    }, function(result) {
+      $scope.projectTimelineData.outcomes = result.data;
+      $log.debug('Loaded outcomes', result);
+    }, function(err) {
+      $log.error('ERROR getting project outcomes', err);
+    });
+    var activityResource = ProjectsService.getProjectActivities({
+      project: $stateParams.id,
+      limit: appConfig.paginationSize
+    }, function(result) {
+      $scope.activities = result.data;
+      $log.debug('Loaded activities', result);
+    }, function(err) {
+      $log.error('ERROR getting project activities', err);
+    });
+    var messageResource = ProjectsService.getProjectMessages({
+      project: $stateParams.id,
+      limit: appConfig.paginationSize
+    }, function(result) {
+      $scope.messages = result.data;
+    }, function(err) {
+      $log.error('ERROR getting project messages', err);
+    });
+
+    $q.all([milestoneResource.$promise,
+      annotationResource.$promise,
+      taskResource.$promise,
+      resourceResource.$promise,
+      outcomeResource.$promise,
+      activityResource.$promise,
+      messageResource.$promise]
+    ).then(function() {
+      $scope.loadingData = false;
+    }, function() {
+      // TODO Might make sense to signal data loading issues
+      $scope.loadingData = false;
+    });
+
+    // Attach methods to $scope
     $scope.addOrUpdateAnnotation = function(ev, annotation) {
       $mdDialog.show({
           controller: 'CreateUpdateAnnotationDialogCtrl',
@@ -475,6 +471,7 @@ angular.module('timelinerApp')
       $log.error('Not implemented', ev);
     };
 
+    // Attach event listeners to $scope
     $scope.$on('tl:timeline:item:add',function(ev, data) {
       ev.preventDefault();
       // Passing in custom event raises an error (it is just an object, not real event)

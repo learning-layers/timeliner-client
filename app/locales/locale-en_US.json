@@ -288,7 +288,7 @@
       "AREADY_IS_A_PARTICIPANT": "This user already is a participant of this project!",
       "OWNER_CAN_NOT_LEAVE": "Owner can not leave the project!",
       "OWNER_CAN_NOT_BE_REMOVED": "Owner can not be removed from the project!",
-      "TOASTS.ERRORS.NOT_A_PROJECT_PARTICIPANT": "You are not a participant of this project!",
+      "NOT_A_PROJECT_PARTICIPANT": "You are not a participant of this project!",
       "PERMISSION_ERROR": "Permission error, access denied!",
       "NOT_FOUND": "Requested resource could not be found!",
       "URL_OR_FILE": "Either url or file should be provided, not both!",
