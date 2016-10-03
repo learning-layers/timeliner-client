@@ -47,10 +47,11 @@ angular.module('timelinerApp')
       });
 
       // Make sure socket is authenticated
-      socket.emit('authenticate', {
-        token: AuthService.getAuthToken()
-      });
-
+      if ( AuthService.isLoggedIn() ) {
+        socket.emit('authenticate', {
+          token: AuthService.getAuthToken()
+        });
+      }
     });
 
     // Public API here
@@ -98,6 +99,11 @@ angular.module('timelinerApp')
         } else {
           socket.off();
         }
+      },
+      authenticate: function() {
+        socket.emit('authenticate', {
+          token: AuthService.getAuthToken()
+        });
       }
     };
   });

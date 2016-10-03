@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService, $log, dialogHelper, SocketService) {
+  .controller('NavbarCtrl', function ($scope, $state, AuthService, UsersService, $translate, ProjectsService, $log, dialogHelper, SocketService, $timeout) {
     var maxReconnectAttempts = 50;
     var socketConnected = false;
     var socketReconnecting = false;
@@ -40,6 +40,11 @@ angular.module('timelinerApp')
 
     $scope.logout = function() {
       AuthService.removeAuthCookie();
+      // XXX Need to contact service and notify about logout
+      // Allow other socket operation to finish before triggering logout
+      $timeout(function() {
+        SocketService.emit('logout');
+      }, 3000);
       $state.go('home');
     };
 

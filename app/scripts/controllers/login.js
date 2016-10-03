@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('LoginCtrl', function ($window, $scope, $state, $stateParams, $location, AuthService, SystemMessagesService, UsersService, appConfig) {
+  .controller('LoginCtrl', function ($window, $scope, $state, $stateParams, $location, AuthService, SystemMessagesService, UsersService, appConfig, SocketService) {
     var timeoutId;
 
     $scope.updating = false;
@@ -49,6 +49,7 @@ angular.module('timelinerApp')
         $scope.model = {};
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
+        SocketService.authenticate();
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function(response) {
@@ -80,6 +81,7 @@ angular.module('timelinerApp')
         $scope.showProgressIndicator = false;
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
+        SocketService.authenticate();
         SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function() {
