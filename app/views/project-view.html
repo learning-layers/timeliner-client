@@ -1,4 +1,7 @@
-<md-progress-linear md-mode="indeterminate" ng-show="loadingData"></md-progress-linear>
+<div layout="column" layout-align="center center" layout-fill style="min-height: 300px;" ng-show="loadingData">
+  <md-progress-circular md-mode="indeterminate" class="md-accent" md-diameter="100"></md-progress-circular>
+  <p class="md-headline">Loading project</p>
+</div>
 
 <div layout="row" layout-align="none center" ng-cloak ng-hide="loadingData">
   <md-fab-speed-dial md-open="fabOpen" md-direction="right" class="md-fling">
