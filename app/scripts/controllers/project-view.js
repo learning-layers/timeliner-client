@@ -9,6 +9,13 @@
  */
 angular.module('timelinerApp')
   .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper, project) {
+
+    /*
+     *
+     * Set up objects and arrays
+     *
+     */
+
     $scope.loadingData = false;
     $scope.fabOpen = false; // TODO this doesn't seem to have an effect, #6788 in md github
     $scope.projectTimelineData = {
@@ -23,6 +30,82 @@ angular.module('timelinerApp')
 
     $scope.project = project;
     ProjectsService.setCurrentProject(project);
+
+
+
+
+    /*
+     *
+     * Global functions for drag/drop functionality between Angular and Vis.js
+     *
+     */
+
+    window.tlCurrentDragData = {};
+
+    window.checkDropability = function (ev, el) {
+      window.tlCurrentDragData.containsItem = _.some(
+        findTaskById($(el).data('tlDropId'))[getObjectArrayName(window.tlCurrentDragData.DragType)],
+        {_id: window.tlCurrentDragData.DragId}
+      );
+    };
+
+    window.allowDrop = function(ev, el){
+      if(!window.tlCurrentDragData.containsItem){
+        ev.preventDefault();
+        $(el).addClass('drop-target');
+      }
+    };
+
+    window.objectDragStart = function (ev) {
+      window.tlCurrentDragData.DragId = ev.target.dataset.tlDragId;
+      window.tlCurrentDragData.DragType = ev.target.dataset.tlDragType;
+
+      ev.dataTransfer.setData('application/json', JSON.stringify({
+        tlDragId: ev.target.dataset.tlDragId,
+        tlDragType: ev.target.dataset.tlDragType
+      }));
+    };
+
+    window.dragTargetEnd = function(ev, el){
+      $(el).removeClass('drop-target');
+    };
+
+    window.objectDropped = function (ev, el) {
+      ev.preventDefault();
+      var target = $(el);
+      target.removeClass('drop-target');
+      var dragDropData = {};
+
+      $log.debug(JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType);
+      //return;
+      dragDropData.dragId = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragId;
+      dragDropData.dragType = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType;
+      dragDropData.dropId = target.data('tlDropId');
+      dragDropData.dropType = target.data('tlDropType');
+
+      //$log.debug('dropped: ', dragDropData.dragType, dragDropData.dragId, 'on target', dragDropData.dropType, dragDropData.dropId);
+
+      $(document).trigger('tl:timeline:item:addObject', dragDropData);
+    };
+
+
+    function getObjectArrayName(objectType) {
+      if (objectType === 'participant') {
+        return 'participants';
+      } else if (objectType === 'resource') {
+        return 'resources';
+      } else if (objectType === 'outcome') {
+        return 'outcomes';
+      }
+    }
+
+
+
+    /*
+     *
+     * Helper functions of controller
+     *
+     */
 
     function getDataSourceByItemType(type) {
       var source;
@@ -568,17 +651,7 @@ angular.module('timelinerApp')
 
     $(document).on('tl:timeline:item:addObject', function(ev, data) {
 
-      // TODO check if already exists before sending data
-
-      var objectType;
-
-      if(data.dragType === 'participant'){
-        objectType = 'participants';
-      } else if (data.dragType === 'resource') {
-        objectType = 'resources';
-      } else if (data.dragType === 'outcome') {
-        objectType = 'outcomes';
-      }
+      var objectType = getObjectArrayName(data.dragType);
 
       if(data.dropType === 'task'){
         ProjectsService.addObjectToTask({

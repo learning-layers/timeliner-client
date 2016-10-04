@@ -64,49 +64,6 @@ angular.module('timelinerApp')
       };
     }
 
-    function getMainDropElement(target) {
-      if(target.dataset.tlDropId){
-        return target;
-      } else {
-        return $(target).parents('[data-tl-drop-id]');
-      }
-    }
-
-    window.allowDrop = function(ev){
-      // TODO check somehow if item is droppable on this element (exists, correct type etc)
-      ev.preventDefault();
-      $(getMainDropElement(ev.target)).addClass('drop-target');
-    };
-
-    window.dragTargetEnd = function(ev){
-      $(getMainDropElement(ev.target)).removeClass('drop-target');
-    };
-
-    window.objectDropped = function (ev) {
-      ev.preventDefault();
-      var target = $(getMainDropElement(ev.target));
-      target.removeClass('drop-target');
-      var dragDropData = {};
-
-      $log.debug(JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType);
-      //return;
-      dragDropData.dragId = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragId;
-      dragDropData.dragType = JSON.parse(ev.dataTransfer.getData('application/json')).tlDragType;
-      dragDropData.dropId = target.data('tlDropId');
-      dragDropData.dropType = target.data('tlDropType');
-
-      //$log.debug('dropped: ', dragDropData.dragType, dragDropData.dragId, 'on target', dragDropData.dropType, dragDropData.dropId);
-
-      $(document).trigger('tl:timeline:item:addObject', dragDropData);
-    };
-
-    window.objectDragStart = function (ev) {
-      ev.dataTransfer.setData('application/json', JSON.stringify({
-        tlDragId: ev.target.dataset.tlDragId,
-        tlDragType: ev.target.dataset.tlDragType
-      }));
-    };
-
     function generateParticipantBlockHtml(participants) {
       var html = '<div class="tl-timeline-task-participants">';
 
@@ -144,9 +101,7 @@ angular.module('timelinerApp')
       return {
         id: task._id,
         className: 'tl-project-timeline-task',
-        content: generateOutcomeBlockHtml(task.outcomes) + '<div ondragover="allowDrop(event)" ondrop="objectDropped(event)"  ondragleave="dragTargetEnd(event)" class="tl-timeline-task-content" style="margin-left: ' + task.outcomes.length*5 + 'px;"><div class="tl-task-title"><span class="mdi mdi-briefcase-check tl-timeline-outcome-icon"></span>' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div>',
-        'tl-drop-id': task._id,
-        'tl-drop-type': 'task',
+        content: '<div ondragenter="checkDropability(event, this)" ondragover="allowDrop(event, this)" ondrop="objectDropped(event, this)"  ondragleave="dragTargetEnd(event, this)" data-tl-drop-id="' + task._id +'" data-tl-drop-type="task">' + generateOutcomeBlockHtml(task.outcomes) + '<div class="tl-timeline-task-content" style="margin-left: ' + task.outcomes.length*5 + 'px;"><div class="tl-task-title"><span class="mdi mdi-briefcase-check tl-timeline-outcome-icon"></span>' + $sanitize(task.title) + '</div>' + generateParticipantBlockHtml(task.participants) + generateResourceBlockHtml(task.resources) + '</div></div>',
         group: 'timeline-tasks',
         type: 'range',
         start: new Date(task.start),

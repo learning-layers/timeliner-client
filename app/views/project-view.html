@@ -124,7 +124,7 @@
     <md-content style="max-height:230px;" tl-prevent-parent-scroll>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="resource in resources" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::resource._id }}" data-tl-drag-type="resource">
-          <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(resource) }}" class="md-avatar-icon"></md-icon>
+          <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(resource) }}" class="tl-list-icon"></md-icon>
           <div class="md-list-item-text" layout="column">
             <h3>{{ resource.title }}</h3>
             <h4>{{ resource.description }}</h4>
@@ -157,7 +157,7 @@
     <md-content style="max-height:230px;" tl-prevent-parent-scroll>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="outcome in projectTimelineData.outcomes" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::outcome._id }}" data-tl-drag-type="outcome">
-          <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file" class="md-avatar-icon"></md-icon>
+          <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file" class="tl-list-icon"></md-icon>
           <div class="md-list-item-text" layout="column">
             <h3>{{ outcome.title }}</h3>
             <h4>{{ outcome.description }}</h4>
@@ -184,8 +184,8 @@
     </md-toolbar>
     <md-content style="max-height:230px;" tl-prevent-parent-scroll>
       <md-list flex class="md-dense">
-        <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks" ondrop="objectDropped(event)" ondragover="allowDrop(event)"  ondragleave="dragTargetEnd(event)" data-tl-drop-id="{{ ::task._id }}" data-tl-drop-type="task">
-          <md-icon md-font-set="mdi" md-font-icon="mdi-briefcase-check" class="md-avatar-icon"></md-icon>
+        <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks" ondragenter="checkDropability(event, this)" ondragover="allowDrop(event, this)" ondragleave="dragTargetEnd(event, this)" ondrop="objectDropped(event, this)" data-tl-drop-id="{{ ::task._id }}" data-tl-drop-type="task">
+          <md-icon md-font-set="mdi" md-font-icon="mdi-briefcase-check" class="tl-list-icon"></md-icon>
           <div class="md-list-item-text" layout="column">
             <h3>{{ task.title }}</h3>
             <p>{{ task.description }}</p>
