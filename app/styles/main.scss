@@ -618,3 +618,16 @@ tl-file-upload {
 .md-toolbar-tools.tl-socket-disconnected {
   background-color: #FF5252;
 }
+
+md-calendar {
+  table.md-calendar-day-header {
+    background-color: #2e3138;
+  }
+  table.md-calendar {
+    background-color: #42454b;
+  }
+}
+
+md-menu-content {
+  background-color: #42454b;
+}
