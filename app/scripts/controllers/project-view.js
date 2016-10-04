@@ -24,58 +24,82 @@ angular.module('timelinerApp')
     $scope.project = project;
     ProjectsService.setCurrentProject(project);
 
-    function findAnnotationIndex(annotation) {
-      return _($scope.projectTimelineData.annotations).findIndex(function(o) {
-        return o._id === annotation._id;
+    function getDataSourceByItemType(type) {
+      var source;
+
+      switch(type) {
+        case 'annotation':
+          source = $scope.projectTimelineData.annotations;
+          break;
+        case 'milestone':
+          source = $scope.projectTimelineData.milestones;
+          break;
+        case 'task':
+          source = $scope.projectTimelineData.tasks;
+          break;
+        case 'resource':
+          source = $scope.projectTimelineData.resouces;
+          break;
+        case 'outcome':
+          source = $scope.projectTimelineData.outcomes;
+          break;
+        default:
+          throw 'Unknown object type';
+      }
+
+      return source;
+    }
+
+    function findItemIndex(type, item) {
+      var source = getDataSourceByItemType(type);
+
+      return _(source).findIndex(function(o) {
+        return o._id === item._id;
       });
+    }
+
+    function findItemById(type, id) {
+      var source = getDataSourceByItemType(type);
+
+      return _(source).find(function(o) {
+        return o._id === id;
+      });
+    }
+
+    function findAnnotationIndex(annotation) {
+      return findItemIndex('annotation', annotation);
     }
 
     function findAnnotationById(id) {
-      return _($scope.projectTimelineData.annotations).find(function(o) {
-        return o._id === id;
-      });
+      return findItemById('annotation', id);
     }
 
     function findMilestoneIndex(milestone) {
-      return _($scope.projectTimelineData.milestones).findIndex(function(o) {
-        return o._id === milestone._id;
-      });
+      return findItemIndex('milestone', milestone);
     }
 
     function findMilestoneById(id) {
-      return _($scope.projectTimelineData.milestones).find(function(o){
-        return o._id === id;
-      });
+      return findItemById('milestone', id);
     }
 
     function findTaskIndex(task) {
-      return _($scope.projectTimelineData.tasks).findIndex(function(o) {
-        return o._id === task._id;
-      });
+      return findItemIndex('task', task);
     }
 
     function findTaskById(id) {
-      return _($scope.projectTimelineData.tasks).find(function(o) {
-        return o._id === id;
-      });
+      return findItemById('task', id);
     }
 
     function findResourceIndex(resource) {
-      return _($scope.resources).findIndex(function(o) {
-        return o._id === resource._id;
-      });
+      return findItemIndex('resource', resource);
     }
 
     function findOutcomeIndex(outcome) {
-      return _($scope.projectTimelineData.outcomes).findIndex(function(o) {
-        return o._id === outcome._id;
-      });
+      return findItemIndex('outcome', outcome);
     }
 
     function findOutcomeById(id) {
-      return _($scope.projectTimelineData.outcomes).find(function(o) {
-        return o._id === id;
-      });
+      return findItemById('outcome', id);
     }
 
     function socketConnectCallback() {
@@ -465,6 +489,11 @@ angular.module('timelinerApp')
 
     $scope.timelineFitToScreen = function(ev) {
       $scope.$broadcast('tl:timeline:fit_to_screen', ev);
+    };
+
+    $scope.showOnTimeline = function(ev, activity) {
+      $log.debug(ev, activity);
+      throw 'Not implemented';
     };
 
     $scope.resetPanels = function(ev) {

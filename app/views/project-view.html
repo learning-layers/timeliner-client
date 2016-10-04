@@ -247,6 +247,7 @@
                   <h3>{{ ::activity.created | tlDate : true }}</h3>
                   <p translate translate-values="{{ ::getActivityTranslateValues(activity) }}">{{ ::getActivityTranslateTemplate(activity) }}</p>
                 </div>
+                <md-icon class="md-secondary" md-font-set="mdi" md-font-icon="mdi-target" ng-click="showOnTimeline($event, activity)" aria-label="Show on Timeline"></md-icon>
                 <md-divider></md-divider>
               </md-list-item>
             </md-list>
