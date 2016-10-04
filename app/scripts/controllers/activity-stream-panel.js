@@ -74,6 +74,22 @@ angular.module('timelinerApp')
       };
     };
 
+    $scope.canShowOnTimeline = function(activity) {
+      var timelineTypes = ['annotation', 'milestone', 'task', 'outcome'];
+      if ( activity.activityType === 'delete' ) {
+        return false;
+      }
+
+      if ( timelineTypes.indexOf(activity.objectType) === -1 ) {
+        return false;
+      }
+
+       // TODO It might make sense to either check if item really exists and is on timeline
+       // or add some functiona that would be determining that and hiding the button
+
+      return true;
+    };
+
     function loadMoreMessages() {
       if ( $scope.messages.length === 0 ) {
         return;

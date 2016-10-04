@@ -380,6 +380,11 @@ angular.module('timelinerApp')
           timeline.fit();
         });
 
+        scope.$on('tl:timeline:focus', function(ev, data) {
+          ev.preventDefault();
+          timeline.focus(data.id);
+        });
+
         scope.$on('tl:timeline:add:annotation', function(ev, annotation) {
           ev.preventDefault();
           items.add(generateAnnotationDataSetItem(annotation));

@@ -471,29 +471,34 @@ angular.module('timelinerApp')
         });
     };
 
-    $scope.timelineMoveLeft = function(ev) {
-      $scope.$broadcast('tl:timeline:move_left', ev);
+    $scope.timelineMoveLeft = function() {
+      $scope.$broadcast('tl:timeline:move_left');
     };
 
-    $scope.timelineMoveRight = function(ev) {
-      $scope.$broadcast('tl:timeline:move_right', ev);
+    $scope.timelineMoveRight = function() {
+      $scope.$broadcast('tl:timeline:move_right');
     };
 
-    $scope.timelineZoomIn = function(ev) {
-      $scope.$broadcast('tl:timeline:zoom_in', ev);
+    $scope.timelineZoomIn = function() {
+      $scope.$broadcast('tl:timeline:zoom_in');
     };
 
-    $scope.timelineZoomOut = function(ev) {
-      $scope.$broadcast('tl:timeline:zoom_out', ev);
+    $scope.timelineZoomOut = function() {
+      $scope.$broadcast('tl:timeline:zoom_out');
     };
 
-    $scope.timelineFitToScreen = function(ev) {
-      $scope.$broadcast('tl:timeline:fit_to_screen', ev);
+    $scope.timelineFitToScreen = function() {
+      $scope.$broadcast('tl:timeline:fit_to_screen');
     };
 
     $scope.showOnTimeline = function(ev, activity) {
-      $log.debug(ev, activity);
-      throw 'Not implemented';
+       if ( activity.data.id ) {
+         var item = findItemById(activity.objectType, activity.data.id);
+
+         if ( item && item.start ) {
+           $scope.$broadcast('tl:timeline:focus', { id: item._id });
+         }
+       }
     };
 
     $scope.resetPanels = function(ev) {
