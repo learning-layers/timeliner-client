@@ -504,6 +504,38 @@ md-icon.tl-remove {
   }
 }
 
+#sidebar {
+  background-color: #111111;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+.floating {
+  position: fixed;
+  height: 200px;
+  width: 300px;
+  top: 100px;
+  left: 100px;
+  z-index: 50;
+  padding-bottom: 64px;
+
+  md-content {
+    height: 100%;
+  }
+
+  .ui-resizable-handle {
+    position: relative;
+    float: right;
+    bottom: 20px;
+    width: 0;
+    height: 0;
+    border-bottom: 10px solid $tl-color-blue;
+    border-right:10px solid $tl-color-blue;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+  }
+}
+
 .drop-target {
   background-color: rgba(14, 223, 0, 0.34);
   -webkit-box-shadow:inset 0px 0px 0px 2px #40ca0e;

@@ -48,6 +48,12 @@
   </md-fab-speed-dial>
 
   <span flex></span>
+  <md-button class="md-icon-button" type="button" ng-click="kala()">
+    <md-tooltip md-direction="top">
+      TOGGLE
+    </md-tooltip>
+    <md-icon md-font-set="mdi" md-font-icon="mdi-star"></md-icon>
+  </md-button>
   <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.MOVE_LEFT' | translate }}" type="button" ng-click="timelineMoveLeft($event)">
     <md-tooltip md-direction="top">
       <translate>VIEWS.PROJECT.ACTIONS.MOVE_LEFT</translate>
@@ -86,8 +92,8 @@
   </md-button>
 </div>
 
-<div layout-gt-sm="row" layout="column" ng-hide="loadingData">
-  <div flex-gt-sm="20" flex>
+<div ng-hide="loadingData">
+  <div class="floating">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</span>
@@ -97,7 +103,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content style="max-height:230px;" tl-prevent-parent-scroll>
+    <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="participant in project.participants" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::participant._id }}" data-tl-drag-type="participant">
           <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" draggable="false"/>
@@ -112,9 +118,7 @@
     </md-content>
   </div>
 
-  <md-divider></md-divider>
-
-  <div flex-gt-sm="20" flex ng-controller="ResourcesPanelCtrl">
+  <div class="floating" ng-controller="ResourcesPanelCtrl">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</span>
@@ -124,7 +128,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content style="max-height:230px;" tl-prevent-parent-scroll>
+    <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="resource in resources" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::resource._id }}" data-tl-drag-type="resource">
           <md-icon md-font-set="mdi" md-font-icon="{{ getIcon(resource) }}" class="tl-list-icon"></md-icon>
@@ -145,9 +149,7 @@
     </md-content>
   </div>
 
-  <md-divider></md-divider>
-
-  <div flex-gt-sm="20" flex>
+  <div class="floating">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.OUTCOMES.HEADER</span>
@@ -157,7 +159,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content style="max-height:230px;" tl-prevent-parent-scroll>
+    <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="outcome in projectTimelineData.outcomes" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::outcome._id }}" data-tl-drag-type="outcome">
           <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file" class="tl-list-icon"></md-icon>
@@ -173,9 +175,7 @@
     </md-content>
   </div>
 
-  <md-divider></md-divider>
-
-  <div flex-gt-sm="20" flex>
+  <div class="floating">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.TASKS.HEADER</span>
@@ -185,7 +185,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content style="max-height:230px;" tl-prevent-parent-scroll>
+    <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks" ondragenter="checkDropability(event, this)" ondragover="allowDrop(event, this)" ondragleave="dragTargetEnd(event, this)" ondrop="objectDropped(event, this)" data-tl-drop-id="{{ ::task._id }}" data-tl-drop-type="task">
           <md-icon md-font-set="mdi" md-font-icon="mdi-briefcase-check" class="tl-list-icon"></md-icon>
@@ -200,9 +200,7 @@
     </md-content>
   </div>
 
-  <md-divider></md-divider>
-
-  <div flex-gt-sm="20" flex ng-controller="ActivityStreamPanelCtrl">
+  <div class="floating" ng-controller="ActivityStreamPanelCtrl">
     <md-toolbar layout="row" class="md-hue-3">
       <div class="md-toolbar-tools">
         <span translate>VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.HEADER</span>
@@ -212,7 +210,7 @@
         </md-button>
       </div>
     </md-toolbar>
-    <md-content style="max-height:230px;">
+    <md-content>
       <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
         <md-tab label="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.TAB.CHAT' | translate }}">
           <md-content class="md-padding" style="max-height:125px;" id="tl-project-messages" tl-prevent-parent-scroll>
@@ -262,6 +260,11 @@
   </div>
 </div>
 
-<div ng-hide="loadingData">
-  <project-timeline data="projectTimelineData"></project-timeline>
+<div layout="row" flex ng-hide="loadingData">
+  <div flex>
+    <project-timeline data="projectTimelineData"></project-timeline>
+  </div>
+  <div flex-gt-sm="{{saba}}" id="sidebar">
+
+  </div>
 </div>

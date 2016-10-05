@@ -32,6 +32,30 @@ angular.module('timelinerApp')
     ProjectsService.setCurrentProject(project);
 
 
+    $scope.saba = 0;
+    $scope.kala = function () {
+      if ($scope.saba == 20){
+        $scope.saba = 0;
+      } else {
+        $scope.saba = 20;
+      }
+    };
+
+    $( ".floating" ).draggable({
+      handle: 'md-toolbar',
+      containment: 'body',
+      scroll: false,
+      stack: '.floating'
+    }).resizable({
+      handles: 'se',
+      minHeight: 100,
+      minWidth: 200,
+      maxWidth: 600
+    });
+
+    $('#sidebar').sortable();
+
+
 
 
     /*
