@@ -13,6 +13,8 @@ $tl-color-green: #82ad1a;
 $tl-color-purple: #b553c0;
 $tl-color-white: #d9d4c9;
 
+$tl-accent-blue: #40c4ff;
+
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 // bower:scss
@@ -526,13 +528,12 @@ md-icon.tl-remove {
   .ui-resizable-handle {
     position: relative;
     float: right;
-    bottom: 20px;
+    bottom: 14px;
     width: 0;
     height: 0;
-    border-bottom: 10px solid $tl-color-blue;
-    border-right:10px solid $tl-color-blue;
-    border-top: 10px solid transparent;
-    border-left: 10px solid transparent;
+    border: 7px solid transparent;
+    border-right-color: $tl-accent-blue;
+    border-bottom-color: $tl-accent-blue;
   }
 }
 

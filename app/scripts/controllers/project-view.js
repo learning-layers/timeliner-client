@@ -734,5 +734,7 @@ angular.module('timelinerApp')
       SocketService.off('create:message', socketCreateMessageCallback);
 
       ProjectsService.unsetCurrentProject();
+
+      $(document).off('tl:timeline:item:addObject');
     });
   });
