@@ -7,7 +7,7 @@
  * # projectTimeline
  */
 angular.module('timelinerApp')
-  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService, UsersService, $) {
+  .directive('projectTimeline', function ($log, $window, $sanitize, _, $translate, ProjectsService, UsersService) {
     var timelineOptions = {
       groupOrder: 'order',
       zoomMax: 1.578e+11, // 5 years
