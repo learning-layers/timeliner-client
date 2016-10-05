@@ -37,7 +37,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_UPDATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
           $scope.updating = false;
@@ -53,7 +52,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_CREATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
           $scope.updating = false;
@@ -68,7 +66,6 @@ angular.module('timelinerApp')
       }, function(response) {
         $scope.updating = false;
         $mdDialog.hide(response.data);
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.MILESTONE_REMOVED');
       }, function(response) {
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="milestoneForm"]'));
         $scope.updating = false;

@@ -40,7 +40,6 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           end: $scope.model.end
         }, function(response) {
-          $log.debug('Project update success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
         }, function(err) {
@@ -55,7 +54,6 @@ angular.module('timelinerApp')
           start: $scope.model.start,
           end: $scope.model.end
         }, function(response) {
-          $log.debug('Project creation success', response);
           $scope.updating = false;
           $mdDialog.hide(response.data);
         }, function(err) {

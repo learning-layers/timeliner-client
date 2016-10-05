@@ -35,7 +35,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_UPDATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
           $scope.updating = false;
@@ -50,7 +49,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_CREATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
           $scope.updating = false;
@@ -65,7 +63,6 @@ angular.module('timelinerApp')
       }, function(response) {
         $scope.updating = false;
         $mdDialog.hide(response.data);
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.ANNOTATION_REMOVED');
       }, function(response) {
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="annotationForm"]'));
         $scope.updating = false;

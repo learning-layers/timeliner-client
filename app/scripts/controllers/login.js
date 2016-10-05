@@ -50,7 +50,6 @@ angular.module('timelinerApp')
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
         SocketService.authenticate();
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function(response) {
         $scope.updating = false;
@@ -82,7 +81,6 @@ angular.module('timelinerApp')
 
         AuthService.setCookieAndUser(response.data.token, response.data.user);
         SocketService.authenticate();
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('projects.list');
       }, function() {
         $scope.updating = false;

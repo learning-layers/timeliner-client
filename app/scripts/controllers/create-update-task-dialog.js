@@ -45,7 +45,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
           $scope.updating = false;
@@ -61,7 +60,6 @@ angular.module('timelinerApp')
         }, function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_CREATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
           $scope.updating = false;
@@ -76,7 +74,6 @@ angular.module('timelinerApp')
       }, function(response) {
         $scope.updating = false;
         $mdDialog.hide(response.data);
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_REMOVED');
       }, function(response) {
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="taskForm"]'));
         $scope.updating = false;

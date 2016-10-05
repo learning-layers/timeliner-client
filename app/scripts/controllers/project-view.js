@@ -661,7 +661,6 @@ angular.module('timelinerApp')
           objectId: data.dragId
         }, {}, function() {
           //$log.debug('Task update success', response);
-          //SystemMessagesService.showSuccess('TOASTS.SUCCESSES.TASK_UPDATED');
         }, function(err) {
           if (err.status === 409) {
             if (data.dragType === 'participant') {

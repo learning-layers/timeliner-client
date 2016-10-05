@@ -63,7 +63,6 @@ angular.module('timelinerApp')
         }, getFormData(), function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_UPDATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
           $scope.updating = false;
@@ -74,7 +73,6 @@ angular.module('timelinerApp')
         }, getFormData(), function(response) {
           $scope.updating = false;
           $mdDialog.hide(response.data);
-          SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_CREATED');
         }, function(response) {
           SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
           $scope.updating = false;
@@ -89,7 +87,6 @@ angular.module('timelinerApp')
       }, function(response) {
         $scope.updating = false;
         $mdDialog.hide(response.data);
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.RESOURCE_REMOVED');
       }, function(response) {
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response), null, document.querySelector('form[name="resourceForm"]'));
         $scope.updating = false;
