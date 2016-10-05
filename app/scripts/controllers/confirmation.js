@@ -28,7 +28,6 @@ angular.module('timelinerApp')
         $scope.confirmationSuccessful = true;
         AuthService.setCookieAndUser(response.data.token, response.data.user);
         SystemMessagesService.showSuccess('VIEWS.CONFIRMATION.REGISTRATION_COMPLETED');
-        SystemMessagesService.showSuccess('TOASTS.SUCCESSES.LOGIN_SUCCESS', { FULL_NAME: UsersService.getFullName(response.data.user) });
         $state.go('home');
       }, function () {
         $scope.updating = false;

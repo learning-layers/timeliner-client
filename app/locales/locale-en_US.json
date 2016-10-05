@@ -251,22 +251,6 @@
   },
   "TOASTS": {
     "SUCCESSES": {
-      "LOGIN_SUCCESS": "Welcome back {{ FULL_NAME }}, you have successfully logged in.",
-      "ANNOTATION_CREATED": "New annotation successfully created.",
-      "ANNOTATION_UPDATED": "Annotation successfully changed.",
-      "ANNOTATION_REMOVED": "Annotation successfully removed.",
-      "MILESTONE_CREATED": "New milestone successfully created.",
-      "MILESTONE_UPDATED": "Milestone successfully changed.",
-      "MILESTONE_REMOVED": "Milestone successfully removed.",
-      "TASK_CREATED": "New task successfully created.",
-      "TASK_UPDATED": "Task successfully updated.",
-      "TASK_REMOVED": "Task successfully removed.",
-      "RESOURCE_CREATED": "New resource successfully created.",
-      "RESOURCE_UPDATED": "Resource successfully changed.",
-      "RESOURCE_REMOVED": "Resource successfully removed.",
-      "OUTCOME_CREATED": "New outcome successful created.",
-      "OUTCOME_UPDATED": "Outcome successful changed.",
-      "OUTCOME_REMOVED": "Outcome successful removed.",
       "PASSWORD_RESET": "Password reset successful. You can now login into the system."
     },
     "WARNINGS": {
