@@ -517,12 +517,15 @@ md-icon.tl-remove {
   height: 200px;
   width: 300px;
   top: 100px;
-  left: 100px;
   z-index: 50;
   padding-bottom: 64px;
 
   md-content {
     height: 100%;
+  }
+
+  md-list {
+    overflow-y: scroll;
   }
 
   .ui-resizable-handle {
@@ -534,6 +537,10 @@ md-icon.tl-remove {
     border: 7px solid transparent;
     border-right-color: $tl-accent-blue;
     border-bottom-color: $tl-accent-blue;
+
+    &:hover {
+      cursor: se-resize;
+    }
   }
 }
 

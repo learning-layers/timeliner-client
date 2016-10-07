@@ -93,16 +93,8 @@
 </div>
 
 <div ng-hide="loadingData">
-  <div class="floating" md-whiteframe="6">
-    <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</span>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close">
-            <md-icon>close</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+  <div class="floating" id="participantPanel">
+    <item-panel-toolbar heading="'VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER'" panel-id="'participantPanel'"></item-panel-toolbar>
     <md-content>
       <div ng-controller="InviteParticipantsCtrl as ctrl">
         <form name="participantForm" ng-submit="ctrl.inviteParticipant()" novalidate>
@@ -155,16 +147,8 @@
     </md-content>
   </div>
 
-  <div class="floating" md-whiteframe="6" ng-controller="ResourcesPanelCtrl">
-    <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</span>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close">
-            <md-icon>close</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+  <div class="floating" ng-controller="ResourcesPanelCtrl" id="resourcePanel">
+    <item-panel-toolbar heading="'VIEWS.PROJECT.PANELS.RESOURCES.HEADER'" panel-id="'resourcePanel'"></item-panel-toolbar>
     <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="resource in resources" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::resource._id }}" data-tl-drag-type="resource">
@@ -186,16 +170,8 @@
     </md-content>
   </div>
 
-  <div class="floating" md-whiteframe="6">
-    <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span translate>VIEWS.PROJECT.PANELS.OUTCOMES.HEADER</span>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close">
-            <md-icon>close</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+  <div class="floating" id="outcomePanel">
+    <item-panel-toolbar heading="'VIEWS.PROJECT.PANELS.OUTCOMES.HEADER'" panel-id="'outcomePanel'"></item-panel-toolbar>
     <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="outcome in projectTimelineData.outcomes" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::outcome._id }}" data-tl-drag-type="outcome">
@@ -212,16 +188,8 @@
     </md-content>
   </div>
 
-  <div class="floating" md-whiteframe="6">
-    <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span translate>VIEWS.PROJECT.PANELS.TASKS.HEADER</span>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close">
-            <md-icon>close</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+  <div class="floating" id="taskPanel">
+    <item-panel-toolbar heading="'VIEWS.PROJECT.PANELS.TASKS.HEADER'" panel-id="'taskPanel'"></item-panel-toolbar>
     <md-content>
       <md-list flex class="md-dense">
         <md-list-item class="md-2-line" ng-repeat="task in projectTimelineData.tasks" ondragenter="checkDropability(event, this)" ondragover="allowDrop(event, this)" ondragleave="dragTargetEnd(event, this)" ondrop="objectDropped(event, this)" data-tl-drop-id="{{ ::task._id }}" data-tl-drop-type="task">
@@ -237,16 +205,8 @@
     </md-content>
   </div>
 
-  <div class="floating" md-whiteframe="6" ng-controller="ActivityStreamPanelCtrl">
-    <md-toolbar layout="row" class="md-hue-3">
-      <div class="md-toolbar-tools">
-        <span translate>VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.HEADER</span>
-        <span flex></span>
-        <md-button class="md-icon-button" aria-label="Close">
-            <md-icon>close</md-icon>
-        </md-button>
-      </div>
-    </md-toolbar>
+  <div class="floating" ng-controller="ActivityStreamPanelCtrl" id="feedPanel">
+    <item-panel-toolbar heading="'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.HEADER'" panel-id="'feedPanel'"></item-panel-toolbar>
     <md-content>
       <md-tabs md-dynamic-height md-border-bottom md-stretch-tabs="always">
         <md-tab label="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.TAB.CHAT' | translate }}">

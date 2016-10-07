@@ -41,6 +41,27 @@ angular.module('timelinerApp')
       }
     };
 
+    function resetPanels() {
+      var windowWidth = $(window).width();
+      var marginLeft = 50;
+      var defaultPanelWidth = 300;
+      var defaultPanelHeight = 200;
+
+      var horizontalPlacement = windowWidth - marginLeft - defaultPanelWidth;
+
+      $('.floating').animate({left: horizontalPlacement, height: defaultPanelHeight, width: defaultPanelWidth});
+
+      $('#participantPanel').show().animate({top: 100, zIndex: 55});
+      $('#resourcePanel').show().animate({top: 300, zIndex: 56});
+      $('#outcomePanel').show().animate({top: 450, zIndex: 57});
+      $('#taskPanel').show().animate({top: 650, zIndex: 58});
+      $('#feedPanel').show().animate({top: 800, zIndex: 59});
+
+
+    }
+
+    resetPanels();
+
     $( '.floating' ).draggable({
       handle: 'md-toolbar',
       containment: 'body',
@@ -608,8 +629,8 @@ angular.module('timelinerApp')
        }
     };
 
-    $scope.resetPanels = function(ev) {
-      $log.error('Not implemented', ev);
+    $scope.resetPanels = function() {
+      resetPanels();
     };
 
     // Attach event listeners to $scope

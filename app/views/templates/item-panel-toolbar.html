@@ -1,0 +1,13 @@
+<md-toolbar layout="row" class="md-hue-3">
+  <div class="md-toolbar-tools">
+    <span translate>{{ heading }}</span>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="Expand" ng-click="togglePanelCollapse()">
+      <md-icon ng-if="!collapsed">expand_less</md-icon>
+      <md-icon ng-if="collapsed">expand_more</md-icon>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="Close" ng-click="hidePanel()">
+      <md-icon>close</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
