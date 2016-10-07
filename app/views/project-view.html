@@ -135,7 +135,7 @@
                 </md-not-found>
               </md-autocomplete>
             </md-input-container>
-            <md-button type="submit" class="md-icon-button md-primary" aria-label="Invite" ng-disabled="!ctrl.canInviteParticipant()">
+            <md-button type="submit" class="md-icon-button md-accent" aria-label="Invite" ng-disabled="!ctrl.canInviteParticipant()">
               <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
             </md-button>
           </div>
@@ -257,7 +257,7 @@
                   <md-input-container class="md-block" flex="100">
                     <textarea ng-model="model.message" name="message" md-maxlength="150" rows="1" md-no-autogrow="true" md-select-on-focus placeholder="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.MESSAGE_FORM.MESSAGE.PLACEHOLDER' | translate }}"></textarea>
                   </md-input-container>
-                  <md-button type="submit" class="md-icon-button" aria-label="Send" ng-disabled="!canSubmitMessage()">
+                  <md-button type="submit" class="md-icon-button md-accent" aria-label="Send" ng-disabled="!canSubmitMessage()">
                     <md-icon>send</md-icon>
                   </md-button>
                 </div>
