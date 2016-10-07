@@ -680,3 +680,52 @@ md-calendar {
 md-menu-content {
   background-color: #42454b;
 }
+
+md-autocomplete, md-autocomplete[disabled]:not([md-floating-label]) {
+  background-color: #2e3138;
+}
+
+.autocomplete-participant-template {
+  ul {
+    background-color: #42454b;
+  }
+
+  li {
+    background-color: #42454b;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+    height: auto;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    white-space: normal;
+
+    &:last-child {
+      border-bottom-width: 0;
+    }
+  }
+
+  .item-image {
+    img.md-avatar {
+      height: 38px;
+      width: 38px;
+      border: none;
+      @include tl-rounded-image;
+      vertical-align: middle;
+    }
+  }
+
+  .item-content {
+    display: inline-block;
+    margin-left: 10px;
+    line-height: 1;
+    color: #ffffff;
+    vertical-align: middle;
+
+    span {
+      display: block;
+    }
+  }
+
+  md-not-found {
+    color: #ffffff;
+  }
+}

@@ -34,6 +34,10 @@ angular.module('timelinerApp')
         url: apiLocation + '/:id',
         method: 'PUT'
       },
+      invite: {
+        url: apiLocation + '/:id/participants/invite/:user',
+        method: 'POST'
+      },
       accept: {
         url: apiLocation + '/:id/participants/accept',
         key: '@id',
@@ -292,6 +296,7 @@ angular.module('timelinerApp')
       update: projectsResource.update,
       mine: projectsResource.mine,
       all: projectsResource.all,
+      invite: projectsResource.invite,
       accept: projectsResource.accept,
       reject: projectsResource.reject,
       hide: projectsResource.hide,

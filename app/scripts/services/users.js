@@ -23,6 +23,9 @@ angular.module('timelinerApp')
             params: {
               user: '@user',
             }
+          },
+          searchByNameOrEmail: {
+            url: apiLocation + '/search',
           }
         });
 
@@ -30,6 +33,7 @@ angular.module('timelinerApp')
         return {
           all: usersResource.all,
           manageAdmin: usersResource.manageAdmin,
+          searchByNameOrEmail: usersResource.searchByNameOrEmail,
           getFullName: function(user) {
             return ( user && user.name ) ? user.name.first + ' ' + user.name.last : '@unknown';
           },

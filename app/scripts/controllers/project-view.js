@@ -34,14 +34,14 @@ angular.module('timelinerApp')
 
     $scope.saba = 0;
     $scope.kala = function () {
-      if ($scope.saba == 20){
+      if ($scope.saba === 20){
         $scope.saba = 0;
       } else {
         $scope.saba = 20;
       }
     };
 
-    $( ".floating" ).draggable({
+    $( '.floating' ).draggable({
       handle: 'md-toolbar',
       containment: 'body',
       scroll: false,

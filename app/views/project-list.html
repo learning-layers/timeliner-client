@@ -10,7 +10,7 @@
 <md-list>
   <div ng-if="pendingProjects && pendingProjects.length > 0">
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
-    <md-list-item class="secondary-button-padding" ng-repeat="project in pendingProjects" ng-click="openProject()">
+    <md-list-item class="secondary-button-padding" ng-repeat="project in pendingProjects" ui-sref="project({id: project._id})">
       <div flex="40">{{ ::project.title }}</div>
       <div flex="10">{{ ::project.start | tlDate }}</div>
       <div flex="10">{{ ::project.end | tlDate }}</div>

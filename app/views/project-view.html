@@ -104,6 +104,43 @@
       </div>
     </md-toolbar>
     <md-content>
+      <div ng-controller="InviteParticipantsCtrl as ctrl">
+        <form name="participantForm" ng-submit="ctrl.inviteParticipant()" novalidate>
+          <div layout="row" layout-align="space-between center">
+            <md-input-container class="md-block" flex="100">
+              <md-autocomplete
+                ng-disabled="ctrl.isDisabled"
+                md-no-cache="ctrl.noCache"
+                md-selected-item="ctrl.selectedItem"
+                md-search-text="ctrl.searchText"
+                md-items="item in ctrl.querySearch(ctrl.searchText)"
+                md-item-text="getUserFullName(item)"
+                md-min-length="3"
+                md-delay="500"
+                placeholder="{{ 'VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.PLACEHOLDER' | translate }}"
+                md-menu-class="autocomplete-participant-template">
+                <md-item-template>
+                  <div>
+                  <span class="item-image">
+                    <img ng-src="{{ ::getUserImage(item) }}" class="md-avatar" alt="{{ ::getUserFullName(item) }}" draggable="false"/>
+                  </span>
+                  <span class="item-content">
+                    <span>{{ ::getUserFullName(item) }}</span>
+                    <span>{{ item.email }}</span>
+                  </span>
+                  </div>
+                </md-item-template>
+                <md-not-found>
+                  <translate translate translate-values="{ TEXT: ctrl.searchText }">VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.NOT_FOUND</translate>
+                </md-not-found>
+              </md-autocomplete>
+            </md-input-container>
+            <md-button type="submit" class="md-icon-button md-primary" aria-label="Invite" ng-disabled="!ctrl.canInviteParticipant()">
+              <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
+            </md-button>
+          </div>
+        </form>
+      </div>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="participant in project.participants" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::participant._id }}" data-tl-drag-type="participant">
           <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" draggable="false"/>

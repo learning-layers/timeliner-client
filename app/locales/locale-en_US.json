@@ -205,7 +205,11 @@
       },
       "PANELS": {
         "PARTICIPANTS": {
-          "HEADER": "Participants"
+          "HEADER": "Participants",
+          "FORM": {
+            "PLACEHOLDER": "Name or email address",
+            "NOT_FOUND": "No users matching <strong>{{ TEXT }}</strong> were found."
+          }
         },
         "RESOURCES": {
           "HEADER": "Resources"
