@@ -52,7 +52,7 @@
     "LOGOUT": "Log out",
     "SOCKET": {
       "RECONNECTING": "Connection lost, reconnect is in progress. Please wait until connection could be established.",
-      "DISCONNECTED": "Connection lost, reconnection failed. Please refresh or contact administrator it it persists."
+      "DISCONNECTED": "Connection lost, reconnection failed. Please refresh or contact administrator if it persists."
     }
   },
   "VIEWS": {
