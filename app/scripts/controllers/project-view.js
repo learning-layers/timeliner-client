@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper, project) {
+  .controller('ProjectViewCtrl', function ($scope, $stateParams, $log, $mdDialog, $mdMedia, $q, appConfig, ProjectsService, SocketService, _, SystemMessagesService, $, dialogHelper, project, $window, $timeout) {
 
     /*
      *
@@ -41,23 +41,47 @@ angular.module('timelinerApp')
       }
     };
 
+    // Variables for panels placement
+    var windowWidth = $(window).width();
+    var panelMarginLeft = 50;
+    var defaultPanelWidth = 300;
+    var defaultPanelHeight = 0;
+
     function resetPanels() {
-      var windowWidth = $(window).width();
-      var marginLeft = 50;
-      var defaultPanelWidth = 300;
-      var defaultPanelHeight = 200;
+      $scope.panelStates = {
+        participantPanel: {
+          collapsed: true,
+          moved: false
+        },
+        resourcePanel: {
+          collapsed: true,
+          moved: false
+        },
+        outcomePanel: {
+          collapsed: true,
+          moved: false
+        },
+        taskPanel: {
+          collapsed: true,
+          moved: false
+        },
+        feedPanel: {
+          collapsed: true,
+          moved: false
+        }
+      };
 
-      var horizontalPlacement = windowWidth - marginLeft - defaultPanelWidth;
+      $('.floating .ui-resizable-handle').hide();
 
+      windowWidth = $(window).width();
+      var horizontalPlacement = windowWidth - panelMarginLeft - defaultPanelWidth;
       $('.floating').animate({left: horizontalPlacement, height: defaultPanelHeight, width: defaultPanelWidth});
 
-      $('#participantPanel').show().animate({top: 100, zIndex: 55});
-      $('#resourcePanel').show().animate({top: 300, zIndex: 56});
-      $('#outcomePanel').show().animate({top: 450, zIndex: 57});
-      $('#taskPanel').show().animate({top: 650, zIndex: 58});
-      $('#feedPanel').show().animate({top: 800, zIndex: 59});
-
-
+      $('#participantPanel').show().animate({top: 150});
+      $('#resourcePanel').show().animate({top: 250});
+      $('#outcomePanel').show().animate({top: 350});
+      $('#taskPanel').show().animate({top: 450});
+      $('#feedPanel').show().animate({top: 550});
     }
 
     resetPanels();
@@ -66,7 +90,10 @@ angular.module('timelinerApp')
       handle: 'md-toolbar',
       containment: 'body',
       scroll: false,
-      stack: '.floating'
+      stack: '.floating',
+      start: function() {
+        $scope.panelStates[this.id].moved = true;
+      }
     }).resizable({
       handles: 'se',
       minHeight: 100,
@@ -74,8 +101,28 @@ angular.module('timelinerApp')
       maxWidth: 600
     });
 
-    $('#sidebar').sortable();
+    //$('#sidebar').sortable();
 
+    function onResize() {
+      // Reset timeout
+      $timeout.cancel($scope.resizing);
+
+      // Add a timeout to not call the resizing function every pixel
+      $scope.resizing = $timeout( function() {
+        windowWidth = $(window).width();
+        var horizontalPlacement = windowWidth - panelMarginLeft - defaultPanelWidth;
+
+        $('.floating').each(
+          function () {
+            if(!$scope.panelStates[this.id].moved){
+              $(this).animate({left: horizontalPlacement});
+            }
+          }
+        );
+      }, 500);
+    }
+
+    angular.element($window).on('resize', onResize);
 
 
 
@@ -757,5 +804,6 @@ angular.module('timelinerApp')
       ProjectsService.unsetCurrentProject();
 
       $(document).off('tl:timeline:item:addObject');
+      angular.element($window).off('resize');
     });
   });

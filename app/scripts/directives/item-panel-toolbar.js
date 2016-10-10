@@ -13,16 +13,18 @@ angular.module('timelinerApp')
       restrict: 'E',
       scope: {
         heading: '=',
-        panelId: '='
+        panelId: '=',
+        collapsed: '='
       },
       link: function postLink(scope) {
-        scope.collapsed = false;
-        var lastPanelHeight;
+        var lastPanelHeight = 200;
         var panel = $('#' + scope.panelId );
         var resizeHandle = panel.find('.ui-resizable-handle');
+        resizeHandle.hide(); // Default collapsed and hidden
 
         scope.togglePanelCollapse = function () {
           if(scope.collapsed) {
+            panel.css({zIndex: Number(panel.css('z-index')) + 5 });
             panel.animate({height: lastPanelHeight}, 300);
             resizeHandle.show();
             scope.collapsed = false;

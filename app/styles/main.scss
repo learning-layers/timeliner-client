@@ -514,7 +514,7 @@ md-icon.tl-remove {
 
 .floating {
   position: fixed;
-  height: 200px;
+  height: 0;
   width: 300px;
   top: 100px;
   z-index: 50;
@@ -524,10 +524,6 @@ md-icon.tl-remove {
     height: 100%;
   }
 
-  md-list {
-    overflow-y: scroll;
-  }
-
   .ui-resizable-handle {
     position: relative;
     float: right;
@@ -535,8 +531,8 @@ md-icon.tl-remove {
     width: 0;
     height: 0;
     border: 7px solid transparent;
-    border-right-color: $tl-accent-blue;
-    border-bottom-color: $tl-accent-blue;
+    border-right-color: grey;
+    border-bottom-color: grey;
 
     &:hover {
       cursor: se-resize;
