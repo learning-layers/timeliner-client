@@ -208,7 +208,7 @@
           "HEADER": "Participants",
           "FORM": {
             "PLACEHOLDER": "Name or email address",
-            "NOT_FOUND": "No users matching <strong>{{ TEXT }}</strong> were found."
+            "NOT_FOUND": "No suitable users found."
           }
         },
         "RESOURCES": {

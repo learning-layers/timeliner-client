@@ -26,6 +26,7 @@ angular.module('timelinerApp')
           },
           searchByNameOrEmail: {
             url: apiLocation + '/search',
+            method: 'POST'
           }
         });
 

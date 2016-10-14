@@ -732,3 +732,23 @@ md-autocomplete, md-autocomplete[disabled]:not([md-floating-label]) {
     color: #ffffff;
   }
 }
+
+md-input-container.tl-no-margin-bottom {
+  margin-bottom: 0px;
+}
+
+.tl-find-participant {
+  margin-left: 16px;
+
+  md-input-container {
+    margin: 0;
+  }
+}
+
+img.tl-project-participant-pending {
+  filter: opacity(85%) drop-shadow(5px 5px 10px $tl-color-yellow);
+}
+
+img.tl-project-participant-placeholder {
+  filter: grayscale(100%) drop-shadow(5px 5px 10px $tl-color-orange);
+}

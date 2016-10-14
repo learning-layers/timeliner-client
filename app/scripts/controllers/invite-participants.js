@@ -8,12 +8,16 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('InviteParticipantsCtrl', function ($log, UsersService, ProjectsService, SystemMessagesService) {
+  .controller('InviteParticipantsCtrl', function ($log, UsersService, ProjectsService, SystemMessagesService, _) {
     var self = this;
 
     function querySearch(text) {
       return UsersService.searchByNameOrEmail({
-        text: text
+      }, {
+        search: text,
+        exclude: _(ProjectsService.getCurrentProject().participants).map(function(participant) {
+          return participant.user._id;
+        })
       }).$promise.then(function(response) {
         return response.data;
       });
@@ -37,10 +41,15 @@ angular.module('timelinerApp')
       });
     }
 
+    function getSelectedItemText(item) {
+      return UsersService.getFullName(item) + ' (' + item.email + ')';
+    }
+
     self.isDisabled = false;
     self.noCache = true;
 
     self.querySearch = querySearch;
     self.canInviteParticipant = canInviteParticipant;
     self.inviteParticipant = inviteParticipant;
+    self.getSelectedItemText = getSelectedItemText;
   });

@@ -7,7 +7,7 @@
  * # itemPanelToolbar
  */
 angular.module('timelinerApp')
-  .directive('itemPanelToolbar', function () {
+  .directive('itemPanelToolbar', function ($) {
     return {
       templateUrl: 'views/templates/item-panel-toolbar.html',
       restrict: 'E',
