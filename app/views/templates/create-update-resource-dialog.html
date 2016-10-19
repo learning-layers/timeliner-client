@@ -45,6 +45,7 @@
             <div ng-message="size" translate translate-values="{ SIZE: getUploadFileSize() }">GENERAL.FORM.MESSAGES.FILE_SIZE</div>
           </div>
         </md-input-container>
+      </div>
     </md-dialog-content>
     <md-dialog-actions layout="row" layout-align="end center">
       <md-switch ng-show="isEdit()" ng-disabled="updating" ng-model="activateDelete" aria-label="{{ 'GENERAL.ACTIVATE_DELETE' | translate }}" class="md-warn">
