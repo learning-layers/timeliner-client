@@ -33,19 +33,19 @@
         </form>
         <h5 layout="row" layout-align="center center" md-colors="::{color: 'primary-300'}" translate>VIEWS.LOGIN.REGISTER_WITH_SOCIAL_NETWORK</h5>
         <div layout="row" layout-align="center center">
-          <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="{{ 'VIEWS.LOGIN.FB_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="">
+          <md-button class="md-raised md-icon-button tl-facebook-button" aria-label="{{ 'VIEWS.LOGIN.FB_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ui-sref="login.social({ state: 'social', provider: 'facebook' })">
             <md-tooltip md-direction="top" class="tooltip-text">
               <translate>VIEWS.LOGIN.FB_BTN_TOOLTIP</translate>
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-facebook"></md-icon>
           </md-button>
-          <md-button class="md-raised md-icon-button tl-google-button" aria-label="{{ 'VIEWS.LOGIN.GOOGLE_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="">
+          <md-button class="md-raised md-icon-button tl-google-button" aria-label="{{ 'VIEWS.LOGIN.GOOGLE_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ui-sref="login.social({ state: 'social', provider: 'google' })">
             <md-tooltip md-direction="top" class="tooltip-text">
               <translate>VIEWS.LOGIN.GOOGLE_BTN_TOOLTIP</translate>
             </md-tooltip>
             <md-icon md-font-set="mdi" md-font-icon="mdi-google-plus"></md-icon>
           </md-button>
-          <md-button class="md-raised md-icon-button tl-linkedin-button" aria-label="{{ 'VIEWS.LOGIN.LINKEDIN_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ng-click="">
+          <md-button class="md-raised md-icon-button tl-linkedin-button" aria-label="{{ 'VIEWS.LOGIN.LINKEDIN_BTN_TOOLTIP' | translate }}" type="button" ng-disabled="updating" ui-sref="login.social({ state: 'social', provider: 'linkedin2' })">
             <md-tooltip md-direction="top" class="tooltip-text">
               <translate>VIEWS.LOGIN.LINKEDIN_BTN_TOOLTIP</translate>
             </md-tooltip>

@@ -32,6 +32,12 @@ angular.module('timelinerApp').config(function($stateProvider, $urlRouterProvide
         $title: function() { return 'TITLES.LOGIN'; }
       }
     })
+    .state('login.social', {
+      url: '/:state/:provider',
+      resolve: {
+        $title: function() { return 'TITLES.LOGIN'; }
+      }
+    })
     .state('confirm', {
       url: '/confirm/:key',
       templateUrl: 'views/confirmation.html',

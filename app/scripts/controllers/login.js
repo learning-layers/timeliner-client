@@ -69,7 +69,9 @@ angular.module('timelinerApp')
       $window.location = appConfig.backendUrl + '/auth/connect/' + provider;
     };
 
-    if ( $state.params.state ) {
+    if ( $state.params.provider ) {
+      $scope.socialLogin($state.params.provider);
+    } else if ( $state.params.state ) {
       $scope.updating = true;
       $scope.showProgressIndicator = true;
 
