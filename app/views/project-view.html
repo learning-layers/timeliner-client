@@ -48,12 +48,6 @@
   </md-fab-speed-dial>
 
   <span flex></span>
-  <md-button class="md-icon-button" type="button" ng-click="kala()">
-    <md-tooltip md-direction="top">
-      TOGGLE
-    </md-tooltip>
-    <md-icon md-font-set="mdi" md-font-icon="mdi-star"></md-icon>
-  </md-button>
   <md-button class="md-icon-button" aria-label="{{ 'VIEWS.PROJECT.ACTIONS.MOVE_LEFT' | translate }}" type="button" ng-click="timelineMoveLeft($event)">
     <md-tooltip md-direction="top">
       <translate>VIEWS.PROJECT.ACTIONS.MOVE_LEFT</translate>
@@ -261,8 +255,5 @@
 <div layout="row" flex ng-hide="loadingData">
   <div flex>
     <project-timeline data="projectTimelineData"></project-timeline>
-  </div>
-  <div flex-gt-sm="{{saba}}" id="sidebar">
-
   </div>
 </div>

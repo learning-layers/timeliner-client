@@ -31,16 +31,6 @@ angular.module('timelinerApp')
     $scope.project = project;
     ProjectsService.setCurrentProject(project);
 
-
-    $scope.saba = 0;
-    $scope.kala = function () {
-      if ($scope.saba === 20){
-        $scope.saba = 0;
-      } else {
-        $scope.saba = 20;
-      }
-    };
-
     // Variables for panels placement
     var windowWidth = $(window).width();
     var panelMarginLeft = 50;
