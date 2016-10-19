@@ -59,7 +59,7 @@ a {
 }
 
 .tl-projectlist-owner-image {
-  max-height: 40px;
+  max-height: 35px;
   vertical-align: middle;
   @include tl-rounded-image;
 }
@@ -611,7 +611,7 @@ md-icon.tl-remove {
   }
 }
 
-img.md-avatar, img.tl-current-user-image {
+img.md-avatar, img.tl-participant, img.tl-current-user-image {
   border: 1px solid #fff;
 }
 
@@ -745,10 +745,10 @@ md-input-container.tl-no-margin-bottom {
   }
 }
 
-img.tl-project-participant-pending {
-  filter: opacity(85%) drop-shadow(5px 5px 10px $tl-color-yellow);
+img.tl-participant-pending {
+  filter: opacity(85%) drop-shadow(1.5px 1.5px 3px $tl-color-yellow);
 }
 
-img.tl-project-participant-placeholder {
-  filter: grayscale(100%) drop-shadow(5px 5px 10px $tl-color-orange);
+img.tl-participant-placeholder {
+  filter: grayscale(100%) drop-shadow(1.5px 1.5px 3px $tl-color-orange);
 }

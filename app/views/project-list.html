@@ -46,13 +46,12 @@
       <div flex="10">{{ ::project.start | tlDate }}</div>
       <div flex="10">{{ ::project.end | tlDate }}</div>
       <div flex="10">
-        <img ng-src="{{ ::getUserImage(project.owner) }}"  alt="Owner image" class="tl-projectlist-owner-image" title="{{ ::getUserFullName(project.owner) }}" />
+        <img ng-src="{{ ::getUserImage(project.owner) }}"  alt="Owner image" class="tl-projectlist-owner-image tl-participant" title="{{ ::getUserFullName(project.owner) }}" />
       </div>
       <div flex="30">
         <div class="tl-participants-block">
           <div>
-            <img ng-repeat="participant in project.participants" ng-src="{{ ::getUserImage(participant.user) }}"  alt="Participant image" class="tl-participant" title="{{ ::getUserFullName(participant.user) }}" ng-style="{'z-index': project.participants.length-$index}" md-tooltip="::getUserFullName(participant.user)"/>
-
+            <img ng-repeat="participant in project.participants" ng-src="{{ ::getUserImage(participant.user) }}" tl-participant-status="participant"  alt="Participant image" title="{{ ::getUserFullName(participant.user) }}" ng-style="{'z-index': project.participants.length-$index}" md-tooltip="::getUserFullName(participant.user)"/>
           </div>
 
         </div>

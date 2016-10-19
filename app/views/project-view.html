@@ -136,7 +136,7 @@
       </div>
       <md-list flex class="md-dense">
         <md-list-item class="md-3-line" ng-repeat="participant in project.participants" draggable="true" ondragstart="objectDragStart(event)" data-tl-drag-id="{{ ::participant._id }}" data-tl-drag-type="participant">
-          <img ng-src="{{ ::getUserImage(participant.user) }}" class="md-avatar tl-project-participant-{{participant.status}}" alt="{{ ::getUserFullName(participant.user) }}" draggable="false"/>
+          <img ng-src="{{ ::getUserImage(participant.user) }}" tl-participant-status="participant" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}" draggable="false"/>
           <div class="md-list-item-text" layout="column">
             <h3>{{ ::getUserFullName(participant.user) }}</h3>
             <h4>{{ :: participant.status }}</h4>
