@@ -207,7 +207,8 @@
         "PARTICIPANTS": {
           "HEADER": "Participants",
           "FORM": {
-            "PLACEHOLDER": "Name or email address",
+            "LABEL": "Invite new participants",
+            "HINT": "Search by Name or E-Mail address",
             "NOT_FOUND": "No suitable users found."
           }
         },

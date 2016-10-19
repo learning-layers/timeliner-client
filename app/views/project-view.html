@@ -103,7 +103,7 @@
                 md-item-text="ctrl.getSelectedItemText(item)"
                 md-min-length="3"
                 md-delay="500"
-                md-floating-label="{{ 'VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.PLACEHOLDER' | translate }}"
+                md-floating-label="{{ 'VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.LABEL' | translate }}"
                 md-menu-class="autocomplete-participant-template"
                 class="tl-find-participant">
                 <md-item-template>
@@ -121,6 +121,7 @@
                   <translate translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.NOT_FOUND</translate>
                 </md-not-found>
               </md-autocomplete>
+               <div class="hint" translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.FORM.HINT</div>
             </md-input-container>
             <md-button type="submit" class="md-icon-button md-accent" aria-label="Invite" ng-disabled="!ctrl.canInviteParticipant()">
               <md-icon md-font-set="mdi" md-font-icon="mdi-plus"></md-icon>
