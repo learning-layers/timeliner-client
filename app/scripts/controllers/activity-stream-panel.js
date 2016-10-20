@@ -11,9 +11,7 @@ angular.module('timelinerApp')
   .controller('ActivityStreamPanelCtrl', function ($scope, ProjectsService, SystemMessagesService, UsersService, $filter, _, $log, $, appConfig) {
     $scope.updating = false;
     $scope.loadingMessages = false;
-    $scope.moreMessagesLeft = true;
     $scope.loadingActivities = false;
-    $scope.moreActivitiesLeft = true;
     $scope.model = {
       message: ''
     };
@@ -105,17 +103,12 @@ angular.module('timelinerApp')
         lastCreated: lastMessage.created,
         limit: appConfig.paginationSize
       }, function(result) {
-        if ( result.data.length < appConfig.paginationSize ) {
+        if ( result.data.remaining === 0 ) {
           $scope.moreMessagesLeft = false;
         }
 
-        if ( result.data.length > 0 ) {
-          // XXX This is highly ineffective
-          _(result.data).each(function(message) {
-            $scope.messages.push(message);
-          });
-        } else {
-          $scope.moreMessagesLeft = false;
+        if ( result.data.messages.length > 0 ) {
+          Array.prototype.push.apply($scope.messages, result.data.messages);
         }
 
         $scope.loadingMessages = false;
@@ -137,17 +130,12 @@ angular.module('timelinerApp')
         lastCreated: lastActivity.created,
         limit: appConfig.paginationSize
       }, function(result) {
-        if ( result.data.length < appConfig.paginationSize ) {
+        if ( result.data.remaining === 0 ) {
           $scope.moreActivitiesLeft = false;
         }
 
-        if ( result.data.length > 0 ) {
-          // XXX This is highly ineffective
-          _(result.data).each(function(activity) {
-            $scope.activities.push(activity);
-          });
-        } else {
-          $scope.moreActivitiesLeft = false;
+        if ( result.data.activities.length > 0 ) {
+          Array.prototype.push.apply($scope.activities, result.data.activities);
         }
 
         $scope.loadingActivities = false;

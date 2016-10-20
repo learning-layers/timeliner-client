@@ -26,7 +26,9 @@ angular.module('timelinerApp')
     };
     $scope.resouces = [];
     $scope.activities = [];
+    $scope.moreActivitiesLeft = true;
     $scope.messages = [];
+    $scope.moreMessagesLeft = true;
 
     $scope.project = project;
     ProjectsService.setCurrentProject(project);
@@ -521,8 +523,10 @@ angular.module('timelinerApp')
       project: $stateParams.id,
       limit: appConfig.paginationSize
     }, function(result) {
-      $scope.activities = result.data;
-      $log.debug('Loaded activities', result);
+      $scope.activities = result.data.activities;
+      if ( result.data.remaining === 0 ) {
+        $scope.moreActivitiesLeft = false;
+      }
     }, function(err) {
       $log.error('ERROR getting project activities', err);
     });
@@ -530,7 +534,10 @@ angular.module('timelinerApp')
       project: $stateParams.id,
       limit: appConfig.paginationSize
     }, function(result) {
-      $scope.messages = result.data;
+      $scope.messages = result.data.messages;
+      if ( result.data.remaining === 0 ) {
+        $scope.moreMessagesLeft = false;
+      }
     }, function(err) {
       $log.error('ERROR getting project messages', err);
     });
