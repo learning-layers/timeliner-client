@@ -15,6 +15,24 @@ angular.module('timelinerApp')
       selectable: false
     };
 
+    function getContainerWidth(containerElement, timeline) {
+      if ( containerElement.offsetLeft < 0 ) {
+        if ( containerElement.clientWidth + containerElement.offsetLeft > 0 ) {
+          return containerElement.clientWidth + containerElement.offsetLeft;
+        }
+        return 0;
+      } else {
+        var centerContainerWidth = timeline.dom.centerContainer.clientWidth;
+        if ( centerContainerWidth - containerElement.offsetLeft < containerElement.clientWidth ) {
+          if ( centerContainerWidth - containerElement.offsetLeft > 0 ) {
+            return centerContainerWidth - containerElement.offsetLeft;
+          }
+          return 0;
+        }
+        return containerElement.clientWidth;
+      }
+    }
+
     function determineFull(containerWidth, elementWidth, elementsCount, factor) {
       if ( factor < 2 ) {
         throw new Error('Factor is required to be greater or equal to two, instead a value of ' + factor.toString() + ' was provided!');
@@ -37,7 +55,7 @@ angular.module('timelinerApp')
       return 1;
     }
 
-    function findAndApply(element) {
+    function findAndApply(element, timeline) {
       var factor = 10;
       var elements = angular.element(element[0].querySelectorAll('.tl-timeline-project'));
 
@@ -45,9 +63,7 @@ angular.module('timelinerApp')
         _(elements).each(function(singleProjectElement) {
           var imageElements = angular.element(singleProjectElement.querySelectorAll('img.tl-timeline-participant'));
           if ( imageElements && imageElements.length > 1 ) {
-            var containerWidth = singleProjectElement.clientWidth;
-            //var imageElementWidth = imageElements[0].clientWidth;
-            // TODO It does not count for margins
+            var containerWidth = getContainerWidth(singleProjectElement, timeline);
             var imageElementWidth = imageElements[0].offsetWidth;
             // This accounts for contained nested element margins
             var fullCount = determineFull(containerWidth - 10, imageElementWidth + 2, imageElements.length, factor);
@@ -144,7 +160,7 @@ angular.module('timelinerApp')
                 findAndApplyTimeout = null;
               }
               findAndApplyTimeout = $timeout(function() {
-                findAndApply(element);
+                findAndApply(element, timeline);
               }, 50);
             });
 
