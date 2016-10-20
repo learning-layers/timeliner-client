@@ -747,6 +747,18 @@ img.tl-participant-placeholder {
   filter: grayscale(100%) drop-shadow(1.5px 1.5px 3px $tl-color-orange);
 }
 
+md-list-item.md-3-line {
+  .md-list-item-text {
+    h4.tl-participant-pending {
+      color: $tl-color-yellow;
+    }
+
+    h4.tl-participant-placeholder {
+      color: $tl-color-orange;
+    }
+  }
+}
+
 form[name="participantForm"] {
   .hint {
       position: absolute;

@@ -215,6 +215,10 @@
             "LABEL": "Invite new participants",
             "HINT": "Search by Name or E-Mail address",
             "NOT_FOUND": "No suitable users found."
+          },
+          "STATUS": {
+            "PENDING": "pending",
+            "PLACEHOLDER": "placeholder"
           }
         },
         "RESOURCES": {
