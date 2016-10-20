@@ -48,6 +48,11 @@ angular.module('timelinerApp')
         key: '@id',
         method: 'POST'
       },
+      leave: {
+        url: apiLocation + '/:id/participants/leave',
+        key: '@id',
+        method: 'POST'
+      },
       hide: {
         url: apiLocation + '/:id/timeline/hide',
         method: 'POST'
@@ -299,6 +304,7 @@ angular.module('timelinerApp')
       invite: projectsResource.invite,
       accept: projectsResource.accept,
       reject: projectsResource.reject,
+      leave: projectsResource.leave,
       hide: projectsResource.hide,
       show: projectsResource.show,
       getProjectAnnotations: projectsResource.getProjectAnnotations,

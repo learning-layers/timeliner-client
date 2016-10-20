@@ -208,6 +208,9 @@ angular.module('timelinerApp')
         case 'outcome':
           source = $scope.projectTimelineData.outcomes;
           break;
+        case 'participant':
+         source = $scope.project.participants;
+         break;
         default:
           throw 'Unknown object type';
       }
@@ -265,6 +268,10 @@ angular.module('timelinerApp')
 
     function findOutcomeById(id) {
       return findItemById('outcome', id);
+    }
+
+    function findParticipantIndex(participant) {
+      return findItemIndex('participant', participant);
     }
 
     function socketConnectCallback() {
@@ -424,6 +431,15 @@ angular.module('timelinerApp')
       $scope.messages.unshift(message);
     }
 
+    function socketAddParticipantCallback(participant) {
+      $scope.project.participants.push(participant);
+    }
+
+    function socketUpdateParticipantCallback(participant) {
+      var index = findParticipantIndex(participant);
+      $scope.project.participants[index] = participant;
+    }
+
     function socketEmitJoinAndSetupListeners() {
       SocketService.emit('join', {
         id: $scope.project._id
@@ -452,6 +468,8 @@ angular.module('timelinerApp')
       SocketService.on('delete:outcome', socketDeleteOutcomeCallback);
       SocketService.on('create:activity', socketCreateActivityCallback);
       SocketService.on('create:message', socketCreateMessageCallback);
+      SocketService.on('invite:participant', socketAddParticipantCallback);
+      SocketService.on('update:participant', socketUpdateParticipantCallback);
     }
 
     // Setup and load additional data
@@ -790,6 +808,8 @@ angular.module('timelinerApp')
       SocketService.off('delete:outcome', socketDeleteOutcomeCallback);
       SocketService.off('create:activity', socketCreateActivityCallback);
       SocketService.off('create:message', socketCreateMessageCallback);
+      SocketService.off('invite:participant', socketAddParticipantCallback);
+      SocketService.off('update:participant', socketUpdateParticipantCallback);
 
       ProjectsService.unsetCurrentProject();
 

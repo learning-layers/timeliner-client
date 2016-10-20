@@ -63,6 +63,9 @@ angular.module('timelinerApp')
       if ( activity.data.end ) {
         values.END = $filter('tlDate')(activity.data.end, false);
       }
+      if ( activity.data.user && activity.data.user.name ) {
+        values.PARTICIPANT_FULL_NAME = UsersService.getFullName(activity.data.user);
+      }
 
       return values;
     };

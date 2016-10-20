@@ -145,6 +145,11 @@
         "TEXT": "You could be invited again later.",
         "ARIA_LABEL": "Decline project invitation"
       },
+      "LEAVE_DIALOG": {
+        "TITLE": "Would you like to leave the project?",
+        "TEXT": "Leaving the project is permanent and can not be reversed!",
+        "ARIA_LABEL": "Leave the project"
+      },
       "TIMELINE_SHOW_DIALOG": {
         "TITLE": "Would you like to show the project on the timeline?",
         "TEXT": "Project will be shown in the timeline view.",
@@ -331,6 +336,13 @@
       "CREATE": "<strong>{{ FULL_NAME }}</strong> added an outcome <strong>{{ TITLE }}</strong>",
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an outcome <strong>{{ TITLE }}</strong>",
       "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong>"
+    },
+    "PARTICIPANT": {
+      "INVITE": "<strong>{{ FULL_NAME }}</strong> invited <strong>{{ PARTICIPANT_FULL_NAME }}</strong> to the project.",
+      "ACCEPT": "<strong>{{ FULL_NAME }}</strong> accepted an invitation and joined the project.",
+      "REJECT": "<strong>{{ FULL_NAME }}</strong> rejected an invitation to join the project.",
+      "LEAVE": "<strong>{{ FULL_NAME }}</strong> left the project.",
+      "REMOVE": "<strong>{{ FULL_NAME }}</strong> removed <strong>{{ PARTICIPANT_FULL_NAME }}</strong> from the project."
     }
   }
 }

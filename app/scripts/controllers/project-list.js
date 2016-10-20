@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _, $translate, dialogHelper) {
+  .controller('ProjectListCtrl', function ($scope, $log, $filter, $state, ProjectsService, AuthService, $mdDialog, $mdMedia, _, $translate, dialogHelper, SystemMessagesService) {
     $scope.pendingProjects = [];
     $scope.activeProjects = [];
     $scope.allProjects = [];
@@ -96,8 +96,7 @@ angular.module('timelinerApp')
           $scope.activeProjects.push(project);
           $scope.updating = false;
         }, function(response) {
-          // TODO Handle error
-          $log.debug('Project join error', response);
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
           $scope.updating = false;
         });
       });
@@ -123,8 +122,7 @@ angular.module('timelinerApp')
           $scope.pendingProjects.splice(index, 1);
           $scope.updating = false;
         }, function(response) {
-          // TODO Handle error
-          $log.debug('Join decline error', response);
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
           $scope.updating = false;
         });
       });
@@ -143,10 +141,33 @@ angular.module('timelinerApp')
     };
 
     $scope.doLeave = function(project, index, ev) {
-      $log.debug('Leave called for project', project, index, ev);
+      $mdDialog.show(
+        $mdDialog.confirm()
+          .parent(angular.element(document.body))
+          .clickOutsideToClose(true)
+          .title($translate.instant('VIEWS.PROJECT_LIST.LEAVE_DIALOG.TITLE'))
+          .textContent($translate.instant('VIEWS.PROJECT_LIST.LEAVE_DIALOG.TEXT'))
+          .ariaLabel($translate.instant('VIEWS.PROJECT_LIST.LEAVE_DIALOG.ARIA_LABEL'))
+          .targetEvent(ev)
+          .ok($translate.instant('GENERAL.CONFIRM'))
+          .cancel($translate.instant('GENERAL.CLOSE'))
+      ).then(function() {
+        $scope.updating = true;
+
+        ProjectsService.leave({
+          id: project._id
+        }, {}, function() {
+          $scope.activeProjects.splice(index, 1);
+          $scope.updating = false;
+        }, function(response) {
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
+          $scope.updating = false;
+        });
+      });
     };
 
     $scope.doDelete = function(project, index, ev) {
+      $log.error('Not implemented');
       $log.debug('Delete called for project', project, index, ev);
     };
 
@@ -172,8 +193,7 @@ angular.module('timelinerApp')
           currentParticipant.showOnTimeline = true;
           $scope.updating = false;
         }, function(response) {
-          // TODO Handle error
-          $log.debug('Show on timeline error', response);
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
           $scope.updating = false;
         });
       });
@@ -201,8 +221,7 @@ angular.module('timelinerApp')
           currentParticipant.showOnTimeline = false;
           $scope.updating = false;
         }, function(response) {
-          // TODO Handle error
-          $log.debug('Hide from timeline error', response);
+          SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
           $scope.updating = false;
         });
       });
@@ -241,8 +260,8 @@ angular.module('timelinerApp')
           $scope.pendingProjects = pendingProjects;
           $scope.activeProjects = activeProjects;
         }
-      }, function(err) {
-        $log.debug('My projects ERROR', err);
+      }, function(response) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(response));
       });
     }
   });
