@@ -30,6 +30,10 @@
       },
       "TITLE": "Title",
       "DESCRIPTION": "Description"
+    },
+    "LANGUAGES": {
+      "ENGLISH": "English",
+      "ESTONIAN": "Estonian"
     }
   },
   "TITLES": {
