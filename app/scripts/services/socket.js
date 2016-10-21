@@ -9,7 +9,10 @@
  */
 angular.module('timelinerApp')
   .factory('SocketService', function ($rootScope, $window, $log, appConfig, AuthService) {
-    var socket = $window.io(appConfig.backendUrl, { transports: ['websocket'] });
+    var socket = $window.io(appConfig.socketIo.url, {
+      transports: ['websocket'],
+      path: appConfig.socketIo.path
+    });
 
     socket.on('error', function(err) {
       $log.debug('Socket error', err);
