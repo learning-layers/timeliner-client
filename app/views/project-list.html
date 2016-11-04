@@ -9,13 +9,22 @@
 
 <md-list>
   <div ng-if="pendingProjects && pendingProjects.length > 0">
-    <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
+    <md-subheader class="md-no-sticky md-warn"><translate>VIEWS.PROJECT_LIST.PENDING</translate></md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="project in pendingProjects" ui-sref="project({id: project._id})">
       <div flex="40">{{ ::project.title }}</div>
       <div flex="10">{{ ::project.start | tlDate }}</div>
       <div flex="10">{{ ::project.end | tlDate }}</div>
-      <div flex="10">{{ ::getUserFullName(project.owner) }}</div>
-      <div flex="30">{{ ::displayParticipants(project.participants) }}</div>
+      <div flex="10">
+        <img ng-src="{{ ::getUserImage(project.owner) }}"  alt="Owner image" class="tl-projectlist-owner-image tl-participant" title="{{ ::getUserFullName(project.owner) }}" />
+      </div>
+      <div flex="30">
+        <div class="tl-participants-block">
+          <div>
+            <img ng-repeat="participant in project.participants" ng-src="{{ ::getUserImage(participant.user) }}" tl-participant-status="participant"  alt="Participant image" title="{{ ::getUserFullName(participant.user) }}" ng-style="{'z-index': project.participants.length-$index}" md-tooltip="::getUserFullName(participant.user)"/>
+          </div>
+        </div>
+      </div>
+
       <md-menu md-position-mode="target-right target">
         <md-button ng-disabled="updating" aria-label="{{ 'VIEWS.PROJECT_LIST.LIST_TITLES.ACTIONS' | translate }}" class="md-icon-button" ng-click="$mdOpenMenu($event)">
           <md-icon md-menu-origin>more_vert</md-icon>
@@ -42,7 +51,7 @@
   <div ng-if="activeProjects && activeProjects.length > 0">
     <md-subheader class="md-no-sticky"><translate>VIEWS.PROJECT_LIST.ACTIVE</translate></md-subheader>
     <md-list-item class="secondary-button-padding" ng-repeat="project in activeProjects" ui-sref="project({id: project._id})">
-      <div flex="40">{{ ::project.title }}</div> <!-- TODO remove this duplication of list items (except for menu buttons) -->
+      <div flex="40">{{ ::project.title }}</div>
       <div flex="10">{{ ::project.start | tlDate }}</div>
       <div flex="10">{{ ::project.end | tlDate }}</div>
       <div flex="10">
@@ -53,7 +62,6 @@
           <div>
             <img ng-repeat="participant in project.participants" ng-src="{{ ::getUserImage(participant.user) }}" tl-participant-status="participant"  alt="Participant image" title="{{ ::getUserFullName(participant.user) }}" ng-style="{'z-index': project.participants.length-$index}" md-tooltip="::getUserFullName(participant.user)"/>
           </div>
-
         </div>
       </div>
 

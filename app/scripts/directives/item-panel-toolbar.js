@@ -17,7 +17,7 @@ angular.module('timelinerApp')
         collapsed: '='
       },
       link: function postLink(scope) {
-        var lastPanelHeight = 200;
+        var lastPanelHeight = 150;
         var panel = $('#' + scope.panelId );
         var resizeHandle = panel.find('.ui-resizable-handle');
         resizeHandle.hide(); // Default collapsed and hidden

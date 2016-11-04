@@ -775,3 +775,10 @@ form[name="participantForm"] {
 md-pagination-wrapper {
   width:auto !important;
 }
+
+#chatField {
+  md-input-container {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}

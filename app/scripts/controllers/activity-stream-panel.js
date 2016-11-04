@@ -27,7 +27,7 @@ angular.module('timelinerApp')
     };
 
     $scope.submitMessage = function() {
-      $scope.updaring = true;
+      $scope.updating = true;
       ProjectsService.createMessage({
         project: $scope.project._id
       }, {

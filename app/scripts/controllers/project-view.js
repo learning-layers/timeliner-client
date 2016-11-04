@@ -88,12 +88,11 @@ angular.module('timelinerApp')
       }
     }).resizable({
       handles: 'se',
-      minHeight: 100,
+      minHeight: 150,
       minWidth: 200,
       maxWidth: 600
     });
 
-    //$('#sidebar').sortable();
 
     function onResize() {
       // Reset timeout
@@ -115,6 +114,18 @@ angular.module('timelinerApp')
     }
 
     angular.element($window).on('resize', onResize);
+
+    function setFeedPanelScroll(that) {
+      var height = $(that).height();
+      var tabsHeight = $(that).find('md-tabs-wrapper').first().outerHeight();
+
+      $('#tl-project-messages').css('max-height', height - tabsHeight - $(that).find('#chatField').outerHeight());
+      $('#tl-project-activities').css('max-height', height - tabsHeight);
+    }
+
+    $( "#feedPanel" ).on('resize', function() {
+      setFeedPanelScroll(this);
+    });
 
 
 
