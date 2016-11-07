@@ -91,4 +91,7 @@ angular.module('timelinerApp')
     $translateProvider.preferredLanguage('en_US');
     $translateProvider.useSanitizeValueStrategy('sanitize');
     $translateProvider.useMissingTranslationHandlerLog();
-  });
+  })
+  .config(['$mdAriaProvider', function ($mdAriaProvider) {
+    $mdAriaProvider.disableWarnings();
+  }]);
