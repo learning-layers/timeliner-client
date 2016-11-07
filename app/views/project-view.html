@@ -216,7 +216,7 @@
               <form name="messageForm" ng-submit="submitMessage()" novalidate>
                 <div layout="row" layout-align="space-between center">
                   <md-input-container class="md-block" flex="100">
-                    <textarea htk-chat-input="submitMessage()" ng-model="model.message" name="message" md-maxlength="150" rows="1" md-select-on-focus placeholder="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.MESSAGE_FORM.MESSAGE.PLACEHOLDER' | translate }}"></textarea>
+                    <textarea htk-shift-enter="submitMessage()" ng-model="model.message" name="message" md-maxlength="150" rows="1" md-select-on-focus placeholder="{{ 'VIEWS.PROJECT.PANELS.ACTIVITY_STREAM.MESSAGE_FORM.MESSAGE.PLACEHOLDER' | translate }}"></textarea>
                   </md-input-container>
                   <md-button type="submit" class="md-icon-button md-accent" aria-label="Send" ng-disabled="!canSubmitMessage()">
                     <md-icon>send</md-icon>
