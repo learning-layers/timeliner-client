@@ -123,7 +123,7 @@ angular.module('timelinerApp')
       $('#tl-project-activities').css('max-height', height - tabsHeight);
     }
 
-    $( "#feedPanel" ).on('resize', function() {
+    $( '#feedPanel' ).on('resize', function() {
       setFeedPanelScroll(this);
     });
 
