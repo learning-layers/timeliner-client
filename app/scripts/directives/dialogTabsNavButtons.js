@@ -14,16 +14,17 @@ angular.module('timelinerApp')
         firstTab: '@',
         lastTab: '@',
         nextDisabled: '=',
-        activeTab: '=',
+        tabIndex: '=',
         submitDisabled: '='
       },
       link: function (scope) {
+
         scope.nextTab = function () {
-          scope.activeTab++;
+          scope.tabIndex++;
         };
 
         scope.prevTab = function () {
-          scope.activeTab--;
+          scope.tabIndex--;
         };
       }
     };

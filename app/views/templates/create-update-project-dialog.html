@@ -13,7 +13,7 @@
       </div>
     </md-toolbar>
     <md-dialog-content>
-      <md-tabs md-dynamic-height md-border-bottom>
+      <md-tabs md-dynamic-height md-border-bottom md-selected="activeTab.tabIndex">
         <md-tab label="basic">
           <md-content class="md-padding">
             <h3>Basic project info</h3>
@@ -52,7 +52,7 @@
                 </div>
               </div>
             </div>
-            <dialog-tabs-nav-buttons ng-if="!isEdit()" first-tab="true" active-tab="test" next-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid"></dialog-tabs-nav-buttons>
+            <dialog-tabs-nav-buttons tab-index="activeTab.tabIndex" ng-show="!isEdit()" first-tab="true" next-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid"></dialog-tabs-nav-buttons>
             <md-dialog-actions ng-if="isEdit()" layout="row" layout-align="end">
               <md-button type="submit" class="md-accent" ng-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid" translate="VIEWS.PROJECT_LIST.CREATE_UPDATE_PROJECT.BTN.UPDATE"></md-button>
             </md-dialog-actions>
@@ -62,17 +62,19 @@
           <md-content class="md-padding">
             <h3>Resources</h3>
             <md-checkbox ng-model="dummy" aria-label="Dummy Resources" name="dummyResource" required>
-              I have added some resources (I promise).
+              I pretend to have added some resources (testing functionality).
             </md-checkbox>
-            <dialog-tabs-nav-buttons active-tab="test" next-disabled="projectForm.dummyResource.$invalid"></dialog-tabs-nav-buttons>
+            <dialog-tabs-nav-buttons tab-index="activeTab.tabIndex" next-disabled="projectForm.dummyResource.$invalid"></dialog-tabs-nav-buttons>
           </md-content>
         </md-tab>
-        <md-tab label="participants" ng-if="!isEdit()" ng-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid">
+        <md-tab label="participants" ng-if="!isEdit()" ng-disabled="projectForm.title.$invalid || projectForm.desc.$invalid || projectForm.goal.$invalid || projectForm.startDate.$invalid || projectForm.dummyResource.$invalid">
           <md-content layout-padding>
-            <h3>Tere</h3>
+            <h3>Add your first participants</h3>
 
+            <p>You can add them later as well, of course</p>
+
+            <dialog-tabs-nav-buttons tab-index="activeTab.tabIndex" last-tab="true" submit-disabled="updating || projectForm.$invalid"></dialog-tabs-nav-buttons>
           </md-content>
-          <dialog-tabs-nav-buttons last-tab="true" active-tab="test" submit-disabled="updating || projectForm.$invalid"></dialog-tabs-nav-buttons>
         </md-tab>
       </md-tabs>
     </md-dialog-content>

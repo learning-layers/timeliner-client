@@ -22,7 +22,9 @@ angular.module('timelinerApp')
       end: ( project && project.end ) ? new Date(project.end) : null
     };
 
-    $scope.test = 0;
+    $scope.activeTab = {
+      tabIndex: 0
+    };
 
     $scope.isEdit = function() {
       return !!$scope.model._id;
