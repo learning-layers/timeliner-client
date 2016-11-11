@@ -305,9 +305,13 @@
       "PARTICIPANT_EXISTS": "Participant already exists!",
       "RESOURCE_EXISTS": "Resource already exists!",
       "OUTCOME_EXISTS": "Outcome already exists!",
+      "PARTICIPANT_NOT_EXISTS": "Participant does not exist!",
+      "RESOURCE_NOT_EXISTS": "Resource does not exist!",
+      "OUTCOME_NOT_EXISTS": "Outcome does not exist!",
       "EMAIL_NOT_SENT": "Email message could not be sent!",
       "CAPTCHA_VERIFICATION_INVALID": "Captcha verification failed!",
-      "PASSWORD_RESET_FORBIDDEN": "Password reset for this account is forbidden!"
+      "PASSWORD_RESET_FORBIDDEN": "Password reset for this account is forbidden!",
+      "CONFLICT": "Conflict!"
     }
   },
   "STREAM": {

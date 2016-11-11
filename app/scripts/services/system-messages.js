@@ -95,6 +95,24 @@ angular.module('timelinerApp')
             case 'password_reset_forbidden':
               message = 'TOASTS.ERRORS.PASSWORD_RESET_FORBIDDEN';
               break;
+            case 'alredy_has_this_participant':
+              message = 'TOASTS.ERRORS.PARTICIPANT_EXISTS';
+              break;
+            case 'already_has_this_outcome':
+              message = 'TOASTS.ERRORS.OUTCOME_EXISTS';
+              break;
+            case 'already_has_this_resource':
+              message = 'TOASTS.ERRORS.RESOURCE_EXISTS';
+              break;
+              case 'does_not_have_this_participant':
+                message = 'TOASTS.ERRORS.PARTICIPANT_NOT_EXISTS';
+                break;
+              case 'does_not_have_this_outcome':
+                message = 'TOASTS.ERRORS.OUTCOME_NOT_EXISTS';
+                break;
+              case 'does_not_have_this_resource':
+                message = 'TOASTS.ERRORS.RESOURCE_NOT_EXISTS';
+                break;
             default:
             message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';
           }
@@ -114,6 +132,9 @@ angular.module('timelinerApp')
               break;
             case 405:
               message = 'TOASTS.ERRORS.METHOD_NOT_ALLOWED';
+              break;
+            case 409:
+              message = 'TOASTS.ERRORS.CONFLICT';
               break;
             case 500:
               message = 'TOASTS.ERRORS.INTERNAL_SERVER_ERROR';

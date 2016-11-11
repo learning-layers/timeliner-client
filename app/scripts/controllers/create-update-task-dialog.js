@@ -8,7 +8,7 @@
  * Controller of the timelinerApp
  */
 angular.module('timelinerApp')
-  .controller('CreateUpdateTaskDialogCtrl', function ($scope, $mdDialog, project, task, ProjectsService, SystemMessagesService) {
+  .controller('CreateUpdateTaskDialogCtrl', function ($scope, $mdDialog, project, task, ProjectsService, SystemMessagesService, UsersService) {
     $scope.updating = false;
 
     $scope.model = {
@@ -83,4 +83,54 @@ angular.module('timelinerApp')
     $scope.cancel = function() {
       $mdDialog.cancel();
     };
+
+    $scope.getUserFullName = function(user) {
+      return UsersService.getFullName(user);
+    };
+
+    $scope.getUserImage = function(user) {
+      return UsersService.getImage(user);
+    };
+
+    $scope.getResourceIcon = function(resource) {
+      return ProjectsService.getResourceIcon(resource);
+    };
+
+    function removeFromTask(object, objectType) {
+      var objectTypePlural = objectType + 's';
+
+      return ProjectsService.removeObjectFromTask({
+        project: project._id,
+        task: task._id,
+        objectType: objectTypePlural,
+        objectId: object._id
+      }, {}, function() {
+      }, function(err) {
+        SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(err), null, document.querySelector('form[name="taskForm"]'));
+      });
+    }
+
+    $scope.removeOutcome = function(ev, index, outcome) {
+      removeFromTask(outcome, 'outcome').$promise.then(function() {
+        $scope.outcomes.splice(index, 1);
+      });
+    };
+
+    $scope.removeParticipant = function(ev, index, participant) {
+      removeFromTask(participant, 'participant').$promise.then(function() {
+        $scope.participants.splice(index, 1);
+      });
+    };
+
+    $scope.removeResource = function(ev, index, resource) {
+      removeFromTask(resource, 'resource').$promise.then(function() {
+        $scope.resources.splice(index, 1);
+      });
+    };
+
+    if ( $scope.isEdit() ) {
+      $scope.outcomes = task.outcomes;
+      $scope.participants = task.participants;
+      $scope.resources = task.resources;
+    }
   });

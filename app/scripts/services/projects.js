@@ -152,6 +152,10 @@ angular.module('timelinerApp')
         url: apiLocation + '/:project/tasks/:task/:objectType/:objectId',
         method: 'POST'
       },
+      removeObjectFromTask: {
+        url: apiLocation + '/:project/tasks/:task/:objectType/:objectId',
+        method: 'DELETE'
+      },
       getProjectActivities: {
         url: apiLocation + '/:project/activities'
       },
@@ -328,6 +332,7 @@ angular.module('timelinerApp')
       updateOutcome: projectsResource.updateOutcome,
       deleteOutcome: projectsResource.deleteOutcome,
       addObjectToTask: projectsResource.addObjectToTask,
+      removeObjectFromTask: projectsResource.removeObjectFromTask,
       getProjectActivities: projectsResource.getProjectActivities,
       getProjectMessages: projectsResource.getProjectMessages,
       createMessage: projectsResource.createMessage
