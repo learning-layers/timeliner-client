@@ -197,7 +197,8 @@
         "CREATE_HEADLINE": "Create new task",
         "UPDATE_HEADLINE": "Update a task",
         "START": "Timeline start date",
-        "END": "Timeline end date"
+        "END": "Timeline end date",
+        "DETACH": "Remove fom task"
       },
       "CREATE_UPDATE_RESOURCE": {
         "CREATE_HEADLINE": "Add new resource",
