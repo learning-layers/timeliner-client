@@ -64,6 +64,9 @@ angular.module('timelinerApp')
       if ( activity.data.user && activity.data.user.name ) {
         values.PARTICIPANT_FULL_NAME = UsersService.getFullName(activity.data.user);
       }
+      if ( activity.data.task && activity.data.task.title ) {
+        values.TASK_TITLE = activity.data.task.title;
+      }
 
       return values;
     };

@@ -342,19 +342,25 @@
     "RESOURCE": {
       "CREATE": "<strong>{{ FULL_NAME }}</strong> added a resource <strong>{{ TITLE }}</strong>",
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed a resource <strong>{{ TITLE }}</strong>",
-      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a resource <strong>{{ TITLE }}</strong>"
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed a resource <strong>{{ TITLE }}</strong>",
+      "ATTACH": "<strong>{{ FULL_NAME }}</strong> added a resource <strong>{{ TITLE }}</strong> to task <strong>{{ TASK_TITLE }}</strong>.",
+      "DETACH": "<strong>{{ FULL_NAME }}</strong> removed a resource <strong>{{ TITLE }}</strong> from task <strong>{{ TASK_TITLE }}</strong>."
     },
     "OUTCOME": {
       "CREATE": "<strong>{{ FULL_NAME }}</strong> added an outcome <strong>{{ TITLE }}</strong>",
       "UPDATE": "<strong>{{ FULL_NAME }}</strong> changed an outcome <strong>{{ TITLE }}</strong>",
-      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong>"
+      "DELETE": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong>",
+      "ATTACH": "<strong>{{ FULL_NAME }}</strong> added an outcome <strong>{{ TITLE }}</strong> to task <strong>{{ TASK_TITLE }}</strong>.",
+      "DETACH": "<strong>{{ FULL_NAME }}</strong> removed an outcome <strong>{{ TITLE }}</strong> from task <strong>{{ TASK_TITLE }}</strong>."
     },
     "PARTICIPANT": {
       "INVITE": "<strong>{{ FULL_NAME }}</strong> invited <strong>{{ PARTICIPANT_FULL_NAME }}</strong> to the project.",
       "ACCEPT": "<strong>{{ FULL_NAME }}</strong> accepted an invitation and joined the project.",
       "REJECT": "<strong>{{ FULL_NAME }}</strong> rejected an invitation to join the project.",
       "LEAVE": "<strong>{{ FULL_NAME }}</strong> left the project.",
-      "REMOVE": "<strong>{{ FULL_NAME }}</strong> removed <strong>{{ PARTICIPANT_FULL_NAME }}</strong> from the project."
+      "REMOVE": "<strong>{{ FULL_NAME }}</strong> removed <strong>{{ PARTICIPANT_FULL_NAME }}</strong> from the project.",
+      "ATTACH": "<strong>{{ FULL_NAME }}</strong> added a participant <strong>{{ PARTICIPANT_FULL_NAME }}</strong> to task <strong>{{ TASK_TITLE }}</strong>.",
+      "DETACH": "<strong>{{ FULL_NAME }}</strong> removed a participant <strong>{{ PARTICIPANT_FULL_NAME }}</strong> from task <strong>{{ TASK_TITLE }}</strong>."
     }
   }
 }

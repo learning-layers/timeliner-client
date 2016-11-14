@@ -96,7 +96,8 @@ angular.module('timelinerApp')
       return ProjectsService.getResourceIcon(resource);
     };
 
-    function removeFromTask(object, objectType) {
+    function detachFromTask(object, objectType) {
+      $scope.updating = true;
       var objectTypePlural = objectType + 's';
 
       return ProjectsService.removeObjectFromTask({
@@ -105,25 +106,27 @@ angular.module('timelinerApp')
         objectType: objectTypePlural,
         objectId: object._id
       }, {}, function() {
+        $scope.updating = false;
       }, function(err) {
+        $scope.updating = false;
         SystemMessagesService.showError(SystemMessagesService.getTranslatableMessageFromError(err), null, document.querySelector('form[name="taskForm"]'));
       });
     }
 
-    $scope.removeOutcome = function(ev, index, outcome) {
-      removeFromTask(outcome, 'outcome').$promise.then(function() {
+    $scope.detachOutcome = function(ev, index, outcome) {
+      detachFromTask(outcome, 'outcome').$promise.then(function() {
         $scope.outcomes.splice(index, 1);
       });
     };
 
-    $scope.removeParticipant = function(ev, index, participant) {
-      removeFromTask(participant, 'participant').$promise.then(function() {
+    $scope.detachParticipant = function(ev, index, participant) {
+      detachFromTask(participant, 'participant').$promise.then(function() {
         $scope.participants.splice(index, 1);
       });
     };
 
-    $scope.removeResource = function(ev, index, resource) {
-      removeFromTask(resource, 'resource').$promise.then(function() {
+    $scope.detachResource = function(ev, index, resource) {
+      detachFromTask(resource, 'resource').$promise.then(function() {
         $scope.resources.splice(index, 1);
       });
     };

@@ -51,10 +51,7 @@
 
         <md-content ng-if="isEdit()">
           <div ng-if="outcomes.length > 0">
-            <div layout="row" layout-align="space-between center">
-              <md-subheader><translate>VIEWS.PROJECT.PANELS.OUTCOMES.HEADER</translate></md-subheader>
-              <md-switch ng-disabled="updating" ng-model="$parent.activateItemRemoval" aria-label="Activate Item Removal" class="md-warn"></md-switch>
-            </div>
+            <md-subheader><translate>VIEWS.PROJECT.PANELS.OUTCOMES.HEADER</translate></md-subheader>
             <md-list flex>
               <md-list-item class="md-2-line" ng-repeat="outcome in outcomes">
                 <md-icon md-font-set="icomoon-timeliner" md-font-icon="icon-file" class="tl-icon-large"></md-icon>
@@ -62,17 +59,14 @@
                   <h3>{{ ::outcome.title }}</a></h3>
                   <p>{{ ::outcome.description }}</p>
                 </div>
-                <md-icon class="md-secondary md-warn" md-font-set="mdi" md-font-icon="mdi-link-off" ng-click="removeOutcome($event, $index, outcome)" aria-label="Disconnect" ng-disabled="!activateItemRemoval || updating"></md-icon>
+                <md-icon class="md-secondary md-accent" md-font-set="mdi" md-font-icon="mdi-link" ng-click="detachOutcome($event, $index, outcome)" aria-label="Disconnect" ng-disabled="updating"></md-icon>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
           </div>
 
           <div ng-if="participants.length > 0">
-            <div layout="row" layout-align="space-between center">
-              <md-subheader><translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</translate></md-subheader>
-              <md-switch ng-disabled="updating" ng-model="$parent.activateItemRemoval" aria-label="Activate Item Removal" class="md-warn"></md-switch>
-            </div>
+            <md-subheader><translate>VIEWS.PROJECT.PANELS.PARTICIPANTS.HEADER</translate></md-subheader>
             <md-list flex>
               <md-list-item class="md-2-line" ng-repeat="participant in participants">
                 <img ng-src="{{ ::getUserImage(participant.user) }}" tl-participant-status="participant" class="md-avatar" alt="{{ ::getUserFullName(participant.user) }}">
@@ -80,18 +74,14 @@
                   <h3>{{ ::getUserFullName(participant.user) }}</a></h3>
                   <p>{{ ::participant.user.email }}</p>
                 </div>
-                <md-icon class="md-secondary md-warn" md-font-set="mdi" md-font-icon="mdi-link-off" ng-click="removeParticipant($event, $index, participant)" aria-label="Disconnect" ng-disabled="!activateItemRemoval || updating"></md-icon>
+                <md-icon class="md-secondary md-accent" md-font-set="mdi" md-font-icon="mdi-link" ng-click="detachParticipant($event, $index, participant)" aria-label="Disconnect" ng-disabled="updating"></md-icon>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
           </div>
 
           <div ng-if="resources.length > 0">
-            <div layout="row" layout-align="space-between center">
-              <md-subheader><translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</translate></md-subheader>
-              <md-switch ng-disabled="updating" ng-model="$parent.activateItemRemoval" aria-label="Activate Item Removal" class="md-warn"></md-switch>
-            </div>
-
+            <md-subheader><translate>VIEWS.PROJECT.PANELS.RESOURCES.HEADER</translate></md-subheader>
             <md-list flex>
               <md-list-item class="md-2-line" ng-repeat="resource in resources">
                 <md-icon md-font-set="mdi" md-font-icon="{{ getResourceIcon(resource) }}" class="tl-icon-large"></md-icon>
@@ -99,7 +89,7 @@
                   <h3>{{ ::resource.title }}</h3>
                   <p>{{ ::resource.description }}</p>
                 </div>
-                <md-icon class="md-secondary md-warn" md-font-set="mdi" md-font-icon="mdi-link-off" ng-click="removeResource($event, $index, resource)" aria-label="Disconnect" ng-disabled="!activateItemRemoval || updating"></md-icon>
+                <md-icon class="md-secondary md-accent" md-font-set="mdi" md-font-icon="mdi-link" ng-click="detachResource($event, $index, resource)" aria-label="Disconnect" ng-disabled="updating"></md-icon>
                 <md-divider ng-if="!$last"></md-divider>
               </md-list-item>
             </md-list>
