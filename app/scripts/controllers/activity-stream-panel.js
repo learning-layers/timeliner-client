@@ -84,6 +84,10 @@ angular.module('timelinerApp')
         return false;
       }
 
+      if ( activity.activityType === 'attach' || activity.activityType === 'detach' ) {
+        return true;
+      }
+
       if ( timelineTypes.indexOf(activity.objectType) === -1 ) {
         return false;
       }

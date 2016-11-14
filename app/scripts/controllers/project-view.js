@@ -694,7 +694,12 @@ angular.module('timelinerApp')
 
     $scope.showOnTimeline = function(ev, activity) {
        if ( activity.data.id ) {
-         var item = findItemById(activity.objectType, activity.data.id);
+         var item;
+         if ( activity.activityType === 'attach' || activity.activityType === 'detach' ) {
+           item = findItemById('task', activity.data.task.id);
+         } else {
+           item = findItemById(activity.objectType, activity.data.id);
+         }
 
          if ( item && item.start ) {
            $scope.$broadcast('tl:timeline:focus', { id: item._id });
