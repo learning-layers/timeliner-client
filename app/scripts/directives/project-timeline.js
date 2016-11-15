@@ -68,7 +68,7 @@ angular.module('timelinerApp')
       var html = '<div class="tl-timeline-task-participants">';
 
       angular.forEach(participants, function (participant) {
-       html += '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-task-participant" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
+       html += '<img src="' + UsersService.getImage(participant.user) + '"  alt="participant" class="tl-timeline-task-participant tl-participant-' + participant.status + '" title="' + $sanitize(UsersService.getFullName(participant.user)) + '" />';
       });
 
       html += '</div>';
