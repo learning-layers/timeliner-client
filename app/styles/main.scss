@@ -1,4 +1,3 @@
-$icon-font-path: "../bower_components/bootstrap-sass-official/assets/fonts/bootstrap/";
 $mdi-font-path: "../bower_components/mdi/fonts/";
 
 $tl-timeline-text-color: #ccc;
@@ -21,7 +20,7 @@ $tl-accent-blue: #40c4ff;
 @import "mdi/scss/materialdesignicons.scss";
 // endbower
 
-@import "icomoon-timeliner.css";
+@import "icomoon-timeliner.scss";
 
 $tl-timeline-visible-border-bottom-color: #23252b;
 
